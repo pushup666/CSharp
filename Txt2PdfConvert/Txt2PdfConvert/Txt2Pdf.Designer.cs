@@ -33,6 +33,8 @@
             this.buttonConvert = new System.Windows.Forms.Button();
             this.checkedListBoxFileName = new System.Windows.Forms.CheckedListBox();
             this.buttonClearList = new System.Windows.Forms.Button();
+            this.radioButtonMini2 = new System.Windows.Forms.RadioButton();
+            this.radioButton5s = new System.Windows.Forms.RadioButton();
             this.SuspendLayout();
             // 
             // buttonAddFile
@@ -47,7 +49,7 @@
             // 
             // buttonAddFolder
             // 
-            this.buttonAddFolder.Location = new System.Drawing.Point(116, 223);
+            this.buttonAddFolder.Location = new System.Drawing.Point(93, 223);
             this.buttonAddFolder.Name = "buttonAddFolder";
             this.buttonAddFolder.Size = new System.Drawing.Size(75, 23);
             this.buttonAddFolder.TabIndex = 1;
@@ -75,7 +77,7 @@
             // 
             // buttonClearList
             // 
-            this.buttonClearList.Location = new System.Drawing.Point(222, 223);
+            this.buttonClearList.Location = new System.Drawing.Point(174, 223);
             this.buttonClearList.Name = "buttonClearList";
             this.buttonClearList.Size = new System.Drawing.Size(75, 23);
             this.buttonClearList.TabIndex = 5;
@@ -83,11 +85,35 @@
             this.buttonClearList.UseVisualStyleBackColor = true;
             this.buttonClearList.Click += new System.EventHandler(this.ButtonClearListClick);
             // 
+            // radioButtonMini2
+            // 
+            this.radioButtonMini2.AutoSize = true;
+            this.radioButtonMini2.Checked = true;
+            this.radioButtonMini2.Location = new System.Drawing.Point(395, 214);
+            this.radioButtonMini2.Name = "radioButtonMini2";
+            this.radioButtonMini2.Size = new System.Drawing.Size(83, 16);
+            this.radioButtonMini2.TabIndex = 6;
+            this.radioButtonMini2.TabStop = true;
+            this.radioButtonMini2.Text = "iPad mini2";
+            this.radioButtonMini2.UseVisualStyleBackColor = true;
+            // 
+            // radioButton5s
+            // 
+            this.radioButton5s.AutoSize = true;
+            this.radioButton5s.Location = new System.Drawing.Point(395, 236);
+            this.radioButton5s.Name = "radioButton5s";
+            this.radioButton5s.Size = new System.Drawing.Size(77, 16);
+            this.radioButton5s.TabIndex = 7;
+            this.radioButton5s.Text = "iPhone 5s";
+            this.radioButton5s.UseVisualStyleBackColor = true;
+            // 
             // Txt2Pdf
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(615, 258);
+            this.Controls.Add(this.radioButton5s);
+            this.Controls.Add(this.radioButtonMini2);
             this.Controls.Add(this.buttonClearList);
             this.Controls.Add(this.checkedListBoxFileName);
             this.Controls.Add(this.buttonConvert);
@@ -96,6 +122,7 @@
             this.Name = "Txt2Pdf";
             this.Text = "Txt2Pdf";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -106,5 +133,7 @@
         private System.Windows.Forms.Button buttonConvert;
         private System.Windows.Forms.CheckedListBox checkedListBoxFileName;
         private System.Windows.Forms.Button buttonClearList;
+        private System.Windows.Forms.RadioButton radioButtonMini2;
+        private System.Windows.Forms.RadioButton radioButton5s;
     }
 }

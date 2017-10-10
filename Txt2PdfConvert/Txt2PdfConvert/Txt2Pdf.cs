@@ -23,7 +23,7 @@ namespace Txt2PdfConvert
             {
                 using (var openFileDialog = new OpenFileDialog())
                 {
-                    openFileDialog.InitialDirectory = @"C:\";
+                    openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
                     openFileDialog.Multiselect = true;
 
                     if (openFileDialog.ShowDialog() == DialogResult.OK)
@@ -112,31 +112,42 @@ namespace Txt2PdfConvert
             }
         }
         
-        private static void GeneratePdf(string fileName)
+        private void GeneratePdf(string fileName)
         {
             try
             {
-                var baseFont = BaseFont.CreateFont(@"C:\Windows\Fonts\msyhbd.ttc,0", BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
-
-                var font = new Font(baseFont, 14f);                       //iPad mini2
-                var document = new Document(new Rectangle(600, 800));     //iPad mini2
-
-                //var font = new Font(baseFont, 22f);                         //iPhone 5s
-                //var document = new Document(new Rectangle(450, 800));       //iPhone 5s
-
-                PdfWriter.GetInstance(document, new FileStream(Path.ChangeExtension(fileName, "pdf"), FileMode.Create));
-                document.Open();
-                
-                using (var sr = new StreamReader(fileName, Encoding.Default))
+                if (fileName != null)
                 {
-                    string line;
-                    while ((line = sr.ReadLine()) != null)
-                    {
-                        document.Add(new Paragraph(line == "" ? "\n" : line.Trim(), font));
-                    }
-                }
+                    var baseFont = BaseFont.CreateFont(@"C:\Windows\Fonts\msyhbd.ttc,0", BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
+                    Font font; 
+                    Document document;
 
-                document.Close();
+                    if (radioButtonMini2.Checked)
+                    {
+                        font = new Font(baseFont, 14f);                       //iPad mini2
+                        document = new Document(new Rectangle(600, 800));     //iPad mini2
+                    }
+                    else
+                    {
+                        font = new Font(baseFont, 22f);                         //iPhone 5s
+                        document = new Document(new Rectangle(450, 800));       //iPhone 5s
+                    }
+                   
+
+                    PdfWriter.GetInstance(document, new FileStream(Path.ChangeExtension(fileName, "pdf"), FileMode.Create));
+                    document.Open();
+
+                    using (var sr = new StreamReader(fileName, Encoding.Default))
+                    {
+                        string line;
+                        while ((line = sr.ReadLine()) != null)
+                        {
+                            document.Add(new Paragraph(line == "" ? "\n" : line.Trim(), font));
+                        }
+                    }
+
+                    document.Close();
+                }
             }
             catch (Exception ex)
             {
