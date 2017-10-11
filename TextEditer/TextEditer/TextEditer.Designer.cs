@@ -1,4 +1,6 @@
-﻿namespace TextEditer
+﻿using System.Windows.Forms;
+
+namespace TextEditer
 {
     partial class TextEditer
     {
@@ -28,23 +30,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.richTextBoxMain = new System.Windows.Forms.RichTextBox();
             this.buttonRemoveBlankLine = new System.Windows.Forms.Button();
             this.buttonAddBlankLine = new System.Windows.Forms.Button();
-            this.buttonRemoveBlank = new System.Windows.Forms.Button();
             this.buttonShort2Long = new System.Windows.Forms.Button();
+            this.buttonSave = new System.Windows.Forms.Button();
+            this.buttonTrimLine = new System.Windows.Forms.Button();
+            this.textBoxMain = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
-            // 
-            // richTextBoxMain
-            // 
-            this.richTextBoxMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.richTextBoxMain.Location = new System.Drawing.Point(12, 41);
-            this.richTextBoxMain.Name = "richTextBoxMain";
-            this.richTextBoxMain.Size = new System.Drawing.Size(1032, 565);
-            this.richTextBoxMain.TabIndex = 0;
-            this.richTextBoxMain.Text = "";
             // 
             // buttonRemoveBlankLine
             // 
@@ -66,16 +58,6 @@
             this.buttonAddBlankLine.UseVisualStyleBackColor = true;
             this.buttonAddBlankLine.Click += new System.EventHandler(this.buttonAddBlankLine_Click);
             // 
-            // buttonRemoveBlank
-            // 
-            this.buttonRemoveBlank.Location = new System.Drawing.Point(12, 12);
-            this.buttonRemoveBlank.Name = "buttonRemoveBlank";
-            this.buttonRemoveBlank.Size = new System.Drawing.Size(75, 23);
-            this.buttonRemoveBlank.TabIndex = 3;
-            this.buttonRemoveBlank.Text = "去空白";
-            this.buttonRemoveBlank.UseVisualStyleBackColor = true;
-            this.buttonRemoveBlank.Click += new System.EventHandler(this.buttonRemoveBlank_Click);
-            // 
             // buttonShort2Long
             // 
             this.buttonShort2Long.Location = new System.Drawing.Point(255, 12);
@@ -86,29 +68,68 @@
             this.buttonShort2Long.UseVisualStyleBackColor = true;
             this.buttonShort2Long.Click += new System.EventHandler(this.buttonShort2Long_Click);
             // 
+            // buttonSave
+            // 
+            this.buttonSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonSave.Location = new System.Drawing.Point(969, 12);
+            this.buttonSave.Name = "buttonSave";
+            this.buttonSave.Size = new System.Drawing.Size(75, 23);
+            this.buttonSave.TabIndex = 5;
+            this.buttonSave.Text = "保存";
+            this.buttonSave.UseVisualStyleBackColor = true;
+            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
+            // 
+            // buttonTrimLine
+            // 
+            this.buttonTrimLine.Location = new System.Drawing.Point(12, 12);
+            this.buttonTrimLine.Name = "buttonTrimLine";
+            this.buttonTrimLine.Size = new System.Drawing.Size(75, 23);
+            this.buttonTrimLine.TabIndex = 6;
+            this.buttonTrimLine.Text = "去首尾空白";
+            this.buttonTrimLine.UseVisualStyleBackColor = true;
+            this.buttonTrimLine.Click += new System.EventHandler(this.buttonTrimLine_Click);
+            // 
+            // textBoxMain
+            // 
+            this.textBoxMain.AllowDrop = true;
+            this.textBoxMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxMain.Location = new System.Drawing.Point(12, 41);
+            this.textBoxMain.Multiline = true;
+            this.textBoxMain.Name = "textBoxMain";
+            this.textBoxMain.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.textBoxMain.Size = new System.Drawing.Size(1032, 565);
+            this.textBoxMain.TabIndex = 7;
+            this.textBoxMain.DragDrop += new System.Windows.Forms.DragEventHandler(this.textBoxMain_DragDrop);
+            this.textBoxMain.DragEnter += new System.Windows.Forms.DragEventHandler(this.textBoxMain_DragEnter);
+            // 
             // TextEditer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1056, 618);
+            this.Controls.Add(this.textBoxMain);
+            this.Controls.Add(this.buttonTrimLine);
+            this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.buttonShort2Long);
-            this.Controls.Add(this.buttonRemoveBlank);
             this.Controls.Add(this.buttonAddBlankLine);
             this.Controls.Add(this.buttonRemoveBlankLine);
-            this.Controls.Add(this.richTextBoxMain);
             this.Name = "TextEditer";
             this.Text = "TextEditer";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.RichTextBox richTextBoxMain;
         private System.Windows.Forms.Button buttonRemoveBlankLine;
         private System.Windows.Forms.Button buttonAddBlankLine;
-        private System.Windows.Forms.Button buttonRemoveBlank;
         private System.Windows.Forms.Button buttonShort2Long;
+        private Button buttonSave;
+        private Button buttonTrimLine;
+        private TextBox textBoxMain;
     }
 }
 

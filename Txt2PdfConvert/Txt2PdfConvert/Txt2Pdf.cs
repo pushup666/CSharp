@@ -132,7 +132,9 @@ namespace Txt2PdfConvert
                         font = new Font(baseFont, 22f);                         //iPhone 5s
                         document = new Document(new Rectangle(450, 800));       //iPhone 5s
                     }
-                   
+
+                    font.Color = BaseColor.WHITE;
+                    document.PageSize.BackgroundColor = BaseColor.BLACK;
 
                     PdfWriter.GetInstance(document, new FileStream(Path.ChangeExtension(fileName, "pdf"), FileMode.Create));
                     document.Open();

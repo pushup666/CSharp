@@ -14,6 +14,7 @@ namespace MyTextSplit
     public partial class MyTextSplit : Form
     {
         private Dictionary<string, long> _files = new Dictionary<string, long>();
+        private const string TxtPath = @"C:\Users\SSF\Desktop\新建文件夹";
 
         public MyTextSplit()
         {
@@ -22,7 +23,7 @@ namespace MyTextSplit
 
         private void MyTextSplit_Load(object sender, EventArgs e)
         {
-            DirectoryInfo di = new DirectoryInfo(Application.StartupPath);
+            DirectoryInfo di = new DirectoryInfo(TxtPath);
 
             foreach (var file in di.GetFiles("*.txt"))
             {
@@ -80,12 +81,12 @@ namespace MyTextSplit
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
-            if (!Directory.Exists(Application.StartupPath + "/Split/" + textBoxFolder.Text))
+            if (!Directory.Exists(TxtPath + "/Split/" + textBoxFolder.Text))
             {
-                Directory.CreateDirectory(Application.StartupPath + "/Split/" + textBoxFolder.Text);
+                Directory.CreateDirectory(TxtPath + "/Split/" + textBoxFolder.Text);
             }
 
-            using (StreamWriter sw = new StreamWriter(Application.StartupPath + "/Split/" + textBoxFolder.Text + "/" + textBoxPrefix.Text + textBoxChapter.Text + textBoxSuffix.Text+".txt"))
+            using (StreamWriter sw = new StreamWriter(TxtPath + "/Split/" + textBoxFolder.Text + "/" + textBoxPrefix.Text + textBoxChapter.Text + textBoxSuffix.Text + ".txt"))
             {
                 sw.Write(richTextBoxOutput.Text);
             }
