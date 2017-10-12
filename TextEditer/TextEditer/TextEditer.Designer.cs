@@ -35,7 +35,9 @@ namespace TextEditer
             this.buttonShort2Long = new System.Windows.Forms.Button();
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonTrimLine = new System.Windows.Forms.Button();
-            this.textBoxMain = new System.Windows.Forms.TextBox();
+            this.richTextBoxMain = new System.Windows.Forms.RichTextBox();
+            this.checkBoxUTF8Write = new System.Windows.Forms.CheckBox();
+            this.checkBoxUTF8Read = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // buttonRemoveBlankLine
@@ -89,27 +91,48 @@ namespace TextEditer
             this.buttonTrimLine.UseVisualStyleBackColor = true;
             this.buttonTrimLine.Click += new System.EventHandler(this.buttonTrimLine_Click);
             // 
-            // textBoxMain
+            // richTextBoxMain
             // 
-            this.textBoxMain.AllowDrop = true;
-            this.textBoxMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.richTextBoxMain.AllowDrop = true;
+            this.richTextBoxMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxMain.Location = new System.Drawing.Point(12, 41);
-            this.textBoxMain.Multiline = true;
-            this.textBoxMain.Name = "textBoxMain";
-            this.textBoxMain.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBoxMain.Size = new System.Drawing.Size(1032, 565);
-            this.textBoxMain.TabIndex = 7;
-            this.textBoxMain.DragDrop += new System.Windows.Forms.DragEventHandler(this.textBoxMain_DragDrop);
-            this.textBoxMain.DragEnter += new System.Windows.Forms.DragEventHandler(this.textBoxMain_DragEnter);
+            this.richTextBoxMain.Location = new System.Drawing.Point(12, 41);
+            this.richTextBoxMain.Name = "richTextBoxMain";
+            this.richTextBoxMain.Size = new System.Drawing.Size(1032, 565);
+            this.richTextBoxMain.TabIndex = 7;
+            this.richTextBoxMain.Text = "";
+            this.richTextBoxMain.DragDrop += new System.Windows.Forms.DragEventHandler(this.richTextBoxMain_DragDrop);
+            this.richTextBoxMain.DragEnter += new System.Windows.Forms.DragEventHandler(this.richTextBoxMain_DragEnter);
+            // 
+            // checkBoxUTF8Write
+            // 
+            this.checkBoxUTF8Write.AutoSize = true;
+            this.checkBoxUTF8Write.Location = new System.Drawing.Point(408, 16);
+            this.checkBoxUTF8Write.Name = "checkBoxUTF8Write";
+            this.checkBoxUTF8Write.Size = new System.Drawing.Size(66, 16);
+            this.checkBoxUTF8Write.TabIndex = 9;
+            this.checkBoxUTF8Write.Text = "UTF-8写";
+            this.checkBoxUTF8Write.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxUTF8Read
+            // 
+            this.checkBoxUTF8Read.AutoSize = true;
+            this.checkBoxUTF8Read.Location = new System.Drawing.Point(336, 16);
+            this.checkBoxUTF8Read.Name = "checkBoxUTF8Read";
+            this.checkBoxUTF8Read.Size = new System.Drawing.Size(66, 16);
+            this.checkBoxUTF8Read.TabIndex = 8;
+            this.checkBoxUTF8Read.Text = "UTF-8读";
+            this.checkBoxUTF8Read.UseVisualStyleBackColor = true;
             // 
             // TextEditer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1056, 618);
-            this.Controls.Add(this.textBoxMain);
+            this.Controls.Add(this.checkBoxUTF8Write);
+            this.Controls.Add(this.checkBoxUTF8Read);
+            this.Controls.Add(this.richTextBoxMain);
             this.Controls.Add(this.buttonTrimLine);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.buttonShort2Long);
@@ -129,7 +152,9 @@ namespace TextEditer
         private System.Windows.Forms.Button buttonShort2Long;
         private Button buttonSave;
         private Button buttonTrimLine;
-        private TextBox textBoxMain;
+        private RichTextBox richTextBoxMain;
+        private CheckBox checkBoxUTF8Write;
+        private CheckBox checkBoxUTF8Read;
     }
 }
 

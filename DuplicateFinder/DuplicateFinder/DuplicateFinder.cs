@@ -60,7 +60,7 @@ namespace DuplicateFinder
 
                     if (_folderList.Contains(folder))
                     {
-                        MessageBox.Show(string.Format("该目录已添加！"));
+                        MessageBox.Show("该目录已添加！");
                         return;
                     }
                     _folderList.Add(folder);
@@ -188,7 +188,7 @@ namespace DuplicateFinder
                 }
             }
 
-            MessageBox.Show(string.Format("删除完成！"));
+            MessageBox.Show("删除完成！");
 
             ImportFiles();
         }

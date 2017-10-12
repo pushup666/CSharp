@@ -16,7 +16,12 @@ namespace TextEditer
             InitializeComponent();
         }
 
-        private void textBoxMain_DragDrop(object sender, DragEventArgs e)
+        private void richTextBoxMain_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = e.Data.GetDataPresent(DataFormats.FileDrop) ? DragDropEffects.Copy : DragDropEffects.None;
+        }
+
+        private void richTextBoxMain_DragDrop(object sender, DragEventArgs e)
         {
             try
             {
@@ -28,9 +33,9 @@ namespace TextEditer
                 }
                 _fileName = filesName.GetValue(0).ToString();
 
-                using (var sr = new StreamReader(_fileName, Encoding.Default))
+                using (var sr = new StreamReader(_fileName, checkBoxUTF8Read.Checked ? Encoding.UTF8 : Encoding.Default))
                 {
-                    textBoxMain.Text = sr.ReadToEnd();
+                    richTextBoxMain.Text = sr.ReadToEnd();
                 }
             }
             catch (Exception ex)
@@ -38,6 +43,7 @@ namespace TextEditer
                 MessageBox.Show(ex.Message + "只支持单文本文件拖拽！");
             }
         }
+
 
         private void RefreshTextBox()
         {
@@ -47,7 +53,7 @@ namespace TextEditer
                 sb.AppendLine(line);
             }
 
-           textBoxMain.Text = sb.ToString().Trim();
+            richTextBoxMain.Text = sb.ToString().Trim();
         }
 
 
@@ -55,7 +61,7 @@ namespace TextEditer
         {
             _lines.Clear();
 
-            foreach (var line in textBoxMain.Lines)
+            foreach (var line in richTextBoxMain.Lines)
             {
                 _lines.Add(line.Trim());
             }
@@ -68,7 +74,7 @@ namespace TextEditer
             _lines.Clear();
 
             var lastLine = "";
-            foreach (var currLine in textBoxMain.Lines)
+            foreach (var currLine in richTextBoxMain.Lines)
             {
                 if (currLine != "" || lastLine != "")
                 {
@@ -84,9 +90,9 @@ namespace TextEditer
         {
             _lines.Clear();
 
-            foreach (var line in textBoxMain.Lines)
+            foreach (var line in richTextBoxMain.Lines)
             {
-                _lines.Add(line.Trim());
+                _lines.Add(line);
                 _lines.Add("");
             }
 
@@ -97,8 +103,8 @@ namespace TextEditer
         {
             _lines.Clear();
 
-            StringBuilder sb = new StringBuilder();
-            foreach (var line in textBoxMain.Lines)
+            var sb = new StringBuilder();
+            foreach (var line in richTextBoxMain.Lines)
             {
                 if (line != "")
                 {
@@ -115,16 +121,15 @@ namespace TextEditer
 
             RefreshTextBox();
         }
-
-
-
+        
         private void buttonSave_Click(object sender, EventArgs e)
         {
             try
             {
-                using (var sw = new StreamWriter(_fileName, false, Encoding.Default))
+                using (var sw = new StreamWriter(_fileName, false, checkBoxUTF8Write.Checked ? Encoding.UTF8 : Encoding.Default))
                 {
-                    sw.Write(textBoxMain.Text);
+                    var txt = richTextBoxMain.Text.Replace("\n", "\r\n");   //unix -> dos
+                    sw.Write(txt);
                 }
                 MessageBox.Show("保存成功！");
             }
@@ -134,9 +139,6 @@ namespace TextEditer
             }
         }
 
-        private void textBoxMain_DragEnter(object sender, DragEventArgs e)
-        {
-            e.Effect = e.Data.GetDataPresent(DataFormats.FileDrop) ? DragDropEffects.Copy : DragDropEffects.None;
-        }
+        
     }
 }
