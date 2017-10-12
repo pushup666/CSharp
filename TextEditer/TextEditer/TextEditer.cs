@@ -43,8 +43,7 @@ namespace TextEditer
                 MessageBox.Show(ex.Message + "只支持单文本文件拖拽！");
             }
         }
-
-
+        
         private void RefreshTextBox()
         {
             var sb = new StringBuilder();
@@ -53,7 +52,7 @@ namespace TextEditer
                 sb.AppendLine(line);
             }
 
-            richTextBoxMain.Text = sb.ToString().Trim();
+            richTextBoxMain.Text = sb.ToString();
         }
 
 
@@ -64,6 +63,18 @@ namespace TextEditer
             foreach (var line in richTextBoxMain.Lines)
             {
                 _lines.Add(line.Trim());
+            }
+
+            RefreshTextBox();
+        }
+
+        private void buttonAddHeadBlank_Click(object sender, EventArgs e)
+        {
+            _lines.Clear();
+
+            foreach (var line in richTextBoxMain.Lines)
+            {
+                _lines.Add("　　" + line);
             }
 
             RefreshTextBox();
@@ -118,15 +129,46 @@ namespace TextEditer
                 }
             }
             _lines.Add(sb.ToString());
-
             RefreshTextBox();
+        }
+
+
+        private void buttonLong2Short_Click(object sender, EventArgs e)
+        {
+            _lines.Clear();
+
+            foreach (var line in richTextBoxMain.Lines)
+            {
+                foreach (var newLine in GetSeparateSubString(line, 35))
+                {
+                    _lines.Add(newLine);
+                }
+
+                if (line == "")
+                {
+                    _lines.Add(line);
+                }
+            }
+            RefreshTextBox();
+        }
+
+        private IEnumerable<string> GetSeparateSubString(string txtString, int charNumber)
+        {
+            var list = new List<string>();
+            var tempStr = txtString;
+
+            for (int i = 0; i < tempStr.Length; i += charNumber)
+            {
+                list.Add((tempStr.Length - i) > charNumber ? tempStr.Substring(i, charNumber) : tempStr.Substring(i));
+            }
+            return list;
         }
         
         private void buttonSave_Click(object sender, EventArgs e)
         {
             try
             {
-                using (var sw = new StreamWriter(_fileName, false, checkBoxUTF8Write.Checked ? Encoding.UTF8 : Encoding.Default))
+                using (var sw = new StreamWriter(_fileName, false, Encoding.Default))
                 {
                     var txt = richTextBoxMain.Text.Replace("\n", "\r\n");   //unix -> dos
                     sw.Write(txt);
@@ -138,7 +180,5 @@ namespace TextEditer
                 MessageBox.Show(ex.Message);
             }
         }
-
-        
     }
 }

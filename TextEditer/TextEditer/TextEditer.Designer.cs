@@ -36,13 +36,14 @@ namespace TextEditer
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonTrimLine = new System.Windows.Forms.Button();
             this.richTextBoxMain = new System.Windows.Forms.RichTextBox();
-            this.checkBoxUTF8Write = new System.Windows.Forms.CheckBox();
             this.checkBoxUTF8Read = new System.Windows.Forms.CheckBox();
+            this.buttonAddHeadBlank = new System.Windows.Forms.Button();
+            this.buttonLong2Short = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // buttonRemoveBlankLine
             // 
-            this.buttonRemoveBlankLine.Location = new System.Drawing.Point(93, 12);
+            this.buttonRemoveBlankLine.Location = new System.Drawing.Point(194, 12);
             this.buttonRemoveBlankLine.Name = "buttonRemoveBlankLine";
             this.buttonRemoveBlankLine.Size = new System.Drawing.Size(75, 23);
             this.buttonRemoveBlankLine.TabIndex = 1;
@@ -52,7 +53,7 @@ namespace TextEditer
             // 
             // buttonAddBlankLine
             // 
-            this.buttonAddBlankLine.Location = new System.Drawing.Point(174, 12);
+            this.buttonAddBlankLine.Location = new System.Drawing.Point(275, 12);
             this.buttonAddBlankLine.Name = "buttonAddBlankLine";
             this.buttonAddBlankLine.Size = new System.Drawing.Size(75, 23);
             this.buttonAddBlankLine.TabIndex = 2;
@@ -62,7 +63,7 @@ namespace TextEditer
             // 
             // buttonShort2Long
             // 
-            this.buttonShort2Long.Location = new System.Drawing.Point(255, 12);
+            this.buttonShort2Long.Location = new System.Drawing.Point(378, 12);
             this.buttonShort2Long.Name = "buttonShort2Long";
             this.buttonShort2Long.Size = new System.Drawing.Size(75, 23);
             this.buttonShort2Long.TabIndex = 4;
@@ -99,38 +100,51 @@ namespace TextEditer
             | System.Windows.Forms.AnchorStyles.Right)));
             this.richTextBoxMain.Location = new System.Drawing.Point(12, 41);
             this.richTextBoxMain.Name = "richTextBoxMain";
-            this.richTextBoxMain.Size = new System.Drawing.Size(1032, 565);
+            this.richTextBoxMain.ReadOnly = true;
+            this.richTextBoxMain.Size = new System.Drawing.Size(1032, 562);
             this.richTextBoxMain.TabIndex = 7;
             this.richTextBoxMain.Text = "";
             this.richTextBoxMain.DragDrop += new System.Windows.Forms.DragEventHandler(this.richTextBoxMain_DragDrop);
             this.richTextBoxMain.DragEnter += new System.Windows.Forms.DragEventHandler(this.richTextBoxMain_DragEnter);
             // 
-            // checkBoxUTF8Write
-            // 
-            this.checkBoxUTF8Write.AutoSize = true;
-            this.checkBoxUTF8Write.Location = new System.Drawing.Point(408, 16);
-            this.checkBoxUTF8Write.Name = "checkBoxUTF8Write";
-            this.checkBoxUTF8Write.Size = new System.Drawing.Size(66, 16);
-            this.checkBoxUTF8Write.TabIndex = 9;
-            this.checkBoxUTF8Write.Text = "UTF-8写";
-            this.checkBoxUTF8Write.UseVisualStyleBackColor = true;
-            // 
             // checkBoxUTF8Read
             // 
             this.checkBoxUTF8Read.AutoSize = true;
-            this.checkBoxUTF8Read.Location = new System.Drawing.Point(336, 16);
+            this.checkBoxUTF8Read.Location = new System.Drawing.Point(587, 16);
             this.checkBoxUTF8Read.Name = "checkBoxUTF8Read";
             this.checkBoxUTF8Read.Size = new System.Drawing.Size(66, 16);
             this.checkBoxUTF8Read.TabIndex = 8;
             this.checkBoxUTF8Read.Text = "UTF-8读";
             this.checkBoxUTF8Read.UseVisualStyleBackColor = true;
             // 
+            // buttonAddHeadBlank
+            // 
+            this.buttonAddHeadBlank.Location = new System.Drawing.Point(93, 12);
+            this.buttonAddHeadBlank.Name = "buttonAddHeadBlank";
+            this.buttonAddHeadBlank.Size = new System.Drawing.Size(75, 23);
+            this.buttonAddHeadBlank.TabIndex = 9;
+            this.buttonAddHeadBlank.Text = "加首空白";
+            this.buttonAddHeadBlank.UseVisualStyleBackColor = true;
+            this.buttonAddHeadBlank.Click += new System.EventHandler(this.buttonAddHeadBlank_Click);
+            // 
+            // buttonLong2Short
+            // 
+            this.buttonLong2Short.Enabled = false;
+            this.buttonLong2Short.Location = new System.Drawing.Point(459, 12);
+            this.buttonLong2Short.Name = "buttonLong2Short";
+            this.buttonLong2Short.Size = new System.Drawing.Size(75, 23);
+            this.buttonLong2Short.TabIndex = 10;
+            this.buttonLong2Short.Text = "长行变短行";
+            this.buttonLong2Short.UseVisualStyleBackColor = true;
+            this.buttonLong2Short.Click += new System.EventHandler(this.buttonLong2Short_Click);
+            // 
             // TextEditer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1056, 618);
-            this.Controls.Add(this.checkBoxUTF8Write);
+            this.Controls.Add(this.buttonLong2Short);
+            this.Controls.Add(this.buttonAddHeadBlank);
             this.Controls.Add(this.checkBoxUTF8Read);
             this.Controls.Add(this.richTextBoxMain);
             this.Controls.Add(this.buttonTrimLine);
@@ -153,8 +167,9 @@ namespace TextEditer
         private Button buttonSave;
         private Button buttonTrimLine;
         private RichTextBox richTextBoxMain;
-        private CheckBox checkBoxUTF8Write;
         private CheckBox checkBoxUTF8Read;
+        private Button buttonAddHeadBlank;
+        private Button buttonLong2Short;
     }
 }
 
