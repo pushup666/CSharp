@@ -129,7 +129,6 @@ namespace TextEditer
             // 
             // buttonLong2Short
             // 
-            this.buttonLong2Short.Enabled = false;
             this.buttonLong2Short.Location = new System.Drawing.Point(459, 12);
             this.buttonLong2Short.Name = "buttonLong2Short";
             this.buttonLong2Short.Size = new System.Drawing.Size(75, 23);

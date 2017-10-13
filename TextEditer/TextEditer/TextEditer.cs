@@ -51,8 +51,7 @@ namespace TextEditer
             {
                 sb.AppendLine(line);
             }
-
-            richTextBoxMain.Text = sb.ToString();
+            richTextBoxMain.Text = sb.ToString().TrimEnd();
         }
 
 
@@ -83,7 +82,7 @@ namespace TextEditer
         private void buttonRemoveBlankLine_Click(object sender, EventArgs e)
         {
             _lines.Clear();
-
+            
             var lastLine = "";
             foreach (var currLine in richTextBoxMain.Lines)
             {
@@ -129,38 +128,40 @@ namespace TextEditer
                 }
             }
             _lines.Add(sb.ToString());
+
             RefreshTextBox();
         }
-
-
+        
         private void buttonLong2Short_Click(object sender, EventArgs e)
         {
             _lines.Clear();
 
             foreach (var line in richTextBoxMain.Lines)
             {
-                foreach (var newLine in GetSeparateSubString(line, 35))
+                if (line == "")
+                {
+                    _lines.Add("");
+                    continue;
+                }
+                foreach (var newLine in GetSubStringList(line, 35))
                 {
                     _lines.Add(newLine);
                 }
-
-                if (line == "")
-                {
-                    _lines.Add(line);
-                }
             }
+
             RefreshTextBox();
         }
 
-        private IEnumerable<string> GetSeparateSubString(string txtString, int charNumber)
+        private static IEnumerable<string> GetSubStringList(string txt, int subLength)
         {
             var list = new List<string>();
-            var tempStr = txtString;
+            var temp = txt;
 
-            for (int i = 0; i < tempStr.Length; i += charNumber)
+            for (var i = 0; i < temp.Length; i += subLength)
             {
-                list.Add((tempStr.Length - i) > charNumber ? tempStr.Substring(i, charNumber) : tempStr.Substring(i));
+                list.Add((temp.Length - i) > subLength ? temp.Substring(i, subLength) : temp.Substring(i));
             }
+
             return list;
         }
         
