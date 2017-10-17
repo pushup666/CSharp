@@ -171,7 +171,7 @@ namespace TextEditer
             {
                 using (var sw = new StreamWriter(_fileName, false, Encoding.Default))
                 {
-                    var txt = richTextBoxMain.Text.Replace("\n", "\r\n");   //unix -> dos
+                    var txt = richTextBoxMain.Text.Replace("\n", "\r\n");   //Unix -> Dos
                     sw.Write(txt);
                 }
                 MessageBox.Show("保存成功！");
