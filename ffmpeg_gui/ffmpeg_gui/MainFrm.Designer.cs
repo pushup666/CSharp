@@ -32,16 +32,17 @@
             this.buttonAddFolder = new System.Windows.Forms.Button();
             this.buttonAddFile = new System.Windows.Forms.Button();
             this.checkedListBoxFileName = new System.Windows.Forms.CheckedListBox();
-            this.textBoxOutput = new System.Windows.Forms.TextBox();
             this.buttonAudio = new System.Windows.Forms.Button();
             this.buttonVideo = new System.Windows.Forms.Button();
             this.buttonPackage = new System.Windows.Forms.Button();
             this.buttonSeparate = new System.Windows.Forms.Button();
+            this.richTextBoxOutput = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // buttonClearList
             // 
-            this.buttonClearList.Location = new System.Drawing.Point(222, 243);
+            this.buttonClearList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonClearList.Location = new System.Drawing.Point(174, 243);
             this.buttonClearList.Name = "buttonClearList";
             this.buttonClearList.Size = new System.Drawing.Size(75, 23);
             this.buttonClearList.TabIndex = 12;
@@ -51,7 +52,8 @@
             // 
             // buttonAddFolder
             // 
-            this.buttonAddFolder.Location = new System.Drawing.Point(116, 243);
+            this.buttonAddFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonAddFolder.Location = new System.Drawing.Point(93, 243);
             this.buttonAddFolder.Name = "buttonAddFolder";
             this.buttonAddFolder.Size = new System.Drawing.Size(75, 23);
             this.buttonAddFolder.TabIndex = 11;
@@ -61,6 +63,7 @@
             // 
             // buttonAddFile
             // 
+            this.buttonAddFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonAddFile.Location = new System.Drawing.Point(12, 243);
             this.buttonAddFile.Name = "buttonAddFile";
             this.buttonAddFile.Size = new System.Drawing.Size(75, 23);
@@ -71,23 +74,18 @@
             // 
             // checkedListBoxFileName
             // 
+            this.checkedListBoxFileName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.checkedListBoxFileName.FormattingEnabled = true;
             this.checkedListBoxFileName.Location = new System.Drawing.Point(12, 12);
             this.checkedListBoxFileName.Name = "checkedListBoxFileName";
             this.checkedListBoxFileName.Size = new System.Drawing.Size(435, 196);
             this.checkedListBoxFileName.TabIndex = 9;
             // 
-            // textBoxOutput
-            // 
-            this.textBoxOutput.Location = new System.Drawing.Point(468, 12);
-            this.textBoxOutput.Multiline = true;
-            this.textBoxOutput.Name = "textBoxOutput";
-            this.textBoxOutput.Size = new System.Drawing.Size(479, 196);
-            this.textBoxOutput.TabIndex = 13;
-            // 
             // buttonAudio
             // 
-            this.buttonAudio.Location = new System.Drawing.Point(468, 243);
+            this.buttonAudio.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonAudio.Location = new System.Drawing.Point(629, 243);
             this.buttonAudio.Name = "buttonAudio";
             this.buttonAudio.Size = new System.Drawing.Size(75, 23);
             this.buttonAudio.TabIndex = 14;
@@ -97,7 +95,8 @@
             // 
             // buttonVideo
             // 
-            this.buttonVideo.Location = new System.Drawing.Point(580, 243);
+            this.buttonVideo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonVideo.Location = new System.Drawing.Point(710, 243);
             this.buttonVideo.Name = "buttonVideo";
             this.buttonVideo.Size = new System.Drawing.Size(75, 23);
             this.buttonVideo.TabIndex = 15;
@@ -107,7 +106,8 @@
             // 
             // buttonPackage
             // 
-            this.buttonPackage.Location = new System.Drawing.Point(692, 243);
+            this.buttonPackage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonPackage.Location = new System.Drawing.Point(791, 243);
             this.buttonPackage.Name = "buttonPackage";
             this.buttonPackage.Size = new System.Drawing.Size(75, 23);
             this.buttonPackage.TabIndex = 16;
@@ -117,7 +117,8 @@
             // 
             // buttonSeparate
             // 
-            this.buttonSeparate.Location = new System.Drawing.Point(804, 243);
+            this.buttonSeparate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonSeparate.Location = new System.Drawing.Point(872, 243);
             this.buttonSeparate.Name = "buttonSeparate";
             this.buttonSeparate.Size = new System.Drawing.Size(75, 23);
             this.buttonSeparate.TabIndex = 17;
@@ -125,16 +126,28 @@
             this.buttonSeparate.UseVisualStyleBackColor = true;
             this.buttonSeparate.Click += new System.EventHandler(this.ButtonSeparateClick);
             // 
+            // richTextBoxOutput
+            // 
+            this.richTextBoxOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.richTextBoxOutput.Location = new System.Drawing.Point(468, 12);
+            this.richTextBoxOutput.Name = "richTextBoxOutput";
+            this.richTextBoxOutput.Size = new System.Drawing.Size(479, 196);
+            this.richTextBoxOutput.TabIndex = 18;
+            this.richTextBoxOutput.Text = "";
+            this.richTextBoxOutput.WordWrap = false;
+            // 
             // MainFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(959, 290);
+            this.Controls.Add(this.richTextBoxOutput);
             this.Controls.Add(this.buttonSeparate);
             this.Controls.Add(this.buttonPackage);
             this.Controls.Add(this.buttonVideo);
             this.Controls.Add(this.buttonAudio);
-            this.Controls.Add(this.textBoxOutput);
             this.Controls.Add(this.buttonClearList);
             this.Controls.Add(this.buttonAddFolder);
             this.Controls.Add(this.buttonAddFile);
@@ -142,7 +155,6 @@
             this.Name = "MainFrm";
             this.Text = "MainFrm";
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -152,10 +164,10 @@
         private System.Windows.Forms.Button buttonAddFolder;
         private System.Windows.Forms.Button buttonAddFile;
         private System.Windows.Forms.CheckedListBox checkedListBoxFileName;
-        private System.Windows.Forms.TextBox textBoxOutput;
         private System.Windows.Forms.Button buttonAudio;
         private System.Windows.Forms.Button buttonVideo;
         private System.Windows.Forms.Button buttonPackage;
         private System.Windows.Forms.Button buttonSeparate;
+        private System.Windows.Forms.RichTextBox richTextBoxOutput;
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using System.Windows.Forms;
 
 namespace ffmpeg_gui
@@ -8,13 +9,13 @@ namespace ffmpeg_gui
     public partial class MainFrm : Form
     {
         private readonly Dictionary<string, bool> _files = new Dictionary<string, bool>();
-        private const string AudioFormat = "ffmpeg -i \"{0}\\{1}\" -ac 2 -map 0:1 -f wav - | neroaacenc -q 0.25 -if - -ignorelength -of \"{0}\\A_{2}.m4a\"\r\n";
-        private const string VideoFormat = "x264 --crf 30 --demuxer lavf -o \"{0}\\V_{2}.mkv\" \"{0}\\{1}\"\r\n";
-        private const string PackageFormat = "ffmpeg -i \"{0}\\V_{2}.mkv\" -i \"{0}\\A_{2}.m4a\" -vcodec copy -acodec copy \"{0}\\ENC_{2}.mkv\"\r\n";
-        //private const string PackageFormat = "ffmpeg -i \"{0}\\V_{2}.mkv\" -itsoffset 1.196 -i \"{0}\\A_{2}.m4a\" -vcodec copy -acodec copy \"{0}\\ENC_{2}.mkv\"\r\n";
-        private const string SeparateFormat = "ffmpeg -i \"{0}\\{1}\" -vcodec copy -an \"{0}\\V_{2}.mkv\"\r\nffmpeg -i \"{0}\\{1}\" -acodec copy -vn \"{0}\\A_{2}.m4a\"\r\n";
 
-        //ffmpeg -i \"{0}\\V_{2}.mkv\" -itsoffset -0.578 -i \"{0}\\A_{2}.m4a\" -vcodec copy -acodec copy \"{0}\\ENC_{2}.mkv\"
+        private const string AudioFormat = @"ffmpeg -i ""{0}\{1}"" -ac 2 -map 0:1 -f wav - | neroaacenc -q 0.25 -if - -ignorelength -of ""{0}\A_{2}.m4a""";
+        private const string VideoFormat = @"x264 -o ""{0}\V_{2}.mkv"" ""{0}\{1}"" --ssim --tune ssim";
+        private const string PackageFormat = @"ffmpeg -i ""{0}\V_{2}.mkv"" -i ""{0}\A_{2}.m4a"" -vcodec copy -acodec copy ""{0}\ENC_{2}.mp4""";
+        private const string SeparateVideoFormat = @"ffmpeg -i ""{0}\{1}"" -vcodec copy -an ""{0}\V_{2}.mkv""";
+        private const string SeparateAudioFormat = @"ffmpeg -i ""{0}\{1}"" -acodec copy -vn ""{0}\A_{2}.m4a""";
+        
         public MainFrm()
         {
             InitializeComponent();
@@ -24,7 +25,7 @@ namespace ffmpeg_gui
         {
             try
             {
-                using (OpenFileDialog openFileDialog = new OpenFileDialog())
+                using (var openFileDialog = new OpenFileDialog())
                 {
                     openFileDialog.Multiselect = true;
                     if (openFileDialog.ShowDialog() == DialogResult.OK)
@@ -43,7 +44,7 @@ namespace ffmpeg_gui
                     }
                 }
 
-                ShowFileList();
+                RefreshFileList();
             }
             catch (Exception ex)
             {
@@ -51,24 +52,15 @@ namespace ffmpeg_gui
             }
         }
 
-        private void ShowFileList()
-        {
-            checkedListBoxFileName.Items.Clear();
-            foreach (var file in _files)
-            {
-                checkedListBoxFileName.Items.Add(file.Key, file.Value);
-            }
-        }
-
         private void ButtonAddFolderClick(object sender, EventArgs e)
         {
             try
             {
-                using (FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog())
+                using (var folderBrowserDialog = new FolderBrowserDialog())
                 {
                     if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
                     {
-                        foreach (string fileName in Directory.GetFiles(folderBrowserDialog.SelectedPath))
+                        foreach (var fileName in Directory.GetFiles(folderBrowserDialog.SelectedPath))
                         {
                             try
                             {
@@ -82,7 +74,7 @@ namespace ffmpeg_gui
                     }
                 }
 
-                ShowFileList();
+                RefreshFileList();
             }
             catch (Exception ex)
             {
@@ -90,10 +82,21 @@ namespace ffmpeg_gui
             }
         }
 
+        private void RefreshFileList()
+        {
+            checkedListBoxFileName.Items.Clear();
+            foreach (var file in _files)
+            {
+                checkedListBoxFileName.Items.Add(file.Key, file.Value);
+            }
+        }
+
+        
+
         private void ButtonClearListClick(object sender, EventArgs e)
         {
             _files.Clear();
-            ShowFileList();
+            RefreshFileList();
         }
 
         private void ButtonAudioClick(object sender, EventArgs e)
@@ -113,23 +116,25 @@ namespace ffmpeg_gui
 
         private void ButtonSeparateClick(object sender, EventArgs e)
         {
-            GenerateCmdLine(SeparateFormat);
+            GenerateCmdLine(SeparateVideoFormat);
+            GenerateCmdLine(SeparateAudioFormat);
         }
+
         private void GenerateCmdLine(string format)
         {
             try
             {
-                string result = "";
+                var sb = new StringBuilder();
                 foreach (string item in checkedListBoxFileName.CheckedItems)
                 {
-                    string directoryName = Path.GetDirectoryName(item);
-                    string fileName = Path.GetFileName(item);
-                    string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(item);
+                    var directoryName = Path.GetDirectoryName(item);
+                    var fileName = Path.GetFileName(item);
+                    var fileNameWithoutExtension = Path.GetFileNameWithoutExtension(item);
 
-                    result += string.Format(format, directoryName, fileName, fileNameWithoutExtension);
+                    sb.AppendLine(string.Format(format, directoryName, fileName, fileNameWithoutExtension));
                 }
 
-                textBoxOutput.Text += result;
+                richTextBoxOutput.Text += sb.ToString();
             }
             catch (Exception ex)
             {
