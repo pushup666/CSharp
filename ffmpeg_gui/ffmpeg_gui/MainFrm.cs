@@ -13,8 +13,9 @@ namespace ffmpeg_gui
         private const string AudioFormat = @"ffmpeg -i ""{0}\{1}"" -ac 2 -map 0:1 -f wav - | neroaacenc -q 0.25 -if - -ignorelength -of ""{0}\A_{2}.m4a""";
         private const string VideoFormat = @"x264 -o ""{0}\V_{2}.mkv"" ""{0}\{1}"" --ssim --tune ssim";
         private const string PackageFormat = @"ffmpeg -i ""{0}\V_{2}.mkv"" -i ""{0}\A_{2}.m4a"" -vcodec copy -acodec copy ""{0}\ENC_{2}.mp4""";
-        private const string SeparateVideoFormat = @"ffmpeg -i ""{0}\{1}"" -vcodec copy -an ""{0}\V_{2}.mkv""";
         private const string SeparateAudioFormat = @"ffmpeg -i ""{0}\{1}"" -acodec copy -vn ""{0}\A_{2}.m4a""";
+        private const string SeparateVideoFormat = @"ffmpeg -i ""{0}\{1}"" -vcodec copy -an ""{0}\V_{2}.mkv""";
+        
         
         public MainFrm()
         {
@@ -82,6 +83,12 @@ namespace ffmpeg_gui
             }
         }
 
+        private void ButtonClearListClick(object sender, EventArgs e)
+        {
+            _files.Clear();
+            RefreshFileList();
+        }
+
         private void RefreshFileList()
         {
             checkedListBoxFileName.Items.Clear();
@@ -92,13 +99,6 @@ namespace ffmpeg_gui
         }
 
         
-
-        private void ButtonClearListClick(object sender, EventArgs e)
-        {
-            _files.Clear();
-            RefreshFileList();
-        }
-
         private void ButtonAudioClick(object sender, EventArgs e)
         {
             GenerateCmdLine(AudioFormat);
@@ -114,10 +114,14 @@ namespace ffmpeg_gui
             GenerateCmdLine(PackageFormat);
         }
 
+        private void buttonAll_Click(object sender, EventArgs e)
+        {
+            GenerateCmdLine(AudioFormat + "\n" + VideoFormat + "\n" + PackageFormat + "\n");
+        }
+
         private void ButtonSeparateClick(object sender, EventArgs e)
         {
-            GenerateCmdLine(SeparateVideoFormat);
-            GenerateCmdLine(SeparateAudioFormat);
+            GenerateCmdLine(SeparateAudioFormat + "\n" + SeparateVideoFormat + "\n");
         }
 
         private void GenerateCmdLine(string format)
@@ -133,8 +137,21 @@ namespace ffmpeg_gui
 
                     sb.AppendLine(string.Format(format, directoryName, fileName, fileNameWithoutExtension));
                 }
-
                 richTextBoxOutput.Text += sb.ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+
+        private void buttonSave_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                File.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\ssf.bat", richTextBoxOutput.Text.Trim().Replace("\n", "\r\n"), Encoding.Default);
+                MessageBox.Show("保存成功！");
             }
             catch (Exception ex)
             {

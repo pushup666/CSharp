@@ -37,6 +37,8 @@
             this.buttonPackage = new System.Windows.Forms.Button();
             this.buttonSeparate = new System.Windows.Forms.Button();
             this.richTextBoxOutput = new System.Windows.Forms.RichTextBox();
+            this.buttonAll = new System.Windows.Forms.Button();
+            this.buttonSave = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // buttonClearList
@@ -85,7 +87,7 @@
             // buttonAudio
             // 
             this.buttonAudio.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonAudio.Location = new System.Drawing.Point(629, 243);
+            this.buttonAudio.Location = new System.Drawing.Point(468, 243);
             this.buttonAudio.Name = "buttonAudio";
             this.buttonAudio.Size = new System.Drawing.Size(75, 23);
             this.buttonAudio.TabIndex = 14;
@@ -96,7 +98,7 @@
             // buttonVideo
             // 
             this.buttonVideo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonVideo.Location = new System.Drawing.Point(710, 243);
+            this.buttonVideo.Location = new System.Drawing.Point(549, 243);
             this.buttonVideo.Name = "buttonVideo";
             this.buttonVideo.Size = new System.Drawing.Size(75, 23);
             this.buttonVideo.TabIndex = 15;
@@ -107,7 +109,7 @@
             // buttonPackage
             // 
             this.buttonPackage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonPackage.Location = new System.Drawing.Point(791, 243);
+            this.buttonPackage.Location = new System.Drawing.Point(630, 243);
             this.buttonPackage.Name = "buttonPackage";
             this.buttonPackage.Size = new System.Drawing.Size(75, 23);
             this.buttonPackage.TabIndex = 16;
@@ -118,7 +120,7 @@
             // buttonSeparate
             // 
             this.buttonSeparate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonSeparate.Location = new System.Drawing.Point(872, 243);
+            this.buttonSeparate.Location = new System.Drawing.Point(792, 243);
             this.buttonSeparate.Name = "buttonSeparate";
             this.buttonSeparate.Size = new System.Drawing.Size(75, 23);
             this.buttonSeparate.TabIndex = 17;
@@ -133,16 +135,40 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.richTextBoxOutput.Location = new System.Drawing.Point(468, 12);
             this.richTextBoxOutput.Name = "richTextBoxOutput";
-            this.richTextBoxOutput.Size = new System.Drawing.Size(479, 196);
+            this.richTextBoxOutput.Size = new System.Drawing.Size(530, 196);
             this.richTextBoxOutput.TabIndex = 18;
             this.richTextBoxOutput.Text = "";
             this.richTextBoxOutput.WordWrap = false;
+            // 
+            // buttonAll
+            // 
+            this.buttonAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonAll.Location = new System.Drawing.Point(711, 243);
+            this.buttonAll.Name = "buttonAll";
+            this.buttonAll.Size = new System.Drawing.Size(75, 23);
+            this.buttonAll.TabIndex = 19;
+            this.buttonAll.Text = "一键转换";
+            this.buttonAll.UseVisualStyleBackColor = true;
+            this.buttonAll.Click += new System.EventHandler(this.buttonAll_Click);
+            // 
+            // buttonSave
+            // 
+            this.buttonSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonSave.Location = new System.Drawing.Point(923, 243);
+            this.buttonSave.Name = "buttonSave";
+            this.buttonSave.Size = new System.Drawing.Size(75, 23);
+            this.buttonSave.TabIndex = 20;
+            this.buttonSave.Text = "保存";
+            this.buttonSave.UseVisualStyleBackColor = true;
+            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             // 
             // MainFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(959, 290);
+            this.ClientSize = new System.Drawing.Size(1010, 290);
+            this.Controls.Add(this.buttonSave);
+            this.Controls.Add(this.buttonAll);
             this.Controls.Add(this.richTextBoxOutput);
             this.Controls.Add(this.buttonSeparate);
             this.Controls.Add(this.buttonPackage);
@@ -169,5 +195,7 @@
         private System.Windows.Forms.Button buttonPackage;
         private System.Windows.Forms.Button buttonSeparate;
         private System.Windows.Forms.RichTextBox richTextBoxOutput;
+        private System.Windows.Forms.Button buttonAll;
+        private System.Windows.Forms.Button buttonSave;
     }
 }
