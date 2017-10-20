@@ -13,6 +13,9 @@ namespace ffmpeg_gui
         private const string AudioFormat = @"ffmpeg -i ""{0}\{1}"" -ac 2 -map 0:1 -f wav - | neroaacenc -q 0.25 -if - -ignorelength -of ""{0}\A_{2}.m4a""";
         private const string VideoFormat = @"x264 -o ""{0}\V_{2}.mkv"" ""{0}\{1}"" --ssim --tune ssim";
         private const string PackageFormat = @"ffmpeg -i ""{0}\V_{2}.mkv"" -i ""{0}\A_{2}.m4a"" -vcodec copy -acodec copy ""{0}\ENC_{2}.mp4""";
+
+        private const string AllFormat = @"ffmpeg -i ""{0}\{1}"" -vcodec libx264 -crf 23 -acodec aac -ac 2 ""{0}\ENC_{2}.mp4""";
+
         private const string SeparateAudioFormat = @"ffmpeg -i ""{0}\{1}"" -acodec copy -vn ""{0}\A_{2}.m4a""";
         private const string SeparateVideoFormat = @"ffmpeg -i ""{0}\{1}"" -vcodec copy -an ""{0}\V_{2}.mkv""";
         
@@ -116,7 +119,8 @@ namespace ffmpeg_gui
 
         private void buttonAll_Click(object sender, EventArgs e)
         {
-            GenerateCmdLine(AudioFormat + "\n" + VideoFormat + "\n" + PackageFormat + "\n");
+            GenerateCmdLine(AllFormat);
+            //GenerateCmdLine(AudioFormat + "\n" + VideoFormat + "\n" + PackageFormat + "\n");
         }
 
         private void ButtonSeparateClick(object sender, EventArgs e)
