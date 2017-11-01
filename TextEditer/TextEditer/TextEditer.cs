@@ -36,6 +36,7 @@ namespace TextEditer
                 using (var sr = new StreamReader(_fileName, checkBoxUTF8Read.Checked ? Encoding.UTF8 : Encoding.Default))
                 {
                     richTextBoxMain.Text = sr.ReadToEnd();
+                    Text = "TextEditer - " + _fileName;
                 }
             }
             catch (Exception ex)
