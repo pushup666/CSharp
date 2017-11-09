@@ -14,9 +14,9 @@ namespace ffmpeg_gui
         private const string VideoFormat = @"x264 -o ""{0}\V_{2}.mkv"" ""{0}\{1}"" --ssim --tune ssim";
         private const string PackageFormat = @"ffmpeg -i ""{0}\V_{2}.mkv"" -i ""{0}\A_{2}.m4a"" -vcodec copy -acodec copy ""{0}\ENC_{2}.mp4""";
 
-        private const string libx264_AllFormat = @"ffmpeg -i ""{0}\{1}"" -vcodec libx264 -acodec aac -ac 2 ""{0}\libx264_{2}.mp4""";
-        private const string h264_nvenc_AllFormat = @"ffmpeg -i ""{0}\{1}"" -vcodec h264_nvenc -acodec aac -ac 2 ""{0}\h264_nvenc_{2}.mp4""";
-        private const string hevc_nvenc_AllFormat = @"ffmpeg -i ""{0}\{1}"" -vcodec hevc_nvenc -acodec aac -ac 2 ""{0}\hevc_nvenc_{2}.mp4""";
+        private const string libx264_AllFormat = @"ffmpeg -i ""{0}\{1}"" -vcodec libx264 -acodec aac -ac 2 ""{0}\{2}_libx264.mp4""";
+        private const string h264_nvenc_AllFormat = @"ffmpeg -i ""{0}\{1}"" -vcodec h264_nvenc -acodec aac -ac 2 ""{0}\{2}_h264_nvenc.mp4""";
+        private const string hevc_nvenc_AllFormat = @"ffmpeg -i ""{0}\{1}"" -vcodec hevc_nvenc -acodec aac -ac 2 ""{0}\{2}_hevc_nvenc.mp4""";
 
         private const string SeparateAudioFormat = @"ffmpeg -i ""{0}\{1}"" -acodec copy -vn ""{0}\A_{2}.m4a""";
         private const string SeparateVideoFormat = @"ffmpeg -i ""{0}\{1}"" -vcodec copy -an ""{0}\V_{2}.mkv""";
