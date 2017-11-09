@@ -74,7 +74,15 @@ namespace TextEditer
 
             foreach (var line in richTextBoxMain.Lines)
             {
-                _lines.Add("　　" + line);
+                if (line == "")
+                {
+                    _lines.Add(line);
+                }
+                else
+                {
+                    _lines.Add("　　" + line);
+                }
+                
             }
 
             RefreshTextBox();

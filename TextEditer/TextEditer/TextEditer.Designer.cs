@@ -100,7 +100,6 @@ namespace TextEditer
             | System.Windows.Forms.AnchorStyles.Right)));
             this.richTextBoxMain.Location = new System.Drawing.Point(12, 41);
             this.richTextBoxMain.Name = "richTextBoxMain";
-            this.richTextBoxMain.ReadOnly = true;
             this.richTextBoxMain.Size = new System.Drawing.Size(1032, 562);
             this.richTextBoxMain.TabIndex = 7;
             this.richTextBoxMain.Text = "";
