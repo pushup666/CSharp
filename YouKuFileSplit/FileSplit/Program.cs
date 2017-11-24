@@ -47,7 +47,7 @@ namespace FileSplit
 
                 using (var bat = new StreamWriter(string.Format(@"{0}concat.bat", path), true, Encoding.Default))
                 {
-                    bat.WriteLine("ffmpeg -f concat -i {0}.txt -c copy \"{1}.{2}\"",count, name, ext);
+                    bat.WriteLine("ffmpeg -f concat -i {0}.txt -c copy \"{1}.{2}\"",count, name, "mp4");
                 }
 
                 using (var list = new StreamWriter(string.Format(@"{0}{1}.txt", path, count), false, Encoding.Default))
