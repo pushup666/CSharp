@@ -125,7 +125,7 @@ namespace ffmpeg_gui
 
         private void buttonAll_Click(object sender, EventArgs e)
         {
-            GenerateCmdLine(AllFormatLibx264);
+            GenerateCmdLine(AllFormatToMp4);
             //GenerateCmdLine(AudioFormat + "\n" + VideoFormat + "\n" + PackageFormat + "\n");
         }
 
