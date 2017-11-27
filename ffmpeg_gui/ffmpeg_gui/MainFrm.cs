@@ -21,7 +21,6 @@ namespace ffmpeg_gui
         private const string AllFormatHevcNvEnc = @"ffmpeg -i ""{0}\{1}"" -vcodec hevc_nvenc -acodec aac -ac 2 ""{0}\{2}_hevc_nvenc.mp4""";
 
         private const string AllFormatH264Qsv = @"ffmpeg -i ""{0}\{1}"" -vcodec h264_qsv -acodec aac -ac 2 ""{0}\{2}_h264_qsv.mp4""";
-        private const string AllFormatToMp4 = @"ffmpeg -i ""{0}\{1}"" -vcodec copy -acodec copy ""{0}\{2}.mp4""";
 
         private const string AllFormatToMp4 = @"ffmpeg -i ""{0}\{1}"" -vcodec copy -acodec copy ""{0}\{2}.mp4""";
 
