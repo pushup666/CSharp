@@ -10,9 +10,9 @@ namespace ffmpeg_gui
     {
         private readonly Dictionary<string, bool> _files = new Dictionary<string, bool>();
 
-        private const string AudioFormat = @"ffmpeg -i ""{0}\{1}"" -ac 2 -f wav - | neroaacenc -q 0.25 -if - -ignorelength -of ""{0}\A_{2}.m4a""";
+        //private const string AudioFormat = @"ffmpeg -i ""{0}\{1}"" -ac 2 -f wav - | neroaacenc -q 0.25 -if - -ignorelength -of ""{0}\A_{2}.m4a""";
 
-        private const string VideoFormat = @"x264 -o ""{0}\V_{2}.mkv"" ""{0}\{1}"" --ssim --tune ssim";
+        //private const string VideoFormat = @"x264 -o ""{0}\V_{2}.mkv"" ""{0}\{1}"" --ssim --tune ssim";
         //private const string VideoFormat = @"ffmpeg -i ""{0}\{1}"" -vcodec hevc_nvenc -an ""{0}\V_{2}.mkv""";
         //private const string VideoFormat = @"ffmpeg -i ""{0}\{1}"" -vcodec h264_qsv -an ""{0}\V_{2}.mkv""";
 
@@ -22,13 +22,18 @@ namespace ffmpeg_gui
         //private const string AllFormatHevcNvEnc = @"ffmpeg -i ""{0}\{1}"" -vcodec hevc_nvenc -acodec aac -ac 2 ""{0}\{2}_hevc_nvenc.mp4""";
         //private const string AllFormatH264Qsv = @"ffmpeg -i ""{0}\{1}"" -vcodec h264_qsv -acodec aac -ac 2 ""{0}\{2}_h264_qsv.mp4""";
 
-        private const string PackageFormat = @"ffmpeg -i ""{0}\V_{2}.mkv"" -i ""{0}\A_{2}.m4a"" -vcodec copy -acodec copy ""{0}\ENC_{2}.mp4""";
+        //private const string PackageFormat = @"ffmpeg -i ""{0}\V_{2}.mkv"" -i ""{0}\A_{2}.m4a"" -vcodec copy -acodec copy ""{0}\{2}_ENC.mp4""";
 
         private const string AllFormatToMp4 = @"ffmpeg -i ""{0}\{1}"" -vcodec copy -acodec copy ""{0}\{2}.mp4""";
 
         private const string SeparateAudioFormat = @"ffmpeg -i ""{0}\{1}"" -acodec copy -vn ""{0}\A_{2}.m4a""";
         private const string SeparateVideoFormat = @"ffmpeg -i ""{0}\{1}"" -vcodec copy -an ""{0}\V_{2}.mkv""";
         private const string SeparateSubtitleFormat = @"ffmpeg -i ""{0}\{1}"" -vn -an -scodec copy ""{0}\S_{2}.ass""";
+
+
+        private const string AudioFormat = @"ffmpeg -i ""{0}\{1}"" -ac 2 -f wav - | neroaacenc -q 0.25 -if - -ignorelength -of ""Z:\A_{2}.m4a""";
+        private const string VideoFormat = @"ffmpeg -i ""{0}\{1}"" -vcodec hevc_nvenc -an ""Z:\V_{2}.mkv""";
+        private const string PackageFormat = @"ffmpeg -i ""Z:\V_{2}.mkv"" -i ""Z:\A_{2}.m4a"" -vcodec copy -acodec copy ""Z:\{2}_ENC.mp4""";
 
         public MainFrm()
         {
@@ -130,8 +135,8 @@ namespace ffmpeg_gui
         private void buttonAll_Click(object sender, EventArgs e)
         {
 
-            GenerateCmdLine(AllFormatToMp4);
-            //GenerateCmdLine(AudioFormat + "\n" + VideoFormat + "\n" + PackageFormat + "\n");
+            //GenerateCmdLine(AllFormatToMp4);
+            GenerateCmdLine(AudioFormat + "\n" + VideoFormat + "\n" + PackageFormat + "\n");
         }
 
         private void ButtonSeparateClick(object sender, EventArgs e)
