@@ -87,7 +87,7 @@
             // buttonAudio
             // 
             this.buttonAudio.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonAudio.Location = new System.Drawing.Point(468, 243);
+            this.buttonAudio.Location = new System.Drawing.Point(549, 243);
             this.buttonAudio.Name = "buttonAudio";
             this.buttonAudio.Size = new System.Drawing.Size(75, 23);
             this.buttonAudio.TabIndex = 14;
@@ -98,7 +98,7 @@
             // buttonVideo
             // 
             this.buttonVideo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonVideo.Location = new System.Drawing.Point(549, 243);
+            this.buttonVideo.Location = new System.Drawing.Point(468, 243);
             this.buttonVideo.Name = "buttonVideo";
             this.buttonVideo.Size = new System.Drawing.Size(75, 23);
             this.buttonVideo.TabIndex = 15;
