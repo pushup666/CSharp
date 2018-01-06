@@ -8,13 +8,13 @@ namespace ffmpeg_gui
 {
     public partial class MainFrm : Form
     {
-        private const bool IsSaveToRam = false;
+        private const bool IsSaveToRam = true;
         private readonly Dictionary<string, bool> _files = new Dictionary<string, bool>();
 
         
         //private const string VideoFormat = @"x264 -o ""{2}\V_{3}.mkv"" ""{0}\{1}"" --ssim --tune ssim";
-        private const string VideoFormat = @"ffmpeg -i ""{0}\{1}"" -vcodec copy -an ""{2}\V_{3}.mkv""";
-        //private const string VideoFormat = @"ffmpeg -i ""{0}\{1}"" -vcodec hevc_nvenc -an ""{2}\V_{3}.mkv""";     //2000 Kbps/s
+        //private const string VideoFormat = @"ffmpeg -i ""{0}\{1}"" -vcodec copy -an ""{2}\V_{3}.mkv""";
+        private const string VideoFormat = @"ffmpeg -i ""{0}\{1}"" -vcodec hevc_nvenc -an ""{2}\V_{3}.mkv""";     //2000 Kbps/s
         //private const string VideoFormat = @"ffmpeg -i ""{0}\{1}"" -vcodec h264_qsv   -an ""{2}\V_{3}.mkv""";     //1000 Kbps/s
 
         private const string AudioFormat = @"ffmpeg -i ""{0}\{1}"" -ac 2 -f wav - | neroaacenc -q 0.3 -if - -ignorelength -of ""{2}\A_{3}.mp4""";           // 81 Kbps/s        59x
