@@ -10,11 +10,11 @@ namespace FileSplit
     {
         static void Main()
         {
-            var splitPattern = new byte[] { 70, 76, 86, 1, 5 };     //flv
-            const string ext = "flv";
+            //var splitPattern = new byte[] { 70, 76, 86, 1, 5 };     //flv
+            //const string ext = "flv";
 
-            //var splitPattern = new byte[] {0, 0, 0, 32, 102, 116, 121, 112, 105, 115, 111, 109};     //mp4
-            //const string ext = "mp4";
+            var splitPattern = new byte[] {0, 0, 0, 32, 102, 116, 121, 112, 105, 115, 111, 109};     //mp4
+            const string ext = "mp4";
 
             var count = 0;
             const string path = @"Z:\kux\";
@@ -22,9 +22,11 @@ namespace FileSplit
             foreach (var fullname in Directory.GetFiles(path, "*.kux"))
             {
                 count++;
-
+                
                 var name = Path.GetFileNameWithoutExtension(fullname);
                 var fileData = File.ReadAllBytes(fullname);
+
+                Console.WriteLine($@"{count}: {name}");
 
                 var idx = new List<int> {0};
                 for (var i = 0; i < fileData.Length - splitPattern.Length + 1; i++)
