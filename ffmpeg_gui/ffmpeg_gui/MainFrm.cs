@@ -8,19 +8,14 @@ namespace ffmpeg_gui
 {
     public partial class MainFrm : Form
     {
-        private const bool IsSaveToRam = false;
+        private const bool IsSaveToRam = true;
         private readonly Dictionary<string, bool> _files = new Dictionary<string, bool>();
 
 
         //private const string VideoFormat = @"x264 -o ""{2}\V_{3}.mkv"" ""{0}\{1}"" --ssim --tune ssim";
         //private const string VideoFormat = @"ffmpeg -i ""{0}\{1}"" -vcodec copy -an ""{2}\V_{3}.mkv""";
-<<<<<<< HEAD
         private const string VideoFormat = @"ffmpeg -i ""{0}\{1}"" -vcodec hevc_nvenc -an ""{2}\V_{3}.mkv""";     //2000 Kbps/s
         //private const string VideoFormat = @"ffmpeg -i ""{0}\{1}"" -vcodec h264_qsv -an ""{2}\V_{3}.mkv""";     //1000 Kbps/s
-=======
-        //private const string VideoFormat = @"ffmpeg -i ""{0}\{1}"" -vcodec hevc_nvenc -an ""{2}\V_{3}.mkv""";     //2000 Kbps/s
-        private const string VideoFormat = @"ffmpeg -i ""{0}\{1}"" -vcodec h264_qsv -an ""{2}\V_{3}.mkv""";     //1000 Kbps/s
->>>>>>> 232c716f90e0e737c8edc4844276025a1ca56408
 
 
         //private const string AudioFormat = @"ffmpeg -i ""{0}\{1}"" -vn -acodec copy ""{2}\A_{3}.mp4""";
