@@ -103,6 +103,23 @@ namespace Txt2PdfConvert
             }
         }
 
+        private void buttonSplit_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var beginTime = DateTime.Now;
+                foreach (string fileName in checkedListBoxFileName.CheckedItems)
+                {
+                    SplitPdf(fileName);
+                }
+                MessageBox.Show(string.Format("耗时：{0} 秒", DateTime.Now.Subtract(beginTime).TotalSeconds));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
         private void ShowFileList()
         {
             checkedListBoxFileName.Items.Clear();
@@ -136,7 +153,9 @@ namespace Txt2PdfConvert
                     //font.Color = BaseColor.WHITE;
                     //document.PageSize.BackgroundColor = BaseColor.BLACK;
 
-                    PdfWriter.GetInstance(document, new FileStream(Path.ChangeExtension(fileName, "pdf"), FileMode.Create));
+                    var pdfName = Path.ChangeExtension(fileName, "pdf");
+                    PdfWriter.GetInstance(document, new FileStream(pdfName, FileMode.Create));
+
                     document.Open();
 
                     using (var sr = new StreamReader(fileName, Encoding.Default))
@@ -149,6 +168,52 @@ namespace Txt2PdfConvert
                     }
 
                     document.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        
+        private void SplitPdf(string fileName)
+        {
+            try
+            {
+                if (fileName != null)
+                {
+                    var pagesPerPdf = radioButtonMini2.Checked ? 3000 : 5000;
+
+                    var reader = new PdfReader(Path.ChangeExtension(fileName, "pdf"));
+                    var pagesCount = reader.NumberOfPages;
+                    var filesCount = pagesCount / pagesPerPdf + 1;
+
+
+                    for (var i = 0; i < filesCount; i++)
+                    {
+                        var document = new Document(reader.GetPageSizeWithRotation(1));
+
+                        string pdfSplitName = $@"{Path.GetDirectoryName(fileName)}\{Path.GetFileNameWithoutExtension(fileName)}-{(i + 1).ToString("D2")}.pdf";
+                        var pdfCopyProvider = new PdfCopy(document, new FileStream(pdfSplitName, FileMode.Create));
+
+                        document.Open();
+
+                        for (var j = 0; j < pagesPerPdf; j++)
+                        {
+                            var index = i * pagesPerPdf + j + 1;
+
+                            if (index <= pagesCount)
+                            {
+                                pdfCopyProvider.AddPage(pdfCopyProvider.GetImportedPage(reader, index));
+                            }
+                        }
+
+                        document.Close();
+                    }
+
+                    reader.Close();
+
+                    File.Delete(Path.ChangeExtension(fileName, "pdf"));
                 }
             }
             catch (Exception ex)
