@@ -94,22 +94,6 @@ namespace Txt2PdfConvert
                 foreach (string fileName in checkedListBoxFileName.CheckedItems)
                 {
                     GeneratePdf(fileName);
-                }
-                MessageBox.Show(string.Format("耗时：{0} 秒", DateTime.Now.Subtract(beginTime).TotalSeconds));
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void buttonSplit_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                var beginTime = DateTime.Now;
-                foreach (string fileName in checkedListBoxFileName.CheckedItems)
-                {
                     SplitPdf(fileName);
                 }
                 MessageBox.Show(string.Format("耗时：{0} 秒", DateTime.Now.Subtract(beginTime).TotalSeconds));
@@ -150,6 +134,7 @@ namespace Txt2PdfConvert
                         document = new Document(new Rectangle(450, 800));       //iPhone 5s
                     }
 
+                    //反色
                     //font.Color = BaseColor.WHITE;
                     //document.PageSize.BackgroundColor = BaseColor.BLACK;
 

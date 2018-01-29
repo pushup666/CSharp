@@ -35,12 +35,11 @@
             this.buttonClearList = new System.Windows.Forms.Button();
             this.radioButtonMini2 = new System.Windows.Forms.RadioButton();
             this.radioButton5s = new System.Windows.Forms.RadioButton();
-            this.buttonSplit = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // buttonAddFile
             // 
-            this.buttonAddFile.Location = new System.Drawing.Point(10, 233);
+            this.buttonAddFile.Location = new System.Drawing.Point(12, 217);
             this.buttonAddFile.Name = "buttonAddFile";
             this.buttonAddFile.Size = new System.Drawing.Size(75, 23);
             this.buttonAddFile.TabIndex = 0;
@@ -50,7 +49,7 @@
             // 
             // buttonAddFolder
             // 
-            this.buttonAddFolder.Location = new System.Drawing.Point(91, 233);
+            this.buttonAddFolder.Location = new System.Drawing.Point(93, 217);
             this.buttonAddFolder.Name = "buttonAddFolder";
             this.buttonAddFolder.Size = new System.Drawing.Size(75, 23);
             this.buttonAddFolder.TabIndex = 1;
@@ -60,7 +59,7 @@
             // 
             // buttonConvert
             // 
-            this.buttonConvert.Location = new System.Drawing.Point(527, 214);
+            this.buttonConvert.Location = new System.Drawing.Point(527, 217);
             this.buttonConvert.Name = "buttonConvert";
             this.buttonConvert.Size = new System.Drawing.Size(75, 23);
             this.buttonConvert.TabIndex = 2;
@@ -78,7 +77,7 @@
             // 
             // buttonClearList
             // 
-            this.buttonClearList.Location = new System.Drawing.Point(172, 233);
+            this.buttonClearList.Location = new System.Drawing.Point(174, 217);
             this.buttonClearList.Name = "buttonClearList";
             this.buttonClearList.Size = new System.Drawing.Size(75, 23);
             this.buttonClearList.TabIndex = 5;
@@ -90,7 +89,7 @@
             // 
             this.radioButtonMini2.AutoSize = true;
             this.radioButtonMini2.Checked = true;
-            this.radioButtonMini2.Location = new System.Drawing.Point(393, 221);
+            this.radioButtonMini2.Location = new System.Drawing.Point(393, 214);
             this.radioButtonMini2.Name = "radioButtonMini2";
             this.radioButtonMini2.Size = new System.Drawing.Size(83, 16);
             this.radioButtonMini2.TabIndex = 6;
@@ -101,29 +100,18 @@
             // radioButton5s
             // 
             this.radioButton5s.AutoSize = true;
-            this.radioButton5s.Location = new System.Drawing.Point(393, 243);
+            this.radioButton5s.Location = new System.Drawing.Point(393, 232);
             this.radioButton5s.Name = "radioButton5s";
             this.radioButton5s.Size = new System.Drawing.Size(77, 16);
             this.radioButton5s.TabIndex = 7;
             this.radioButton5s.Text = "iPhone 5s";
             this.radioButton5s.UseVisualStyleBackColor = true;
             // 
-            // buttonSplit
-            // 
-            this.buttonSplit.Location = new System.Drawing.Point(528, 243);
-            this.buttonSplit.Name = "buttonSplit";
-            this.buttonSplit.Size = new System.Drawing.Size(75, 23);
-            this.buttonSplit.TabIndex = 8;
-            this.buttonSplit.Text = "分割";
-            this.buttonSplit.UseVisualStyleBackColor = true;
-            this.buttonSplit.Click += new System.EventHandler(this.buttonSplit_Click);
-            // 
             // Txt2Pdf
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(615, 276);
-            this.Controls.Add(this.buttonSplit);
+            this.ClientSize = new System.Drawing.Size(615, 252);
             this.Controls.Add(this.radioButton5s);
             this.Controls.Add(this.radioButtonMini2);
             this.Controls.Add(this.buttonClearList);
@@ -147,6 +135,5 @@
         private System.Windows.Forms.Button buttonClearList;
         private System.Windows.Forms.RadioButton radioButtonMini2;
         private System.Windows.Forms.RadioButton radioButton5s;
-        private System.Windows.Forms.Button buttonSplit;
     }
 }
