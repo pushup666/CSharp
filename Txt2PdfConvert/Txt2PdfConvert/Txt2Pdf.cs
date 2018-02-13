@@ -125,13 +125,13 @@ namespace Txt2PdfConvert
 
                     if (radioButtonMini2.Checked)
                     {
-                        font = new Font(baseFont, 14f);                       //iPad mini2
-                        document = new Document(new Rectangle(600, 800));     //iPad mini2
+                        font = new Font(baseFont, 36f);                         //iPad mini2
+                        document = new Document(new Rectangle(1536, 2048));     //iPad mini2  2048x1536
                     }
                     else
                     {
-                        font = new Font(baseFont, 23f);                         //iPhone 5s
-                        document = new Document(new Rectangle(450, 800));       //iPhone 5s
+                        font = new Font(baseFont, 32f);                         //iPhone 5s
+                        document = new Document(new Rectangle(640, 1136));      //iPhone 5s 1136x640
                     }
 
                     //反色
