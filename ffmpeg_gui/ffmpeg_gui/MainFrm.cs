@@ -11,6 +11,7 @@ namespace ffmpeg_gui
         private const bool IsSaveToRam = true;
         private readonly Dictionary<string, bool> _files = new Dictionary<string, bool>();
 
+        //ffmpeg -ss 00:02:40 -i 111.mp4 -c copy -t 01:27:15 222.mp4 分割
 
         //private const string VideoFormat = @"x264 -o ""{2}\V_{3}.mkv"" ""{0}\{1}"" --ssim --tune ssim";
         //private const string VideoFormat = @"ffmpeg -i ""{0}\{1}"" -vcodec copy -an ""{2}\V_{3}.mkv""";
@@ -177,7 +178,7 @@ namespace ffmpeg_gui
         {
             try
             {
-                File.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\ssf.bat", richTextBoxOutput.Text.Trim().Replace("\n", "\r\n") + "\r\npause", Encoding.Default);
+                File.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\ssf.bat", richTextBoxOutput.Text.Trim().Replace("\n", "\r\n"), Encoding.Default);
                 Close();
             }
             catch (Exception ex)
