@@ -142,8 +142,8 @@ namespace ffmpeg_gui
         private void buttonAll_Click(object sender, EventArgs e)
         {
 
+            //GenerateCmdLine(@"ffmpeg -i ""{0}\{1}"" -vcodec copy -acodec copy ""{2}\{3}.mp4""" + "\r\n" + @"ffmpeg -i ""{2}\{3}.mp4"" -vcodec hevc_nvenc -an ""{2}\V_{3}.mkv""" + "\r\n" + @"ffmpeg -i ""{2}\V_{3}.mkv"" -i ""{2}\A_{3}.mp4"" -vcodec copy -acodec copy ""{2}\{3}_ENC.mp4""" + "\r\n" + @"del ""{2}\{3}.mp4""" + "\r\n" + @"del ""{2}\V_{3}.mkv""" + "\r\n" + @"del ""{2}\A_{3}.mp4""");
             GenerateCmdLine(AllFormatToMp4);
-            //GenerateCmdLine(AudioFormat + "\n" + VideoFormat + "\n" + PackageFormat + "\n");
         }
 
         private void ButtonSeparateClick(object sender, EventArgs e)
