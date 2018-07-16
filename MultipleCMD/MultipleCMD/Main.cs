@@ -15,7 +15,7 @@ namespace MultipleCMD
         private void buttonStart_Click(object sender, EventArgs e)
         {
             ThreadPool.SetMinThreads(1, 1);
-            ThreadPool.SetMaxThreads(5, 5);
+            ThreadPool.SetMaxThreads(8, 8);
 
             foreach (var cmdArguments in richTextBoxCmdInput.Lines)
             {
@@ -24,11 +24,11 @@ namespace MultipleCMD
         }
 
 
-        private void ExecCmd(object cmdArguments)
+        private static void ExecCmd(object cmdArguments)
         {
             try
             {
-                Process p = new Process();
+                var p = new Process();
 
                 p.StartInfo.WorkingDirectory = @"D:\Git\you-get";
                 p.StartInfo.FileName = "python";
