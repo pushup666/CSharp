@@ -33,13 +33,12 @@
             this.buttonConvert = new System.Windows.Forms.Button();
             this.checkedListBoxFileName = new System.Windows.Forms.CheckedListBox();
             this.buttonClearList = new System.Windows.Forms.Button();
-            this.radioButtonMini2 = new System.Windows.Forms.RadioButton();
-            this.radioButton5s = new System.Windows.Forms.RadioButton();
+            this.comboBoxDevice = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // buttonAddFile
             // 
-            this.buttonAddFile.Location = new System.Drawing.Point(12, 217);
+            this.buttonAddFile.Location = new System.Drawing.Point(12, 12);
             this.buttonAddFile.Name = "buttonAddFile";
             this.buttonAddFile.Size = new System.Drawing.Size(75, 23);
             this.buttonAddFile.TabIndex = 0;
@@ -49,7 +48,7 @@
             // 
             // buttonAddFolder
             // 
-            this.buttonAddFolder.Location = new System.Drawing.Point(93, 217);
+            this.buttonAddFolder.Location = new System.Drawing.Point(94, 12);
             this.buttonAddFolder.Name = "buttonAddFolder";
             this.buttonAddFolder.Size = new System.Drawing.Size(75, 23);
             this.buttonAddFolder.TabIndex = 1;
@@ -59,7 +58,7 @@
             // 
             // buttonConvert
             // 
-            this.buttonConvert.Location = new System.Drawing.Point(527, 217);
+            this.buttonConvert.Location = new System.Drawing.Point(528, 12);
             this.buttonConvert.Name = "buttonConvert";
             this.buttonConvert.Size = new System.Drawing.Size(75, 23);
             this.buttonConvert.TabIndex = 2;
@@ -70,14 +69,14 @@
             // checkedListBoxFileName
             // 
             this.checkedListBoxFileName.FormattingEnabled = true;
-            this.checkedListBoxFileName.Location = new System.Drawing.Point(12, 12);
+            this.checkedListBoxFileName.Location = new System.Drawing.Point(12, 44);
             this.checkedListBoxFileName.Name = "checkedListBoxFileName";
-            this.checkedListBoxFileName.Size = new System.Drawing.Size(590, 196);
+            this.checkedListBoxFileName.Size = new System.Drawing.Size(590, 212);
             this.checkedListBoxFileName.TabIndex = 4;
             // 
             // buttonClearList
             // 
-            this.buttonClearList.Location = new System.Drawing.Point(174, 217);
+            this.buttonClearList.Location = new System.Drawing.Point(175, 12);
             this.buttonClearList.Name = "buttonClearList";
             this.buttonClearList.Size = new System.Drawing.Size(75, 23);
             this.buttonClearList.TabIndex = 5;
@@ -85,35 +84,25 @@
             this.buttonClearList.UseVisualStyleBackColor = true;
             this.buttonClearList.Click += new System.EventHandler(this.ButtonClearListClick);
             // 
-            // radioButtonMini2
+            // comboBoxDevice
             // 
-            this.radioButtonMini2.AutoSize = true;
-            this.radioButtonMini2.Checked = true;
-            this.radioButtonMini2.Location = new System.Drawing.Point(393, 214);
-            this.radioButtonMini2.Name = "radioButtonMini2";
-            this.radioButtonMini2.Size = new System.Drawing.Size(83, 16);
-            this.radioButtonMini2.TabIndex = 6;
-            this.radioButtonMini2.TabStop = true;
-            this.radioButtonMini2.Text = "iPad mini2";
-            this.radioButtonMini2.UseVisualStyleBackColor = true;
-            // 
-            // radioButton5s
-            // 
-            this.radioButton5s.AutoSize = true;
-            this.radioButton5s.Location = new System.Drawing.Point(393, 232);
-            this.radioButton5s.Name = "radioButton5s";
-            this.radioButton5s.Size = new System.Drawing.Size(77, 16);
-            this.radioButton5s.TabIndex = 7;
-            this.radioButton5s.Text = "iPhone 5s";
-            this.radioButton5s.UseVisualStyleBackColor = true;
+            this.comboBoxDevice.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxDevice.FormattingEnabled = true;
+            this.comboBoxDevice.Items.AddRange(new object[] {
+            "iPad mini2",
+            "iPhone 5s",
+            "iPhone 8"});
+            this.comboBoxDevice.Location = new System.Drawing.Point(344, 13);
+            this.comboBoxDevice.Name = "comboBoxDevice";
+            this.comboBoxDevice.Size = new System.Drawing.Size(121, 20);
+            this.comboBoxDevice.TabIndex = 6;
             // 
             // Txt2Pdf
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(615, 252);
-            this.Controls.Add(this.radioButton5s);
-            this.Controls.Add(this.radioButtonMini2);
+            this.ClientSize = new System.Drawing.Size(615, 268);
+            this.Controls.Add(this.comboBoxDevice);
             this.Controls.Add(this.buttonClearList);
             this.Controls.Add(this.checkedListBoxFileName);
             this.Controls.Add(this.buttonConvert);
@@ -122,7 +111,6 @@
             this.Name = "Txt2Pdf";
             this.Text = "Txt2Pdf";
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -133,7 +121,6 @@
         private System.Windows.Forms.Button buttonConvert;
         private System.Windows.Forms.CheckedListBox checkedListBoxFileName;
         private System.Windows.Forms.Button buttonClearList;
-        private System.Windows.Forms.RadioButton radioButtonMini2;
-        private System.Windows.Forms.RadioButton radioButton5s;
+        private System.Windows.Forms.ComboBox comboBoxDevice;
     }
 }

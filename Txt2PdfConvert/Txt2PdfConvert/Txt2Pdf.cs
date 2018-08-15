@@ -15,6 +15,7 @@ namespace Txt2PdfConvert
         public Txt2Pdf()
         {
             InitializeComponent();
+            comboBoxDevice.SelectedIndex = 0;
         }
 
         private void ButtonAddFileClick(object sender, EventArgs e)
@@ -123,15 +124,26 @@ namespace Txt2PdfConvert
                     Font font; 
                     Document document;
 
-                    if (radioButtonMini2.Checked)
+
+
+                    switch (comboBoxDevice.Text)
                     {
-                        font = new Font(baseFont, 36f);                         //iPad mini2
-                        document = new Document(new Rectangle(1536, 2048));     //iPad mini2  2048x1536
-                    }
-                    else
-                    {
-                        font = new Font(baseFont, 32f);                         //iPhone 5s
-                        document = new Document(new Rectangle(640, 1136));      //iPhone 5s 1136x640
+                        case "iPad mini2":
+                            font = new Font(baseFont, 36f);                         //iPad mini2
+                            document = new Document(new Rectangle(1536, 2048));     //iPad mini2  2048x1536
+                            break;
+                        case "iPhone 5s":
+                            font = new Font(baseFont, 32f);                         //iPhone 5s
+                            document = new Document(new Rectangle(640, 1136));      //iPhone 5s 1136x640
+                            break;
+                        case "iPhone 8":
+                            font = new Font(baseFont, 32f);                         //iPhone 8
+                            document = new Document(new Rectangle(640, 1136));      //iPhone 8 1334x750
+                            break;
+                        default:
+                            font = new Font(baseFont, 36f);                         //iPad mini2
+                            document = new Document(new Rectangle(1536, 2048));     //iPad mini2  2048x1536
+                            break;
                     }
 
                     //反色
@@ -167,7 +179,7 @@ namespace Txt2PdfConvert
             {
                 if (fileName != null)
                 {
-                    var pagesPerPdf = radioButtonMini2.Checked ? 3000 : 5000;
+                    const int pagesPerPdf = 5000;
 
                     var reader = new PdfReader(Path.ChangeExtension(fileName, "pdf"));
                     var pagesCount = reader.NumberOfPages;
@@ -206,5 +218,7 @@ namespace Txt2PdfConvert
                 MessageBox.Show(ex.Message);
             }
         }
+
+        
     }
 }
