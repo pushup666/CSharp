@@ -36,7 +36,7 @@ namespace TextEditer
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonTrimLine = new System.Windows.Forms.Button();
             this.richTextBoxMain = new System.Windows.Forms.RichTextBox();
-            this.checkBoxUTF8Read = new System.Windows.Forms.CheckBox();
+            this.checkBoxUTF8 = new System.Windows.Forms.CheckBox();
             this.buttonAddHeadBlank = new System.Windows.Forms.Button();
             this.buttonLong2Short = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -106,15 +106,15 @@ namespace TextEditer
             this.richTextBoxMain.DragDrop += new System.Windows.Forms.DragEventHandler(this.richTextBoxMain_DragDrop);
             this.richTextBoxMain.DragEnter += new System.Windows.Forms.DragEventHandler(this.richTextBoxMain_DragEnter);
             // 
-            // checkBoxUTF8Read
+            // checkBoxUTF8
             // 
-            this.checkBoxUTF8Read.AutoSize = true;
-            this.checkBoxUTF8Read.Location = new System.Drawing.Point(587, 16);
-            this.checkBoxUTF8Read.Name = "checkBoxUTF8Read";
-            this.checkBoxUTF8Read.Size = new System.Drawing.Size(66, 16);
-            this.checkBoxUTF8Read.TabIndex = 8;
-            this.checkBoxUTF8Read.Text = "UTF-8读";
-            this.checkBoxUTF8Read.UseVisualStyleBackColor = true;
+            this.checkBoxUTF8.AutoSize = true;
+            this.checkBoxUTF8.Location = new System.Drawing.Point(587, 16);
+            this.checkBoxUTF8.Name = "checkBoxUTF8";
+            this.checkBoxUTF8.Size = new System.Drawing.Size(54, 16);
+            this.checkBoxUTF8.TabIndex = 8;
+            this.checkBoxUTF8.Text = "UTF-8";
+            this.checkBoxUTF8.UseVisualStyleBackColor = true;
             // 
             // buttonAddHeadBlank
             // 
@@ -143,7 +143,7 @@ namespace TextEditer
             this.ClientSize = new System.Drawing.Size(1056, 618);
             this.Controls.Add(this.buttonLong2Short);
             this.Controls.Add(this.buttonAddHeadBlank);
-            this.Controls.Add(this.checkBoxUTF8Read);
+            this.Controls.Add(this.checkBoxUTF8);
             this.Controls.Add(this.richTextBoxMain);
             this.Controls.Add(this.buttonTrimLine);
             this.Controls.Add(this.buttonSave);
@@ -165,7 +165,7 @@ namespace TextEditer
         private Button buttonSave;
         private Button buttonTrimLine;
         private RichTextBox richTextBoxMain;
-        private CheckBox checkBoxUTF8Read;
+        private CheckBox checkBoxUTF8;
         private Button buttonAddHeadBlank;
         private Button buttonLong2Short;
     }

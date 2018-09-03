@@ -34,6 +34,7 @@
             this.checkedListBoxFileName = new System.Windows.Forms.CheckedListBox();
             this.buttonClearList = new System.Windows.Forms.Button();
             this.comboBoxDevice = new System.Windows.Forms.ComboBox();
+            this.checkBoxUTF8 = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // buttonAddFile
@@ -92,16 +93,27 @@
             "iPad mini2",
             "iPhone 5s",
             "iPhone 8"});
-            this.comboBoxDevice.Location = new System.Drawing.Point(344, 13);
+            this.comboBoxDevice.Location = new System.Drawing.Point(277, 14);
             this.comboBoxDevice.Name = "comboBoxDevice";
             this.comboBoxDevice.Size = new System.Drawing.Size(121, 20);
             this.comboBoxDevice.TabIndex = 6;
+            // 
+            // checkBoxUTF8
+            // 
+            this.checkBoxUTF8.AutoSize = true;
+            this.checkBoxUTF8.Location = new System.Drawing.Point(429, 16);
+            this.checkBoxUTF8.Name = "checkBoxUTF8";
+            this.checkBoxUTF8.Size = new System.Drawing.Size(54, 16);
+            this.checkBoxUTF8.TabIndex = 7;
+            this.checkBoxUTF8.Text = "UTF-8";
+            this.checkBoxUTF8.UseVisualStyleBackColor = true;
             // 
             // Txt2Pdf
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(615, 268);
+            this.Controls.Add(this.checkBoxUTF8);
             this.Controls.Add(this.comboBoxDevice);
             this.Controls.Add(this.buttonClearList);
             this.Controls.Add(this.checkedListBoxFileName);
@@ -111,6 +123,7 @@
             this.Name = "Txt2Pdf";
             this.Text = "Txt2Pdf";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -122,5 +135,6 @@
         private System.Windows.Forms.CheckedListBox checkedListBoxFileName;
         private System.Windows.Forms.Button buttonClearList;
         private System.Windows.Forms.ComboBox comboBoxDevice;
+        private System.Windows.Forms.CheckBox checkBoxUTF8;
     }
 }

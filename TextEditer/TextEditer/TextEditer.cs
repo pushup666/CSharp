@@ -33,7 +33,7 @@ namespace TextEditer
                 }
                 _fileName = filesName.GetValue(0).ToString();
 
-                using (var sr = new StreamReader(_fileName, checkBoxUTF8Read.Checked ? Encoding.UTF8 : Encoding.Default))
+                using (var sr = new StreamReader(_fileName, checkBoxUTF8.Checked ? Encoding.UTF8 : Encoding.Default))
                 {
                     richTextBoxMain.Text = sr.ReadToEnd();
                     Text = "TextEditer - " + _fileName;
@@ -178,7 +178,7 @@ namespace TextEditer
         {
             try
             {
-                using (var sw = new StreamWriter(_fileName, false, Encoding.Default))
+                using (var sw = new StreamWriter(_fileName, false, checkBoxUTF8.Checked ? Encoding.UTF8 : Encoding.Default))
                 {
                     var txt = richTextBoxMain.Text.Replace("\n", "\r\n");   //Unix -> Dos
                     sw.Write(txt);

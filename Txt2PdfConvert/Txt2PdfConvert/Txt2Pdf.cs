@@ -138,7 +138,7 @@ namespace Txt2PdfConvert
                             break;
                         case "iPhone 8":
                             font = new Font(baseFont, 32f);                         //iPhone 8
-                            document = new Document(new Rectangle(640, 1136));      //iPhone 8 1334x750
+                            document = new Document(new Rectangle(750, 1334));      //iPhone 8 1334x750
                             break;
                         default:
                             font = new Font(baseFont, 36f);                         //iPad mini2
@@ -155,7 +155,7 @@ namespace Txt2PdfConvert
 
                     document.Open();
 
-                    using (var sr = new StreamReader(fileName, Encoding.Default))
+                    using (var sr = new StreamReader(fileName, checkBoxUTF8.Checked ? Encoding.UTF8 : Encoding.Default))
                     {
                         string line;
                         while ((line = sr.ReadLine()) != null)
