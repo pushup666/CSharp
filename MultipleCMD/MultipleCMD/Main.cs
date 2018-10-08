@@ -26,6 +26,8 @@ namespace MultipleCMD
             _allLines = richTextBoxCmdInput.Lines.Length;
             richTextBoxCmdInput.Enabled = false;
 
+            SetLabelCountText($@"{_finishLines} / {_allLines}");
+
             foreach (var cmdArguments in richTextBoxCmdInput.Lines)
             {
                 ThreadPool.QueueUserWorkItem(ExecCmd, cmdArguments);
@@ -48,7 +50,8 @@ namespace MultipleCMD
                 p.WaitForExit();
                 p.Close();
 
-                SetLabelCountText($@"{++_finishLines} / {_allLines}");
+                _finishLines++;
+                SetLabelCountText($@"{_finishLines} / {_allLines}");
             }
             catch (Exception ex)
             {
