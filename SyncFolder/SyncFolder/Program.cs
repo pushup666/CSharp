@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SyncFolder
 {
@@ -15,30 +13,39 @@ namespace SyncFolder
 
         static void Main(string[] args)
         {
-            _srcFolder = args[0];
-            _dstFolder = args[1];
-
-            _srcFileList = new List<string>();
-            _dstFileList = new List<string>();
-            GetFiles(_srcFolder, _srcFolder, _srcFileList);
-            GetFiles(_dstFolder, _dstFolder, _dstFileList);
-
-            _srcCopyFileList = _srcFileList.Except(_dstFileList).ToList();
-            _dstDeleteFileList = _dstFileList.Except(_srcFileList).ToList();
-
-            Console.WriteLine("{0}", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
-
-            foreach (var file in _srcCopyFileList)
+            try
             {
-                File.Copy(_srcFolder + file, _dstFolder + file);
-                Console.WriteLine("Copy {0} {1}", _srcFolder + file, _dstFolder + file);
+                Console.WriteLine("{0}", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+
+                _srcFolder = args[0];
+                _dstFolder = args[1];
+
+                _srcFileList = new List<string>();
+                _dstFileList = new List<string>();
+                GetFiles(_srcFolder, _srcFolder, _srcFileList);
+                GetFiles(_dstFolder, _dstFolder, _dstFileList);
+
+                _srcCopyFileList = _srcFileList.Except(_dstFileList).ToList();
+                _dstDeleteFileList = _dstFileList.Except(_srcFileList).ToList();
+                
+
+                foreach (var file in _srcCopyFileList)
+                {
+                    File.Copy(_srcFolder + file, _dstFolder + file);
+                    Console.WriteLine("Copy {0} {1}", _srcFolder + file, _dstFolder + file);
+                }
+
+                foreach (var file in _dstDeleteFileList)
+                {
+                    File.Delete(_dstFolder + file);
+                    Console.WriteLine("Delete {0}", _dstFolder + file);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
             }
 
-            foreach (var file in _dstDeleteFileList)
-            {
-                File.Delete(_dstFolder + file);
-                Console.WriteLine("Delete {0}", _dstFolder + file);
-            }
             Console.WriteLine();
         }
 
