@@ -12,7 +12,7 @@ namespace BatchConvertTxtCode
         static void Main(string[] args)
         {
 
-            var dir = new DirectoryInfo(@"H:\Video\TV\老友记.Friends\新建文件夹");
+            var dir = new DirectoryInfo(@"C:\Users\ssf\Desktop\一体化\IIH视图");
             
             foreach (var file in dir.GetFiles())
             {
