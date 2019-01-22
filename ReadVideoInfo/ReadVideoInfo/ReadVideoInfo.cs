@@ -121,9 +121,16 @@ namespace ReadVideoInfo
                     var srcFileNameWithoutExtension = Path.GetFileNameWithoutExtension(item);
                     var dstFileNameWithoutExtension = GetVideoCreationTime(GetVideoInfo(item));
 
+                    if (srcFileNameWithoutExtension == dstFileNameWithoutExtension)
+                    {
+                        continue;
+                    }
+
                     sb.AppendLine(string.Format(format, directoryName, srcFileNameWithoutExtension, dstFileExtension, dstFileNameWithoutExtension));
                 }
                 richTextBoxOutput.Text += sb.ToString();
+
+                MessageBox.Show("Finish");
             }
             catch (Exception ex)
             {
@@ -138,10 +145,11 @@ namespace ReadVideoInfo
             {
                 var p = new Process();
 
-                p.StartInfo.WorkingDirectory = @"D:\Codecs\BIN";
+                p.StartInfo.WorkingDirectory = @"F:\Softs\Media\Codecs\BIN";
                 p.StartInfo.FileName = "ffprobe.exe";
                 p.StartInfo.Arguments = $"-i {videoName} -loglevel quiet -print_format flat -show_format";
-                p.StartInfo.WindowStyle = ProcessWindowStyle.Minimized;
+                p.StartInfo.CreateNoWindow = true;
+                //p.StartInfo.WindowStyle = ProcessWindowStyle.Minimized;
                 p.StartInfo.UseShellExecute = false;
                 p.StartInfo.RedirectStandardOutput = true;
 
@@ -169,11 +177,25 @@ namespace ReadVideoInfo
             {
                 foreach (var line in videoInfo.Split(Environment.NewLine.ToCharArray()))
                 {
-                    if (line.StartsWith("format.tags.creation_time"))
+                    if (line.StartsWith("format.tags.com_apple_quicktime_creationdate"))
                     {
-                        result = line.Replace("format.tags.creation_time=", "").Replace("\"", "");
+                        result = line.Replace("format.tags.com_apple_quicktime_creationdate=", "").Replace("\"", "");
                     }
                 }
+
+                if (result == "")
+                {
+                    foreach (var line in videoInfo.Split(Environment.NewLine.ToCharArray()))
+                    {
+                        if (line.StartsWith("format.tags.creation_time"))
+                        {
+                            result = line.Replace("format.tags.creation_time=", "").Replace("\"", "");
+                        }
+                    }
+                }
+
+                
+
                 var dt = DateTime.Parse(result);
 
                 return dt.ToString("yyyyMMdd_HHmmss");
