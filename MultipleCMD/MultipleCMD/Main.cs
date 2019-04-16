@@ -20,7 +20,7 @@ namespace MultipleCMD
         private void buttonStart_Click(object sender, EventArgs e)
         {
             ThreadPool.SetMinThreads(1, 1);
-            ThreadPool.SetMaxThreads(5, 5);
+            ThreadPool.SetMaxThreads(4, 4);
 
             _finishLines = 0;
             _allLines = richTextBoxCmdInput.Lines.Length;
@@ -41,7 +41,7 @@ namespace MultipleCMD
             {
                 var p = new Process();
 
-                p.StartInfo.WorkingDirectory = @"D:\Git\you-get";
+                p.StartInfo.WorkingDirectory = @"Z:\you-get-develop";
                 p.StartInfo.FileName = "python";
                 p.StartInfo.Arguments = cmdArguments.ToString();
                 p.StartInfo.WindowStyle = ProcessWindowStyle.Minimized;
