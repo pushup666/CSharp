@@ -30,11 +30,12 @@
         {
             this.buttonSave = new System.Windows.Forms.Button();
             this.richTextBoxOutput = new System.Windows.Forms.RichTextBox();
-            this.buttonRead = new System.Windows.Forms.Button();
             this.buttonClearList = new System.Windows.Forms.Button();
             this.buttonAddFolder = new System.Windows.Forms.Button();
             this.buttonAddFile = new System.Windows.Forms.Button();
             this.checkedListBoxFileName = new System.Windows.Forms.CheckedListBox();
+            this.buttonReadVideoCreationTime = new System.Windows.Forms.Button();
+            this.buttonAutoBitrate = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // buttonSave
@@ -59,17 +60,6 @@
             this.richTextBoxOutput.TabIndex = 29;
             this.richTextBoxOutput.Text = "";
             this.richTextBoxOutput.WordWrap = false;
-            // 
-            // buttonRead
-            // 
-            this.buttonRead.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonRead.Location = new System.Drawing.Point(468, 352);
-            this.buttonRead.Name = "buttonRead";
-            this.buttonRead.Size = new System.Drawing.Size(75, 23);
-            this.buttonRead.TabIndex = 26;
-            this.buttonRead.Text = "读取";
-            this.buttonRead.UseVisualStyleBackColor = true;
-            this.buttonRead.Click += new System.EventHandler(this.buttonRead_Click);
             // 
             // buttonClearList
             // 
@@ -114,14 +104,39 @@
             this.checkedListBoxFileName.Size = new System.Drawing.Size(435, 324);
             this.checkedListBoxFileName.TabIndex = 21;
             // 
+            // buttonReadVideoCreationTime
+            // 
+            this.buttonReadVideoCreationTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonReadVideoCreationTime.AutoSize = true;
+            this.buttonReadVideoCreationTime.Location = new System.Drawing.Point(468, 352);
+            this.buttonReadVideoCreationTime.Name = "buttonReadVideoCreationTime";
+            this.buttonReadVideoCreationTime.Size = new System.Drawing.Size(87, 23);
+            this.buttonReadVideoCreationTime.TabIndex = 32;
+            this.buttonReadVideoCreationTime.Text = "读取创建时间";
+            this.buttonReadVideoCreationTime.UseVisualStyleBackColor = true;
+            this.buttonReadVideoCreationTime.Click += new System.EventHandler(this.buttonReadVideoCreationTime_Click);
+            // 
+            // buttonAutoBitrate
+            // 
+            this.buttonAutoBitrate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonAutoBitrate.AutoSize = true;
+            this.buttonAutoBitrate.Location = new System.Drawing.Point(561, 352);
+            this.buttonAutoBitrate.Name = "buttonAutoBitrate";
+            this.buttonAutoBitrate.Size = new System.Drawing.Size(135, 23);
+            this.buttonAutoBitrate.TabIndex = 33;
+            this.buttonAutoBitrate.Text = "根据尺寸预估合理码率";
+            this.buttonAutoBitrate.UseVisualStyleBackColor = true;
+            this.buttonAutoBitrate.Click += new System.EventHandler(this.buttonAutoBitrate_Click);
+            // 
             // ReadVideoInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1021, 387);
+            this.Controls.Add(this.buttonAutoBitrate);
+            this.Controls.Add(this.buttonReadVideoCreationTime);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.richTextBoxOutput);
-            this.Controls.Add(this.buttonRead);
             this.Controls.Add(this.buttonClearList);
             this.Controls.Add(this.buttonAddFolder);
             this.Controls.Add(this.buttonAddFile);
@@ -129,6 +144,7 @@
             this.Name = "ReadVideoInfo";
             this.Text = "ReadVideoInfo";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -136,11 +152,12 @@
 
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.RichTextBox richTextBoxOutput;
-        private System.Windows.Forms.Button buttonRead;
         private System.Windows.Forms.Button buttonClearList;
         private System.Windows.Forms.Button buttonAddFolder;
         private System.Windows.Forms.Button buttonAddFile;
         private System.Windows.Forms.CheckedListBox checkedListBoxFileName;
+        private System.Windows.Forms.Button buttonReadVideoCreationTime;
+        private System.Windows.Forms.Button buttonAutoBitrate;
     }
 }
 

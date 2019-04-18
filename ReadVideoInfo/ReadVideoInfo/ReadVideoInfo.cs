@@ -106,7 +106,7 @@ namespace ReadVideoInfo
             }
         }
 
-        private void buttonRead_Click(object sender, EventArgs e)
+        private void buttonReadVideoCreationTime_Click(object sender, EventArgs e)
         {
             try
             {
@@ -119,7 +119,7 @@ namespace ReadVideoInfo
                     var dstFileExtension = Path.GetExtension(item);
 
                     var srcFileNameWithoutExtension = Path.GetFileNameWithoutExtension(item);
-                    var dstFileNameWithoutExtension = GetVideoCreationTime(GetVideoInfo(item));
+                    var dstFileNameWithoutExtension = GetVideoCreationTime(item);
 
                     if (srcFileNameWithoutExtension == dstFileNameWithoutExtension)
                     {
@@ -128,26 +128,55 @@ namespace ReadVideoInfo
 
                     sb.AppendLine(string.Format(format, directoryName, srcFileNameWithoutExtension, dstFileExtension, dstFileNameWithoutExtension));
                 }
-                richTextBoxOutput.Text += sb.ToString();
 
-                MessageBox.Show("Finish");
+                richTextBoxOutput.Text += sb.ToString();
             }
+
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
         }
 
-        private string GetVideoInfo(string videoName)
+
+        private void buttonAutoBitrate_Click(object sender, EventArgs e)
+        {
+            var IsSaveToRam = false;
+            try
+            {
+                const string format = @"ffmpeg -i ""{0}\{1}"" -b:v {4}K -vcodec hevc_nvenc -acodec aac -ac 2 -q:a 0.7 ""{2}\{3}_hevc_nvenc.mp4""";
+                var sb = new StringBuilder();
+
+                foreach (string item in checkedListBoxFileName.CheckedItems)
+                {
+                    var srcDirectoryName = Path.GetDirectoryName(item);
+                    var dstDirectoryName = IsSaveToRam ? "Z:" : srcDirectoryName;
+                    var srcFileName = Path.GetFileName(item);
+                    var dstFileNameWithoutExtension = Path.GetFileNameWithoutExtension(item);
+                    var dstFileAutoBitrate = GetVideoAutoBitrate(item);
+                    sb.AppendLine(string.Format(format, srcDirectoryName, srcFileName, dstDirectoryName, dstFileNameWithoutExtension, dstFileAutoBitrate));
+                }
+
+                richTextBoxOutput.Text += sb.ToString();
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+
+        private static string GetVideoInfo(string videoName, string arg)
         {
             var result = "";
             try
             {
                 var p = new Process();
 
-                p.StartInfo.WorkingDirectory = @"F:\Softs\Media\Codecs\BIN";
+                //p.StartInfo.WorkingDirectory = @"F:\Softs\Media\Codecs\BIN";
                 p.StartInfo.FileName = "ffprobe.exe";
-                p.StartInfo.Arguments = $"-i {videoName} -loglevel quiet -print_format flat -show_format";
+                p.StartInfo.Arguments = $"-i {videoName} -loglevel error -print_format default=noprint_wrappers=1:nokey=1 {arg} ";
                 p.StartInfo.CreateNoWindow = true;
                 //p.StartInfo.WindowStyle = ProcessWindowStyle.Minimized;
                 p.StartInfo.UseShellExecute = false;
@@ -160,7 +189,7 @@ namespace ReadVideoInfo
                 p.WaitForExit();
                 p.Close();
 
-                return result;
+                return result.Trim();
             }
             catch (Exception ex)
             {
@@ -169,32 +198,18 @@ namespace ReadVideoInfo
             }
         }
 
-        private string GetVideoCreationTime(string videoInfo)
+        private static string GetVideoCreationTime(string fileName)
         {
             var result = "";
 
             try
             {
-                foreach (var line in videoInfo.Split(Environment.NewLine.ToCharArray()))
-                {
-                    if (line.StartsWith("format.tags.com_apple_quicktime_creationdate"))
-                    {
-                        result = line.Replace("format.tags.com_apple_quicktime_creationdate=", "").Replace("\"", "");
-                    }
-                }
+                result = GetVideoInfo(fileName, "-show_entries format_tags=com_apple_quicktime_creationdate");
 
                 if (result == "")
                 {
-                    foreach (var line in videoInfo.Split(Environment.NewLine.ToCharArray()))
-                    {
-                        if (line.StartsWith("format.tags.creation_time"))
-                        {
-                            result = line.Replace("format.tags.creation_time=", "").Replace("\"", "");
-                        }
-                    }
+                    result = GetVideoInfo(fileName, "-show_entries format_tags=creation_time");
                 }
-
-                
 
                 var dt = DateTime.Parse(result);
 
@@ -204,6 +219,46 @@ namespace ReadVideoInfo
             {
                 MessageBox.Show(ex.Message + "\r\n跟踪;" + ex.StackTrace);
                 return result;
+            }
+        }
+
+        private static int GetVideoAutoBitrate(string fileName)
+        {
+            try
+            {
+
+                var srcVideoBitrate = GetVideoInfo(fileName, "-select_streams v:0 -show_entries stream=bit_rate");
+                var width = GetVideoInfo(fileName, "-select_streams v:0 -show_entries stream=width");
+                var height = GetVideoInfo(fileName, "-select_streams v:0 -show_entries stream=height");
+                var r_frame_rate = GetVideoInfo(fileName, "-select_streams v:0 -show_entries stream=r_frame_rate").Split('/');
+
+                if (srcVideoBitrate == "" || srcVideoBitrate == "N/A")
+                {
+                    var srcBitrate = GetVideoInfo(fileName, "-select_streams v:0 -show_entries format=bit_rate");
+                    var srcAudioBitrate = GetVideoInfo(fileName, "-select_streams a:0 -show_entries stream=bit_rate");
+                    if (srcAudioBitrate == "" || srcAudioBitrate == "N/A")
+                    {
+                        srcAudioBitrate = "0";
+                    }
+                    srcVideoBitrate = (int.Parse(srcBitrate) - int.Parse(srcAudioBitrate)).ToString();
+                }
+
+
+                var fps = double.Parse(r_frame_rate[0])/double.Parse(r_frame_rate[1]);
+
+                var dstVideoBitrate = int.Parse(width) * int.Parse(height) * fps / 20;
+
+                if (dstVideoBitrate > int.Parse(srcVideoBitrate))
+                {
+                    return 0;
+                }
+
+                return (int)dstVideoBitrate / 1024;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + "\r\n跟踪;" + ex.StackTrace);
+                return 0;
             }
         }
     }
