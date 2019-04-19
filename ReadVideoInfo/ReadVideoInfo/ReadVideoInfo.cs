@@ -130,6 +130,8 @@ namespace ReadVideoInfo
                 }
 
                 richTextBoxOutput.Text += sb.ToString();
+
+                MessageBox.Show("Finish");
             }
 
             catch (Exception ex)
@@ -141,10 +143,10 @@ namespace ReadVideoInfo
 
         private void buttonAutoBitrate_Click(object sender, EventArgs e)
         {
-            var IsSaveToRam = false;
+            var IsSaveToRam = true;
             try
             {
-                const string format = @"ffmpeg -i ""{0}\{1}"" -b:v {4}K -vcodec hevc_nvenc -acodec aac -ac 2 -q:a 0.7 ""{2}\{3}_hevc_nvenc.mp4""";
+                const string format = @"{5}ffmpeg -i ""{0}\{1}"" -b:v {4}K -vcodec hevc_nvenc -acodec aac -ac 2 -q:a 0.7 ""{2}\{3}_hevc_nvenc.mp4""";
                 var sb = new StringBuilder();
 
                 foreach (string item in checkedListBoxFileName.CheckedItems)
@@ -154,7 +156,7 @@ namespace ReadVideoInfo
                     var srcFileName = Path.GetFileName(item);
                     var dstFileNameWithoutExtension = Path.GetFileNameWithoutExtension(item);
                     var dstFileAutoBitrate = GetVideoAutoBitrate(item);
-                    sb.AppendLine(string.Format(format, srcDirectoryName, srcFileName, dstDirectoryName, dstFileNameWithoutExtension, dstFileAutoBitrate));
+                    sb.AppendLine(string.Format(format, srcDirectoryName, srcFileName, dstDirectoryName, dstFileNameWithoutExtension, dstFileAutoBitrate, dstFileAutoBitrate == 0 ? "rem " : ""));
                 }
 
                 richTextBoxOutput.Text += sb.ToString();
@@ -176,7 +178,7 @@ namespace ReadVideoInfo
 
                 //p.StartInfo.WorkingDirectory = @"F:\Softs\Media\Codecs\BIN";
                 p.StartInfo.FileName = "ffprobe.exe";
-                p.StartInfo.Arguments = $"-i {videoName} -loglevel error -print_format default=noprint_wrappers=1:nokey=1 {arg} ";
+                p.StartInfo.Arguments = $"-i \"{videoName}\" -loglevel error -print_format default=noprint_wrappers=1:nokey=1 {arg} ";
                 p.StartInfo.CreateNoWindow = true;
                 //p.StartInfo.WindowStyle = ProcessWindowStyle.Minimized;
                 p.StartInfo.UseShellExecute = false;
@@ -204,7 +206,7 @@ namespace ReadVideoInfo
 
             try
             {
-                result = GetVideoInfo(fileName, "-show_entries format_tags=com_apple_quicktime_creationdate");
+                result = GetVideoInfo(fileName, "-show_entries format_tags=com.apple.quicktime.creationdate");
 
                 if (result == "")
                 {
@@ -246,9 +248,9 @@ namespace ReadVideoInfo
 
                 var fps = double.Parse(r_frame_rate[0])/double.Parse(r_frame_rate[1]);
 
-                var dstVideoBitrate = int.Parse(width) * int.Parse(height) * fps / 20;
+                var dstVideoBitrate = int.Parse(width) * int.Parse(height) * fps / 24;
 
-                if (dstVideoBitrate > int.Parse(srcVideoBitrate))
+                if (dstVideoBitrate * 1.5 > int.Parse(srcVideoBitrate) || dstVideoBitrate + 500000 > int.Parse(srcVideoBitrate))
                 {
                     return 0;
                 }
