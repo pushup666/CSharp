@@ -82,6 +82,7 @@ namespace ReadVideoInfo
         {
             _files.Clear();
             RefreshFileList();
+            richTextBoxOutput.Text = "";
         }
 
         private void RefreshFileList()
@@ -130,8 +131,6 @@ namespace ReadVideoInfo
                 }
 
                 richTextBoxOutput.Text += sb.ToString();
-
-                MessageBox.Show("Finish");
             }
 
             catch (Exception ex)
@@ -143,10 +142,12 @@ namespace ReadVideoInfo
 
         private void buttonAutoBitrate_Click(object sender, EventArgs e)
         {
-            var IsSaveToRam = true;
+            var IsSaveToRam = false;
             try
             {
-                const string format = @"{5}ffmpeg -i ""{0}\{1}"" -b:v {4}K -vcodec hevc_nvenc -acodec aac -ac 2 -q:a 0.7 ""{2}\{3}_hevc_nvenc.mp4""";
+                //const string format = @"{5}ffmpeg -i ""{0}\{1}"" -b:v {4}K -vcodec hevc_nvenc -acodec aac -ac 2 -q:a 0.7 ""{2}\{3}_hevc_nvenc.mp4""";
+                const string format = @"{5}ffmpeg -i ""{0}\{1}"" -b:v {4}K -vcodec h264_qsv -acodec aac -ac 2 -q:a 0.7 ""{2}\{3}_h264_qsv.mp4""";
+
                 var sb = new StringBuilder();
 
                 foreach (string item in checkedListBoxFileName.CheckedItems)
@@ -248,7 +249,7 @@ namespace ReadVideoInfo
 
                 var fps = double.Parse(r_frame_rate[0])/double.Parse(r_frame_rate[1]);
 
-                var dstVideoBitrate = int.Parse(width) * int.Parse(height) * fps / 24;
+                var dstVideoBitrate = int.Parse(width) * int.Parse(height) * fps / 20;
 
                 if (dstVideoBitrate * 1.5 > int.Parse(srcVideoBitrate) || dstVideoBitrate + 500000 > int.Parse(srcVideoBitrate))
                 {
