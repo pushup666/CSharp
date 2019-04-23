@@ -170,16 +170,17 @@ namespace ReadVideoInfo
         }
 
 
-        private static string GetVideoInfo(string videoName, string arg)
+        private static string GetVideoInfo(string videoName, string selectStreams, string showEntries, string arg)
         {
             var result = "";
+            var select_streams = selectStreams == "" ? "" : $"-select_streams {selectStreams} ";
             try
             {
                 var p = new Process();
 
                 //p.StartInfo.WorkingDirectory = @"F:\Softs\Media\Codecs\BIN";
                 p.StartInfo.FileName = "ffprobe.exe";
-                p.StartInfo.Arguments = $"-i \"{videoName}\" -loglevel error -print_format default=noprint_wrappers=1:nokey=1 {arg} ";
+                p.StartInfo.Arguments = $"-i \"{videoName}\" -loglevel error -print_format default=noprint_wrappers=1:nokey=1 {select_streams}-show_entries {showEntries}={arg} ";
                 p.StartInfo.CreateNoWindow = true;
                 //p.StartInfo.WindowStyle = ProcessWindowStyle.Minimized;
                 p.StartInfo.UseShellExecute = false;
@@ -207,11 +208,11 @@ namespace ReadVideoInfo
 
             try
             {
-                result = GetVideoInfo(fileName, "-show_entries format_tags=com.apple.quicktime.creationdate");
+                result = GetVideoInfo(fileName, "", "format_tags", "com.apple.quicktime.creationdate");
 
                 if (result == "")
                 {
-                    result = GetVideoInfo(fileName, "-show_entries format_tags=creation_time");
+                    result = GetVideoInfo(fileName, "", "format_tags", "creation_time");
                 }
 
                 var dt = DateTime.Parse(result);
@@ -225,20 +226,48 @@ namespace ReadVideoInfo
             }
         }
 
+        private static int GetVideoSize(string fileName)
+        {
+            try
+            {
+                var size = GetVideoInfo(fileName, "", "format", "size");
+                return int.Parse(size);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + "\r\n跟踪;" + ex.StackTrace);
+                return 0;
+            }
+        }
+
+        private static int GetVideoDuration(string fileName)
+        {
+            try
+            {
+                var size = GetVideoInfo(fileName, "", "format", "duration");
+                return int.Parse(size);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + "\r\n跟踪;" + ex.StackTrace);
+                return 0;
+            }
+        }
+
         private static int GetVideoAutoBitrate(string fileName)
         {
             try
             {
 
-                var srcVideoBitrate = GetVideoInfo(fileName, "-select_streams v:0 -show_entries stream=bit_rate");
-                var width = GetVideoInfo(fileName, "-select_streams v:0 -show_entries stream=width");
-                var height = GetVideoInfo(fileName, "-select_streams v:0 -show_entries stream=height");
-                var r_frame_rate = GetVideoInfo(fileName, "-select_streams v:0 -show_entries stream=r_frame_rate").Split('/');
+                var srcVideoBitrate = GetVideoInfo(fileName, "v:0", "stream", "bit_rate");
+                var width = GetVideoInfo(fileName, "v:0", "stream", "width");
+                var height = GetVideoInfo(fileName, "v:0", "stream", "height");
+                var r_frame_rate = GetVideoInfo(fileName, "v:0", "stream", "r_frame_rate").Split('/');
 
                 if (srcVideoBitrate == "" || srcVideoBitrate == "N/A")
                 {
-                    var srcBitrate = GetVideoInfo(fileName, "-select_streams v:0 -show_entries format=bit_rate");
-                    var srcAudioBitrate = GetVideoInfo(fileName, "-select_streams a:0 -show_entries stream=bit_rate");
+                    var srcBitrate = GetVideoInfo(fileName, "", "format", "bit_rate");
+                    var srcAudioBitrate = GetVideoInfo(fileName, "a:0", "stream", "bit_rate");
                     if (srcAudioBitrate == "" || srcAudioBitrate == "N/A")
                     {
                         srcAudioBitrate = "0";
