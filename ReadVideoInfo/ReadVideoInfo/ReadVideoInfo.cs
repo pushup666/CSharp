@@ -156,8 +156,21 @@ namespace ReadVideoInfo
                     var dstDirectoryName = IsSaveToRam ? "Z:" : srcDirectoryName;
                     var srcFileName = Path.GetFileName(item);
                     var dstFileNameWithoutExtension = Path.GetFileNameWithoutExtension(item);
+
                     var dstFileAutoBitrate = GetVideoAutoBitrate(item);
-                    sb.AppendLine(string.Format(format, srcDirectoryName, srcFileName, dstDirectoryName, dstFileNameWithoutExtension, dstFileAutoBitrate, dstFileAutoBitrate == 0 ? "rem " : ""));
+                    var duration = GetVideoDuration(item);
+
+                    var srcSize = ((double)GetVideoSize(item) / 1024 / 1024).ToString("F2");
+                    var dstSize = ((dstFileAutoBitrate + 70) / 8 * duration / 1024).ToString("F2");
+
+                    var convertFlag = false;
+                    if (double.Parse(dstSize) > 0 && double.Parse(dstSize) < double.Parse(srcSize) / 1.5)
+                    {
+                        convertFlag = true;
+                    }
+
+                    sb.AppendLine($"rem Pre {srcSize}M    After {dstSize}M");                   
+                    sb.AppendLine(string.Format(format, srcDirectoryName, srcFileName, dstDirectoryName, dstFileNameWithoutExtension, dstFileAutoBitrate, convertFlag ? "" : "rem "));
                 }
 
                 richTextBoxOutput.Text += sb.ToString();
@@ -240,12 +253,12 @@ namespace ReadVideoInfo
             }
         }
 
-        private static int GetVideoDuration(string fileName)
+        private static double GetVideoDuration(string fileName)
         {
             try
             {
-                var size = GetVideoInfo(fileName, "", "format", "duration");
-                return int.Parse(size);
+                var duration = GetVideoInfo(fileName, "", "format", "duration");
+                return double.Parse(duration);
             }
             catch (Exception ex)
             {
@@ -254,11 +267,10 @@ namespace ReadVideoInfo
             }
         }
 
-        private static int GetVideoAutoBitrate(string fileName)
+        private static double GetVideoAutoBitrate(string fileName)
         {
             try
             {
-
                 var srcVideoBitrate = GetVideoInfo(fileName, "v:0", "stream", "bit_rate");
                 var width = GetVideoInfo(fileName, "v:0", "stream", "width");
                 var height = GetVideoInfo(fileName, "v:0", "stream", "height");
@@ -274,18 +286,11 @@ namespace ReadVideoInfo
                     }
                     srcVideoBitrate = (int.Parse(srcBitrate) - int.Parse(srcAudioBitrate)).ToString();
                 }
-
-
+                
                 var fps = double.Parse(r_frame_rate[0])/double.Parse(r_frame_rate[1]);
-
-                var dstVideoBitrate = int.Parse(width) * int.Parse(height) * fps / 20;
-
-                if (dstVideoBitrate * 1.5 > int.Parse(srcVideoBitrate) || dstVideoBitrate + 500000 > int.Parse(srcVideoBitrate))
-                {
-                    return 0;
-                }
-
-                return (int)dstVideoBitrate / 1024;
+                var dstVideoBitrate = int.Parse(width) * int.Parse(height) * fps / 24;
+                
+                return dstVideoBitrate / 1024;
             }
             catch (Exception ex)
             {
