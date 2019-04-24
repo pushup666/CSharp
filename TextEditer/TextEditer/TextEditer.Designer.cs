@@ -39,6 +39,7 @@ namespace TextEditer
             this.checkBoxUTF8 = new System.Windows.Forms.CheckBox();
             this.buttonAddHeadBlank = new System.Windows.Forms.Button();
             this.buttonLong2Short = new System.Windows.Forms.Button();
+            this.buttonRestoreBlankLine = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // buttonRemoveBlankLine
@@ -109,7 +110,7 @@ namespace TextEditer
             // checkBoxUTF8
             // 
             this.checkBoxUTF8.AutoSize = true;
-            this.checkBoxUTF8.Location = new System.Drawing.Point(587, 16);
+            this.checkBoxUTF8.Location = new System.Drawing.Point(799, 16);
             this.checkBoxUTF8.Name = "checkBoxUTF8";
             this.checkBoxUTF8.Size = new System.Drawing.Size(54, 16);
             this.checkBoxUTF8.TabIndex = 8;
@@ -136,11 +137,22 @@ namespace TextEditer
             this.buttonLong2Short.UseVisualStyleBackColor = true;
             this.buttonLong2Short.Click += new System.EventHandler(this.buttonLong2Short_Click);
             // 
+            // buttonRestoreBlankLine
+            // 
+            this.buttonRestoreBlankLine.Location = new System.Drawing.Point(580, 12);
+            this.buttonRestoreBlankLine.Name = "buttonRestoreBlankLine";
+            this.buttonRestoreBlankLine.Size = new System.Drawing.Size(75, 23);
+            this.buttonRestoreBlankLine.TabIndex = 11;
+            this.buttonRestoreBlankLine.Text = "还原空白行";
+            this.buttonRestoreBlankLine.UseVisualStyleBackColor = true;
+            this.buttonRestoreBlankLine.Click += new System.EventHandler(this.buttonRestoreBlankLine_Click);
+            // 
             // TextEditer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1056, 618);
+            this.Controls.Add(this.buttonRestoreBlankLine);
             this.Controls.Add(this.buttonLong2Short);
             this.Controls.Add(this.buttonAddHeadBlank);
             this.Controls.Add(this.checkBoxUTF8);
@@ -168,6 +180,7 @@ namespace TextEditer
         private CheckBox checkBoxUTF8;
         private Button buttonAddHeadBlank;
         private Button buttonLong2Short;
+        private Button buttonRestoreBlankLine;
     }
 }
 

@@ -190,5 +190,25 @@ namespace TextEditer
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void buttonRestoreBlankLine_Click(object sender, EventArgs e)
+        {
+            _lines.Clear();
+
+            foreach (var line in richTextBoxMain.Lines)
+            {
+                if (line.Length < 33)
+                {
+                    _lines.Add(line);
+                    _lines.Add("");
+                }
+                else
+                {
+                    _lines.Add(line);
+                }
+            }
+
+            RefreshTextBox();
+        }
     }
 }
