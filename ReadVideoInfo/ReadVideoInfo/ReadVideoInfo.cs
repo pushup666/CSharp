@@ -143,11 +143,11 @@ namespace ReadVideoInfo
         private void buttonAutoBitrate_Click(object sender, EventArgs e)
         {
             var IsSaveToRam = false;
+            //const string format = @"{5}ffmpeg -i ""{0}\{1}"" -b:v {4}K -vcodec hevc_nvenc -acodec aac -ac 2 -q:a 0.7 ""{2}\{3}_hevc_nvenc.mp4""";
+            const string format = @"{5}ffmpeg -i ""{0}\{1}"" -b:v {4}K -vcodec h264_qsv -acodec aac -ac 2 -q:a 0.7 ""{2}\{3}_h264_qsv.mp4""";
+
             try
             {
-                //const string format = @"{5}ffmpeg -i ""{0}\{1}"" -b:v {4}K -vcodec hevc_nvenc -acodec aac -ac 2 -q:a 0.7 ""{2}\{3}_hevc_nvenc.mp4""";
-                const string format = @"{5}ffmpeg -i ""{0}\{1}"" -b:v {4}K -vcodec h264_qsv -acodec aac -ac 2 -q:a 0.7 ""{2}\{3}_h264_qsv.mp4""";
-
                 var sb = new StringBuilder();
 
                 foreach (string item in checkedListBoxFileName.CheckedItems)
@@ -161,15 +161,11 @@ namespace ReadVideoInfo
                     var duration = GetVideoDuration(item);
 
                     var srcSize = ((double)GetVideoSize(item) / 1024 / 1024).ToString("F2");
-                    var dstSize = ((dstFileAutoBitrate + 70) / 8 * duration / 1024).ToString("F2");
+                    var dstSize = ((double)(dstFileAutoBitrate + 70) / 8 * duration / 1024).ToString("F2");
 
-                    var convertFlag = false;
-                    if (double.Parse(dstSize) > 0 && double.Parse(dstSize) < double.Parse(srcSize) / 1.5)
-                    {
-                        convertFlag = true;
-                    }
+                    var convertFlag = double.Parse(dstSize) > 0 && double.Parse(dstSize) < double.Parse(srcSize) / 1.5;
 
-                    sb.AppendLine($"rem Pre {srcSize}M    After {dstSize}M");                   
+                    sb.AppendLine($"rem Src:{srcSize}M    Dst:{dstSize}M");                   
                     sb.AppendLine(string.Format(format, srcDirectoryName, srcFileName, dstDirectoryName, dstFileNameWithoutExtension, dstFileAutoBitrate, convertFlag ? "" : "rem "));
                 }
 
@@ -217,11 +213,9 @@ namespace ReadVideoInfo
 
         private static string GetVideoCreationTime(string fileName)
         {
-            var result = "";
-
             try
             {
-                result = GetVideoInfo(fileName, "", "format_tags", "com.apple.quicktime.creationdate");
+                var result = GetVideoInfo(fileName, "", "format_tags", "com.apple.quicktime.creationdate");
 
                 if (result == "")
                 {
@@ -234,21 +228,21 @@ namespace ReadVideoInfo
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message + "\r\n跟踪;" + ex.StackTrace);
-                return result;
+                MessageBox.Show(fileName + "\r\n" + ex.Message + "\r\n跟踪;" + ex.StackTrace);
+                return "";
             }
         }
 
-        private static int GetVideoSize(string fileName)
+        private static long GetVideoSize(string fileName)
         {
             try
             {
                 var size = GetVideoInfo(fileName, "", "format", "size");
-                return int.Parse(size);
+                return long.Parse(size);
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message + "\r\n跟踪;" + ex.StackTrace);
+                MessageBox.Show(fileName + "\r\n" + ex.Message + "\r\n跟踪;" + ex.StackTrace);
                 return 0;
             }
         }
@@ -262,39 +256,27 @@ namespace ReadVideoInfo
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message + "\r\n跟踪;" + ex.StackTrace);
+                MessageBox.Show(fileName + "\r\n" + ex.Message + "\r\n跟踪;" + ex.StackTrace);
                 return 0;
             }
         }
 
-        private static double GetVideoAutoBitrate(string fileName)
+        private static int GetVideoAutoBitrate(string fileName)
         {
             try
             {
-                var srcVideoBitrate = GetVideoInfo(fileName, "v:0", "stream", "bit_rate");
                 var width = GetVideoInfo(fileName, "v:0", "stream", "width");
                 var height = GetVideoInfo(fileName, "v:0", "stream", "height");
                 var r_frame_rate = GetVideoInfo(fileName, "v:0", "stream", "r_frame_rate").Split('/');
-
-                if (srcVideoBitrate == "" || srcVideoBitrate == "N/A")
-                {
-                    var srcBitrate = GetVideoInfo(fileName, "", "format", "bit_rate");
-                    var srcAudioBitrate = GetVideoInfo(fileName, "a:0", "stream", "bit_rate");
-                    if (srcAudioBitrate == "" || srcAudioBitrate == "N/A")
-                    {
-                        srcAudioBitrate = "0";
-                    }
-                    srcVideoBitrate = (int.Parse(srcBitrate) - int.Parse(srcAudioBitrate)).ToString();
-                }
                 
                 var fps = double.Parse(r_frame_rate[0])/double.Parse(r_frame_rate[1]);
-                var dstVideoBitrate = int.Parse(width) * int.Parse(height) * fps / 24;
+                var dstVideoBitrate = int.Parse(width) * int.Parse(height) * fps / 20;
                 
-                return dstVideoBitrate / 1024;
+                return (int)dstVideoBitrate / 1024;
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message + "\r\n跟踪;" + ex.StackTrace);
+                MessageBox.Show(fileName + "\r\n" + ex.Message + "\r\n跟踪;" + ex.StackTrace);
                 return 0;
             }
         }
