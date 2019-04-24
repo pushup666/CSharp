@@ -142,9 +142,9 @@ namespace ReadVideoInfo
 
         private void buttonAutoBitrate_Click(object sender, EventArgs e)
         {
-            var IsSaveToRam = false;
-            //const string format = @"{5}ffmpeg -i ""{0}\{1}"" -b:v {4}K -vcodec hevc_nvenc -acodec aac -ac 2 -q:a 0.7 ""{2}\{3}_hevc_nvenc.mp4""";
-            const string format = @"{5}ffmpeg -i ""{0}\{1}"" -b:v {4}K -vcodec h264_qsv -acodec aac -ac 2 -q:a 0.7 ""{2}\{3}_h264_qsv.mp4""";
+            var IsSaveToRam = true;
+            const string format = @"{5}ffmpeg -i ""{0}\{1}"" -b:v {4}K -vcodec hevc_nvenc -acodec aac -ac 2 -q:a 0.7 ""{2}\{3}_hevc_nvenc.mp4""";
+            //const string format = @"{5}ffmpeg -i ""{0}\{1}"" -b:v {4}K -vcodec h264_qsv -acodec aac -ac 2 -q:a 0.7 ""{2}\{3}_h264_qsv.mp4""";
 
             try
             {
@@ -165,7 +165,8 @@ namespace ReadVideoInfo
 
                     var convertFlag = double.Parse(dstSize) > 0 && double.Parse(dstSize) < double.Parse(srcSize) / 1.5;
 
-                    sb.AppendLine($"rem Src:{srcSize}M    Dst:{dstSize}M");                   
+                    sb.AppendLine($"rem Src:{srcSize}M    Dst:{dstSize}M");
+                    //sb.Append($"{srcSize}\t{dstSize}\t\t");
                     sb.AppendLine(string.Format(format, srcDirectoryName, srcFileName, dstDirectoryName, dstFileNameWithoutExtension, dstFileAutoBitrate, convertFlag ? "" : "rem "));
                 }
 
