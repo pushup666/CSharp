@@ -128,21 +128,25 @@ namespace Txt2PdfConvert
 
                     switch (comboBoxDevice.Text)
                     {
-                        case "iPad mini2":
-                            font = new Font(baseFont, 36f);                         //iPad mini2
-                            document = new Document(new Rectangle(1536, 2048));     //iPad mini2  2048x1536
+                        case "iPad Mini2":
+                            font = new Font(baseFont, 36f);                             //iPad mini2 326 ppi
+                            document = new Document(new Rectangle(1536, 2048));         //iPad mini2 2048x1536
+                            break;
+                        case "iPad Pro 11":
+                            font = new Font(baseFont, 32f);                             //iPad Pro 11 264 ppi
+                            document = new Document(new Rectangle(1668, 2388));         //iPad Pro 11 2388x1668
                             break;
                         case "iPhone 5s":
-                            font = new Font(baseFont, 32f);                         //iPhone 5s
-                            document = new Document(new Rectangle(640, 1136));      //iPhone 5s 1136x640
+                            font = new Font(baseFont, 32f);                             //iPhone 5s 264 ppi
+                            document = new Document(new Rectangle(640, 1136));          //iPhone 5s 1136x640
                             break;
                         case "iPhone 8":
-                            font = new Font(baseFont, 32f);                         //iPhone 8
-                            document = new Document(new Rectangle(750, 1334));      //iPhone 8 1334x750
+                            font = new Font(baseFont, 32f);                             //iPhone 8 264 ppi
+                            document = new Document(new Rectangle(750, 1334));          //iPhone 8 1334x750
                             break;
                         default:
-                            font = new Font(baseFont, 36f);                         //iPad mini2
-                            document = new Document(new Rectangle(1536, 2048));     //iPad mini2  2048x1536
+                            font = new Font(baseFont, 36f);                             //iPad mini2 326 ppi
+                            document = new Document(new Rectangle(1536, 2048));         //iPad mini2  2048x1536
                             break;
                     }
 

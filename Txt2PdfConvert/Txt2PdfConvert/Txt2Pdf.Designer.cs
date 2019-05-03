@@ -90,7 +90,8 @@
             this.comboBoxDevice.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxDevice.FormattingEnabled = true;
             this.comboBoxDevice.Items.AddRange(new object[] {
-            "iPad mini2",
+            "iPad Mini2",
+            "iPad Pro 11",
             "iPhone 5s",
             "iPhone 8"});
             this.comboBoxDevice.Location = new System.Drawing.Point(277, 14);
