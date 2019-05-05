@@ -81,8 +81,7 @@ namespace TextEditer
                 else
                 {
                     _lines.Add("　　" + line);
-                }
-                
+                }                
             }
 
             RefreshTextBox();

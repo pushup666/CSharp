@@ -11,6 +11,7 @@ namespace Txt2PdfConvert
     public partial class Txt2Pdf : Form
     {
         private readonly Dictionary<string, bool> _files = new Dictionary<string, bool>();
+        const int pagesPerPdf = 5000;
 
         public Txt2Pdf()
         {
@@ -123,9 +124,7 @@ namespace Txt2PdfConvert
                     var baseFont = BaseFont.CreateFont(@"C:\Windows\Fonts\msyhbd.ttc,0", BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
                     Font font; 
                     Document document;
-
-
-
+                    
                     switch (comboBoxDevice.Text)
                     {
                         case "iPad Mini2":
@@ -145,8 +144,8 @@ namespace Txt2PdfConvert
                             document = new Document(new Rectangle(750, 1334));          //iPhone 8 1334x750
                             break;
                         default:
-                            font = new Font(baseFont, 36f);                             //iPad mini2 326 ppi
-                            document = new Document(new Rectangle(1536, 2048));         //iPad mini2  2048x1536
+                            font = new Font(baseFont, 32f);                             //iPad Pro 11 264 ppi
+                            document = new Document(new Rectangle(1668, 2388));         //iPad Pro 11 2388x1668
                             break;
                     }
 
@@ -183,8 +182,6 @@ namespace Txt2PdfConvert
             {
                 if (fileName != null)
                 {
-                    const int pagesPerPdf = 5000;
-
                     var reader = new PdfReader(Path.ChangeExtension(fileName, "pdf"));
                     var pagesCount = reader.NumberOfPages;
                     var filesCount = pagesCount / pagesPerPdf + 1;
@@ -221,8 +218,6 @@ namespace Txt2PdfConvert
             {
                 MessageBox.Show(ex.Message);
             }
-        }
-
-        
+        }        
     }
 }

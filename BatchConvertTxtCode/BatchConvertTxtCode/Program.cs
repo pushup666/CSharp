@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+﻿using System.IO;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace BatchConvertTxtCode
 {
@@ -12,7 +8,7 @@ namespace BatchConvertTxtCode
         static void Main(string[] args)
         {
 
-            var dir = new DirectoryInfo(@"C:\Users\ssf\Desktop\一体化\IIH视图");
+            var dir = new DirectoryInfo(@"C:\Users\ssf\Desktop");
             
             foreach (var file in dir.GetFiles())
             {
@@ -23,7 +19,7 @@ namespace BatchConvertTxtCode
                     txt = sr.ReadToEnd();
                 }
 
-                using (var sw = new StreamWriter(file.FullName,false, Encoding.UTF8))
+                using (var sw = new StreamWriter(file.FullName, false, Encoding.UTF8))
                 {
                     sw.Write(txt);
                 }
