@@ -11,7 +11,7 @@ namespace Txt2PdfConvert
     public partial class Txt2Pdf : Form
     {
         private readonly Dictionary<string, bool> _files = new Dictionary<string, bool>();
-        const int pagesPerPdf = 5000;
+        const int maxPagesPerPdf = 5000;
 
         public Txt2Pdf()
         {
@@ -184,9 +184,10 @@ namespace Txt2PdfConvert
                 {
                     var reader = new PdfReader(Path.ChangeExtension(fileName, "pdf"));
                     var pagesCount = reader.NumberOfPages;
-                    var filesCount = pagesCount / pagesPerPdf + 1;
+                    var filesCount = pagesCount / maxPagesPerPdf + 1;
 
-
+                    var pagesPerPdf = (pagesCount / filesCount / 1000 + 1) * 1000;
+                    
                     for (var i = 0; i < filesCount; i++)
                     {
                         var document = new Document(reader.GetPageSizeWithRotation(1));
