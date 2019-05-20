@@ -11,7 +11,7 @@ namespace Txt2PdfConvert
     public partial class Txt2Pdf : Form
     {
         private readonly Dictionary<string, bool> _files = new Dictionary<string, bool>();
-        const int maxPagesPerPdf = 5000;
+        private const int MaxPagesPerPdf = 5000;
 
         public Txt2Pdf()
         {
@@ -182,11 +182,11 @@ namespace Txt2PdfConvert
             using (var sw = new StreamWriter(@"D:\111.csv", false, Encoding.Default))
             {
                 StringBuilder sb = new StringBuilder();
-                for (int i = 1; i < 30000; i++)
+                for (var i = 1; i < 30000; i++)
                 {
-                    int pagesCount = i;
-                    int filesCount = (int)Math.Ceiling((double)pagesCount / maxPagesPerPdf);
-                    int pagesPerPdf = (int)Math.Ceiling((double)pagesCount / filesCount);
+                    var pagesCount = i;
+                    var filesCount = (int)Math.Ceiling((double)pagesCount / MaxPagesPerPdf);
+                    var pagesPerPdf = (int)Math.Ceiling((double)pagesCount / filesCount);
 
                     sb.AppendLine($"{pagesCount},{filesCount},{pagesPerPdf}");
                 }
@@ -204,9 +204,9 @@ namespace Txt2PdfConvert
                 if (fileName != null)
                 {
                     var reader = new PdfReader(Path.ChangeExtension(fileName, "pdf"));
-                    int pagesCount = reader.NumberOfPages;
-                    int filesCount = (int)Math.Ceiling((double)pagesCount / maxPagesPerPdf);
-                    int pagesPerPdf = (int)Math.Ceiling((double)pagesCount / filesCount);
+                    var pagesCount = reader.NumberOfPages;
+                    var filesCount = (int)Math.Ceiling((double)pagesCount / MaxPagesPerPdf);
+                    var pagesPerPdf = (int)Math.Ceiling((double)pagesCount / filesCount);
 
                     for (var i = 0; i < filesCount; i++)
                     {
