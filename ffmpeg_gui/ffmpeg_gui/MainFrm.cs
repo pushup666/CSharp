@@ -17,15 +17,15 @@ namespace ffmpeg_gui
 
 
         
-        //private const string VideoFormat = @"ffmpeg -i ""{0}\{1}"" -vcodec copy -an ""{2}\V_{3}.m4v""";
+        //private const string VideoFormat = @"ffmpeg -i ""{0}\{1}"" -vcodec copy -an ""{2}\V_{3}.mp4""";
 
-        private const string VideoFormat = @"ffmpeg -i ""{0}\{1}"" -b:v 2000K -vcodec hevc_nvenc -an ""{2}\V_{3}.m4v""";
-        //private const string VideoFormat = @"ffmpeg -i ""{0}\{1}"" -vcodec hevc_nvenc -rc vbr -cq 30 -an ""{2}\V_{3}.m4v""";
-        //private const string VideoFormat = @"ffmpeg -i ""{0}\{1}"" -vcodec hevc_nvenc -an ""{2}\V_{3}.m4v""";     //2000 Kbps/s
+        private const string VideoFormat = @"ffmpeg -i ""{0}\{1}"" -b:v 2000K -vcodec hevc_nvenc -an ""{2}\V_{3}.mp4""";
+        //private const string VideoFormat = @"ffmpeg -i ""{0}\{1}"" -vcodec hevc_nvenc -rc vbr -cq 30 -an ""{2}\V_{3}.mp4""";
+        //private const string VideoFormat = @"ffmpeg -i ""{0}\{1}"" -vcodec hevc_nvenc -an ""{2}\V_{3}.mp4""";     //2000 Kbps/s
 
-        //private const string VideoFormat = @"ffmpeg -i ""{0}\{1}"" -vcodec h264_qsv -an ""{2}\V_{3}.m4v""";     //1000 Kbps/s
+        //private const string VideoFormat = @"ffmpeg -i ""{0}\{1}"" -vcodec h264_qsv -an ""{2}\V_{3}.mp4""";     //1000 Kbps/s
 
-        //private const string VideoFormat = @"x264 -o ""{2}\V_{3}.m4v"" ""{0}\{1}"" --ssim --tune ssim";
+        //private const string VideoFormat = @"x264 -o ""{2}\V_{3}.mp4"" ""{0}\{1}"" --ssim --tune ssim";
 
 
 
@@ -45,7 +45,7 @@ namespace ffmpeg_gui
 
 
 
-        private const string PackageFormat = @"ffmpeg -i ""{2}\V_{3}.m4v"" -i ""{2}\A_{3}.m4a"" -vcodec copy -acodec copy ""{2}\{3}_ENC.mp4""";
+        private const string PackageFormat = @"ffmpeg -i ""{2}\V_{3}.mp4"" -i ""{2}\A_{3}.m4a"" -vcodec copy -acodec copy ""{2}\{3}_ENC.mp4""";
 
 
 
@@ -62,7 +62,7 @@ namespace ffmpeg_gui
 
 
         private const string SeparateAudioFormat = @"ffmpeg -i ""{0}\{1}"" -acodec copy -vn ""{2}\A_{3}.m4a""";
-        private const string SeparateVideoFormat = @"ffmpeg -i ""{0}\{1}"" -vcodec copy -an ""{2}\V_{3}.m4v""";
+        private const string SeparateVideoFormat = @"ffmpeg -i ""{0}\{1}"" -vcodec copy -an ""{2}\V_{3}.mp4""";
         private const string SeparateSubtitleFormat = @"ffmpeg -i ""{0}\{1}"" -vn -an -scodec copy ""{2}\S_{3}.ass""";
 
         public MainFrm()
@@ -170,6 +170,7 @@ namespace ffmpeg_gui
         private void ButtonSeparateClick(object sender, EventArgs e)
         {
             GenerateCmdLine(SeparateAudioFormat);
+            GenerateCmdLine(SeparateVideoFormat);
         }
 
         private void GenerateCmdLine(string format)
