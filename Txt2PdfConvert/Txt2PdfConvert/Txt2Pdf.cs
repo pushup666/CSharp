@@ -99,7 +99,7 @@ namespace Txt2PdfConvert
                     GeneratePdf(fileName);
                     SplitPdf(fileName);
                 }
-                MessageBox.Show(string.Format("耗时：{0} 秒", DateTime.Now.Subtract(beginTime).TotalSeconds));
+                MessageBox.Show($@"耗时：{DateTime.Now.Subtract(beginTime).TotalSeconds} 秒");
             }
             catch (Exception ex)
             {
