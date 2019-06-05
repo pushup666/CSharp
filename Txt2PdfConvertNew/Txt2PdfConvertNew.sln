@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28922.388
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Txt2PdfConvertNew", "Txt2PdfConvertNew\Txt2PdfConvertNew.csproj", "{EB07928D-4758-43D4-B123-D6A5563A7957}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EB07928D-4758-43D4-B123-D6A5563A7957}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB07928D-4758-43D4-B123-D6A5563A7957}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB07928D-4758-43D4-B123-D6A5563A7957}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB07928D-4758-43D4-B123-D6A5563A7957}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {26A0721A-D699-4280-B9EF-D627E5D646EA}
+	EndGlobalSection
+EndGlobal
