@@ -6,9 +6,11 @@ using System.Windows.Forms;
 using System.IO;
 using iText.IO.Font;
 using iText.Kernel.Font;
+using iText.Kernel.Geom;
 using iText.Kernel.Pdf;
 using iText.Layout;
 using iText.Layout.Element;
+
 
 
 namespace Txt2PdfConvertNew
@@ -123,24 +125,64 @@ namespace Txt2PdfConvertNew
 
         private void GeneratePdf(string fileName)
         {
-            var pdfName = Path.ChangeExtension(fileName, "pdf");
-            var pw = new PdfWriter(pdfName);
-            var pdf = new PdfDocument(pw);
-            var font = PdfFontFactory.CreateFont(@"C:\Windows\Fonts\msyhbd.ttc,0", PdfEncodings.IDENTITY_H, false);
-            
-            var doc = new Document(pdf);
-
-            using (var sr = new StreamReader(fileName, checkBoxUTF8.Checked ? Encoding.UTF8 : Encoding.Default))
+            try
             {
-                string line;
-                while ((line = sr.ReadLine()) != null)
+                if (fileName != null)
                 {
-                    doc.Add(new Paragraph(line == "" ? "\n" : line.Trim()).SetFont(font).SetFontSize(24));
+                    var pdfName = System.IO.Path.ChangeExtension(fileName, "pdf");
+                    var pdf = new PdfDocument(new PdfWriter(pdfName));
+
+                    PageSize pageSize;
+
+                    var font = PdfFontFactory.CreateFont(@"C:\Windows\Fonts\msyhbd.ttc,0", PdfEncodings.IDENTITY_H, false);
+                    float fontSize;
+
+                    switch (comboBoxDevice.Text)
+                    {
+                        case "iPad Mini2":
+                            fontSize = 36f;                                         //iPad mini2 326 ppi
+                            pageSize = new PageSize(1536, 2048);         //iPad mini2 2048x1536
+                            break;
+                        case "iPad Pro 11":
+                            fontSize = 32f;                                         //iPad Pro 11 264 ppi
+                            pageSize = new PageSize(1668, 2388);         //iPad Pro 11 2388x1668
+                            break;
+                        case "iPhone 5s":
+                            fontSize = 32f;                                         //iPhone 5s 264 ppi
+                            pageSize = new PageSize(640, 1136);          //iPhone 5s 1136x640
+                            break;
+                        case "iPhone 8":
+                            fontSize = 32f;                                         //iPhone 8 264 ppi
+                            pageSize = new PageSize(750, 1334);          //iPhone 8 1334x750
+                            break;
+                        default:
+                            fontSize = 32f;                                         //iPad Pro 11 264 ppi
+                            pageSize = new PageSize(1668, 2388);         //iPad Pro 11 2388x1668
+                            break;
+                    }
+
+                    //反色
+                    //font.Color = BaseColor.WHITE;
+                    //document.PageSize.BackgroundColor = BaseColor.BLACK;
+
+                    var doc = new Document(pdf, pageSize);
+
+                    using (var sr = new StreamReader(fileName, checkBoxUTF8.Checked ? Encoding.UTF8 : Encoding.Default))
+                    {
+                        string line;
+                        while ((line = sr.ReadLine()) != null)
+                        {
+                            doc.Add(new Paragraph(line == "" ? "\n" : line.Trim()).SetFont(font).SetFontSize(fontSize));
+                        }
+                    }
+
+                    doc.Close();
                 }
             }
-
-
-            doc.Close();
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void TestSplit()
