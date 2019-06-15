@@ -133,7 +133,7 @@ namespace Txt2PdfConvert
                             document = new Document(new Rectangle(1536, 2048));         //iPad mini2 2048x1536
                             break;
                         case "iPad Pro 11":
-                            font = new Font(baseFont, 32f);                             //iPad Pro 11 264 ppi
+                            font = new Font(baseFont, 36f);                             //iPad Pro 11 264 ppi
                             document = new Document(new Rectangle(1668, 2388));         //iPad Pro 11 2388x1668
                             break;
                         case "iPhone 5s":
