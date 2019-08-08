@@ -12,9 +12,9 @@ namespace DuplicateFinder
 {
     public partial class DuplicateFinder : Form
     {
-        readonly List<String> _folderList = new List<String>();
-        readonly Dictionary<String, String> _fileDict = new Dictionary<String, String>();           //Name  MD5
-        readonly Dictionary<String, String> _uniqueFileDict = new Dictionary<String, String>();     //MD5   Name
+        readonly List<string> _folderList = new List<string>();
+        readonly Dictionary<string, string> _fileDict = new Dictionary<string, string>();           //Name  MD5
+        readonly Dictionary<string, string> _uniqueFileDict = new Dictionary<string, string>();     //MD5   Name
 
         public DuplicateFinder()
         {
@@ -51,11 +51,11 @@ namespace DuplicateFinder
 
         private void AddFolder()
         {
-            using (var flderBrowserDialog = new FolderBrowserDialog())
+            using (var folderBrowserDialog = new FolderBrowserDialog())
             {
-                if (flderBrowserDialog.ShowDialog() == DialogResult.OK)
+                if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
                 {
-                    var folder = flderBrowserDialog.SelectedPath;
+                    var folder = folderBrowserDialog.SelectedPath;
                     textBoxFolder.Text = folder;
 
                     if (_folderList.Contains(folder))
@@ -126,8 +126,8 @@ namespace DuplicateFinder
             var totalSeconds = DateTime.Now.Subtract(start).TotalSeconds;
             var allFileSizeInM = allFileSize/1024/1024;
 
-            MessageBox.Show(string.Format("历时：{0:N} S；文件大小：{1:N} M；速度：{2:N} M/S", totalSeconds, allFileSizeInM, allFileSizeInM / totalSeconds));
-            MessageBox.Show(string.Format("文件总数：{0}，重复文件数：{1}", _fileDict.Count, _fileDict.Count - _uniqueFileDict.Count));
+            MessageBox.Show($"历时：{totalSeconds:N} S；文件大小：{allFileSizeInM:N} M；速度：{allFileSizeInM / totalSeconds:N} M/S");
+            MessageBox.Show($"文件总数：{_fileDict.Count}，重复文件数：{_fileDict.Count - _uniqueFileDict.Count}");
 
             UpdateFileListShow();
         }
