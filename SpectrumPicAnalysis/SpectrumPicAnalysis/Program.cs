@@ -9,6 +9,8 @@ namespace SpectrumPicAnalysis
     {
         private static void Main(string[] args)
         {
+            //for %%a in ("*.mp3") do ffmpeg -i "%%a" -lavfi showspectrumpic=legend=false "%%~na.png"
+
             if (args[0] == "-l")
             {
                 string result = "";
