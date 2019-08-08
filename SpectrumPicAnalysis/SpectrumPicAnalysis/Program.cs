@@ -30,7 +30,11 @@ namespace SpectrumPicAnalysis
             }
             else
             {
-                Console.WriteLine(CalcAvgFreq(args[0]));
+                string fileName = args[0];
+                using (var sw = new StreamWriter($"{fileName}.txt", false, Encoding.Default))
+                {
+                    sw.Write($"{CalcAvgFreq(fileName)}\t{fileName}\r\n");
+                }
             }
         }
 
