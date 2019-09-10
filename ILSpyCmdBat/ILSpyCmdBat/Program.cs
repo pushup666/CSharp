@@ -29,13 +29,13 @@ namespace ILSpyCmdBat
             foreach (var name in list)
             {
 
-                sb.AppendLine($"md {dst}{name}");
-                sb.AppendLine($"ilspycmd \"{src}{name}\" -p -o \"{dst}{name}\"");
+                sb.AppendLine($"md {dst}\\{name}");
+                sb.AppendLine($"ilspycmd \"{src}\\{name}\" -p -o \"{dst}\\{name}\"");
             }
 
             sb.AppendLine($"forfiles /p \"{dst}\" /m *.csproj /s /c \"cmd /c del /Q @file\"");
 
-            using (var sw = new StreamWriter($"{dst}111.bat", false, Encoding.Default))
+            using (var sw = new StreamWriter($"{dst}\\111.bat", false, Encoding.Default))
             {
                 sw.Write(sb.ToString());
             }
