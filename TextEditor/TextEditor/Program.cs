@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace TextEditer
+namespace TextEditor
 {
     static class Program
     {
@@ -13,7 +13,7 @@ namespace TextEditer
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new TextEditer());
+            Application.Run(new TextEditor());
         }
     }
 }

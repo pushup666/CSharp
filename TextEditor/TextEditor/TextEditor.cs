@@ -4,14 +4,14 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace TextEditer
+namespace TextEditor
 {
-    public partial class TextEditer : Form
+    public partial class TextEditor : Form
     {
         private readonly List<string> _lines = new List<string>();
         private string _fileName;
 
-        public TextEditer()
+        public TextEditor()
         {
             InitializeComponent();
         }
@@ -36,7 +36,7 @@ namespace TextEditer
                 using (var sr = new StreamReader(_fileName, checkBoxUTF8.Checked ? Encoding.UTF8 : Encoding.Default))
                 {
                     richTextBoxMain.Text = sr.ReadToEnd();
-                    Text = "TextEditer - " + _fileName;
+                    Text = "TextEditor - " + _fileName;
                 }
             }
             catch (Exception ex)
@@ -44,7 +44,7 @@ namespace TextEditer
                 MessageBox.Show(ex.Message + "只支持单文本文件拖拽！");
             }
         }
-        
+
         private void RefreshTextBox()
         {
             var sb = new StringBuilder();
@@ -81,7 +81,7 @@ namespace TextEditer
                 else
                 {
                     _lines.Add("　　" + line);
-                }                
+                }
             }
 
             RefreshTextBox();
@@ -90,7 +90,7 @@ namespace TextEditer
         private void buttonRemoveBlankLine_Click(object sender, EventArgs e)
         {
             _lines.Clear();
-            
+
             var lastLine = "";
             foreach (var currLine in richTextBoxMain.Lines)
             {
@@ -103,7 +103,7 @@ namespace TextEditer
 
             RefreshTextBox();
         }
-        
+
         private void buttonAddBlankLine_Click(object sender, EventArgs e)
         {
             _lines.Clear();
@@ -139,7 +139,7 @@ namespace TextEditer
 
             RefreshTextBox();
         }
-        
+
         private void buttonLong2Short_Click(object sender, EventArgs e)
         {
             _lines.Clear();
@@ -172,7 +172,7 @@ namespace TextEditer
 
             return list;
         }
-        
+
         private void buttonSave_Click(object sender, EventArgs e)
         {
             try

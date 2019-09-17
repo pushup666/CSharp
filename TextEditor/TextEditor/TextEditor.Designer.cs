@@ -1,8 +1,8 @@
 ﻿using System.Windows.Forms;
 
-namespace TextEditer
+namespace TextEditor
 {
-    partial class TextEditer
+    partial class TextEditor
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -96,8 +96,8 @@ namespace TextEditer
             // richTextBoxMain
             // 
             this.richTextBoxMain.AllowDrop = true;
-            this.richTextBoxMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.richTextBoxMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.richTextBoxMain.Location = new System.Drawing.Point(12, 41);
             this.richTextBoxMain.Name = "richTextBoxMain";
@@ -147,7 +147,7 @@ namespace TextEditer
             this.buttonRestoreBlankLine.UseVisualStyleBackColor = true;
             this.buttonRestoreBlankLine.Click += new System.EventHandler(this.buttonRestoreBlankLine_Click);
             // 
-            // TextEditer
+            // TextEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -162,8 +162,8 @@ namespace TextEditer
             this.Controls.Add(this.buttonShort2Long);
             this.Controls.Add(this.buttonAddBlankLine);
             this.Controls.Add(this.buttonRemoveBlankLine);
-            this.Name = "TextEditer";
-            this.Text = "TextEditer";
+            this.Name = "TextEditor";
+            this.Text = "TextEditor";
             this.ResumeLayout(false);
             this.PerformLayout();
 
