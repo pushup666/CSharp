@@ -30,157 +30,261 @@ namespace TextEditor
         /// </summary>
         private void InitializeComponent()
         {
-            this.buttonRemoveBlankLine = new System.Windows.Forms.Button();
-            this.buttonAddBlankLine = new System.Windows.Forms.Button();
-            this.buttonShort2Long = new System.Windows.Forms.Button();
             this.buttonSave = new System.Windows.Forms.Button();
-            this.buttonTrimLine = new System.Windows.Forms.Button();
             this.richTextBoxMain = new System.Windows.Forms.RichTextBox();
             this.checkBoxUTF8 = new System.Windows.Forms.CheckBox();
-            this.buttonAddHeadBlank = new System.Windows.Forms.Button();
-            this.buttonLong2Short = new System.Windows.Forms.Button();
-            this.buttonRestoreBlankLine = new System.Windows.Forms.Button();
+            this.richTextBoxSide = new System.Windows.Forms.RichTextBox();
+            this.menuStripMain = new System.Windows.Forms.MenuStrip();
+            this.blankToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.trimLineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addHeadBlankToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.blankLineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.removeBlankLineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addBlankLineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.restoreBlankLineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.shortLongToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.short2LongToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.long2ShortToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.splitContainerMain = new System.Windows.Forms.SplitContainer();
+            this.textBoxRegex = new System.Windows.Forms.TextBox();
+            this.buttonRegex = new System.Windows.Forms.Button();
+            this.buttonAddLabel = new System.Windows.Forms.Button();
+            this.menuStripMain.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerMain)).BeginInit();
+            this.splitContainerMain.Panel1.SuspendLayout();
+            this.splitContainerMain.Panel2.SuspendLayout();
+            this.splitContainerMain.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // buttonRemoveBlankLine
-            // 
-            this.buttonRemoveBlankLine.Location = new System.Drawing.Point(194, 12);
-            this.buttonRemoveBlankLine.Name = "buttonRemoveBlankLine";
-            this.buttonRemoveBlankLine.Size = new System.Drawing.Size(75, 23);
-            this.buttonRemoveBlankLine.TabIndex = 1;
-            this.buttonRemoveBlankLine.Text = "去空白行";
-            this.buttonRemoveBlankLine.UseVisualStyleBackColor = true;
-            this.buttonRemoveBlankLine.Click += new System.EventHandler(this.buttonRemoveBlankLine_Click);
-            // 
-            // buttonAddBlankLine
-            // 
-            this.buttonAddBlankLine.Location = new System.Drawing.Point(275, 12);
-            this.buttonAddBlankLine.Name = "buttonAddBlankLine";
-            this.buttonAddBlankLine.Size = new System.Drawing.Size(75, 23);
-            this.buttonAddBlankLine.TabIndex = 2;
-            this.buttonAddBlankLine.Text = "增空白行";
-            this.buttonAddBlankLine.UseVisualStyleBackColor = true;
-            this.buttonAddBlankLine.Click += new System.EventHandler(this.buttonAddBlankLine_Click);
-            // 
-            // buttonShort2Long
-            // 
-            this.buttonShort2Long.Location = new System.Drawing.Point(378, 12);
-            this.buttonShort2Long.Name = "buttonShort2Long";
-            this.buttonShort2Long.Size = new System.Drawing.Size(75, 23);
-            this.buttonShort2Long.TabIndex = 4;
-            this.buttonShort2Long.Text = "短行变长行";
-            this.buttonShort2Long.UseVisualStyleBackColor = true;
-            this.buttonShort2Long.Click += new System.EventHandler(this.buttonShort2Long_Click);
             // 
             // buttonSave
             // 
-            this.buttonSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonSave.Location = new System.Drawing.Point(969, 12);
+            this.buttonSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonSave.Location = new System.Drawing.Point(956, 446);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(75, 23);
             this.buttonSave.TabIndex = 5;
             this.buttonSave.Text = "保存";
             this.buttonSave.UseVisualStyleBackColor = true;
-            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
-            // 
-            // buttonTrimLine
-            // 
-            this.buttonTrimLine.Location = new System.Drawing.Point(12, 12);
-            this.buttonTrimLine.Name = "buttonTrimLine";
-            this.buttonTrimLine.Size = new System.Drawing.Size(75, 23);
-            this.buttonTrimLine.TabIndex = 6;
-            this.buttonTrimLine.Text = "去首尾空白";
-            this.buttonTrimLine.UseVisualStyleBackColor = true;
-            this.buttonTrimLine.Click += new System.EventHandler(this.buttonTrimLine_Click);
+            this.buttonSave.Click += new System.EventHandler(this.ButtonSave_Click);
             // 
             // richTextBoxMain
             // 
             this.richTextBoxMain.AllowDrop = true;
-            this.richTextBoxMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.richTextBoxMain.Location = new System.Drawing.Point(12, 41);
+            this.richTextBoxMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBoxMain.Location = new System.Drawing.Point(0, 0);
             this.richTextBoxMain.Name = "richTextBoxMain";
-            this.richTextBoxMain.Size = new System.Drawing.Size(1032, 562);
+            this.richTextBoxMain.Size = new System.Drawing.Size(699, 412);
             this.richTextBoxMain.TabIndex = 7;
             this.richTextBoxMain.Text = "";
-            this.richTextBoxMain.DragDrop += new System.Windows.Forms.DragEventHandler(this.richTextBoxMain_DragDrop);
-            this.richTextBoxMain.DragEnter += new System.Windows.Forms.DragEventHandler(this.richTextBoxMain_DragEnter);
+            this.richTextBoxMain.DragDrop += new System.Windows.Forms.DragEventHandler(this.RichTextBoxMain_DragDrop);
+            this.richTextBoxMain.DragEnter += new System.Windows.Forms.DragEventHandler(this.RichTextBoxMain_DragEnter);
             // 
             // checkBoxUTF8
             // 
+            this.checkBoxUTF8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.checkBoxUTF8.AutoSize = true;
-            this.checkBoxUTF8.Location = new System.Drawing.Point(799, 16);
+            this.checkBoxUTF8.Location = new System.Drawing.Point(896, 450);
             this.checkBoxUTF8.Name = "checkBoxUTF8";
             this.checkBoxUTF8.Size = new System.Drawing.Size(54, 16);
             this.checkBoxUTF8.TabIndex = 8;
             this.checkBoxUTF8.Text = "UTF-8";
             this.checkBoxUTF8.UseVisualStyleBackColor = true;
             // 
-            // buttonAddHeadBlank
+            // richTextBoxSide
             // 
-            this.buttonAddHeadBlank.Location = new System.Drawing.Point(93, 12);
-            this.buttonAddHeadBlank.Name = "buttonAddHeadBlank";
-            this.buttonAddHeadBlank.Size = new System.Drawing.Size(75, 23);
-            this.buttonAddHeadBlank.TabIndex = 9;
-            this.buttonAddHeadBlank.Text = "加首空白";
-            this.buttonAddHeadBlank.UseVisualStyleBackColor = true;
-            this.buttonAddHeadBlank.Click += new System.EventHandler(this.buttonAddHeadBlank_Click);
+            this.richTextBoxSide.AllowDrop = true;
+            this.richTextBoxSide.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBoxSide.Location = new System.Drawing.Point(0, 0);
+            this.richTextBoxSide.Name = "richTextBoxSide";
+            this.richTextBoxSide.Size = new System.Drawing.Size(316, 412);
+            this.richTextBoxSide.TabIndex = 12;
+            this.richTextBoxSide.Text = "";
             // 
-            // buttonLong2Short
+            // menuStripMain
             // 
-            this.buttonLong2Short.Location = new System.Drawing.Point(459, 12);
-            this.buttonLong2Short.Name = "buttonLong2Short";
-            this.buttonLong2Short.Size = new System.Drawing.Size(75, 23);
-            this.buttonLong2Short.TabIndex = 10;
-            this.buttonLong2Short.Text = "长行变短行";
-            this.buttonLong2Short.UseVisualStyleBackColor = true;
-            this.buttonLong2Short.Click += new System.EventHandler(this.buttonLong2Short_Click);
+            this.menuStripMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.blankToolStripMenuItem,
+            this.blankLineToolStripMenuItem,
+            this.shortLongToolStripMenuItem});
+            this.menuStripMain.Location = new System.Drawing.Point(0, 0);
+            this.menuStripMain.Name = "menuStripMain";
+            this.menuStripMain.Size = new System.Drawing.Size(1043, 25);
+            this.menuStripMain.TabIndex = 13;
+            this.menuStripMain.Text = "menuStrip1";
             // 
-            // buttonRestoreBlankLine
+            // blankToolStripMenuItem
             // 
-            this.buttonRestoreBlankLine.Location = new System.Drawing.Point(580, 12);
-            this.buttonRestoreBlankLine.Name = "buttonRestoreBlankLine";
-            this.buttonRestoreBlankLine.Size = new System.Drawing.Size(75, 23);
-            this.buttonRestoreBlankLine.TabIndex = 11;
-            this.buttonRestoreBlankLine.Text = "还原空白行";
-            this.buttonRestoreBlankLine.UseVisualStyleBackColor = true;
-            this.buttonRestoreBlankLine.Click += new System.EventHandler(this.buttonRestoreBlankLine_Click);
+            this.blankToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.trimLineToolStripMenuItem,
+            this.addHeadBlankToolStripMenuItem});
+            this.blankToolStripMenuItem.Name = "blankToolStripMenuItem";
+            this.blankToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
+            this.blankToolStripMenuItem.Text = "空白";
+            // 
+            // trimLineToolStripMenuItem
+            // 
+            this.trimLineToolStripMenuItem.Name = "trimLineToolStripMenuItem";
+            this.trimLineToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.trimLineToolStripMenuItem.Text = "去首尾空白";
+            this.trimLineToolStripMenuItem.Click += new System.EventHandler(this.TrimLineToolStripMenuItem_Click);
+            // 
+            // addHeadBlankToolStripMenuItem
+            // 
+            this.addHeadBlankToolStripMenuItem.Name = "addHeadBlankToolStripMenuItem";
+            this.addHeadBlankToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.addHeadBlankToolStripMenuItem.Text = "加首空白";
+            this.addHeadBlankToolStripMenuItem.Click += new System.EventHandler(this.AddHeadBlankToolStripMenuItem_Click);
+            // 
+            // blankLineToolStripMenuItem
+            // 
+            this.blankLineToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.removeBlankLineToolStripMenuItem,
+            this.addBlankLineToolStripMenuItem,
+            this.restoreBlankLineToolStripMenuItem});
+            this.blankLineToolStripMenuItem.Name = "blankLineToolStripMenuItem";
+            this.blankLineToolStripMenuItem.Size = new System.Drawing.Size(56, 21);
+            this.blankLineToolStripMenuItem.Text = "空白行";
+            // 
+            // removeBlankLineToolStripMenuItem
+            // 
+            this.removeBlankLineToolStripMenuItem.Name = "removeBlankLineToolStripMenuItem";
+            this.removeBlankLineToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.removeBlankLineToolStripMenuItem.Text = "去空白行";
+            this.removeBlankLineToolStripMenuItem.Click += new System.EventHandler(this.RemoveBlankLineToolStripMenuItem_Click);
+            // 
+            // addBlankLineToolStripMenuItem
+            // 
+            this.addBlankLineToolStripMenuItem.Name = "addBlankLineToolStripMenuItem";
+            this.addBlankLineToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.addBlankLineToolStripMenuItem.Text = "增空白行";
+            this.addBlankLineToolStripMenuItem.Click += new System.EventHandler(this.AddBlankLineToolStripMenuItem_Click);
+            // 
+            // restoreBlankLineToolStripMenuItem
+            // 
+            this.restoreBlankLineToolStripMenuItem.Name = "restoreBlankLineToolStripMenuItem";
+            this.restoreBlankLineToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.restoreBlankLineToolStripMenuItem.Text = "还原空白行";
+            this.restoreBlankLineToolStripMenuItem.Click += new System.EventHandler(this.RestoreBlankLineToolStripMenuItem_Click);
+            // 
+            // shortLongToolStripMenuItem
+            // 
+            this.shortLongToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.short2LongToolStripMenuItem,
+            this.long2ShortToolStripMenuItem});
+            this.shortLongToolStripMenuItem.Name = "shortLongToolStripMenuItem";
+            this.shortLongToolStripMenuItem.Size = new System.Drawing.Size(56, 21);
+            this.shortLongToolStripMenuItem.Text = "长短行";
+            // 
+            // short2LongToolStripMenuItem
+            // 
+            this.short2LongToolStripMenuItem.Name = "short2LongToolStripMenuItem";
+            this.short2LongToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.short2LongToolStripMenuItem.Text = "短行变长行";
+            this.short2LongToolStripMenuItem.Click += new System.EventHandler(this.Short2LongToolStripMenuItem_Click);
+            // 
+            // long2ShortToolStripMenuItem
+            // 
+            this.long2ShortToolStripMenuItem.Name = "long2ShortToolStripMenuItem";
+            this.long2ShortToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.long2ShortToolStripMenuItem.Text = "长行变短行";
+            this.long2ShortToolStripMenuItem.Click += new System.EventHandler(this.Long2ShortToolStripMenuItem_Click);
+            // 
+            // splitContainerMain
+            // 
+            this.splitContainerMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.splitContainerMain.Location = new System.Drawing.Point(12, 28);
+            this.splitContainerMain.Name = "splitContainerMain";
+            // 
+            // splitContainerMain.Panel1
+            // 
+            this.splitContainerMain.Panel1.Controls.Add(this.richTextBoxMain);
+            // 
+            // splitContainerMain.Panel2
+            // 
+            this.splitContainerMain.Panel2.Controls.Add(this.richTextBoxSide);
+            this.splitContainerMain.Size = new System.Drawing.Size(1019, 412);
+            this.splitContainerMain.SplitterDistance = 699;
+            this.splitContainerMain.TabIndex = 14;
+            // 
+            // textBoxRegex
+            // 
+            this.textBoxRegex.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.textBoxRegex.Location = new System.Drawing.Point(12, 450);
+            this.textBoxRegex.Name = "textBoxRegex";
+            this.textBoxRegex.Size = new System.Drawing.Size(170, 21);
+            this.textBoxRegex.TabIndex = 15;
+            this.textBoxRegex.Text = "^第.+章.+$";
+            // 
+            // buttonRegex
+            // 
+            this.buttonRegex.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonRegex.Location = new System.Drawing.Point(188, 448);
+            this.buttonRegex.Name = "buttonRegex";
+            this.buttonRegex.Size = new System.Drawing.Size(75, 23);
+            this.buttonRegex.TabIndex = 16;
+            this.buttonRegex.Text = "正则";
+            this.buttonRegex.UseVisualStyleBackColor = true;
+            this.buttonRegex.Click += new System.EventHandler(this.ButtonRegex_Click);
+            // 
+            // buttonAddLabel
+            // 
+            this.buttonAddLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonAddLabel.Location = new System.Drawing.Point(269, 448);
+            this.buttonAddLabel.Name = "buttonAddLabel";
+            this.buttonAddLabel.Size = new System.Drawing.Size(75, 23);
+            this.buttonAddLabel.TabIndex = 17;
+            this.buttonAddLabel.Text = "添加标签";
+            this.buttonAddLabel.UseVisualStyleBackColor = true;
+            this.buttonAddLabel.Click += new System.EventHandler(this.ButtonAddLabel_Click);
             // 
             // TextEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1056, 618);
-            this.Controls.Add(this.buttonRestoreBlankLine);
-            this.Controls.Add(this.buttonLong2Short);
-            this.Controls.Add(this.buttonAddHeadBlank);
+            this.ClientSize = new System.Drawing.Size(1043, 481);
+            this.Controls.Add(this.buttonAddLabel);
+            this.Controls.Add(this.buttonRegex);
+            this.Controls.Add(this.textBoxRegex);
+            this.Controls.Add(this.splitContainerMain);
             this.Controls.Add(this.checkBoxUTF8);
-            this.Controls.Add(this.richTextBoxMain);
-            this.Controls.Add(this.buttonTrimLine);
             this.Controls.Add(this.buttonSave);
-            this.Controls.Add(this.buttonShort2Long);
-            this.Controls.Add(this.buttonAddBlankLine);
-            this.Controls.Add(this.buttonRemoveBlankLine);
+            this.Controls.Add(this.menuStripMain);
+            this.MainMenuStrip = this.menuStripMain;
             this.Name = "TextEditor";
             this.Text = "TextEditor";
+            this.menuStripMain.ResumeLayout(false);
+            this.menuStripMain.PerformLayout();
+            this.splitContainerMain.Panel1.ResumeLayout(false);
+            this.splitContainerMain.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerMain)).EndInit();
+            this.splitContainerMain.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Button buttonRemoveBlankLine;
-        private System.Windows.Forms.Button buttonAddBlankLine;
-        private System.Windows.Forms.Button buttonShort2Long;
         private Button buttonSave;
-        private Button buttonTrimLine;
         private RichTextBox richTextBoxMain;
         private CheckBox checkBoxUTF8;
-        private Button buttonAddHeadBlank;
-        private Button buttonLong2Short;
-        private Button buttonRestoreBlankLine;
+        private RichTextBox richTextBoxSide;
+        private MenuStrip menuStripMain;
+        private ToolStripMenuItem blankToolStripMenuItem;
+        private ToolStripMenuItem blankLineToolStripMenuItem;
+        private ToolStripMenuItem shortLongToolStripMenuItem;
+        private ToolStripMenuItem trimLineToolStripMenuItem;
+        private ToolStripMenuItem addHeadBlankToolStripMenuItem;
+        private ToolStripMenuItem removeBlankLineToolStripMenuItem;
+        private ToolStripMenuItem addBlankLineToolStripMenuItem;
+        private ToolStripMenuItem restoreBlankLineToolStripMenuItem;
+        private ToolStripMenuItem short2LongToolStripMenuItem;
+        private ToolStripMenuItem long2ShortToolStripMenuItem;
+        private SplitContainer splitContainerMain;
+        private TextBox textBoxRegex;
+        private Button buttonRegex;
+        private Button buttonAddLabel;
     }
 }
 

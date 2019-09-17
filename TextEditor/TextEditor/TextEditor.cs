@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace TextEditor
 {
@@ -16,22 +17,22 @@ namespace TextEditor
             InitializeComponent();
         }
 
-        private void richTextBoxMain_DragEnter(object sender, DragEventArgs e)
+        private void RichTextBoxMain_DragEnter(object sender, DragEventArgs e)
         {
             e.Effect = e.Data.GetDataPresent(DataFormats.FileDrop) ? DragDropEffects.Copy : DragDropEffects.None;
         }
 
-        private void richTextBoxMain_DragDrop(object sender, DragEventArgs e)
+        private void RichTextBoxMain_DragDrop(object sender, DragEventArgs e)
         {
             try
             {
-                var filesName = (Array)e.Data.GetData(DataFormats.FileDrop);
-                if (filesName.Length > 1)
+                var filesNameArr = (Array)e.Data.GetData(DataFormats.FileDrop);
+                if (filesNameArr.Length > 1)
                 {
                     MessageBox.Show("只支持单文本文件拖拽！");
                     return;
                 }
-                _fileName = filesName.GetValue(0).ToString();
+                _fileName = filesNameArr.GetValue(0).ToString();
 
                 using (var sr = new StreamReader(_fileName, checkBoxUTF8.Checked ? Encoding.UTF8 : Encoding.Default))
                 {
@@ -55,8 +56,7 @@ namespace TextEditor
             richTextBoxMain.Text = sb.ToString().TrimEnd();
         }
 
-
-        private void buttonTrimLine_Click(object sender, EventArgs e)
+        private void TrimLineToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _lines.Clear();
 
@@ -68,7 +68,7 @@ namespace TextEditor
             RefreshTextBox();
         }
 
-        private void buttonAddHeadBlank_Click(object sender, EventArgs e)
+        private void AddHeadBlankToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _lines.Clear();
 
@@ -87,7 +87,7 @@ namespace TextEditor
             RefreshTextBox();
         }
 
-        private void buttonRemoveBlankLine_Click(object sender, EventArgs e)
+        private void RemoveBlankLineToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _lines.Clear();
 
@@ -104,7 +104,7 @@ namespace TextEditor
             RefreshTextBox();
         }
 
-        private void buttonAddBlankLine_Click(object sender, EventArgs e)
+        private void AddBlankLineToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _lines.Clear();
 
@@ -117,7 +117,27 @@ namespace TextEditor
             RefreshTextBox();
         }
 
-        private void buttonShort2Long_Click(object sender, EventArgs e)
+        private void RestoreBlankLineToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _lines.Clear();
+
+            foreach (var line in richTextBoxMain.Lines)
+            {
+                if (line.Length < 33)
+                {
+                    _lines.Add(line);
+                    _lines.Add("");
+                }
+                else
+                {
+                    _lines.Add(line);
+                }
+            }
+
+            RefreshTextBox();
+        }
+
+        private void Short2LongToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _lines.Clear();
 
@@ -140,7 +160,7 @@ namespace TextEditor
             RefreshTextBox();
         }
 
-        private void buttonLong2Short_Click(object sender, EventArgs e)
+        private void Long2ShortToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _lines.Clear();
 
@@ -173,7 +193,7 @@ namespace TextEditor
             return list;
         }
 
-        private void buttonSave_Click(object sender, EventArgs e)
+        private void ButtonSave_Click(object sender, EventArgs e)
         {
             try
             {
@@ -190,16 +210,35 @@ namespace TextEditor
             }
         }
 
-        private void buttonRestoreBlankLine_Click(object sender, EventArgs e)
+        private void ButtonRegex_Click(object sender, EventArgs e)
         {
-            _lines.Clear();
+            var sb = new  StringBuilder();
+            var i = 1;
 
             foreach (var line in richTextBoxMain.Lines)
             {
-                if (line.Length < 33)
+                var m = Regex.Match(line, textBoxRegex.Text);
+                if (m.Success)
                 {
-                    _lines.Add(line);
-                    _lines.Add("");
+                    sb.AppendLine($"{i++} {line}");
+                }
+            }
+
+            richTextBoxSide.Text = sb.ToString();
+        }
+
+        private void ButtonAddLabel_Click(object sender, EventArgs e)
+        {
+            _lines.Clear();
+
+            _lines.Add("<TITLE>");
+
+            foreach (var line in richTextBoxMain.Lines)
+            {
+                var m = Regex.Match(line, textBoxRegex.Text);
+                if (m.Success)
+                {
+                    _lines.Add("<CHAPTER>" + line);
                 }
                 else
                 {
