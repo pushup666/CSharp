@@ -1,32 +1,34 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Configuration;
 
 namespace TestSqlite
 {
     static class SqliteHelper
     {
-        private static readonly string connStr = @"Data Source = C:\Users\ssf\Desktop\sqlite\db\cs.db";
-
+        private const string ConnStr = @"Data Source = C:\Users\ssf\Desktop\sqlite\db\cs.db";
 
         public static int ExecuteNonQuery(string sql, params SQLiteParameter[] pms)
         {
-            using (SQLiteConnection con = new SQLiteConnection(connStr))
+            try
             {
-                using (SQLiteCommand cmd = new SQLiteCommand(sql, con))
+                using (var conn = new SQLiteConnection(ConnStr))
                 {
-                    if (pms != null)
+                    using (var cmd = new SQLiteCommand(sql, conn))
                     {
-                        cmd.Parameters.AddRange(pms);
+                        if (pms != null)
+                        {
+                            cmd.Parameters.AddRange(pms);
+                        }
+                        conn.Open();
+                        return cmd.ExecuteNonQuery();
                     }
-                    con.Open();
-                    return cmd.ExecuteNonQuery();
                 }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return -1;
             }
         }
 
@@ -34,15 +36,15 @@ namespace TestSqlite
         {
             try
             {
-                using (SQLiteConnection con = new SQLiteConnection(connStr))
+                using (var conn = new SQLiteConnection(ConnStr))
                 {
-                    using (SQLiteCommand cmd = new SQLiteCommand(sql, con))
+                    using (var cmd = new SQLiteCommand(sql, conn))
                     {
                         if (pms != null)
                         {
                             cmd.Parameters.AddRange(pms);
                         }
-                        con.Open();
+                        conn.Open();
                         return cmd.ExecuteScalar();
                     }
                 }
@@ -50,47 +52,34 @@ namespace TestSqlite
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                return "";
-            }
-            
-        }
-
-        public static SQLiteDataReader ExecuteReader(string sql, params SQLiteParameter[] pms)
-        {
-            SQLiteConnection con = new SQLiteConnection(connStr);
-            using (SQLiteCommand cmd = new SQLiteCommand(sql, con))
-            {
-                if (pms != null)
-                {
-                    cmd.Parameters.AddRange(pms);
-                }
-                try
-                {
-                    con.Open();
-                    return cmd.ExecuteReader(System.Data.CommandBehavior.CloseConnection);
-                    //System.Data.CommandBehavior.CloseConnection,表示DataReader对象调用结束后，释放conn
-                }
-                catch
-                {
-                    con.Close();
-                    con.Dispose();
-                    throw;
-                }
+                return null;
             }
         }
 
-        public static DataTable ExecuteDataTable(string sql, params SQLiteParameter[] pms)
+        public static DataTable ExecuteReader(string sql, params SQLiteParameter[] pms)
         {
-            DataTable dt = new DataTable();
-            using (SQLiteDataAdapter adapter = new SQLiteDataAdapter(sql, connStr))
+            try
             {
-                if (pms != null)
+                using (var conn = new SQLiteConnection(ConnStr))
                 {
-                    adapter.SelectCommand.Parameters.AddRange(pms);
+                    using (var cmd = new SQLiteCommand(sql, conn))
+                    {
+                        if (pms != null)
+                        {
+                            cmd.Parameters.AddRange(pms);
+                        }
+                        conn.Open();
+                        var dt = new DataTable();
+                        dt.Load(cmd.ExecuteReader());
+                        return dt;
+                    }
                 }
-                adapter.Fill(dt);
             }
-            return dt;
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
         }
     }
 }
