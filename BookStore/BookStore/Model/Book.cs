@@ -8,12 +8,23 @@ namespace BookStore.Model
 {
     class Book
     {
-        private string UID;
-        private string Title;
-        private string Alias;
-        private string Author;
-        private string Note;
-        private int rate;
-        private int DeleteFlag;
+        public string UID { get; }
+        public string Title { get; }
+        public string Alias { get; }
+        public string Author { get; }
+        public string Note { get; }
+        public int Rate { get; }
+        public int DeleteFlag { get; }
+
+        public Book(string title, string alias, string author, string note)
+        {
+            UID = Utils.GetUID();
+            Title = title;
+            Alias = alias;
+            Author = author;
+            Note = note;
+            Rate = 0;
+            DeleteFlag = 0;
+        }
     }
 }

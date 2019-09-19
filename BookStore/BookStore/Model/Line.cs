@@ -12,5 +12,13 @@ namespace BookStore.Model
         private string VersionID;
         private int LineNo;
         private string Content;
+
+
+        public Line()
+        {
+
+        }
+
+
     }
 }
