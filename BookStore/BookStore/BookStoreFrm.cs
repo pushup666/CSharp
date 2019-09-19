@@ -8,14 +8,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BookStore.BLL;
+using BookStore.Model;
 
 namespace BookStore
 {
-    public partial class BookStore : Form
+    public partial class BookStoreFrm : Form
     {
         private List<string> _fileList = new List<string>();
 
-        public BookStore()
+        public BookStoreFrm()
         {
             InitializeComponent();
         }
@@ -28,6 +30,7 @@ namespace BookStore
                 {
                     openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
                     openFileDialog.Multiselect = true;
+                    openFileDialog.Filter = "TXT File|*.txt";
 
                     if (openFileDialog.ShowDialog() != DialogResult.OK) return;
 
@@ -48,13 +51,23 @@ namespace BookStore
                 {
                     using (var sr = new StreamReader(fileName, Encoding.Default))
                     {
-                        MessageBox.Show(Utils.GetHash(sr.ReadToEnd()));
+                        var fileContent = sr.ReadToEnd();
+                        var contentHash = Utils.GetHash(fileContent);
+
+                        if (!BookStoreBLL.isThisHashExist(contentHash))
+                        {
+                            
+                            var book = new BookDO(Path.GetFileNameWithoutExtension(fileName), "", "", "");
+                            BookStoreBLL.AddBook(book);
+
+                        }
+
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message+ ex.StackTrace);
             }
         }
     }

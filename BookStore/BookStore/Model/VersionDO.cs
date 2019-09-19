@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BookStore.Model
 {
-    class Version
+    class VersionDO
     {
         public string UID { get; }
         public string BookID { get; }
@@ -15,7 +15,7 @@ namespace BookStore.Model
         public string ContentHash { get; }
         public int ContentLength { get; }
 
-        public Version(string bookId, int versionNo, string content, string contentHash, int contentLength)
+        public VersionDO(string bookId, int versionNo, string content, string contentHash, int contentLength)
         {
             UID = Utils.GetUID();
             BookID = bookId;

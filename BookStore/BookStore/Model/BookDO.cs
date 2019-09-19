@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BookStore.Model
 {
-    class Book
+    class BookDO
     {
         public string UID { get; }
         public string Title { get; }
@@ -16,7 +16,7 @@ namespace BookStore.Model
         public int Rate { get; }
         public int DeleteFlag { get; }
 
-        public Book(string title, string alias, string author, string note)
+        public BookDO(string title, string alias, string author, string note)
         {
             UID = Utils.GetUID();
             Title = title;

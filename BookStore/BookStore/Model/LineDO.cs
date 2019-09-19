@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BookStore.Model
 {
-    class Line
+    class LineDO
     {
         private string UID;
         private string VersionID;
@@ -14,7 +14,7 @@ namespace BookStore.Model
         private string Content;
 
 
-        public Line()
+        public LineDO()
         {
 
         }

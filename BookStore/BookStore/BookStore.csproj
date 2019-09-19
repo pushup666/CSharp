@@ -51,21 +51,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BookStore.cs">
+    <Compile Include="BLL\BookStoreBLL.cs" />
+    <Compile Include="BookStoreFrm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="BookStore.Designer.cs">
-      <DependentUpon>BookStore.cs</DependentUpon>
+    <Compile Include="BookStoreFrm.Designer.cs">
+      <DependentUpon>BookStoreFrm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Model\Book.cs" />
-    <Compile Include="Model\Line.cs" />
-    <Compile Include="Model\Version.cs" />
+    <Compile Include="DAL\BookStoreDAL.cs" />
+    <Compile Include="Model\BookDO.cs" />
+    <Compile Include="Model\LineDO.cs" />
+    <Compile Include="Model\VersionDO.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqliteHelper.cs" />
     <Compile Include="Utils.cs" />
-    <EmbeddedResource Include="BookStore.resx">
-      <DependentUpon>BookStore.cs</DependentUpon>
+    <EmbeddedResource Include="BookStoreFrm.resx">
+      <DependentUpon>BookStoreFrm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -90,10 +92,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="BLL\" />
-    <Folder Include="DAL\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="CreateTable.sql" />
   </ItemGroup>
