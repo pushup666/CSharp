@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.Tracing;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -54,16 +55,18 @@ namespace BookStore
                         var fileContent = sr.ReadToEnd();
                         var contentHash = Utils.GetHash(fileContent);
 
-                        if (!BookStoreBLL.isThisHashExist(contentHash))
+                        if (!BookStoreBLL.IsThisHashExist(contentHash))
                         {
                             
                             var book = new BookDO(Path.GetFileNameWithoutExtension(fileName), "", "", "");
                             BookStoreBLL.AddBook(book);
-
+                            var version = new VersionDO(book.UID, fileContent, contentHash, fileContent.Length);
+                            BookStoreBLL.AddVersion(version);
                         }
-
                     }
                 }
+
+                MessageBox.Show("导入完成！");
             }
             catch (Exception ex)
             {

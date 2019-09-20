@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,14 +12,24 @@ namespace BookStore.BLL
 {
     class BookStoreBLL
     {
-        public static bool isThisHashExist(string hash)
+        public static bool IsThisHashExist(string hash)
         {
-            return BookStoreDAL.isThisHashExist(hash);
+            return BookStoreDAL.IsThisHashExist(hash);
         }
 
         public static bool AddBook(BookDO book)
         {
             return BookStoreDAL.AddBook(book);
+        }
+
+        public static DataTable GetBookList()
+        {
+            return BookStoreDAL.GetBookList();
+        }
+
+        public static bool AddVersion(VersionDO version)
+        {
+            return BookStoreDAL.AddVersion(version);
         }
     }
 }

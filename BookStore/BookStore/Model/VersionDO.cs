@@ -10,16 +10,15 @@ namespace BookStore.Model
     {
         public string UID { get; }
         public string BookID { get; }
-        public int VersionNo { get; }
+        public int VersionNo { get; set; }
         public string Content { get; }
         public string ContentHash { get; }
         public int ContentLength { get; }
 
-        public VersionDO(string bookId, int versionNo, string content, string contentHash, int contentLength)
+        public VersionDO(string bookId, string content, string contentHash, int contentLength)
         {
             UID = Utils.GetUID();
             BookID = bookId;
-            VersionNo = versionNo;
             Content = content;
             ContentHash = contentHash;
             ContentLength = contentLength;
