@@ -21,6 +21,8 @@ namespace BookStore
         public BookStoreFrm()
         {
             InitializeComponent();
+
+            RefreshBookList();
         }
 
         private void ButtonImportBooks_Click(object sender, EventArgs e)
@@ -67,11 +69,30 @@ namespace BookStore
                 }
 
                 MessageBox.Show("导入完成！");
+
+                RefreshBookList();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message+ ex.StackTrace);
+                MessageBox.Show(ex.Message + ex.StackTrace);
             }
+        }
+
+        private void RefreshBookList()
+        {
+            dataGridViewBook.DataSource = BookStoreBLL.GetBookList();
+        }
+
+        private void DataGridViewBook_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var bookID = dataGridViewBook.Rows[e.RowIndex].Cells["UID"].Value.ToString();
+            var book = BookStoreBLL.GetBook(bookID);
+
+            textBoxTitle.Text = book.Title;
+            textBoxAlias.Text = book.Alias;
+            textBoxAuthor.Text = book.Author;
+            textBoxNote.Text = book.Note;
+            comboBoxRate.SelectedIndex = book.Rate;
         }
     }
 }

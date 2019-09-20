@@ -12,17 +12,16 @@ namespace BookStore.DAL
 {
     class BookStoreDAL
     {
-        public static bool IsThisHashExist(string hash)
-        {
-            const string sql = "SELECT UID FROM Version WHERE ContentHash = @ContentHash;";
-            var UID = SqliteHelper.ExecuteScalar(sql, new SQLiteParameter("@ContentHash", DbType.String) { Value = hash });
-
-            return UID != null;
-        }
-
         //INSERT INTO Book(UID, Title, Alias, Author, Note, Rate, DeleteFlag) VALUES(@UID, @Title, @Alias, @Author, @Note, @Rate, @DeleteFlag);
         //INSERT INTO Version(UID, BookID, VersionNo, Content, ContentHash, ContentLength) VALUES(@UID, @BookID, @VersionNo, @Content, @ContentHash, @ContentLength);
         //INSERT INTO Line(UID, VersionID, LineNo, Content) VALUES(@UID, @VersionID, @LineNo, @Content);
+
+
+        
+    }
+
+    class BookDAL
+    {
         public static bool AddBook(BookDO book)
         {
             const string sql = "INSERT INTO Book(UID, Title, Alias, Author, Note) VALUES(@UID, @Title, @Alias, @Author, @Note);";
@@ -38,12 +37,23 @@ namespace BookStore.DAL
             return SqliteHelper.ExecuteNonQuery(sql, pms) != -1;
         }
 
-        public static DataTable GetBookList()
+        public static BookDO GetBook(string bookID)
         {
-            var sql = "SELECT Title, Alias, Author, Note, Rate FROM Version WHERE DeleteFlag = 0;";
-            return SqliteHelper.ExecuteReader(sql);
+            const string sql = "SELECT * FROM Book WHERE DeleteFlag = 0 AND UID = @UID;";
+            var book = SqliteHelper.ExecuteReader(sql, new SQLiteParameter("@UID", DbType.String) { Value = bookID });
+            return book.Rows.Count == 1 ? new BookDO(book.Rows[0]["UID"].ToString(), book.Rows[0]["Title"].ToString(), book.Rows[0]["Alias"].ToString(), book.Rows[0]["Author"].ToString(), book.Rows[0]["Note"].ToString(), int.Parse(book.Rows[0]["Rate"].ToString())) : null;
         }
 
+        public static DataTable GetBookList()
+        {
+            var sql = "SELECT UID, Title, Alias, Author, Note, Rate FROM Book WHERE DeleteFlag = 0;";
+            return SqliteHelper.ExecuteReader(sql);
+        }
+    }
+
+
+    class VersionDAL
+    {
         public static bool AddVersion(VersionDO version)
         {
             var sql = "SELECT VersionNo FROM Version WHERE BookID = @BookID;";
@@ -54,7 +64,7 @@ namespace BookStore.DAL
             }
             else
             {
-                version.VersionNo = (int) versionNo + 1;
+                version.VersionNo = (int)versionNo + 1;
             }
 
             sql = "INSERT INTO Version(UID, BookID, VersionNo, Content, ContentHash, ContentLength) VALUES(@UID, @BookID, @VersionNo, @Content, @ContentHash, @ContentLength);";
@@ -69,6 +79,14 @@ namespace BookStore.DAL
             };
 
             return SqliteHelper.ExecuteNonQuery(sql, pms) != -1;
+        }
+
+        public static bool IsThisHashExist(string hash)
+        {
+            const string sql = "SELECT UID FROM Version WHERE ContentHash = @ContentHash;";
+            var UID = SqliteHelper.ExecuteScalar(sql, new SQLiteParameter("@ContentHash", DbType.String) { Value = hash });
+
+            return UID != null;
         }
     }
 }

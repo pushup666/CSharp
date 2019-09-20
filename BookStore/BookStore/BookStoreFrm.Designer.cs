@@ -31,17 +31,17 @@
             this.buttonImportBooks = new System.Windows.Forms.Button();
             this.tabControlMain = new System.Windows.Forms.TabControl();
             this.tabPageBook = new System.Windows.Forms.TabPage();
-            this.dataGridViewBook = new System.Windows.Forms.DataGridView();
-            this.labelTitle = new System.Windows.Forms.Label();
-            this.textBoxTitle = new System.Windows.Forms.TextBox();
-            this.textBoxAlias = new System.Windows.Forms.TextBox();
-            this.labelAlias = new System.Windows.Forms.Label();
-            this.textBoxAuthor = new System.Windows.Forms.TextBox();
-            this.labelAuthor = new System.Windows.Forms.Label();
+            this.comboBoxRate = new System.Windows.Forms.ComboBox();
+            this.labelRate = new System.Windows.Forms.Label();
             this.textBoxNote = new System.Windows.Forms.TextBox();
             this.labelNote = new System.Windows.Forms.Label();
-            this.labelRate = new System.Windows.Forms.Label();
-            this.comboBoxRate = new System.Windows.Forms.ComboBox();
+            this.textBoxAuthor = new System.Windows.Forms.TextBox();
+            this.labelAuthor = new System.Windows.Forms.Label();
+            this.textBoxAlias = new System.Windows.Forms.TextBox();
+            this.labelAlias = new System.Windows.Forms.Label();
+            this.textBoxTitle = new System.Windows.Forms.TextBox();
+            this.labelTitle = new System.Windows.Forms.Label();
+            this.dataGridViewBook = new System.Windows.Forms.DataGridView();
             this.tabControlMain.SuspendLayout();
             this.tabPageBook.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBook)).BeginInit();
@@ -90,68 +90,30 @@
             this.tabPageBook.Text = "Book";
             this.tabPageBook.UseVisualStyleBackColor = true;
             // 
-            // dataGridViewBook
+            // comboBoxRate
             // 
-            this.dataGridViewBook.AllowUserToAddRows = false;
-            this.dataGridViewBook.AllowUserToDeleteRows = false;
-            this.dataGridViewBook.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridViewBook.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewBook.Location = new System.Drawing.Point(6, 73);
-            this.dataGridViewBook.Name = "dataGridViewBook";
-            this.dataGridViewBook.ReadOnly = true;
-            this.dataGridViewBook.RowTemplate.Height = 23;
-            this.dataGridViewBook.Size = new System.Drawing.Size(921, 354);
-            this.dataGridViewBook.TabIndex = 0;
+            this.comboBoxRate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxRate.FormattingEnabled = true;
+            this.comboBoxRate.Items.AddRange(new object[] {
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"});
+            this.comboBoxRate.Location = new System.Drawing.Point(531, 46);
+            this.comboBoxRate.Name = "comboBoxRate";
+            this.comboBoxRate.Size = new System.Drawing.Size(165, 20);
+            this.comboBoxRate.TabIndex = 10;
             // 
-            // labelTitle
+            // labelRate
             // 
-            this.labelTitle.AutoSize = true;
-            this.labelTitle.Location = new System.Drawing.Point(9, 9);
-            this.labelTitle.Name = "labelTitle";
-            this.labelTitle.Size = new System.Drawing.Size(29, 12);
-            this.labelTitle.TabIndex = 1;
-            this.labelTitle.Text = "标题";
-            // 
-            // textBoxTitle
-            // 
-            this.textBoxTitle.Location = new System.Drawing.Point(56, 6);
-            this.textBoxTitle.Name = "textBoxTitle";
-            this.textBoxTitle.Size = new System.Drawing.Size(165, 21);
-            this.textBoxTitle.TabIndex = 2;
-            // 
-            // textBoxAlias
-            // 
-            this.textBoxAlias.Location = new System.Drawing.Point(289, 6);
-            this.textBoxAlias.Name = "textBoxAlias";
-            this.textBoxAlias.Size = new System.Drawing.Size(165, 21);
-            this.textBoxAlias.TabIndex = 4;
-            // 
-            // labelAlias
-            // 
-            this.labelAlias.AutoSize = true;
-            this.labelAlias.Location = new System.Drawing.Point(242, 9);
-            this.labelAlias.Name = "labelAlias";
-            this.labelAlias.Size = new System.Drawing.Size(29, 12);
-            this.labelAlias.TabIndex = 3;
-            this.labelAlias.Text = "别名";
-            // 
-            // textBoxAuthor
-            // 
-            this.textBoxAuthor.Location = new System.Drawing.Point(531, 6);
-            this.textBoxAuthor.Name = "textBoxAuthor";
-            this.textBoxAuthor.Size = new System.Drawing.Size(165, 21);
-            this.textBoxAuthor.TabIndex = 6;
-            // 
-            // labelAuthor
-            // 
-            this.labelAuthor.AutoSize = true;
-            this.labelAuthor.Location = new System.Drawing.Point(484, 9);
-            this.labelAuthor.Name = "labelAuthor";
-            this.labelAuthor.Size = new System.Drawing.Size(29, 12);
-            this.labelAuthor.TabIndex = 5;
-            this.labelAuthor.Text = "作者";
+            this.labelRate.AutoSize = true;
+            this.labelRate.Location = new System.Drawing.Point(484, 49);
+            this.labelRate.Name = "labelRate";
+            this.labelRate.Size = new System.Drawing.Size(29, 12);
+            this.labelRate.TabIndex = 9;
+            this.labelRate.Text = "评分";
             // 
             // textBoxNote
             // 
@@ -169,30 +131,69 @@
             this.labelNote.TabIndex = 7;
             this.labelNote.Text = "备注";
             // 
-            // labelRate
+            // textBoxAuthor
             // 
-            this.labelRate.AutoSize = true;
-            this.labelRate.Location = new System.Drawing.Point(484, 49);
-            this.labelRate.Name = "labelRate";
-            this.labelRate.Size = new System.Drawing.Size(29, 12);
-            this.labelRate.TabIndex = 9;
-            this.labelRate.Text = "评分";
+            this.textBoxAuthor.Location = new System.Drawing.Point(531, 6);
+            this.textBoxAuthor.Name = "textBoxAuthor";
+            this.textBoxAuthor.Size = new System.Drawing.Size(165, 21);
+            this.textBoxAuthor.TabIndex = 6;
             // 
-            // comboBoxRate
+            // labelAuthor
             // 
-            this.comboBoxRate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxRate.FormattingEnabled = true;
-            this.comboBoxRate.Items.AddRange(new object[] {
-            "0",
-            "1",
-            "2",
-            "3",
-            "4",
-            "5"});
-            this.comboBoxRate.Location = new System.Drawing.Point(531, 46);
-            this.comboBoxRate.Name = "comboBoxRate";
-            this.comboBoxRate.Size = new System.Drawing.Size(165, 20);
-            this.comboBoxRate.TabIndex = 10;
+            this.labelAuthor.AutoSize = true;
+            this.labelAuthor.Location = new System.Drawing.Point(484, 9);
+            this.labelAuthor.Name = "labelAuthor";
+            this.labelAuthor.Size = new System.Drawing.Size(29, 12);
+            this.labelAuthor.TabIndex = 5;
+            this.labelAuthor.Text = "作者";
+            // 
+            // textBoxAlias
+            // 
+            this.textBoxAlias.Location = new System.Drawing.Point(289, 6);
+            this.textBoxAlias.Name = "textBoxAlias";
+            this.textBoxAlias.Size = new System.Drawing.Size(165, 21);
+            this.textBoxAlias.TabIndex = 4;
+            // 
+            // labelAlias
+            // 
+            this.labelAlias.AutoSize = true;
+            this.labelAlias.Location = new System.Drawing.Point(242, 9);
+            this.labelAlias.Name = "labelAlias";
+            this.labelAlias.Size = new System.Drawing.Size(29, 12);
+            this.labelAlias.TabIndex = 3;
+            this.labelAlias.Text = "别名";
+            // 
+            // textBoxTitle
+            // 
+            this.textBoxTitle.Location = new System.Drawing.Point(56, 6);
+            this.textBoxTitle.Name = "textBoxTitle";
+            this.textBoxTitle.Size = new System.Drawing.Size(165, 21);
+            this.textBoxTitle.TabIndex = 2;
+            // 
+            // labelTitle
+            // 
+            this.labelTitle.AutoSize = true;
+            this.labelTitle.Location = new System.Drawing.Point(9, 9);
+            this.labelTitle.Name = "labelTitle";
+            this.labelTitle.Size = new System.Drawing.Size(29, 12);
+            this.labelTitle.TabIndex = 1;
+            this.labelTitle.Text = "标题";
+            // 
+            // dataGridViewBook
+            // 
+            this.dataGridViewBook.AllowUserToAddRows = false;
+            this.dataGridViewBook.AllowUserToDeleteRows = false;
+            this.dataGridViewBook.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridViewBook.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewBook.Location = new System.Drawing.Point(6, 73);
+            this.dataGridViewBook.Name = "dataGridViewBook";
+            this.dataGridViewBook.ReadOnly = true;
+            this.dataGridViewBook.RowTemplate.Height = 23;
+            this.dataGridViewBook.Size = new System.Drawing.Size(921, 354);
+            this.dataGridViewBook.TabIndex = 0;
+            this.dataGridViewBook.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewBook_CellClick);
             // 
             // BookStoreFrm
             // 

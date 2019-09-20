@@ -16,6 +16,16 @@ namespace BookStore.Model
         public int Rate { get; }
         public int DeleteFlag { get; }
 
+        public BookDO(string uid, string title, string alias, string author, string note, int rate)
+        {
+            UID = uid;
+            Title = title;
+            Alias = alias;
+            Author = author;
+            Note = note;
+            Rate = rate;
+            DeleteFlag = 0;
+        }
         public BookDO(string title, string alias, string author, string note)
         {
             UID = Utils.GetUID();

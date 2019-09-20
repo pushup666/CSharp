@@ -14,22 +14,27 @@ namespace BookStore.BLL
     {
         public static bool IsThisHashExist(string hash)
         {
-            return BookStoreDAL.IsThisHashExist(hash);
+            return VersionDAL.IsThisHashExist(hash);
         }
 
         public static bool AddBook(BookDO book)
         {
-            return BookStoreDAL.AddBook(book);
+            return BookDAL.AddBook(book);
         }
 
         public static DataTable GetBookList()
         {
-            return BookStoreDAL.GetBookList();
+            return BookDAL.GetBookList();
         }
 
         public static bool AddVersion(VersionDO version)
         {
-            return BookStoreDAL.AddVersion(version);
+            return VersionDAL.AddVersion(version);
+        }
+
+        public static BookDO GetBook(string bookID)
+        {
+            return BookDAL.GetBook(bookID);
         }
     }
 }
