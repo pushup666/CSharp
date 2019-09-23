@@ -32,7 +32,7 @@ namespace BookStore
                 {
                     openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
                     openFileDialog.Multiselect = true;
-                    openFileDialog.Filter = "TXT File|*.txt";
+                    openFileDialog.Filter = "Text File|*.txt";
 
                     if (openFileDialog.ShowDialog() != DialogResult.OK) return;
 
@@ -69,7 +69,7 @@ namespace BookStore
 
                 MessageBox.Show("导入完成！");
 
-                userControlBook1.RefreshBookList();
+                ucBook.RefreshBookList();
             }
             catch (Exception ex)
             {

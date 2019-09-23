@@ -69,7 +69,23 @@ namespace BookStore.UC
 
         private void DataGridViewBook_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            ((TabControl)this.Parent.Parent).TabPages.Add(_currBbook.Title);
+            if (_currBbook != null)
+            {
+                var mainTabPages = ((TabControl) Parent.Parent).TabPages;
+
+                if (mainTabPages.ContainsKey(_currBbook.Title))
+                {
+                    return;
+                }
+
+                var ucVersion = new UserControlVersion(_currBbook.UID);
+                var versionPage = new TabPage(_currBbook.Title) {Name = _currBbook.Title};
+
+                versionPage.Controls.Add(ucVersion);
+                ucVersion.Dock = DockStyle.Fill;
+
+                mainTabPages.Add(versionPage);
+            }
         }
     }
 }

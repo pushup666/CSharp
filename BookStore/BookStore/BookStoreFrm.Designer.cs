@@ -31,7 +31,7 @@
             this.buttonImportBooks = new System.Windows.Forms.Button();
             this.tabControlMain = new System.Windows.Forms.TabControl();
             this.tabPageBook = new System.Windows.Forms.TabPage();
-            this.userControlBook1 = new BookStore.UC.UserControlBook();
+            this.ucBook = new BookStore.UC.UserControlBook();
             this.tabControlMain.SuspendLayout();
             this.tabPageBook.SuspendLayout();
             this.SuspendLayout();
@@ -61,7 +61,7 @@
             // 
             // tabPageBook
             // 
-            this.tabPageBook.Controls.Add(this.userControlBook1);
+            this.tabPageBook.Controls.Add(this.ucBook);
             this.tabPageBook.Location = new System.Drawing.Point(4, 22);
             this.tabPageBook.Name = "tabPageBook";
             this.tabPageBook.Size = new System.Drawing.Size(933, 433);
@@ -69,13 +69,13 @@
             this.tabPageBook.Text = "Book";
             this.tabPageBook.UseVisualStyleBackColor = true;
             // 
-            // userControlBook1
+            // ucBook
             // 
-            this.userControlBook1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.userControlBook1.Location = new System.Drawing.Point(0, 0);
-            this.userControlBook1.Name = "userControlBook1";
-            this.userControlBook1.Size = new System.Drawing.Size(933, 433);
-            this.userControlBook1.TabIndex = 0;
+            this.ucBook.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucBook.Location = new System.Drawing.Point(0, 0);
+            this.ucBook.Name = "ucBook";
+            this.ucBook.Size = new System.Drawing.Size(933, 433);
+            this.ucBook.TabIndex = 0;
             // 
             // BookStoreFrm
             // 
@@ -97,7 +97,7 @@
         private System.Windows.Forms.Button buttonImportBooks;
         private System.Windows.Forms.TabControl tabControlMain;
         private System.Windows.Forms.TabPage tabPageBook;
-        private BookStore.UC.UserControlBook userControlBook1;
+        private BookStore.UC.UserControlBook ucBook;
     }
 }
 

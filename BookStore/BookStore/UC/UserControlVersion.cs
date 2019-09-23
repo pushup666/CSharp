@@ -13,17 +13,27 @@ namespace BookStore.UC
 {
     public partial class UserControlVersion : UserControl
     {
-        private string _bookID;
+        private readonly string _bookID;
         public UserControlVersion(string bookID)
         {
             InitializeComponent();
+
             _bookID = bookID;
             RefreshVersionList();
         }
 
-        internal void RefreshVersionList()
+        private void RefreshVersionList()
         {
-            dataGridViewVersionList.DataSource = BookStoreBLL.GetBookList();
+            dataGridViewVersionList.DataSource = BookStoreBLL.GetVersionList(_bookID);
+        }
+
+        private void DataGridViewVersionList_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex != -1)
+            {
+                var versionNo = int.Parse(dataGridViewVersionList.Rows[e.RowIndex].Cells["VersionNo"].Value.ToString());
+                richTextBoxVersionContent.Text = BookStoreBLL.GetVersionContent(_bookID, versionNo);
+            }
         }
     }
 }

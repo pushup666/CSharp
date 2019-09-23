@@ -46,5 +46,15 @@ namespace BookStore.BLL
         {
             return BookDAL.ModifyBook(book);
         }
+
+        public static DataTable GetVersionList(string bookID)
+        {
+            return VersionDAL.GetVersionList(bookID);
+        }
+
+        public static string GetVersionContent(string bookID, int versionNo)
+        {
+            return VersionDAL.GetVersionContent(bookID, versionNo);
+        }
     }
 }

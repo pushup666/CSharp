@@ -96,7 +96,20 @@ namespace BookStore.DAL
                 new SQLiteParameter("@UID", DbType.String){Value = bookID},
             };
 
-            return SqliteHelper.ExecuteReader(sql);
+            return SqliteHelper.ExecuteReader(sql, pms);
+        }
+
+        public static string GetVersionContent(string bookID, int versionNo)
+        {
+            const string sql = "SELECT Content FROM Version WHERE BookID = @BookID AND VersionNo = @VersionNo;";
+            var pms = new SQLiteParameter[]
+            {
+                new SQLiteParameter("@BookID", DbType.String){Value = bookID},
+                new SQLiteParameter("@VersionNo", DbType.Int32){Value = versionNo},
+            };
+            var version = SqliteHelper.ExecuteReader(sql, pms);
+
+            return version.Rows.Count == 1 ? version.Rows[0]["Content"].ToString() : "";
         }
 
         public static bool AddVersion(VersionDO version)
