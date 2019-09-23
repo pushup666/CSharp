@@ -18,11 +18,10 @@ namespace BookStore
     {
         private List<string> _fileList = new List<string>();
 
+
         public BookStoreFrm()
         {
             InitializeComponent();
-
-            RefreshBookList();
         }
 
         private void ButtonImportBooks_Click(object sender, EventArgs e)
@@ -70,7 +69,7 @@ namespace BookStore
 
                 MessageBox.Show("导入完成！");
 
-                RefreshBookList();
+                userControlBook1.RefreshBookList();
             }
             catch (Exception ex)
             {
@@ -78,21 +77,12 @@ namespace BookStore
             }
         }
 
-        private void RefreshBookList()
+        private void TabControlMain_DoubleClick(object sender, EventArgs e)
         {
-            dataGridViewBook.DataSource = BookStoreBLL.GetBookList();
-        }
-
-        private void DataGridViewBook_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            var bookID = dataGridViewBook.Rows[e.RowIndex].Cells["UID"].Value.ToString();
-            var book = BookStoreBLL.GetBook(bookID);
-
-            textBoxTitle.Text = book.Title;
-            textBoxAlias.Text = book.Alias;
-            textBoxAuthor.Text = book.Author;
-            textBoxNote.Text = book.Note;
-            comboBoxRate.SelectedIndex = book.Rate;
+            if (tabControlMain.SelectedIndex > 0)
+            {
+                tabControlMain.TabPages.RemoveAt(tabControlMain.SelectedIndex);
+            }
         }
     }
 }

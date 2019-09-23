@@ -36,5 +36,15 @@ namespace BookStore.BLL
         {
             return BookDAL.GetBook(bookID);
         }
+
+        public static bool RemoveBook(BookDO book)
+        {
+            return BookDAL.RemoveBook(book);
+        }
+
+        public static bool ModifyBook(BookDO book)
+        {
+            return BookDAL.ModifyBook(book);
+        }
     }
 }
