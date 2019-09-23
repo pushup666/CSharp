@@ -32,11 +32,24 @@
             this.richTextBoxVersionContent = new System.Windows.Forms.RichTextBox();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.menuStripMain = new System.Windows.Forms.MenuStrip();
+            this.blankToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.trimLineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addHeadBlankToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.blankLineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.removeBlankLineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addBlankLineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.restoreBlankLineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.shortLongToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.short2LongToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.long2ShortToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.SaveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewVersionList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.menuStripMain.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridViewVersionList
@@ -49,7 +62,7 @@
             this.dataGridViewVersionList.Name = "dataGridViewVersionList";
             this.dataGridViewVersionList.ReadOnly = true;
             this.dataGridViewVersionList.RowTemplate.Height = 23;
-            this.dataGridViewVersionList.Size = new System.Drawing.Size(195, 429);
+            this.dataGridViewVersionList.Size = new System.Drawing.Size(195, 476);
             this.dataGridViewVersionList.TabIndex = 0;
             this.dataGridViewVersionList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewVersionList_CellClick);
             // 
@@ -58,7 +71,7 @@
             this.richTextBoxVersionContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.richTextBoxVersionContent.Location = new System.Drawing.Point(0, 0);
             this.richTextBoxVersionContent.Name = "richTextBoxVersionContent";
-            this.richTextBoxVersionContent.Size = new System.Drawing.Size(702, 429);
+            this.richTextBoxVersionContent.Size = new System.Drawing.Size(702, 476);
             this.richTextBoxVersionContent.TabIndex = 1;
             this.richTextBoxVersionContent.Text = "";
             // 
@@ -75,7 +88,7 @@
             this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.splitContainer1.Location = new System.Drawing.Point(9, 50);
+            this.splitContainer1.Location = new System.Drawing.Point(9, 3);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -84,10 +97,108 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.menuStripMain);
             this.splitContainer1.Panel2.Controls.Add(this.richTextBoxVersionContent);
-            this.splitContainer1.Size = new System.Drawing.Size(901, 429);
+            this.splitContainer1.Size = new System.Drawing.Size(901, 476);
             this.splitContainer1.SplitterDistance = 195;
             this.splitContainer1.TabIndex = 3;
+            // 
+            // menuStripMain
+            // 
+            this.menuStripMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.blankToolStripMenuItem,
+            this.blankLineToolStripMenuItem,
+            this.shortLongToolStripMenuItem,
+            this.SaveToolStripMenuItem});
+            this.menuStripMain.Location = new System.Drawing.Point(0, 0);
+            this.menuStripMain.Name = "menuStripMain";
+            this.menuStripMain.Size = new System.Drawing.Size(702, 25);
+            this.menuStripMain.TabIndex = 14;
+            this.menuStripMain.Text = "menuStrip1";
+            // 
+            // blankToolStripMenuItem
+            // 
+            this.blankToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.trimLineToolStripMenuItem,
+            this.addHeadBlankToolStripMenuItem});
+            this.blankToolStripMenuItem.Name = "blankToolStripMenuItem";
+            this.blankToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
+            this.blankToolStripMenuItem.Text = "空白";
+            // 
+            // trimLineToolStripMenuItem
+            // 
+            this.trimLineToolStripMenuItem.Name = "trimLineToolStripMenuItem";
+            this.trimLineToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.trimLineToolStripMenuItem.Text = "去首尾空白";
+            this.trimLineToolStripMenuItem.Click += new System.EventHandler(this.TrimLineToolStripMenuItem_Click);
+            // 
+            // addHeadBlankToolStripMenuItem
+            // 
+            this.addHeadBlankToolStripMenuItem.Name = "addHeadBlankToolStripMenuItem";
+            this.addHeadBlankToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.addHeadBlankToolStripMenuItem.Text = "加首空白";
+            this.addHeadBlankToolStripMenuItem.Click += new System.EventHandler(this.AddHeadBlankToolStripMenuItem_Click);
+            // 
+            // blankLineToolStripMenuItem
+            // 
+            this.blankLineToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.removeBlankLineToolStripMenuItem,
+            this.addBlankLineToolStripMenuItem,
+            this.restoreBlankLineToolStripMenuItem});
+            this.blankLineToolStripMenuItem.Name = "blankLineToolStripMenuItem";
+            this.blankLineToolStripMenuItem.Size = new System.Drawing.Size(56, 21);
+            this.blankLineToolStripMenuItem.Text = "空白行";
+            // 
+            // removeBlankLineToolStripMenuItem
+            // 
+            this.removeBlankLineToolStripMenuItem.Name = "removeBlankLineToolStripMenuItem";
+            this.removeBlankLineToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.removeBlankLineToolStripMenuItem.Text = "去空白行";
+            this.removeBlankLineToolStripMenuItem.Click += new System.EventHandler(this.RemoveBlankLineToolStripMenuItem_Click);
+            // 
+            // addBlankLineToolStripMenuItem
+            // 
+            this.addBlankLineToolStripMenuItem.Name = "addBlankLineToolStripMenuItem";
+            this.addBlankLineToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.addBlankLineToolStripMenuItem.Text = "增空白行";
+            this.addBlankLineToolStripMenuItem.Click += new System.EventHandler(this.AddBlankLineToolStripMenuItem_Click);
+            // 
+            // restoreBlankLineToolStripMenuItem
+            // 
+            this.restoreBlankLineToolStripMenuItem.Name = "restoreBlankLineToolStripMenuItem";
+            this.restoreBlankLineToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.restoreBlankLineToolStripMenuItem.Text = "还原空白行";
+            this.restoreBlankLineToolStripMenuItem.Click += new System.EventHandler(this.RestoreBlankLineToolStripMenuItem_Click);
+            // 
+            // shortLongToolStripMenuItem
+            // 
+            this.shortLongToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.short2LongToolStripMenuItem,
+            this.long2ShortToolStripMenuItem});
+            this.shortLongToolStripMenuItem.Name = "shortLongToolStripMenuItem";
+            this.shortLongToolStripMenuItem.Size = new System.Drawing.Size(56, 21);
+            this.shortLongToolStripMenuItem.Text = "长短行";
+            // 
+            // short2LongToolStripMenuItem
+            // 
+            this.short2LongToolStripMenuItem.Name = "short2LongToolStripMenuItem";
+            this.short2LongToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.short2LongToolStripMenuItem.Text = "短行变长行";
+            this.short2LongToolStripMenuItem.Click += new System.EventHandler(this.Short2LongToolStripMenuItem_Click);
+            // 
+            // long2ShortToolStripMenuItem
+            // 
+            this.long2ShortToolStripMenuItem.Name = "long2ShortToolStripMenuItem";
+            this.long2ShortToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.long2ShortToolStripMenuItem.Text = "长行变短行";
+            this.long2ShortToolStripMenuItem.Click += new System.EventHandler(this.Long2ShortToolStripMenuItem_Click);
+            // 
+            // SaveToolStripMenuItem
+            // 
+            this.SaveToolStripMenuItem.Name = "SaveToolStripMenuItem";
+            this.SaveToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
+            this.SaveToolStripMenuItem.Text = "保存";
+            this.SaveToolStripMenuItem.Click += new System.EventHandler(this.SaveToolStripMenuItem_Click);
             // 
             // UserControlVersion
             // 
@@ -100,8 +211,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewVersionList)).EndInit();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
+            this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.menuStripMain.ResumeLayout(false);
+            this.menuStripMain.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -112,5 +226,17 @@
         private System.Windows.Forms.RichTextBox richTextBoxVersionContent;
         private System.Windows.Forms.Splitter splitter1;
         private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.MenuStrip menuStripMain;
+        private System.Windows.Forms.ToolStripMenuItem blankToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem trimLineToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem addHeadBlankToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem blankLineToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem removeBlankLineToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem addBlankLineToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem restoreBlankLineToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem shortLongToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem short2LongToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem long2ShortToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem SaveToolStripMenuItem;
     }
 }

@@ -99,9 +99,9 @@ namespace BookStore.DAL
             return SqliteHelper.ExecuteReader(sql, pms);
         }
 
-        public static string GetVersionContent(string bookID, int versionNo)
+        public static VersionDO GetVersion(string bookID, int versionNo)
         {
-            const string sql = "SELECT Content FROM Version WHERE BookID = @BookID AND VersionNo = @VersionNo;";
+            const string sql = "SELECT * FROM Version WHERE BookID = @BookID AND VersionNo = @VersionNo;";
             var pms = new SQLiteParameter[]
             {
                 new SQLiteParameter("@BookID", DbType.String){Value = bookID},
@@ -109,7 +109,7 @@ namespace BookStore.DAL
             };
             var version = SqliteHelper.ExecuteReader(sql, pms);
 
-            return version.Rows.Count == 1 ? version.Rows[0]["Content"].ToString() : "";
+            return version.Rows.Count == 1 ? new VersionDO(version.Rows[0]["UID"].ToString(), version.Rows[0]["BookID"].ToString(), int.Parse(version.Rows[0]["VersionNo"].ToString()), version.Rows[0]["Content"].ToString(), version.Rows[0]["ContentHash"].ToString(), int.Parse(version.Rows[0]["ContentLength"].ToString())) : null;
         }
 
         public static bool AddVersion(VersionDO version)

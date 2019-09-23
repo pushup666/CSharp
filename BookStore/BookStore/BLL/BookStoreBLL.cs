@@ -52,9 +52,9 @@ namespace BookStore.BLL
             return VersionDAL.GetVersionList(bookID);
         }
 
-        public static string GetVersionContent(string bookID, int versionNo)
+        public static VersionDO GetVersion(string bookID, int versionNo)
         {
-            return VersionDAL.GetVersionContent(bookID, versionNo);
+            return VersionDAL.GetVersion(bookID, versionNo);
         }
     }
 }

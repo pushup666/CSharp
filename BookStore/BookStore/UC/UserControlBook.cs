@@ -14,7 +14,7 @@ namespace BookStore.UC
 {
     public partial class UserControlBook : UserControl
     {
-        private BookDO _currBbook;
+        private BookDO _currBook;
 
         public UserControlBook()
         {
@@ -32,23 +32,22 @@ namespace BookStore.UC
             if (e.RowIndex != -1)
             {
                 var bookID = dataGridViewBookList.Rows[e.RowIndex].Cells["UID"].Value.ToString();
-                _currBbook = BookStoreBLL.GetBook(bookID);
+                _currBook = BookStoreBLL.GetBook(bookID);
 
-                textBoxTitle.Text = _currBbook.Title;
-                textBoxAlias.Text = _currBbook.Alias;
-                textBoxAuthor.Text = _currBbook.Author;
-                textBoxNote.Text = _currBbook.Note;
-                comboBoxRate.SelectedIndex = _currBbook.Rate;
+                textBoxTitle.Text = _currBook.Title;
+                textBoxAlias.Text = _currBook.Alias;
+                textBoxAuthor.Text = _currBook.Author;
+                textBoxNote.Text = _currBook.Note;
+                comboBoxRate.SelectedIndex = _currBook.Rate;
             }
         }
 
         private void ButtonSave_Click(object sender, EventArgs e)
         {
-            if (_currBbook != null)
+            if (_currBook != null)
             {
-                _currBbook = new BookDO(_currBbook.UID, textBoxTitle.Text, textBoxAlias.Text, textBoxAuthor.Text,
-                    textBoxNote.Text, comboBoxRate.SelectedIndex);
-                BookStoreBLL.ModifyBook(_currBbook);
+                _currBook = new BookDO(_currBook.UID, textBoxTitle.Text, textBoxAlias.Text, textBoxAuthor.Text, textBoxNote.Text, comboBoxRate.SelectedIndex);
+                BookStoreBLL.ModifyBook(_currBook);
             }
 
             RefreshBookList();
@@ -56,11 +55,11 @@ namespace BookStore.UC
 
         private void ButtonRemove_Click(object sender, EventArgs e)
         {
-            if (_currBbook != null)
+            if (_currBook != null)
             {
-                if (MessageBox.Show($"确认删除 “{_currBbook.Title}” 文件？", "警告⚠", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                if (MessageBox.Show($"确认删除 “{_currBook.Title}” 文件？", "警告⚠", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-                    BookStoreBLL.RemoveBook(_currBbook);
+                    BookStoreBLL.RemoveBook(_currBook);
                 }
             }
 
@@ -69,17 +68,17 @@ namespace BookStore.UC
 
         private void DataGridViewBook_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (_currBbook != null)
+            if (_currBook != null)
             {
                 var mainTabPages = ((TabControl) Parent.Parent).TabPages;
 
-                if (mainTabPages.ContainsKey(_currBbook.Title))
+                if (mainTabPages.ContainsKey(_currBook.Title))
                 {
                     return;
                 }
 
-                var ucVersion = new UserControlVersion(_currBbook.UID);
-                var versionPage = new TabPage(_currBbook.Title) {Name = _currBbook.Title};
+                var ucVersion = new UserControlVersion(_currBook.UID);
+                var versionPage = new TabPage(_currBook.Title) {Name = _currBook.Title};
 
                 versionPage.Controls.Add(ucVersion);
                 ucVersion.Dock = DockStyle.Fill;

@@ -23,5 +23,15 @@ namespace BookStore.Model
             ContentHash = contentHash;
             ContentLength = contentLength;
         }
+
+        public VersionDO(string uid, string bookId, int versionNo, string content, string contentHash, int contentLength)
+        {
+            UID = uid;
+            BookID = bookId;
+            VersionNo = versionNo;
+            Content = content;
+            ContentHash = contentHash;
+            ContentLength = contentLength;
+        }
     }
 }
