@@ -25,13 +25,19 @@ namespace BookStore.DAL
         public static BookDO GetBook(string bookID)
         {
             const string sql = "SELECT * FROM Book WHERE DeleteFlag = 0 AND UID = @UID;";
-            var book = SqliteHelper.ExecuteReader(sql, new SQLiteParameter("@UID", DbType.String) { Value = bookID });
+            var pms = new SQLiteParameter[]
+            {
+                new SQLiteParameter("@UID", DbType.String){Value = bookID},
+            };
+            var book = SqliteHelper.ExecuteReader(sql, pms);
+
             return book.Rows.Count == 1 ? new BookDO(book.Rows[0]["UID"].ToString(), book.Rows[0]["Title"].ToString(), book.Rows[0]["Alias"].ToString(), book.Rows[0]["Author"].ToString(), book.Rows[0]["Note"].ToString(), int.Parse(book.Rows[0]["Rate"].ToString())) : null;
         }
 
         public static DataTable GetBookList()
         {
-            var sql = "SELECT UID, Title, Alias, Author, Note, Rate FROM Book WHERE DeleteFlag = 0;";
+            const string sql = "SELECT UID, Title, Alias, Author, Note, Rate FROM Book WHERE DeleteFlag = 0;";
+
             return SqliteHelper.ExecuteReader(sql);
         }
 
@@ -81,6 +87,18 @@ namespace BookStore.DAL
 
     class VersionDAL
     {
+
+        public static DataTable GetVersionList(string bookID)
+        {
+            const string sql = "SELECT b.Title, v.VersionNo, v.ContentLength FROM Book b, Version v where b.UID = v.BookID and b.UID = @UID;";
+            var pms = new SQLiteParameter[]
+            {
+                new SQLiteParameter("@UID", DbType.String){Value = bookID},
+            };
+
+            return SqliteHelper.ExecuteReader(sql);
+        }
+
         public static bool AddVersion(VersionDO version)
         {
             var sql = "SELECT VersionNo FROM Version WHERE BookID = @BookID;";
@@ -111,7 +129,12 @@ namespace BookStore.DAL
         public static bool IsThisHashExist(string hash)
         {
             const string sql = "SELECT UID FROM Version WHERE ContentHash = @ContentHash;";
-            var UID = SqliteHelper.ExecuteScalar(sql, new SQLiteParameter("@ContentHash", DbType.String) { Value = hash });
+            var pms = new SQLiteParameter[]
+            {
+                new SQLiteParameter("@ContentHash", DbType.String){Value = hash},
+            };
+
+            var UID = SqliteHelper.ExecuteScalar(sql, pms);
 
             return UID != null;
         }

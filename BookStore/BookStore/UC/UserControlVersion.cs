@@ -7,14 +7,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BookStore.BLL;
 
 namespace BookStore.UC
 {
     public partial class UserControlVersion : UserControl
     {
-        public UserControlVersion()
+        private string _bookID;
+        public UserControlVersion(string bookID)
         {
             InitializeComponent();
+            _bookID = bookID;
+            RefreshVersionList();
+        }
+
+        internal void RefreshVersionList()
+        {
+            dataGridViewVersionList.DataSource = BookStoreBLL.GetBookList();
         }
     }
 }
