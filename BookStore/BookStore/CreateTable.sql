@@ -21,7 +21,6 @@ CREATE TABLE Version (
                             DEFAULT (1),
     Content       TEXT      NOT NULL,
     ContentHash   CHAR (32) NOT NULL,
-    ContentLength INTEGER   NOT NULL
     ContentLength INTEGER   NOT NULL,
     DeleteFlag    INTEGER   NOT NULL
                             DEFAULT (0) 
