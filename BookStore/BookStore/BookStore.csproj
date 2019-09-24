@@ -60,6 +60,7 @@
     </Compile>
     <Compile Include="DAL\BookDAL.cs" />
     <Compile Include="DAL\BookStoreDAL.cs" />
+    <Compile Include="DAL\LineDAL.cs" />
     <Compile Include="DAL\VersionDAL.cs" />
     <Compile Include="Model\BookDO.cs" />
     <Compile Include="Model\LineDO.cs" />
@@ -72,6 +73,12 @@
     </Compile>
     <Compile Include="UC\UserControlBook.Designer.cs">
       <DependentUpon>UserControlBook.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC\UserControlLine.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC\UserControlLine.Designer.cs">
+      <DependentUpon>UserControlLine.cs</DependentUpon>
     </Compile>
     <Compile Include="UC\UserControlVersion.cs">
       <SubType>UserControl</SubType>
@@ -94,6 +101,9 @@
     </Compile>
     <EmbeddedResource Include="UC\UserControlBook.resx">
       <DependentUpon>UserControlBook.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC\UserControlLine.resx">
+      <DependentUpon>UserControlLine.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UC\UserControlVersion.resx">
       <DependentUpon>UserControlVersion.cs</DependentUpon>

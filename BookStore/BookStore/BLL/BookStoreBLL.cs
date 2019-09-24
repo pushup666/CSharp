@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System.Collections.Generic;
+using System.Data;
 using BookStore.DAL;
 using BookStore.Model;
 
@@ -6,29 +7,19 @@ namespace BookStore.BLL
 {
     static class BookStoreBLL
     {
-        public static bool IsThisHashExist(string hash)
-        {
-            return VersionDAL.IsThisHashExist(hash);
-        }
-
-        public static bool AddBook(BookDO book)
-        {
-            return BookDAL.AddBook(book);
-        }
-
         public static DataTable GetBookList()
         {
             return BookDAL.GetBookList();
         }
 
-        public static bool AddVersion(VersionDO version)
-        {
-            return VersionDAL.AddVersion(version);
-        }
-
         public static BookDO GetBook(string bookID)
         {
             return BookDAL.GetBook(bookID);
+        }
+
+        public static bool AddBook(BookDO book)
+        {
+            return BookDAL.AddBook(book);
         }
 
         public static bool RemoveBook(BookDO book)
@@ -41,6 +32,8 @@ namespace BookStore.BLL
             return BookDAL.ModifyBook(book);
         }
 
+
+
         public static DataTable GetVersionList(string bookID)
         {
             return VersionDAL.GetVersionList(bookID);
@@ -49,6 +42,27 @@ namespace BookStore.BLL
         public static VersionDO GetVersion(string bookID, int versionNo)
         {
             return VersionDAL.GetVersion(bookID, versionNo);
+        }
+
+        public static bool AddVersion(VersionDO version)
+        {
+            return VersionDAL.AddVersion(version);
+        }
+
+        public static bool IsThisHashExist(string hash)
+        {
+            return VersionDAL.IsThisHashExist(hash);
+        }
+
+
+        public static DataTable GetListList(string versionID)
+        {
+            return LineDAL.GetListList(versionID);
+        }
+
+        public static bool Version2Lines(string versionID, List<string> lines)
+        {
+            return LineDAL.Version2Lines(versionID, lines);
         }
     }
 }

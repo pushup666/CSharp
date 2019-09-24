@@ -44,6 +44,7 @@
             this.short2LongToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.long2ShortToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.SaveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToLinesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewVersionList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -65,6 +66,7 @@
             this.dataGridViewVersionList.Size = new System.Drawing.Size(195, 476);
             this.dataGridViewVersionList.TabIndex = 0;
             this.dataGridViewVersionList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewVersionList_CellClick);
+            this.dataGridViewVersionList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewVersionList_CellDoubleClick);
             // 
             // richTextBoxVersionContent
             // 
@@ -111,7 +113,8 @@
             this.blankToolStripMenuItem,
             this.blankLineToolStripMenuItem,
             this.shortLongToolStripMenuItem,
-            this.SaveToolStripMenuItem});
+            this.SaveToolStripMenuItem,
+            this.ToLinesToolStripMenuItem});
             this.menuStripMain.Location = new System.Drawing.Point(0, 0);
             this.menuStripMain.Name = "menuStripMain";
             this.menuStripMain.Size = new System.Drawing.Size(702, 25);
@@ -202,6 +205,13 @@
             this.SaveToolStripMenuItem.Text = "保存";
             this.SaveToolStripMenuItem.Click += new System.EventHandler(this.SaveToolStripMenuItem_Click);
             // 
+            // ToLinesToolStripMenuItem
+            // 
+            this.ToLinesToolStripMenuItem.Name = "ToLinesToolStripMenuItem";
+            this.ToLinesToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
+            this.ToLinesToolStripMenuItem.Text = "拆解";
+            this.ToLinesToolStripMenuItem.Click += new System.EventHandler(this.ToLinesToolStripMenuItem_Click);
+            // 
             // UserControlVersion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -240,5 +250,6 @@
         private System.Windows.Forms.ToolStripMenuItem short2LongToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem long2ShortToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem SaveToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ToLinesToolStripMenuItem;
     }
 }

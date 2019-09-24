@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BookStore.BLL;
+using BookStore.DAL;
 using BookStore.Model;
 
 namespace BookStore.UC
@@ -39,6 +40,28 @@ namespace BookStore.UC
                 var versionNo = int.Parse(dataGridViewVersionList.Rows[e.RowIndex].Cells["No"].Value.ToString());
                 _currVersion = BookStoreBLL.GetVersion(_bookID, versionNo);
                 richTextBoxVersionContent.Text = _currVersion.Content;
+            }
+        }
+
+        private void DataGridViewVersionList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex != -1)
+            {
+                var mainTabPages = ((TabControl)Parent.Parent).TabPages;
+                var tabName = $"{dataGridViewVersionList.Rows[e.RowIndex].Cells["Title"].Value} - {dataGridViewVersionList.Rows[e.RowIndex].Cells["No"].Value}";
+
+                if (mainTabPages.ContainsKey(tabName))
+                {
+                    return;
+                }
+
+                var ucLine = new UserControlLine(_currVersion.UID);
+                var linePage = new TabPage(tabName) {Name = tabName};
+
+                linePage.Controls.Add(ucLine);
+                ucLine.Dock = DockStyle.Fill;
+
+                mainTabPages.Add(linePage);
             }
         }
 
@@ -210,5 +233,21 @@ namespace BookStore.UC
 
             return list;
         }
+
+        private void ToLinesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _lines.Clear();
+
+            foreach (var line in richTextBoxVersionContent.Lines)
+            {
+                _lines.Add(line);
+            }
+
+            BookStoreBLL.Version2Lines(_currVersion.UID, _lines);
+
+            MessageBox.Show($"{ToLinesToolStripMenuItem.Text} 完成！");
+        }
+
+
     }
 }
