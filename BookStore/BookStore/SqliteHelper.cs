@@ -92,7 +92,7 @@ namespace BookStore
             }
         }
 
-        public static object ExecuteScalar(string sql, params SQLiteParameter[] pms)
+        public static string ExecuteScalar(string sql, params SQLiteParameter[] pms)
         {
             try
             {
@@ -105,7 +105,7 @@ namespace BookStore
                             cmd.Parameters.AddRange(pms);
                         }
                         conn.Open();
-                        return cmd.ExecuteScalar();
+                        return cmd.ExecuteScalar().ToString();
                     }
                 }
             }

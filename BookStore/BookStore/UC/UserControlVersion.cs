@@ -29,13 +29,14 @@ namespace BookStore.UC
         private void RefreshVersionList()
         {
             dataGridViewVersionList.DataSource = BookStoreBLL.GetVersionList(_bookID);
+            dataGridViewVersionList.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
         }
 
         private void DataGridViewVersionList_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex != -1)
             {
-                var versionNo = int.Parse(dataGridViewVersionList.Rows[e.RowIndex].Cells["VersionNo"].Value.ToString());
+                var versionNo = int.Parse(dataGridViewVersionList.Rows[e.RowIndex].Cells["No"].Value.ToString());
                 _currVersion = BookStoreBLL.GetVersion(_bookID, versionNo);
                 richTextBoxVersionContent.Text = _currVersion.Content;
             }

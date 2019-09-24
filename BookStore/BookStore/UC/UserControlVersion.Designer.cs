@@ -68,10 +68,11 @@
             // 
             // richTextBoxVersionContent
             // 
-            this.richTextBoxVersionContent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBoxVersionContent.Location = new System.Drawing.Point(0, 0);
+            this.richTextBoxVersionContent.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.richTextBoxVersionContent.Location = new System.Drawing.Point(0, 28);
             this.richTextBoxVersionContent.Name = "richTextBoxVersionContent";
-            this.richTextBoxVersionContent.Size = new System.Drawing.Size(702, 476);
+            this.richTextBoxVersionContent.Size = new System.Drawing.Size(702, 448);
             this.richTextBoxVersionContent.TabIndex = 1;
             this.richTextBoxVersionContent.Text = "";
             // 
@@ -128,14 +129,14 @@
             // trimLineToolStripMenuItem
             // 
             this.trimLineToolStripMenuItem.Name = "trimLineToolStripMenuItem";
-            this.trimLineToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.trimLineToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.trimLineToolStripMenuItem.Text = "去首尾空白";
             this.trimLineToolStripMenuItem.Click += new System.EventHandler(this.TrimLineToolStripMenuItem_Click);
             // 
             // addHeadBlankToolStripMenuItem
             // 
             this.addHeadBlankToolStripMenuItem.Name = "addHeadBlankToolStripMenuItem";
-            this.addHeadBlankToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.addHeadBlankToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.addHeadBlankToolStripMenuItem.Text = "加首空白";
             this.addHeadBlankToolStripMenuItem.Click += new System.EventHandler(this.AddHeadBlankToolStripMenuItem_Click);
             // 
@@ -152,21 +153,21 @@
             // removeBlankLineToolStripMenuItem
             // 
             this.removeBlankLineToolStripMenuItem.Name = "removeBlankLineToolStripMenuItem";
-            this.removeBlankLineToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.removeBlankLineToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.removeBlankLineToolStripMenuItem.Text = "去空白行";
             this.removeBlankLineToolStripMenuItem.Click += new System.EventHandler(this.RemoveBlankLineToolStripMenuItem_Click);
             // 
             // addBlankLineToolStripMenuItem
             // 
             this.addBlankLineToolStripMenuItem.Name = "addBlankLineToolStripMenuItem";
-            this.addBlankLineToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.addBlankLineToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.addBlankLineToolStripMenuItem.Text = "增空白行";
             this.addBlankLineToolStripMenuItem.Click += new System.EventHandler(this.AddBlankLineToolStripMenuItem_Click);
             // 
             // restoreBlankLineToolStripMenuItem
             // 
             this.restoreBlankLineToolStripMenuItem.Name = "restoreBlankLineToolStripMenuItem";
-            this.restoreBlankLineToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.restoreBlankLineToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.restoreBlankLineToolStripMenuItem.Text = "还原空白行";
             this.restoreBlankLineToolStripMenuItem.Click += new System.EventHandler(this.RestoreBlankLineToolStripMenuItem_Click);
             // 
@@ -182,14 +183,14 @@
             // short2LongToolStripMenuItem
             // 
             this.short2LongToolStripMenuItem.Name = "short2LongToolStripMenuItem";
-            this.short2LongToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.short2LongToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.short2LongToolStripMenuItem.Text = "短行变长行";
             this.short2LongToolStripMenuItem.Click += new System.EventHandler(this.Short2LongToolStripMenuItem_Click);
             // 
             // long2ShortToolStripMenuItem
             // 
             this.long2ShortToolStripMenuItem.Name = "long2ShortToolStripMenuItem";
-            this.long2ShortToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.long2ShortToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.long2ShortToolStripMenuItem.Text = "长行变短行";
             this.long2ShortToolStripMenuItem.Click += new System.EventHandler(this.Long2ShortToolStripMenuItem_Click);
             // 

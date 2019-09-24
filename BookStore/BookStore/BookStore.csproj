@@ -58,7 +58,9 @@
     <Compile Include="BookStoreFrm.Designer.cs">
       <DependentUpon>BookStoreFrm.cs</DependentUpon>
     </Compile>
+    <Compile Include="DAL\BookDAL.cs" />
     <Compile Include="DAL\BookStoreDAL.cs" />
+    <Compile Include="DAL\VersionDAL.cs" />
     <Compile Include="Model\BookDO.cs" />
     <Compile Include="Model\LineDO.cs" />
     <Compile Include="Model\VersionDO.cs" />

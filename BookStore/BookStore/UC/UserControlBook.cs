@@ -25,6 +25,7 @@ namespace BookStore.UC
         internal void RefreshBookList()
         {
             dataGridViewBookList.DataSource = BookStoreBLL.GetBookList();
+            dataGridViewBookList.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
         }
 
         private void DataGridViewBook_CellClick(object sender, DataGridViewCellEventArgs e)
