@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.dataGridViewLineList = new System.Windows.Forms.DataGridView();
+            this.buttonDelete = new System.Windows.Forms.Button();
+            this.buttonSave = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLineList)).BeginInit();
             this.SuspendLayout();
             // 
@@ -40,17 +42,39 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridViewLineList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewLineList.Location = new System.Drawing.Point(3, 56);
+            this.dataGridViewLineList.Location = new System.Drawing.Point(3, 32);
             this.dataGridViewLineList.Name = "dataGridViewLineList";
             this.dataGridViewLineList.ReadOnly = true;
             this.dataGridViewLineList.RowTemplate.Height = 23;
-            this.dataGridViewLineList.Size = new System.Drawing.Size(907, 423);
+            this.dataGridViewLineList.Size = new System.Drawing.Size(907, 447);
             this.dataGridViewLineList.TabIndex = 0;
+            // 
+            // buttonDelete
+            // 
+            this.buttonDelete.Location = new System.Drawing.Point(3, 3);
+            this.buttonDelete.Name = "buttonDelete";
+            this.buttonDelete.Size = new System.Drawing.Size(75, 23);
+            this.buttonDelete.TabIndex = 1;
+            this.buttonDelete.Text = "删除";
+            this.buttonDelete.UseVisualStyleBackColor = true;
+            this.buttonDelete.Click += new System.EventHandler(this.ButtonDelete_Click);
+            // 
+            // buttonSave
+            // 
+            this.buttonSave.Location = new System.Drawing.Point(93, 3);
+            this.buttonSave.Name = "buttonSave";
+            this.buttonSave.Size = new System.Drawing.Size(75, 23);
+            this.buttonSave.TabIndex = 2;
+            this.buttonSave.Text = "保存";
+            this.buttonSave.UseVisualStyleBackColor = true;
+            this.buttonSave.Click += new System.EventHandler(this.ButtonSave_Click);
             // 
             // UserControlLine
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.buttonSave);
+            this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.dataGridViewLineList);
             this.Name = "UserControlLine";
             this.Size = new System.Drawing.Size(913, 482);
@@ -62,5 +86,7 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dataGridViewLineList;
+        private System.Windows.Forms.Button buttonDelete;
+        private System.Windows.Forms.Button buttonSave;
     }
 }

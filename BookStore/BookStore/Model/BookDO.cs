@@ -18,7 +18,6 @@
             Author = author;
             Note = note;
             Rate = rate;
-            DeleteFlag = 0;
         }
         public BookDO(string title, string alias, string author, string note)
         {
@@ -27,8 +26,6 @@
             Alias = alias;
             Author = author;
             Note = note;
-            Rate = 0;
-            DeleteFlag = 0;
         }
     }
 }

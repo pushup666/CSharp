@@ -16,7 +16,7 @@ namespace BookStore
 {
     public partial class BookStoreFrm : Form
     {
-        private List<string> _fileList = new List<string>();
+        private readonly List<string> _fileList = new List<string>();
 
 
         public BookStoreFrm()
@@ -58,9 +58,10 @@ namespace BookStore
 
                         if (!BookStoreBLL.IsThisHashExist(contentHash))
                         {
-                            
+
                             var book = new BookDO(Path.GetFileNameWithoutExtension(fileName), "", "", "");
                             BookStoreBLL.AddBook(book);
+
                             var version = new VersionDO(book.UID, fileContent, contentHash, fileContent.Length);
                             BookStoreBLL.AddVersion(version);
                         }

@@ -31,6 +31,14 @@ namespace BookStore.UC
         {
             dataGridViewVersionList.DataSource = BookStoreBLL.GetVersionList(_bookID);
             dataGridViewVersionList.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+
+            if (dataGridViewVersionList.RowCount > 0)
+            {
+                var versionNo = dataGridViewVersionList.Rows[0].Cells["No"].Value.ToString();
+                _currVersion = BookStoreBLL.GetVersion(_bookID, int.Parse(versionNo));
+
+                richTextBoxVersionContent.Text = _currVersion.Content;
+            }
         }
 
         private void DataGridViewVersionList_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -93,7 +101,7 @@ namespace BookStore.UC
                 }
                 else
                 {
-                    var version = new VersionDO(_currVersion.BookID, contentNew, contentNewHash,contentNew.Length);
+                    var version = new VersionDO(_currVersion.BookID, contentNew, contentNewHash, contentNew.Length);
                     BookStoreBLL.AddVersion(version);
 
                     RefreshVersionList();

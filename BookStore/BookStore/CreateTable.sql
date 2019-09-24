@@ -22,15 +22,20 @@ CREATE TABLE Version (
     Content       TEXT      NOT NULL,
     ContentHash   CHAR (32) NOT NULL,
     ContentLength INTEGER   NOT NULL
+    ContentLength INTEGER   NOT NULL,
+    DeleteFlag    INTEGER   NOT NULL
+                            DEFAULT (0) 
 );
 
 
 CREATE TABLE Line (
-    UID       CHAR (32) PRIMARY KEY
-                        NOT NULL,
-    VersionID CHAR (32) REFERENCES Version (UID) 
-                        NOT NULL,
-    LineNo    INTEGER   NOT NULL
-                        DEFAULT (1),
-    Content   TEXT      NOT NULL
+    UID        CHAR (32) PRIMARY KEY
+                         NOT NULL,
+    VersionID  CHAR (32) REFERENCES Version (UID) 
+                         NOT NULL,
+    LineNo     INTEGER   NOT NULL
+                         DEFAULT (1),
+    Content    TEXT      NOT NULL,
+    DeleteFlag INTEGER   NOT NULL
+                         DEFAULT (0) 
 );

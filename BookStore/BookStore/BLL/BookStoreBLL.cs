@@ -46,6 +46,7 @@ namespace BookStore.BLL
 
         public static bool AddVersion(VersionDO version)
         {
+            version.VersionNo = VersionDAL.GetNextVersionNo(version.BookID);
             return VersionDAL.AddVersion(version);
         }
 

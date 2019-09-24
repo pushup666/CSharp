@@ -8,6 +8,7 @@
         public string Content { get; }
         public string ContentHash { get; }
         public int ContentLength { get; }
+        public int DeleteFlag { get; }
 
         public VersionDO(string bookId, string content, string contentHash, int contentLength)
         {

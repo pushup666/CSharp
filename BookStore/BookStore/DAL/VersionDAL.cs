@@ -6,21 +6,9 @@ namespace BookStore.DAL
 {
     static class VersionDAL
     {
-
-        public static DataTable GetVersionList(string bookID)
-        {
-            const string sql = "SELECT b.Title, v.VersionNo AS No, v.ContentLength AS Length FROM Book b, Version v where b.UID = v.BookID and b.UID = @UID ORDER BY v.VersionNo DESC;";
-            var pms = new[]
-            {
-                new SQLiteParameter("@UID", DbType.String){Value = bookID},
-            };
-
-            return SqliteHelper.ExecuteReader(sql, pms);
-        }
-
         public static VersionDO GetVersion(string bookID, int versionNo)
         {
-            const string sql = "SELECT * FROM Version WHERE BookID = @BookID AND VersionNo = @VersionNo;";
+            const string sql = "SELECT * FROM Version WHERE BookID = @BookID AND VersionNo = @VersionNo AND DeleteFlag = 0;";
             var pms = new[]
             {
                 new SQLiteParameter("@BookID", DbType.String){Value = bookID},
@@ -31,20 +19,34 @@ namespace BookStore.DAL
             return version.Rows.Count == 1 ? new VersionDO(version.Rows[0]["UID"].ToString(), version.Rows[0]["BookID"].ToString(), int.Parse(version.Rows[0]["VersionNo"].ToString()), version.Rows[0]["Content"].ToString(), version.Rows[0]["ContentHash"].ToString(), int.Parse(version.Rows[0]["ContentLength"].ToString())) : null;
         }
 
-        public static bool AddVersion(VersionDO version)
+        public static DataTable GetVersionList(string bookID)
         {
-            var sql = "SELECT MAX(VersionNo) FROM Version WHERE BookID = @BookID;";
-            var versionNo = SqliteHelper.ExecuteScalar(sql, new SQLiteParameter("@BookID", DbType.String) { Value = version.BookID });
+            const string sql = "SELECT b.Title, v.VersionNo AS No, v.ContentLength AS Length FROM Version v, Book b WHERE v.BookID = b.UID AND v.BookID = @BookID AND v.DeleteFlag = 0 ORDER BY v.VersionNo DESC;";
+            var pms = new[]
+            {
+                new SQLiteParameter("@BookID", DbType.String){Value = bookID},
+            };
+
+            return SqliteHelper.ExecuteReader(sql, pms);
+        }
+
+        public static int GetNextVersionNo(string bookID)
+        {
+            const string sql = "SELECT MAX(VersionNo) FROM Version WHERE BookID = @BookID;";
+            var versionNo = SqliteHelper.ExecuteScalar(sql, new SQLiteParameter("@BookID", DbType.String) { Value = bookID });
             if (string.IsNullOrEmpty(versionNo))
             {
-                version.VersionNo = 1;
+                return 1;
             }
             else
             {
-                version.VersionNo = int.Parse(versionNo) + 1;
+                return int.Parse(versionNo) + 1;
             }
+        }
 
-            sql = "INSERT INTO Version(UID, BookID, VersionNo, Content, ContentHash, ContentLength) VALUES(@UID, @BookID, @VersionNo, @Content, @ContentHash, @ContentLength);";
+        public static bool AddVersion(VersionDO version)
+        {
+            const string sql = "INSERT INTO Version(UID, BookID, VersionNo, Content, ContentHash, ContentLength) VALUES (@UID, @BookID, @VersionNo, @Content, @ContentHash, @ContentLength);";
             var pms = new[]
             {
                 new SQLiteParameter("@UID", DbType.String){Value = version.UID},
@@ -53,6 +55,17 @@ namespace BookStore.DAL
                 new SQLiteParameter("@Content", DbType.String){Value = version.Content},
                 new SQLiteParameter("@ContentHash", DbType.String){Value = version.ContentHash},
                 new SQLiteParameter("@ContentLength", DbType.Int32){Value = version.ContentLength},
+            };
+
+            return SqliteHelper.ExecuteNonQuery(sql, pms) != -1;
+        }
+
+        public static bool RemoveVersion(VersionDO version)
+        {
+            const string sql = "UPDATE Version SET DeleteFlag = 1 WHERE UID = @UID;";
+            var pms = new[]
+            {
+                new SQLiteParameter("@UID", DbType.String){Value = version.UID},
             };
 
             return SqliteHelper.ExecuteNonQuery(sql, pms) != -1;

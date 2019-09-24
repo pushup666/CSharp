@@ -26,5 +26,20 @@ namespace BookStore.UC
             dataGridViewLineList.DataSource = BookStoreBLL.GetLineList(_versionID);
             dataGridViewLineList.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
         }
+
+        private void ButtonSave_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ButtonDelete_Click(object sender, EventArgs e)
+        {
+            foreach (var row in dataGridViewLineList.SelectedRows)
+            {
+                
+            }
+
+            RefreshVersionList();
+        }
     }
 }
