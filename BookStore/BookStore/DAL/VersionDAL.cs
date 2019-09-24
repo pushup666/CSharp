@@ -35,7 +35,7 @@ namespace BookStore.DAL
         {
             var sql = "SELECT MAX(VersionNo) FROM Version WHERE BookID = @BookID;";
             var versionNo = SqliteHelper.ExecuteScalar(sql, new SQLiteParameter("@BookID", DbType.String) { Value = version.BookID });
-            if (versionNo == null)
+            if (string.IsNullOrEmpty(versionNo))
             {
                 version.VersionNo = 1;
             }
