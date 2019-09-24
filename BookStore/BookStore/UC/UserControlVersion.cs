@@ -37,8 +37,9 @@ namespace BookStore.UC
         {
             if (e.RowIndex != -1)
             {
-                var versionNo = int.Parse(dataGridViewVersionList.Rows[e.RowIndex].Cells["No"].Value.ToString());
-                _currVersion = BookStoreBLL.GetVersion(_bookID, versionNo);
+                var versionNo = dataGridViewVersionList.Rows[e.RowIndex].Cells["No"].Value.ToString();
+                _currVersion = BookStoreBLL.GetVersion(_bookID, int.Parse(versionNo));
+
                 richTextBoxVersionContent.Text = _currVersion.Content;
             }
         }
@@ -47,8 +48,12 @@ namespace BookStore.UC
         {
             if (e.RowIndex != -1)
             {
+                var title = dataGridViewVersionList.Rows[e.RowIndex].Cells["Title"].Value.ToString();
+                var versionNo = dataGridViewVersionList.Rows[e.RowIndex].Cells["No"].Value.ToString();
+                _currVersion = BookStoreBLL.GetVersion(_bookID, int.Parse(versionNo));
+
                 var mainTabPages = ((TabControl)Parent.Parent).TabPages;
-                var tabName = $"{dataGridViewVersionList.Rows[e.RowIndex].Cells["Title"].Value} - {dataGridViewVersionList.Rows[e.RowIndex].Cells["No"].Value}";
+                var tabName = $"{title} - {versionNo}";
 
                 if (mainTabPages.ContainsKey(tabName))
                 {

@@ -55,9 +55,9 @@ namespace BookStore.BLL
         }
 
 
-        public static DataTable GetListList(string versionID)
+        public static DataTable GetLineList(string versionID)
         {
-            return LineDAL.GetListList(versionID);
+            return LineDAL.GetLineList(versionID);
         }
 
         public static bool Version2Lines(string versionID, List<string> lines)

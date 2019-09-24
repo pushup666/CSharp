@@ -7,7 +7,7 @@ namespace BookStore.DAL
 {
     static class LineDAL
     {
-        public static DataTable GetListList(string versionID)
+        public static DataTable GetLineList(string versionID)
         {
             const string sql = "SELECT UID, LineNo, Content FROM Line WHERE VersionID = @VersionID ORDER BY LineNo;";
             var pms = new[]

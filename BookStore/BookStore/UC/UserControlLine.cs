@@ -23,7 +23,7 @@ namespace BookStore.UC
 
         private void RefreshVersionList()
         {
-            dataGridViewLineList.DataSource = BookStoreBLL.GetListList(_versionID);
+            dataGridViewLineList.DataSource = BookStoreBLL.GetLineList(_versionID);
             dataGridViewLineList.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
         }
     }
