@@ -14,7 +14,7 @@ namespace TestSqlite
         {
             const int scale = 1000;
             const int scaleBat = scale * 2;
-            Stopwatch sw = new Stopwatch();
+            var sw = new Stopwatch();
 
 
             sw.Reset();
@@ -56,7 +56,6 @@ namespace TestSqlite
 
             Console.ReadKey();
         }
-
 
         static void Test()
         {
