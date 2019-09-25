@@ -60,7 +60,7 @@ namespace BookStore.UC
             {
                 if (MessageBox.Show($"确认删除 “{_currBook.Title}” 文件？", "警告⚠", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-                    BookStoreBLL.RemoveBook(_currBook);
+                    BookStoreBLL.RemoveBook(_currBook.UID);
                 }
             }
 

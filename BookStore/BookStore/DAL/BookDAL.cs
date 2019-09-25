@@ -63,12 +63,12 @@ namespace BookStore.DAL
             return SqliteHelper.ExecuteNonQuery(sql, pms) != -1;
         }
 
-        public static bool RemoveBook(BookDO book)
+        public static bool RemoveBook(string bookID)
         {
             const string sql = "UPDATE Book SET DeleteFlag = 1 WHERE UID = @UID;";
             var pms = new[]
             {
-                new SQLiteParameter("@UID", DbType.String){Value = book.UID},
+                new SQLiteParameter("@UID", DbType.String){Value = bookID},
             };
 
             return SqliteHelper.ExecuteNonQuery(sql, pms) != -1;

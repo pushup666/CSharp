@@ -60,6 +60,8 @@ namespace BookStore.UC
                 var versionNo = dataGridViewVersionList.Rows[e.RowIndex].Cells["No"].Value.ToString();
                 _currVersion = BookStoreBLL.GetVersion(_bookID, int.Parse(versionNo));
 
+                BookStoreBLL.IsVersionLineHashMatch(_currVersion.UID);
+
                 var mainTabPages = ((TabControl)Parent.Parent).TabPages;
                 var tabName = $"{title} - {versionNo}";
 
@@ -88,27 +90,7 @@ namespace BookStore.UC
             richTextBoxVersionContent.Text = sb.ToString().TrimEnd();
         }
 
-        private void SaveToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (_currVersion != null)
-            {
-                var contentNew = richTextBoxVersionContent.Text.Replace("\n", "\r\n");
-                var contentNewHash = Utils.GetHash(contentNew);
 
-                if (contentNewHash == _currVersion.ContentHash)
-                {
-                    MessageBox.Show("无改动！");
-                }
-                else
-                {
-                    var version = new VersionDO(_currVersion.BookID, contentNew, contentNewHash, contentNew.Length);
-                    BookStoreBLL.AddVersion(version);
-
-                    RefreshVersionList();
-                }
-            }
-
-        }
 
         private void TrimLineToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -258,9 +240,41 @@ namespace BookStore.UC
 
             BookStoreBLL.Version2Lines(_currVersion.UID, _lines);
 
-            MessageBox.Show($"{ToLinesToolStripMenuItem.Text} 完成！");
+            MessageBox.Show($"{toLinesToolStripMenuItem.Text} 完成！");
         }
 
+        private void SaveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (_currVersion != null)
+            {
+                var contentNew = richTextBoxVersionContent.Text.Replace("\n", "\r\n");
+                var contentNewHash = Utils.GetHash(contentNew);
 
+                if (contentNewHash == _currVersion.ContentHash)
+                {
+                    MessageBox.Show("无改动！");
+                }
+                else
+                {
+                    var version = new VersionDO(_currVersion.BookID, contentNew, contentNewHash, contentNew.Length);
+                    BookStoreBLL.AddVersion(version);
+
+                    RefreshVersionList();
+                }
+            }
+        }
+
+        private void RemoveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (_currVersion != null)
+            {
+                if (MessageBox.Show($"确认删除 版本“{_currVersion.VersionNo}” 文件？", "警告⚠", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    BookStoreBLL.RemoveVersion(_currVersion.UID);
+                }
+            }
+
+            RefreshVersionList();
+        }
     }
 }

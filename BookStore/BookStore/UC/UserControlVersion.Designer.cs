@@ -43,8 +43,10 @@
             this.shortLongToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.short2LongToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.long2ShortToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.SaveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ToLinesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.EtcToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toLinesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.removeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewVersionList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -113,8 +115,7 @@
             this.blankToolStripMenuItem,
             this.blankLineToolStripMenuItem,
             this.shortLongToolStripMenuItem,
-            this.SaveToolStripMenuItem,
-            this.ToLinesToolStripMenuItem});
+            this.EtcToolStripMenuItem});
             this.menuStripMain.Location = new System.Drawing.Point(0, 0);
             this.menuStripMain.Name = "menuStripMain";
             this.menuStripMain.Size = new System.Drawing.Size(702, 25);
@@ -198,19 +199,36 @@
             this.long2ShortToolStripMenuItem.Text = "长行变短行";
             this.long2ShortToolStripMenuItem.Click += new System.EventHandler(this.Long2ShortToolStripMenuItem_Click);
             // 
-            // SaveToolStripMenuItem
+            // EtcToolStripMenuItem
             // 
-            this.SaveToolStripMenuItem.Name = "SaveToolStripMenuItem";
-            this.SaveToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
-            this.SaveToolStripMenuItem.Text = "保存";
-            this.SaveToolStripMenuItem.Click += new System.EventHandler(this.SaveToolStripMenuItem_Click);
+            this.EtcToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toLinesToolStripMenuItem,
+            this.saveToolStripMenuItem,
+            this.removeToolStripMenuItem});
+            this.EtcToolStripMenuItem.Name = "EtcToolStripMenuItem";
+            this.EtcToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
+            this.EtcToolStripMenuItem.Text = "其他";
             // 
-            // ToLinesToolStripMenuItem
+            // toLinesToolStripMenuItem
             // 
-            this.ToLinesToolStripMenuItem.Name = "ToLinesToolStripMenuItem";
-            this.ToLinesToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
-            this.ToLinesToolStripMenuItem.Text = "拆解";
-            this.ToLinesToolStripMenuItem.Click += new System.EventHandler(this.ToLinesToolStripMenuItem_Click);
+            this.toLinesToolStripMenuItem.Name = "toLinesToolStripMenuItem";
+            this.toLinesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.toLinesToolStripMenuItem.Text = "拆解";
+            this.toLinesToolStripMenuItem.Click += new System.EventHandler(this.ToLinesToolStripMenuItem_Click);
+            // 
+            // saveToolStripMenuItem
+            // 
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveToolStripMenuItem.Text = "保存";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.SaveToolStripMenuItem_Click);
+            // 
+            // removeToolStripMenuItem
+            // 
+            this.removeToolStripMenuItem.Name = "removeToolStripMenuItem";
+            this.removeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.removeToolStripMenuItem.Text = "删除";
+            this.removeToolStripMenuItem.Click += new System.EventHandler(this.RemoveToolStripMenuItem_Click);
             // 
             // UserControlVersion
             // 
@@ -249,7 +267,9 @@
         private System.Windows.Forms.ToolStripMenuItem shortLongToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem short2LongToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem long2ShortToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem SaveToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem ToLinesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem EtcToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toLinesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem removeToolStripMenuItem;
     }
 }

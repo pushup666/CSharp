@@ -18,20 +18,24 @@ namespace BookStore.DAL
             return SqliteHelper.ExecuteReader(sql, pms);
         }
 
-        public static bool Version2Lines(string versionID, List<string> lines )
-        {
-            const string sql1 = "DELETE FROM Line WHERE VersionID = @VersionID;";
 
-            var pms1 = new[]
+        public static bool RemoveLines(string versionID)
+        {
+            const string sql = "DELETE FROM Line WHERE VersionID = @VersionID;";
+
+            var pms = new[]
             {
                 new SQLiteParameter("@VersionID", DbType.String){Value = versionID},
             };
-            SqliteHelper.ExecuteNonQuery(sql1, pms1);
 
+            return SqliteHelper.ExecuteNonQuery(sql, pms) != -1;
+        }
 
-            const string sql2 = "INSERT INTO Line (UID, VersionID, LineNo, Content) VALUES (@UID, @VersionID, @LineNo, @Content);";
+        public static bool Version2Lines(string versionID, List<string> lines )
+        {
+            const string sql = "INSERT INTO Line (UID, VersionID, LineNo, Content) VALUES (@UID, @VersionID, @LineNo, @Content);";
 
-            var pms2 = new SQLiteParameter[lines.Count][];
+            var pms = new SQLiteParameter[lines.Count][];
             for (var i = 0; i < lines.Count; i++)
             {
                 var pm = new SQLiteParameter[4];
@@ -41,10 +45,10 @@ namespace BookStore.DAL
                 pm[2] = new SQLiteParameter("@LineNo", DbType.Int32) {Value = i};
                 pm[3] = new SQLiteParameter("@Content", DbType.String) {Value = lines[i]};
 
-                pms2[i] = pm;
+                pms[i] = pm;
             }
 
-            return SqliteHelper.ExecuteNonQueryBat(sql2, pms2) != -1;
+            return SqliteHelper.ExecuteNonQueryBat(sql, pms) != -1;
         }
     }
 }

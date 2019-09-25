@@ -19,6 +19,18 @@ namespace BookStore.DAL
             return version.Rows.Count == 1 ? new VersionDO(version.Rows[0]["UID"].ToString(), version.Rows[0]["BookID"].ToString(), int.Parse(version.Rows[0]["VersionNo"].ToString()), version.Rows[0]["Content"].ToString(), version.Rows[0]["ContentHash"].ToString(), int.Parse(version.Rows[0]["ContentLength"].ToString())) : null;
         }
 
+        public static VersionDO GetVersion(string versionID)
+        {
+            const string sql = "SELECT * FROM Version WHERE UID = @UID AND DeleteFlag = 0;";
+            var pms = new[]
+            {
+                new SQLiteParameter("@UID", DbType.String){Value = versionID},
+            };
+            var version = SqliteHelper.ExecuteReader(sql, pms);
+
+            return version.Rows.Count == 1 ? new VersionDO(version.Rows[0]["UID"].ToString(), version.Rows[0]["BookID"].ToString(), int.Parse(version.Rows[0]["VersionNo"].ToString()), version.Rows[0]["Content"].ToString(), version.Rows[0]["ContentHash"].ToString(), int.Parse(version.Rows[0]["ContentLength"].ToString())) : null;
+        }
+
         public static DataTable GetVersionList(string bookID)
         {
             const string sql = "SELECT b.Title, v.VersionNo AS No, v.ContentLength AS Length FROM Version v, Book b WHERE v.BookID = b.UID AND v.BookID = @BookID AND v.DeleteFlag = 0 ORDER BY v.VersionNo DESC;";
@@ -60,12 +72,12 @@ namespace BookStore.DAL
             return SqliteHelper.ExecuteNonQuery(sql, pms) != -1;
         }
 
-        public static bool RemoveVersion(VersionDO version)
+        public static bool RemoveVersion(string versionID)
         {
             const string sql = "UPDATE Version SET DeleteFlag = 1 WHERE UID = @UID;";
             var pms = new[]
             {
-                new SQLiteParameter("@UID", DbType.String){Value = version.UID},
+                new SQLiteParameter("@UID", DbType.String){Value = versionID},
             };
 
             return SqliteHelper.ExecuteNonQuery(sql, pms) != -1;

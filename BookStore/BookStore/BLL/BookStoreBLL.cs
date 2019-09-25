@@ -22,15 +22,18 @@ namespace BookStore.BLL
             return BookDAL.AddBook(book);
         }
 
-        public static bool RemoveBook(BookDO book)
+        public static bool RemoveBook(string bookID)
         {
-            return BookDAL.RemoveBook(book);
+            return BookDAL.RemoveBook(bookID);
         }
 
         public static bool ModifyBook(BookDO book)
         {
             return BookDAL.ModifyBook(book);
         }
+
+
+
 
 
 
@@ -50,10 +53,27 @@ namespace BookStore.BLL
             return VersionDAL.AddVersion(version);
         }
 
+        public static bool RemoveVersion(string versionID)
+        {
+            return VersionDAL.RemoveVersion(versionID);
+        }
+
         public static bool IsThisHashExist(string hash)
         {
             return VersionDAL.IsThisHashExist(hash);
         }
+
+        public static bool IsVersionLineHashMatch(string versionID)
+        {
+            var versionHash = VersionDAL.GetVersion(versionID).ContentHash;
+
+            var dt = LineDAL.GetLineList(versionID);
+
+            return true;
+        }
+
+
+
 
 
         public static DataTable GetLineList(string versionID)
@@ -63,7 +83,7 @@ namespace BookStore.BLL
 
         public static bool Version2Lines(string versionID, List<string> lines)
         {
-            return LineDAL.Version2Lines(versionID, lines);
+            return LineDAL.RemoveLines(versionID) && LineDAL.Version2Lines(versionID, lines);
         }
     }
 }
