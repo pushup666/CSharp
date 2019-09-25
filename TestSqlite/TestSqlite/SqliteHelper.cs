@@ -8,7 +8,7 @@ namespace TestSqlite
     static class SqliteHelper
     {
         //private const string ConnStr = @"Data Source = C:\Users\ssf\Desktop\sqlite\db\cs.db";
-        private const string ConnStr = @"Data Source = Z:\Test";
+        private const string ConnStr = @"Data Source = Z:\Test.db3";
 
         public static int ExecuteNonQuery(string sql, params SQLiteParameter[] pms)
         {
