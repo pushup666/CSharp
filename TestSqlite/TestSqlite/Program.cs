@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.SQLite;
 using System.Diagnostics;
 
 
 namespace TestSqlite
 {
-    class Program
+    static class Program
     {
-        //CREATE TABLE Test (ID INTEGER PRIMARY KEY NOT NULL, Name TEXT);
-        private static void Main(string[] args)
+        private static void Main()
         {
+            //SqliteHelper.ExecuteNonQuery("CREATE TABLE Test (ID INTEGER PRIMARY KEY NOT NULL, Name TEXT);");
+
             const int scale = 1000;
             const int scaleBat = scale * 2;
             var sw = new Stopwatch();
@@ -20,18 +19,20 @@ namespace TestSqlite
             sw.Reset();
             sw.Start();
             InsertTest(scale);
+            UpdateTest(scale);
             DeleteTest(scale);
             sw.Stop();
-            Console.WriteLine(scale * 2000 / sw.ElapsedMilliseconds);
+            Console.WriteLine(scale * 3000 / sw.ElapsedMilliseconds);
 
 
 
             sw.Reset();
             sw.Start();
             InsertTestBat(scaleBat);
+            UpdateTestBat(scaleBat);
             DeleteTestBat(scaleBat);
             sw.Stop();
-            Console.WriteLine(scaleBat * 2000 / sw.ElapsedMilliseconds);
+            Console.WriteLine(scaleBat * 3000 / sw.ElapsedMilliseconds);
 
 
 
@@ -93,6 +94,14 @@ namespace TestSqlite
             }
         }
 
+        static void UpdateTest(int n)
+        {
+            for (var i = 0; i < n; i++)
+            {
+                SqliteHelper.ExecuteNonQuery($"UPDATE Test SET Name = {(n-1-i).ToString().PadLeft(10, '0')} WHERE ID = {i};");
+            }
+        }
+
         static void DeleteTest(int n)
         {
             for (var i = 0; i < n; i++)
@@ -107,6 +116,16 @@ namespace TestSqlite
             for (var i = 0; i < n; i++)
             {
                 sqls.Add($"INSERT INTO Test (ID, Name) VALUES ({i}, '{i.ToString().PadLeft(10, '0')}');");
+            }
+            SqliteHelper.ExecuteNonQueryBat(sqls);
+        }
+
+        static void UpdateTestBat(int n)
+        {
+            var sqls = new List<string>();
+            for (var i = 0; i < n; i++)
+            {
+                sqls.Add($"UPDATE Test SET Name = {(n - 1 - i).ToString().PadLeft(10, '0')} WHERE ID = {i};");
             }
             SqliteHelper.ExecuteNonQueryBat(sqls);
         }
