@@ -13,18 +13,15 @@ namespace BookStore
         {
             try
             {
-                using (var conn = new SQLiteConnection(ConnStr))
+                using var conn = new SQLiteConnection(ConnStr);
+                using var cmd = new SQLiteCommand(sql, conn);
+
+                if (pms != null)
                 {
-                    using (var cmd = new SQLiteCommand(sql, conn))
-                    {
-                        if (pms != null)
-                        {
-                            cmd.Parameters.AddRange(pms);
-                        }
-                        conn.Open();
-                        return cmd.ExecuteNonQuery();
-                    }
+                    cmd.Parameters.AddRange(pms);
                 }
+                conn.Open();
+                return cmd.ExecuteNonQuery();
             }
             catch (Exception e)
             {
@@ -37,22 +34,18 @@ namespace BookStore
         {
             try
             {
-                using (var conn = new SQLiteConnection(ConnStr))
+                using var conn = new SQLiteConnection(ConnStr);
+                using var cmd = new SQLiteCommand(conn);
+
+                var affectRows = 0;
+                conn.Open();
+
+                foreach (var sql in sqls)
                 {
-                    using (var cmd = new SQLiteCommand(conn))
-                    {
-                        var affectRows = 0;
-                        conn.Open();
-
-                        foreach (var sql in sqls)
-                        {
-                            cmd.CommandText = sql;
-                            affectRows += cmd.ExecuteNonQuery();
-                        }
-
-                        return affectRows;
-                    }
+                    cmd.CommandText = sql;
+                    affectRows += cmd.ExecuteNonQuery();
                 }
+                return affectRows;
             }
             catch (Exception e)
             {
@@ -65,25 +58,22 @@ namespace BookStore
         {
             try
             {
-                using (var conn = new SQLiteConnection(ConnStr))
+                var affectRows = 0;
+
+                using var conn = new SQLiteConnection(ConnStr);
+                using var cmd = new SQLiteCommand(sql, conn);
+                
+                conn.Open();
+                foreach (var pm in pms)
                 {
-                    using (var cmd = new SQLiteCommand(sql, conn))
+                    if (pm != null)
                     {
-                        var affectRows = 0;
-                        conn.Open();
-
-                        foreach (var pm in pms)
-                        {
-                            if (pm != null)
-                            {
-                                cmd.Parameters.AddRange(pm);
-                            }
-                            affectRows += cmd.ExecuteNonQuery();
-                        }
-
-                        return affectRows;
+                        cmd.Parameters.AddRange(pm);
                     }
+                    affectRows += cmd.ExecuteNonQuery();
                 }
+
+                return affectRows;
             }
             catch (Exception e)
             {
@@ -96,18 +86,15 @@ namespace BookStore
         {
             try
             {
-                using (var conn = new SQLiteConnection(ConnStr))
+                using var conn = new SQLiteConnection(ConnStr);
+                using var cmd = new SQLiteCommand(sql, conn);
+
+                if (pms != null)
                 {
-                    using (var cmd = new SQLiteCommand(sql, conn))
-                    {
-                        if (pms != null)
-                        {
-                            cmd.Parameters.AddRange(pms);
-                        }
-                        conn.Open();
-                        return cmd.ExecuteScalar().ToString();
-                    }
+                    cmd.Parameters.AddRange(pms);
                 }
+                conn.Open();
+                return cmd.ExecuteScalar().ToString();
             }
             catch (Exception e)
             {
@@ -120,20 +107,17 @@ namespace BookStore
         {
             try
             {
-                using (var conn = new SQLiteConnection(ConnStr))
+                using var conn = new SQLiteConnection(ConnStr);
+                using var cmd = new SQLiteCommand(sql, conn);
+
+                if (pms != null)
                 {
-                    using (var cmd = new SQLiteCommand(sql, conn))
-                    {
-                        if (pms != null)
-                        {
-                            cmd.Parameters.AddRange(pms);
-                        }
-                        conn.Open();
-                        var dt = new DataTable();
-                        dt.Load(cmd.ExecuteReader());
-                        return dt;
-                    }
+                    cmd.Parameters.AddRange(pms);
                 }
+                conn.Open();
+                var dt = new DataTable();
+                dt.Load(cmd.ExecuteReader());
+                return dt;
             }
             catch (Exception e)
             {
