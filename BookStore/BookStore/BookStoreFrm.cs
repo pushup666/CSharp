@@ -21,6 +21,7 @@ namespace BookStore
 
         public BookStoreFrm()
         {
+            //BookStoreBLL.CreateTable();
             InitializeComponent();
         }
 

@@ -7,6 +7,11 @@ namespace BookStore.BLL
 {
     static class BookStoreBLL
     {
+        public static bool CreateTable()
+        {
+            return BookStoreDAL.CreateTable();
+        }
+
         public static DataTable GetBookList()
         {
             return BookDAL.GetBookList();
