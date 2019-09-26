@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
+using System.Windows.Forms;
 
 namespace BookStore
 {
@@ -25,7 +26,7 @@ namespace BookStore
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                MessageBox.Show(e.Message);
                 return -1;
             }
         }
@@ -40,16 +41,23 @@ namespace BookStore
                 var affectRows = 0;
                 conn.Open();
 
+                cmd.CommandText = "begin;";
+                cmd.ExecuteNonQuery();
+
                 foreach (var sql in sqls)
                 {
                     cmd.CommandText = sql;
                     affectRows += cmd.ExecuteNonQuery();
                 }
+
+                cmd.CommandText = "commit;";
+                cmd.ExecuteNonQuery();
+
                 return affectRows;
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                MessageBox.Show(e.Message);
                 return -1;
             }
         }
@@ -61,11 +69,16 @@ namespace BookStore
                 var affectRows = 0;
 
                 using var conn = new SQLiteConnection(ConnStr);
-                using var cmd = new SQLiteCommand(sql, conn);
-                
+                using var cmd = new SQLiteCommand(conn);
+
                 conn.Open();
+
+                cmd.CommandText = "begin;";
+                cmd.ExecuteNonQuery();
+
                 foreach (var pm in pms)
                 {
+                    cmd.CommandText = sql;
                     if (pm != null)
                     {
                         cmd.Parameters.AddRange(pm);
@@ -73,11 +86,14 @@ namespace BookStore
                     affectRows += cmd.ExecuteNonQuery();
                 }
 
+                cmd.CommandText = "commit;";
+                cmd.ExecuteNonQuery();
+
                 return affectRows;
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                MessageBox.Show(e.Message);
                 return -1;
             }
         }
@@ -98,7 +114,7 @@ namespace BookStore
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                MessageBox.Show(e.Message);
                 return null;
             }
         }
@@ -121,7 +137,7 @@ namespace BookStore
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                MessageBox.Show(e.Message);
                 return null;
             }
         }

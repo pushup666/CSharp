@@ -7,7 +7,7 @@ namespace TestSqlite
 {
     static class SqliteHelper
     {
-        private const string ConnStr = @"Data Source = Z:\Test.db3";
+        private const string ConnStr = @"Data Source = D:\Test.db3";
 
         public static int ExecuteNonQuery(string sql, params SQLiteParameter[] pms)
         {
@@ -44,11 +44,17 @@ namespace TestSqlite
                         var affectRows = 0;
                         conn.Open();
 
+                        cmd.CommandText = "begin;";
+                        cmd.ExecuteNonQuery();
+
                         foreach (var sql in sqls)
                         {
                             cmd.CommandText = sql;
                             affectRows += cmd.ExecuteNonQuery();
                         }
+
+                        cmd.CommandText = "commit;";
+                        cmd.ExecuteNonQuery();
 
                         return affectRows;
                     }

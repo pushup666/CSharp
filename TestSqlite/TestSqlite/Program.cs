@@ -11,28 +11,29 @@ namespace TestSqlite
         {
             //SqliteHelper.ExecuteNonQuery("CREATE TABLE Test (ID INTEGER PRIMARY KEY NOT NULL, Name TEXT);");
 
-            const int scale = 1000;
-            const int scaleBat = scale * 2;
+            const int scale = 100;
             var sw = new Stopwatch();
 
 
             sw.Reset();
             sw.Start();
+            SqliteHelper.ExecuteNonQuery("begin;");
             InsertTest(scale);
-            UpdateTest(scale);
-            DeleteTest(scale);
+            //UpdateTest(scale);
+            //DeleteTest(scale);
+            SqliteHelper.ExecuteNonQuery("commit;");
             sw.Stop();
-            Console.WriteLine(scale * 3000 / sw.ElapsedMilliseconds);
+            Console.WriteLine(scale * 1000 / sw.ElapsedMilliseconds);
 
 
 
-            sw.Reset();
-            sw.Start();
-            InsertTestBat(scaleBat);
-            UpdateTestBat(scaleBat);
-            DeleteTestBat(scaleBat);
-            sw.Stop();
-            Console.WriteLine(scaleBat * 3000 / sw.ElapsedMilliseconds);
+            //sw.Reset();
+            //sw.Start();
+            //InsertTestBat(scale);
+            //UpdateTestBat(scale);
+            //DeleteTestBat(scale);
+            //sw.Stop();
+            //Console.WriteLine(scale * 1000 / sw.ElapsedMilliseconds);
 
 
 
