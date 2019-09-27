@@ -60,6 +60,10 @@ namespace BookStore.UC
                 tabControlMain.TabPages.Add(versionPage);
                 tabControlMain.SelectTab(newTabName);
             }
+            else
+            {
+                MessageBox.Show("保存失败！");
+            }
         }
 
         private void ButtonDelete_Click(object sender, EventArgs e)
@@ -71,9 +75,14 @@ namespace BookStore.UC
                 lineIDList.Add(row.Cells["ID"].Value.ToString());
             }
 
-            BookStoreBLL.DeleteLines(lineIDList);
-
-            RefreshVersionList();
+            if (BookStoreBLL.DeleteLines(lineIDList))
+            {
+                RefreshVersionList();
+            }
+            else
+            {
+                MessageBox.Show("删除失败！");
+            }
         }
     }
 }

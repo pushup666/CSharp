@@ -41,10 +41,15 @@ namespace BookStore.UC
             if (_currBook != null)
             {
                 _currBook = new BookDO(_currBook.ID, textBoxTitle.Text, textBoxAlias.Text, textBoxAuthor.Text, textBoxNote.Text, comboBoxRate.SelectedIndex);
-                BookStoreBLL.ModifyBook(_currBook);
+                if (BookStoreBLL.ModifyBook(_currBook))
+                {
+                    RefreshBookList();
+                }
+                else
+                {
+                    MessageBox.Show("保存失败！");
+                }
             }
-
-            RefreshBookList();
         }
 
         private void ButtonRemove_Click(object sender, EventArgs e)
@@ -53,11 +58,16 @@ namespace BookStore.UC
             {
                 if (MessageBox.Show($"确认删除 “{_currBook.Title}” 文件？", "警告⚠", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-                    BookStoreBLL.RemoveBook(_currBook.ID);
+                    if (BookStoreBLL.RemoveBook(_currBook.ID))
+                    {
+                        RefreshBookList();
+                    }
+                    else
+                    {
+                        MessageBox.Show("删除失败！");
+                    }
                 }
             }
-
-            RefreshBookList();
         }
 
         private void DataGridViewBook_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

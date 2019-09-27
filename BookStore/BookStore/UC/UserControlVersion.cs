@@ -258,9 +258,15 @@ namespace BookStore.UC
                 else
                 {
                     var version = new VersionDO(_currVersion.BookID, contentNew, contentNewHash, contentNew.Length);
-                    BookStoreBLL.AddVersion(version);
 
-                    RefreshVersionList();
+                    if (BookStoreBLL.AddVersion(version))
+                    {
+                        RefreshVersionList();
+                    }
+                    else
+                    {
+                        MessageBox.Show("保存失败！");
+                    }
                 }
             }
         }
@@ -277,8 +283,14 @@ namespace BookStore.UC
 
                 if (MessageBox.Show($"确认删除 版本“{_currVersion.VersionNo}” 文件？", "警告⚠", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-                    BookStoreBLL.RemoveVersion(_currVersion.ID);
-                    RefreshVersionList();
+                    if (BookStoreBLL.RemoveVersion(_currVersion.ID))
+                    {
+                        RefreshVersionList();
+                    }
+                    else
+                    {
+                        MessageBox.Show("删除失败！");
+                    }
                 }
             }
         }

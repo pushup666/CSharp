@@ -3,13 +3,17 @@ using System.Data;
 using BookStore.DAL;
 using BookStore.Model;
 
+
 namespace BookStore.BLL
 {
     static class BookStoreBLL
     {
-        public static bool CreateTable()
+        public static void CreateTable()
         {
-            return BookStoreDAL.CreateTable();
+            if (BookDAL.GetBookList() == null)
+            {
+                BookStoreDAL.CreateTable();
+            }
         }
 
         public static DataTable GetBookList()

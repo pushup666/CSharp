@@ -11,11 +11,10 @@ namespace BookStore
     public partial class BookStoreFrm : Form
     {
         private readonly List<string> _fileList = new List<string>();
-
-
+        
         public BookStoreFrm()
         {
-            //BookStoreBLL.CreateTable();
+            BookStoreBLL.CreateTable();
             InitializeComponent();
         }
 
@@ -49,17 +48,30 @@ namespace BookStore
                 {
                     using var sr = new StreamReader(fileName, Encoding.Default);
 
+                    var title = Path.GetFileNameWithoutExtension(fileName);
                     var fileContent = sr.ReadToEnd();
                     var contentHash = Utils.GetHash(fileContent);
-
-                    if (!BookStoreBLL.IsThisHashExist(contentHash))
+                    
+                    if (BookStoreBLL.IsThisHashExist(contentHash))
                     {
-
-                        var book = new BookDO(Path.GetFileNameWithoutExtension(fileName), "", "", "");
-                        BookStoreBLL.AddBook(book);
-
+                        MessageBox.Show($"{title} 重复！");                        
+                    }
+                    else
+                    {
+                        var book = new BookDO(title, "", "", "");
                         var version = new VersionDO(book.ID, fileContent, contentHash, fileContent.Length);
-                        BookStoreBLL.AddVersion(version);
+
+                        if (!BookStoreBLL.AddBook(book))
+                        {
+                            MessageBox.Show($"{title} book 导入失败！");
+                        }
+                        else
+                        {
+                            if (!BookStoreBLL.AddVersion(version))
+                            {
+                                MessageBox.Show($"{title} version 导入失败！");
+                            }
+                        }
                     }
                 }
 
