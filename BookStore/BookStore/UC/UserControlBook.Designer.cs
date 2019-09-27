@@ -42,6 +42,7 @@
             this.labelTitle = new System.Windows.Forms.Label();
             this.dataGridViewBookList = new System.Windows.Forms.DataGridView();
             this.buttonExport = new System.Windows.Forms.Button();
+            this.buttonRefresh = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBookList)).BeginInit();
             this.SuspendLayout();
             // 
@@ -181,10 +182,21 @@
             this.buttonExport.UseVisualStyleBackColor = true;
             this.buttonExport.Click += new System.EventHandler(this.ButtonExport_Click);
             // 
+            // buttonRefresh
+            // 
+            this.buttonRefresh.Location = new System.Drawing.Point(822, 49);
+            this.buttonRefresh.Name = "buttonRefresh";
+            this.buttonRefresh.Size = new System.Drawing.Size(75, 23);
+            this.buttonRefresh.TabIndex = 27;
+            this.buttonRefresh.Text = "刷新";
+            this.buttonRefresh.UseVisualStyleBackColor = true;
+            this.buttonRefresh.Click += new System.EventHandler(this.ButtonRefresh_Click);
+            // 
             // UserControlBook
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.buttonRefresh);
             this.Controls.Add(this.buttonExport);
             this.Controls.Add(this.buttonRemove);
             this.Controls.Add(this.buttonSave);
@@ -223,5 +235,6 @@
         private System.Windows.Forms.Label labelTitle;
         private System.Windows.Forms.DataGridView dataGridViewBookList;
         private System.Windows.Forms.Button buttonExport;
+        private System.Windows.Forms.Button buttonRefresh;
     }
 }

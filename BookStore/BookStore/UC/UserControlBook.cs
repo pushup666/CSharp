@@ -25,17 +25,25 @@ namespace BookStore.UC
 
         private void DataGridViewBook_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex != -1)
+            try
             {
-                var bookID = dataGridViewBookList.Rows[e.RowIndex].Cells["ID"].Value.ToString();
-                _currBook = BookStoreBLL.GetBook(bookID);
+                if (e.RowIndex != -1)
+                {
+                    var bookID = dataGridViewBookList.Rows[e.RowIndex].Cells["ID"].Value.ToString();
+                    _currBook = BookStoreBLL.GetBook(bookID);
 
-                textBoxTitle.Text = _currBook.Title;
-                textBoxAlias.Text = _currBook.Alias;
-                textBoxAuthor.Text = _currBook.Author;
-                textBoxNote.Text = _currBook.Note;
-                comboBoxRate.SelectedIndex = _currBook.Rate;
+                    textBoxTitle.Text = _currBook.Title;
+                    textBoxAlias.Text = _currBook.Alias;
+                    textBoxAuthor.Text = _currBook.Author;
+                    textBoxNote.Text = _currBook.Note;
+                    comboBoxRate.SelectedIndex = _currBook.Rate;
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + ex.StackTrace);
+            }
+            
         }
 
         private void DataGridViewBook_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -70,7 +78,7 @@ namespace BookStore.UC
                 _currBook = new BookDO(_currBook.ID, textBoxTitle.Text, textBoxAlias.Text, textBoxAuthor.Text, textBoxNote.Text, comboBoxRate.SelectedIndex);
                 if (BookStoreBLL.ModifyBook(_currBook))
                 {
-                    RefreshBookList();
+                    //RefreshBookList();
                 }
                 else
                 {
@@ -87,7 +95,7 @@ namespace BookStore.UC
                 {
                     if (BookStoreBLL.RemoveBook(_currBook.ID))
                     {
-                        RefreshBookList();
+                        //RefreshBookList();
                     }
                     else
                     {
@@ -136,6 +144,11 @@ namespace BookStore.UC
             }
 
             MessageBox.Show("导出完成！");
+        }
+
+        private void ButtonRefresh_Click(object sender, EventArgs e)
+        {
+            RefreshBookList();
         }
     }
 }
