@@ -13,7 +13,7 @@ namespace BookStore.DAL
             {
                 new SQLiteParameter("@ID", DbType.String){Value = bookID},
             };
-            var book = SqliteHelper.ExecuteReader(sql, pms);
+            using var book = SqliteHelper.ExecuteReader(sql, pms);
 
             var id = book.Rows[0]["ID"].ToString();
             var title = book.Rows[0]["Title"].ToString();

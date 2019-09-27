@@ -10,7 +10,9 @@ namespace BookStore.BLL
     {
         public static void CreateTable()
         {
-            if (BookDAL.GetBookList() == null)
+            using var bookList = BookDAL.GetBookList();
+
+            if (bookList == null)
             {
                 BookStoreDAL.CreateTable();
             }

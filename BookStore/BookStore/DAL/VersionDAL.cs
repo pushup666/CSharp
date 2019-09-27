@@ -14,7 +14,7 @@ namespace BookStore.DAL
                 new SQLiteParameter("@BookID", DbType.String){Value = bookID},
                 new SQLiteParameter("@VersionNo", DbType.Int32){Value = versionNo},
             };
-            var version = SqliteHelper.ExecuteReader(sql, pms);
+            using var version = SqliteHelper.ExecuteReader(sql, pms);
 
             return version.Rows.Count == 1 ? new VersionDO(version.Rows[0]["ID"].ToString(), version.Rows[0]["BookID"].ToString(), int.Parse(version.Rows[0]["VersionNo"].ToString()), version.Rows[0]["Content"].ToString(), version.Rows[0]["ContentHash"].ToString(), int.Parse(version.Rows[0]["ContentLength"].ToString())) : null;
         }
