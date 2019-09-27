@@ -13,17 +13,17 @@ namespace BookStore.UC
 {
     public partial class UserControlLine : UserControl
     {
-        private readonly string _versionID;
-        public UserControlLine(string versionID)
+        private readonly string _bookID;
+        public UserControlLine(string bookID)
         {
             InitializeComponent();
-            _versionID = versionID;
+            _bookID = bookID;
             RefreshVersionList();
         }
 
         private void RefreshVersionList()
         {
-            dataGridViewLineList.DataSource = BookStoreBLL.GetLineList(_versionID);
+            dataGridViewLineList.DataSource = BookStoreBLL.GetLineList(_bookID);
             dataGridViewLineList.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
         }
 

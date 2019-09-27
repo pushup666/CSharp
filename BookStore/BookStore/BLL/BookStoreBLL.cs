@@ -68,27 +68,20 @@ namespace BookStore.BLL
             return VersionDAL.IsThisHashExist(hash);
         }
 
-        public static bool IsVersionLineHashMatch(string versionID)
+
+        public static DataTable GetLineList(string bookID)
         {
-            var versionHash = VersionDAL.GetVersion(versionID).ContentHash;
-
-            var dt = LineDAL.GetLineList(versionID);
-
-            return true;
+            return LineDAL.GetLineList(bookID);
         }
 
-
-
-
-
-        public static DataTable GetLineList(string versionID)
+        public static bool Version2Lines(string bookID, List<string> lines)
         {
-            return LineDAL.GetLineList(versionID);
+            return LineDAL.ClearLines(bookID) && LineDAL.Version2Lines(bookID, lines);
         }
 
-        public static bool Version2Lines(string versionID, List<string> lines)
+        public static bool DeleteLines(List<string> lineIDList)
         {
-            return LineDAL.RemoveLines(versionID) && LineDAL.Version2Lines(versionID, lines);
+            return LineDAL.DeleteLines(lineIDList);
         }
     }
 }

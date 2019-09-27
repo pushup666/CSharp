@@ -2,28 +2,27 @@
 {
     class VersionDO
     {
-        public string UID { get; }
+        public string ID { get; }
         public string BookID { get; }
         public int VersionNo { get; set; }
         public string Content { get; }
         public string ContentHash { get; }
         public int ContentLength { get; }
-        public int DeleteFlag { get; }
 
-        public VersionDO(string bookId, string content, string contentHash, int contentLength)
+        public VersionDO(string id, string bookID, int versionNo, string content, string contentHash, int contentLength)
         {
-            UID = Utils.GetUID();
-            BookID = bookId;
+            ID = id;
+            BookID = bookID;
+            VersionNo = versionNo;
             Content = content;
             ContentHash = contentHash;
             ContentLength = contentLength;
         }
 
-        public VersionDO(string uid, string bookId, int versionNo, string content, string contentHash, int contentLength)
+        public VersionDO(string bookID, string content, string contentHash, int contentLength)
         {
-            UID = uid;
-            BookID = bookId;
-            VersionNo = versionNo;
+            ID = Utils.GetUID();
+            BookID = bookID;
             Content = content;
             ContentHash = contentHash;
             ContentLength = contentLength;

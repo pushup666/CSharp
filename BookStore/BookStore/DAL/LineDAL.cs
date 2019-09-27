@@ -7,43 +7,60 @@ namespace BookStore.DAL
 {
     static class LineDAL
     {
-        public static DataTable GetLineList(string versionID)
+        public static DataTable GetLineList(string bookID)
         {
-            const string sql = "SELECT UID, LineNo, Content FROM Line WHERE VersionID = @VersionID ORDER BY LineNo;";
+            const string sql = "SELECT ID, LineNo, Content FROM Line WHERE BookID = @BookID AND Content <> '' ORDER BY LineNo;";
+
             var pms = new[]
             {
-                new SQLiteParameter("@VersionID", DbType.String){Value = versionID},
+                new SQLiteParameter("@BookID", DbType.String){Value = bookID},
             };
 
             return SqliteHelper.ExecuteReader(sql, pms);
         }
 
 
-        public static bool RemoveLines(string versionID)
+        public static bool ClearLines(string bookID)
         {
-            const string sql = "DELETE FROM Line WHERE VersionID = @VersionID;";
+            const string sql = "DELETE FROM Line WHERE BookID = @BookID;";
 
             var pms = new[]
             {
-                new SQLiteParameter("@VersionID", DbType.String){Value = versionID},
+                new SQLiteParameter("@BookID", DbType.String){Value = bookID},
             };
 
             return SqliteHelper.ExecuteNonQuery(sql, pms) != -1;
         }
 
-        public static bool Version2Lines(string versionID, List<string> lines )
+        public static bool Version2Lines(string bookID, List<string> lines )
         {
-            const string sql = "INSERT INTO Line (UID, VersionID, LineNo, Content) VALUES (@UID, @VersionID, @LineNo, @Content);";
+            const string sql = "INSERT INTO Line (ID, BookID, LineNo, Content) VALUES (@ID, @BookID, @LineNo, @Content);";
 
             var pms = new SQLiteParameter[lines.Count][];
             for (var i = 0; i < lines.Count; i++)
             {
                 var pm = new SQLiteParameter[4];
 
-                pm[0] = new SQLiteParameter("@UID", DbType.String) {Value = Utils.GetUID()};
-                pm[1] = new SQLiteParameter("@VersionID", DbType.String) {Value = versionID};
+                pm[0] = new SQLiteParameter("@ID", DbType.String) {Value = Utils.GetUID()};
+                pm[1] = new SQLiteParameter("@BookID", DbType.String) {Value = bookID };
                 pm[2] = new SQLiteParameter("@LineNo", DbType.Int32) {Value = i};
                 pm[3] = new SQLiteParameter("@Content", DbType.String) {Value = lines[i]};
+
+                pms[i] = pm;
+            }
+
+            return SqliteHelper.ExecuteNonQueryBat(sql, pms) != -1;
+        }
+
+        public static bool DeleteLines(List<string> lineIDList)
+        {
+            const string sql = "DELETE FROM Line WHERE ID = @ID;";
+
+            var pms = new SQLiteParameter[lineIDList.Count][];
+            for (var i = 0; i < lineIDList.Count; i++)
+            {
+                var pm = new SQLiteParameter[1];
+                pm[0] = new SQLiteParameter("@ID", DbType.String) { Value = lineIDList[i] }; ;
 
                 pms[i] = pm;
             }

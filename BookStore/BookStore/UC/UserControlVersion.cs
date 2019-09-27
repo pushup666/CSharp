@@ -60,23 +60,25 @@ namespace BookStore.UC
                 var versionNo = dataGridViewVersionList.Rows[e.RowIndex].Cells["No"].Value.ToString();
                 _currVersion = BookStoreBLL.GetVersion(_bookID, int.Parse(versionNo));
 
-                BookStoreBLL.IsVersionLineHashMatch(_currVersion.UID);
+                //BookStoreBLL.IsVersionLineHashMatch(_currVersion.ID);
 
-                var mainTabPages = ((TabControl)Parent.Parent).TabPages;
+                var tabControlMain = ((TabControl)Parent.Parent);
                 var tabName = $"{title} - {versionNo}";
 
-                if (mainTabPages.ContainsKey(tabName))
+                if (tabControlMain.TabPages.ContainsKey(tabName))
                 {
+                    tabControlMain.SelectTab(tabName);
                     return;
                 }
 
-                var ucLine = new UserControlLine(_currVersion.UID);
+                var ucLine = new UserControlLine(_currVersion.BookID);
                 var linePage = new TabPage(tabName) {Name = tabName};
 
                 linePage.Controls.Add(ucLine);
                 ucLine.Dock = DockStyle.Fill;
 
-                mainTabPages.Add(linePage);
+                tabControlMain.TabPages.Add(linePage);
+                tabControlMain.SelectTab(tabName);
             }
         }
 
@@ -238,9 +240,14 @@ namespace BookStore.UC
                 _lines.Add(line);
             }
 
-            BookStoreBLL.Version2Lines(_currVersion.UID, _lines);
-
-            MessageBox.Show($"{toLinesToolStripMenuItem.Text} 完成！");
+            if (BookStoreBLL.Version2Lines(_currVersion.BookID, _lines))
+            {
+                MessageBox.Show($"拆解完成！");
+            }
+            else
+            {
+                MessageBox.Show($"拆解失败！");
+            }
         }
 
         private void SaveToolStripMenuItem_Click(object sender, EventArgs e)
@@ -270,7 +277,7 @@ namespace BookStore.UC
             {
                 if (MessageBox.Show($"确认删除 版本“{_currVersion.VersionNo}” 文件？", "警告⚠", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-                    BookStoreBLL.RemoveVersion(_currVersion.UID);
+                    BookStoreBLL.RemoveVersion(_currVersion.ID);
                 }
             }
 

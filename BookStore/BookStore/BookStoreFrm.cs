@@ -63,7 +63,7 @@ namespace BookStore
                             var book = new BookDO(Path.GetFileNameWithoutExtension(fileName), "", "", "");
                             BookStoreBLL.AddBook(book);
 
-                            var version = new VersionDO(book.UID, fileContent, contentHash, fileContent.Length);
+                            var version = new VersionDO(book.ID, fileContent, contentHash, fileContent.Length);
                             BookStoreBLL.AddVersion(version);
                         }
                     }
@@ -81,10 +81,13 @@ namespace BookStore
 
         private void TabControlMain_DoubleClick(object sender, EventArgs e)
         {
-            if (tabControlMain.SelectedIndex > 0)
+            var index = tabControlMain.SelectedIndex;
+
+            if (index > 0)
             {
-                tabControlMain.TabPages.RemoveAt(tabControlMain.SelectedIndex);
-            }
+                tabControlMain.TabPages.RemoveAt(index);
+                tabControlMain.SelectTab(index - 1);
+            }            
         }
     }
 }

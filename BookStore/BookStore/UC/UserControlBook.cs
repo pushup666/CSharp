@@ -32,7 +32,7 @@ namespace BookStore.UC
         {
             if (e.RowIndex != -1)
             {
-                var bookID = dataGridViewBookList.Rows[e.RowIndex].Cells["UID"].Value.ToString();
+                var bookID = dataGridViewBookList.Rows[e.RowIndex].Cells["ID"].Value.ToString();
                 _currBook = BookStoreBLL.GetBook(bookID);
 
                 textBoxTitle.Text = _currBook.Title;
@@ -47,7 +47,7 @@ namespace BookStore.UC
         {
             if (_currBook != null)
             {
-                _currBook = new BookDO(_currBook.UID, textBoxTitle.Text, textBoxAlias.Text, textBoxAuthor.Text, textBoxNote.Text, comboBoxRate.SelectedIndex);
+                _currBook = new BookDO(_currBook.ID, textBoxTitle.Text, textBoxAlias.Text, textBoxAuthor.Text, textBoxNote.Text, comboBoxRate.SelectedIndex);
                 BookStoreBLL.ModifyBook(_currBook);
             }
 
@@ -60,7 +60,7 @@ namespace BookStore.UC
             {
                 if (MessageBox.Show($"确认删除 “{_currBook.Title}” 文件？", "警告⚠", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-                    BookStoreBLL.RemoveBook(_currBook.UID);
+                    BookStoreBLL.RemoveBook(_currBook.ID);
                 }
             }
 
@@ -71,20 +71,22 @@ namespace BookStore.UC
         {
             if (_currBook != null)
             {
-                var mainTabPages = ((TabControl) Parent.Parent).TabPages;
+                var tabControlMain = ((TabControl) Parent.Parent);
 
-                if (mainTabPages.ContainsKey(_currBook.Title))
+                if (tabControlMain.TabPages.ContainsKey(_currBook.Title))
                 {
+                    tabControlMain.SelectTab(_currBook.Title);
                     return;
                 }
 
-                var ucVersion = new UserControlVersion(_currBook.UID);
+                var ucVersion = new UserControlVersion(_currBook.ID);
                 var versionPage = new TabPage(_currBook.Title) {Name = _currBook.Title};
 
                 versionPage.Controls.Add(ucVersion);
                 ucVersion.Dock = DockStyle.Fill;
 
-                mainTabPages.Add(versionPage);
+                tabControlMain.TabPages.Add(versionPage);
+                tabControlMain.SelectTab(_currBook.Title);
             }
         }
     }

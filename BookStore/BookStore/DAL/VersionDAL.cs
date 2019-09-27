@@ -16,24 +16,24 @@ namespace BookStore.DAL
             };
             var version = SqliteHelper.ExecuteReader(sql, pms);
 
-            return version.Rows.Count == 1 ? new VersionDO(version.Rows[0]["UID"].ToString(), version.Rows[0]["BookID"].ToString(), int.Parse(version.Rows[0]["VersionNo"].ToString()), version.Rows[0]["Content"].ToString(), version.Rows[0]["ContentHash"].ToString(), int.Parse(version.Rows[0]["ContentLength"].ToString())) : null;
+            return version.Rows.Count == 1 ? new VersionDO(version.Rows[0]["ID"].ToString(), version.Rows[0]["BookID"].ToString(), int.Parse(version.Rows[0]["VersionNo"].ToString()), version.Rows[0]["Content"].ToString(), version.Rows[0]["ContentHash"].ToString(), int.Parse(version.Rows[0]["ContentLength"].ToString())) : null;
         }
 
         public static VersionDO GetVersion(string versionID)
         {
-            const string sql = "SELECT * FROM Version WHERE UID = @UID AND DeleteFlag = 0;";
+            const string sql = "SELECT * FROM Version WHERE ID = @ID AND DeleteFlag = 0;";
             var pms = new[]
             {
-                new SQLiteParameter("@UID", DbType.String){Value = versionID},
+                new SQLiteParameter("@ID", DbType.String){Value = versionID},
             };
             var version = SqliteHelper.ExecuteReader(sql, pms);
 
-            return version.Rows.Count == 1 ? new VersionDO(version.Rows[0]["UID"].ToString(), version.Rows[0]["BookID"].ToString(), int.Parse(version.Rows[0]["VersionNo"].ToString()), version.Rows[0]["Content"].ToString(), version.Rows[0]["ContentHash"].ToString(), int.Parse(version.Rows[0]["ContentLength"].ToString())) : null;
+            return version.Rows.Count == 1 ? new VersionDO(version.Rows[0]["ID"].ToString(), version.Rows[0]["BookID"].ToString(), int.Parse(version.Rows[0]["VersionNo"].ToString()), version.Rows[0]["Content"].ToString(), version.Rows[0]["ContentHash"].ToString(), int.Parse(version.Rows[0]["ContentLength"].ToString())) : null;
         }
 
         public static DataTable GetVersionList(string bookID)
         {
-            const string sql = "SELECT b.Title, v.VersionNo AS No, v.ContentLength AS Length FROM Version v, Book b WHERE v.BookID = b.UID AND v.BookID = @BookID AND v.DeleteFlag = 0 ORDER BY v.VersionNo DESC;";
+            const string sql = "SELECT b.Title, v.VersionNo AS No, v.ContentLength AS Length FROM Version v, Book b WHERE v.BookID = b.ID AND v.BookID = @BookID AND v.DeleteFlag = 0 ORDER BY v.VersionNo DESC;";
             var pms = new[]
             {
                 new SQLiteParameter("@BookID", DbType.String){Value = bookID},
@@ -44,11 +44,11 @@ namespace BookStore.DAL
 
         public static int GetNextVersionNo(string bookID)
         {
-            const string sql = "SELECT MAX(VersionNo) FROM Version WHERE BookID = @BookID;";
+            const string sql = "SELECT MAX(VersionNo) FROM Version WHERE BookID = @BookID AND DeleteFlag = 0;";
             var versionNo = SqliteHelper.ExecuteScalar(sql, new SQLiteParameter("@BookID", DbType.String) { Value = bookID });
             if (string.IsNullOrEmpty(versionNo))
             {
-                return 1;
+                return 0;
             }
             else
             {
@@ -58,10 +58,10 @@ namespace BookStore.DAL
 
         public static bool AddVersion(VersionDO version)
         {
-            const string sql = "INSERT INTO Version(UID, BookID, VersionNo, Content, ContentHash, ContentLength) VALUES (@UID, @BookID, @VersionNo, @Content, @ContentHash, @ContentLength);";
+            const string sql = "INSERT INTO Version(ID, BookID, VersionNo, Content, ContentHash, ContentLength) VALUES (@ID, @BookID, @VersionNo, @Content, @ContentHash, @ContentLength);";
             var pms = new[]
             {
-                new SQLiteParameter("@UID", DbType.String){Value = version.UID},
+                new SQLiteParameter("@ID", DbType.String){Value = version.ID},
                 new SQLiteParameter("@BookID", DbType.String){Value = version.BookID},
                 new SQLiteParameter("@VersionNo", DbType.String){Value = version.VersionNo},
                 new SQLiteParameter("@Content", DbType.String){Value = version.Content},
@@ -74,10 +74,10 @@ namespace BookStore.DAL
 
         public static bool RemoveVersion(string versionID)
         {
-            const string sql = "UPDATE Version SET DeleteFlag = 1 WHERE UID = @UID;";
+            const string sql = "UPDATE Version SET DeleteFlag = 1 WHERE ID = @ID;";
             var pms = new[]
             {
-                new SQLiteParameter("@UID", DbType.String){Value = versionID},
+                new SQLiteParameter("@ID", DbType.String){Value = versionID},
             };
 
             return SqliteHelper.ExecuteNonQuery(sql, pms) != -1;
@@ -85,15 +85,15 @@ namespace BookStore.DAL
 
         public static bool IsThisHashExist(string hash)
         {
-            const string sql = "SELECT UID FROM Version WHERE ContentHash = @ContentHash;";
+            const string sql = "SELECT ID FROM Version WHERE ContentHash = @ContentHash;";
             var pms = new[]
             {
                 new SQLiteParameter("@ContentHash", DbType.String){Value = hash},
             };
 
-            var uid = SqliteHelper.ExecuteScalar(sql, pms);
+            var versionID = SqliteHelper.ExecuteScalar(sql, pms);
 
-            return uid != null;
+            return versionID != null;
         }
     }
 }

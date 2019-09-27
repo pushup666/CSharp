@@ -2,11 +2,11 @@
 {
     class LineDO
     {
-        private string UID;
-        private string VersionID;
+        private string ID;
+        private string BookID;
         private int LineNo;
         private string Content;
-        public int DeleteFlag { get; }
+
 
         public LineDO()
         {
