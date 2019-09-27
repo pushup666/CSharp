@@ -8,7 +8,9 @@ namespace BookStore
 {
     static class SqliteHelper
     {
-        private const string ConnStr = @"Data Source = C:\Users\ssf\Desktop\sqlite\BookStore.db3";
+        //private const string ConnStr = @"Data Source = C:\Users\ssf\Desktop\sqlite\BookStore.db3";
+        private static readonly string ConnStr = $@"Data Source = {Environment.CurrentDirectory}\BookStore.db3";
+
 
         public static int ExecuteNonQuery(string sql, params SQLiteParameter[] pms)
         {
