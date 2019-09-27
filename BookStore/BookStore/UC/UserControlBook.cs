@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Windows.Forms;
 using BookStore.BLL;
 using BookStore.Model;
@@ -93,6 +95,47 @@ namespace BookStore.UC
                     }
                 }
             }
+        }
+
+        private void ButtonExport_Click(object sender, EventArgs e)
+        {
+            using var folderBrowserDialog = new FolderBrowserDialog();
+
+            if (folderBrowserDialog.ShowDialog() != DialogResult.OK) return;
+
+            var savePath = folderBrowserDialog.SelectedPath;
+
+            var bookIDList = new List<string>();
+
+            foreach (DataGridViewRow row in dataGridViewBookList.SelectedRows)
+            {
+                bookIDList.Add(row.Cells["ID"].Value.ToString());
+            }
+
+            for (var i = 0; i < bookIDList.Count; i++)
+            {
+                var id = bookIDList[i];
+                var book = BookStoreBLL.GetBook(id);
+                var latestVersion = BookStoreBLL.GetLatestVersion(id);
+
+                if (latestVersion != null)
+                {
+                    var title = book.Title;
+                    var alias = book.Alias == "" ? "" : $"({book.Alias})";
+                    var note = book.Note == "" ? "" : $"{book.Note}";
+
+                    var author = book.Author == "" ? "" : $"[{book.Author}]";
+                    var hash = latestVersion.ContentHash.Substring(0, 4);
+
+                    var filename = $@"{savePath}\{title}{alias}{note}{author}_{hash}.txt";
+                    var content = latestVersion.Content;
+
+                    using var sw = new StreamWriter(filename, false);
+                    sw.Write(content);
+                }
+            }
+
+            MessageBox.Show("导出完成！");
         }
     }
 }

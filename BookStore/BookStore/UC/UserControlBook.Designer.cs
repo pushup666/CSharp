@@ -41,6 +41,7 @@
             this.textBoxTitle = new System.Windows.Forms.TextBox();
             this.labelTitle = new System.Windows.Forms.Label();
             this.dataGridViewBookList = new System.Windows.Forms.DataGridView();
+            this.buttonExport = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBookList)).BeginInit();
             this.SuspendLayout();
             // 
@@ -170,10 +171,21 @@
             this.dataGridViewBookList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewBook_CellClick);
             this.dataGridViewBookList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewBook_CellDoubleClick);
             // 
+            // buttonExport
+            // 
+            this.buttonExport.Location = new System.Drawing.Point(742, 49);
+            this.buttonExport.Name = "buttonExport";
+            this.buttonExport.Size = new System.Drawing.Size(75, 23);
+            this.buttonExport.TabIndex = 26;
+            this.buttonExport.Text = "选中导出";
+            this.buttonExport.UseVisualStyleBackColor = true;
+            this.buttonExport.Click += new System.EventHandler(this.ButtonExport_Click);
+            // 
             // UserControlBook
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.buttonExport);
             this.Controls.Add(this.buttonRemove);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.comboBoxRate);
@@ -210,5 +222,6 @@
         private System.Windows.Forms.TextBox textBoxTitle;
         private System.Windows.Forms.Label labelTitle;
         private System.Windows.Forms.DataGridView dataGridViewBookList;
+        private System.Windows.Forms.Button buttonExport;
     }
 }
