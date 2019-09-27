@@ -21,7 +21,7 @@ namespace BookStore.DAL
 
         public static DataTable GetVersionList(string bookID)
         {
-            const string sql = "SELECT b.Title, v.VersionNo AS No, v.ContentLength AS Length FROM Version v, Book b WHERE v.BookID = b.ID AND v.BookID = @BookID AND v.DeleteFlag = 0 ORDER BY v.VersionNo DESC;";
+            const string sql = "SELECT VersionNo, ContentLength FROM Version WHERE BookID = @BookID AND DeleteFlag = 0 ORDER BY VersionNo DESC;";
             var pms = new[]
             {
                 new SQLiteParameter("@BookID", DbType.String){Value = bookID},

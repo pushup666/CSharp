@@ -94,7 +94,33 @@ namespace BookStore
                 if (folderBrowserDialog.ShowDialog() != DialogResult.OK) return;
 
                 var savePath = folderBrowserDialog.SelectedPath;
-                MessageBox.Show(savePath);
+
+                var bookList = BookStoreBLL.GetBookList();
+
+                for (var i = 0; i < bookList.Rows.Count; i++)
+                {
+                    var id = bookList.Rows[i]["ID"].ToString();
+                    var book = BookStoreBLL.GetBook(id);
+                    var latestVersion = BookStoreBLL.GetLatestVersion(id);
+
+                    if (latestVersion != null)
+                    {
+                        var title = book.Title;
+                        var alias = book.Alias == "" ? "" : $"({book.Alias})";
+                        var note = book.Note == "" ? "" : $"{book.Note}";
+
+                        var author = book.Author == "" ? "" : $"[{book.Author}]";
+                        var hash = latestVersion.ContentHash.Substring(0, 4);
+
+                        var filename = $@"{savePath}\{title}{alias}{note}{author}_{hash}.txt";
+                        var content = latestVersion.Content;
+
+                        using var sw = new StreamWriter(filename, false);
+                        sw.Write(content);
+                    }
+                }
+
+                MessageBox.Show("导出完成！");
             }
             catch (Exception ex)
             {

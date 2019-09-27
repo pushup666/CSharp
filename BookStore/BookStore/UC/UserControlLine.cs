@@ -9,10 +9,14 @@ namespace BookStore.UC
     public partial class UserControlLine : UserControl
     {
         private readonly string _bookID;
-        public UserControlLine(string bookID)
+        private readonly string _bookTitle;
+
+        public UserControlLine(string bookID, string bookTitle)
         {
-            InitializeComponent();
             _bookID = bookID;
+            _bookTitle = bookTitle;
+
+            InitializeComponent();
             RefreshVersionList();
         }
 
@@ -51,7 +55,7 @@ namespace BookStore.UC
                     tabControlMain.TabPages.RemoveByKey(newTabName);
                 }
 
-                var ucVersion = new UserControlVersion(currBook.ID);
+                var ucVersion = new UserControlVersion(_bookID, _bookTitle);
                 var versionPage = new TabPage(newTabText) { Name = newTabName };
 
                 versionPage.Controls.Add(ucVersion);

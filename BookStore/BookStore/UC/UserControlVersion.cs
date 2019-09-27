@@ -10,14 +10,16 @@ namespace BookStore.UC
     public partial class UserControlVersion : UserControl
     {
         private readonly string _bookID;
+        private readonly string _bookTitle;
         private VersionDO _currVersion;
         private readonly List<string> _lines = new List<string>();
 
-        public UserControlVersion(string bookID)
+        public UserControlVersion(string bookID, string bookTitle)
         {
-            InitializeComponent();
-
             _bookID = bookID;
+            _bookTitle = bookTitle;
+
+            InitializeComponent();
             RefreshVersionList();
         }
 
@@ -28,7 +30,7 @@ namespace BookStore.UC
 
             if (dataGridViewVersionList.RowCount > 0)
             {
-                var versionNo = dataGridViewVersionList.Rows[0].Cells["No"].Value.ToString();
+                var versionNo = dataGridViewVersionList.Rows[0].Cells["VersionNo"].Value.ToString();
                 _currVersion = BookStoreBLL.GetVersion(_bookID, int.Parse(versionNo));
 
                 richTextBoxVersionContent.Text = _currVersion.Content;
@@ -39,7 +41,7 @@ namespace BookStore.UC
         {
             if (e.RowIndex != -1)
             {
-                var versionNo = dataGridViewVersionList.Rows[e.RowIndex].Cells["No"].Value.ToString();
+                var versionNo = dataGridViewVersionList.Rows[e.RowIndex].Cells["VersionNo"].Value.ToString();
                 _currVersion = BookStoreBLL.GetVersion(_bookID, int.Parse(versionNo));
 
                 richTextBoxVersionContent.Text = _currVersion.Content;
@@ -50,8 +52,8 @@ namespace BookStore.UC
         {
             if (e.RowIndex != -1)
             {
-                var title = dataGridViewVersionList.Rows[e.RowIndex].Cells["Title"].Value.ToString();
-                var versionNo = dataGridViewVersionList.Rows[e.RowIndex].Cells["No"].Value.ToString();
+                var title = _bookTitle;
+                var versionNo = dataGridViewVersionList.Rows[e.RowIndex].Cells["VersionNo"].Value.ToString();
                 _currVersion = BookStoreBLL.GetVersion(_bookID, int.Parse(versionNo));
 
                 var tabControlMain = ((TabControl)Parent.Parent);
@@ -66,7 +68,7 @@ namespace BookStore.UC
 
                 if (Version2Lines())
                 {
-                    var ucLine = new UserControlLine(_currVersion.BookID);
+                    var ucLine = new UserControlLine(_bookID, _bookTitle);
                     var linePage = new TabPage(newTabText) { Name = newTabName };
 
                     linePage.Controls.Add(ucLine);

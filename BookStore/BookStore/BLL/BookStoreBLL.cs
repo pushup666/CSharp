@@ -58,6 +58,12 @@ namespace BookStore.BLL
             return VersionDAL.GetVersion(bookID, versionNo);
         }
 
+        public static VersionDO GetLatestVersion(string bookID)
+        {
+            var versionNo = VersionDAL.GetNextVersionNo(bookID) - 1;
+            return versionNo < 0 ? null : VersionDAL.GetVersion(bookID, versionNo);
+        }
+
         public static bool AddVersion(VersionDO version)
         {
             version.VersionNo = VersionDAL.GetNextVersionNo(version.BookID);

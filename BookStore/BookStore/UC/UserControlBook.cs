@@ -36,6 +36,31 @@ namespace BookStore.UC
             }
         }
 
+        private void DataGridViewBook_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (_currBook != null)
+            {
+                var tabControlMain = ((TabControl) Parent.Parent);
+                var newTabName = "V" + _currBook.ID;
+                var newTabText = _currBook.Title;
+
+                if (tabControlMain.TabPages.ContainsKey(newTabName))
+                {
+                    tabControlMain.SelectTab(newTabName);
+                    return;
+                }
+
+                var ucVersion = new UserControlVersion(_currBook.ID, _currBook.Title);
+                var versionPage = new TabPage(newTabText) {Name = newTabName};
+
+                versionPage.Controls.Add(ucVersion);
+                ucVersion.Dock = DockStyle.Fill;
+
+                tabControlMain.TabPages.Add(versionPage);
+                tabControlMain.SelectTab(newTabName);
+            }
+        }
+
         private void ButtonSave_Click(object sender, EventArgs e)
         {
             if (_currBook != null)
@@ -67,31 +92,6 @@ namespace BookStore.UC
                         MessageBox.Show("删除失败！");
                     }
                 }
-            }
-        }
-
-        private void DataGridViewBook_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (_currBook != null)
-            {
-                var tabControlMain = ((TabControl) Parent.Parent);
-                var newTabName = "V" + _currBook.ID;
-                var newTabText = _currBook.Title;
-
-                if (tabControlMain.TabPages.ContainsKey(newTabName))
-                {
-                    tabControlMain.SelectTab(newTabName);
-                    return;
-                }
-
-                var ucVersion = new UserControlVersion(_currBook.ID);
-                var versionPage = new TabPage(newTabText) {Name = newTabName};
-
-                versionPage.Controls.Add(ucVersion);
-                ucVersion.Dock = DockStyle.Fill;
-
-                tabControlMain.TabPages.Add(versionPage);
-                tabControlMain.SelectTab(newTabName);
             }
         }
     }
