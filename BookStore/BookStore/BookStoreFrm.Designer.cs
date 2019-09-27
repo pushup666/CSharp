@@ -32,6 +32,7 @@
             this.tabControlMain = new System.Windows.Forms.TabControl();
             this.tabPageBook = new System.Windows.Forms.TabPage();
             this.ucBook = new BookStore.UC.UserControlBook();
+            this.buttonExport = new System.Windows.Forms.Button();
             this.tabControlMain.SuspendLayout();
             this.tabPageBook.SuspendLayout();
             this.SuspendLayout();
@@ -77,11 +78,22 @@
             this.ucBook.Size = new System.Drawing.Size(933, 433);
             this.ucBook.TabIndex = 0;
             // 
+            // buttonExport
+            // 
+            this.buttonExport.Location = new System.Drawing.Point(93, 12);
+            this.buttonExport.Name = "buttonExport";
+            this.buttonExport.Size = new System.Drawing.Size(75, 23);
+            this.buttonExport.TabIndex = 2;
+            this.buttonExport.Text = "导出";
+            this.buttonExport.UseVisualStyleBackColor = true;
+            this.buttonExport.Click += new System.EventHandler(this.ButtonExport_Click);
+            // 
             // BookStoreFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(965, 512);
+            this.Controls.Add(this.buttonExport);
             this.Controls.Add(this.tabControlMain);
             this.Controls.Add(this.buttonImportBooks);
             this.Name = "BookStoreFrm";
@@ -98,6 +110,7 @@
         private System.Windows.Forms.TabControl tabControlMain;
         private System.Windows.Forms.TabPage tabPageBook;
         private BookStore.UC.UserControlBook ucBook;
+        private System.Windows.Forms.Button buttonExport;
     }
 }
 

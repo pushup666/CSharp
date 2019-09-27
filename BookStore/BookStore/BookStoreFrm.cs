@@ -85,6 +85,23 @@ namespace BookStore
             }
         }
 
+        private void ButtonExport_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using var folderBrowserDialog = new FolderBrowserDialog();
+
+                if (folderBrowserDialog.ShowDialog() != DialogResult.OK) return;
+
+                var savePath = folderBrowserDialog.SelectedPath;
+                MessageBox.Show(savePath);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + ex.StackTrace);
+            }
+        }
+
         private void TabControlMain_DoubleClick(object sender, EventArgs e)
         {
             var index = tabControlMain.SelectedIndex;
@@ -95,5 +112,7 @@ namespace BookStore
                 tabControlMain.SelectTab(index - 1);
             }            
         }
+
+
     }
 }
