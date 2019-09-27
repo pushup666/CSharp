@@ -4,7 +4,7 @@ namespace BookStore.DAL
 {
     static class BookStoreDAL
     {
-        public static bool CreateTable()
+        public static void CreateTable()
         {
             var sqls = new List<string>
             {
@@ -15,6 +15,7 @@ namespace BookStore.DAL
                 "Author TEXT, " +
                 "Note TEXT, " +
                 "Rate INTEGER DEFAULT(0) NOT NULL, " +
+                "Length INTEGER DEFAULT(0) NOT NULL, " +
                 "DeleteFlag INTEGER DEFAULT(0) NOT NULL); ",
 
                 "CREATE TABLE Version (" +
@@ -32,11 +33,7 @@ namespace BookStore.DAL
                 "Content TEXT NOT NULL); "
             };
 
-
-
-
-            return SqliteHelper.ExecuteNonQueryBat(sqls) != -1;
+            SqliteHelper.ExecuteNonQueryBat(sqls);
         }
     }
-
 }

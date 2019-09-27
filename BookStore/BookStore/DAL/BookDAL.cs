@@ -27,7 +27,7 @@ namespace BookStore.DAL
 
         public static DataTable GetBookList()
         {
-            const string sql = "SELECT ID, Title, Alias, Author, Note, Rate FROM Book WHERE DeleteFlag = 0;";
+            const string sql = "SELECT ID, Title, Alias, Author, Note, Rate, Length FROM Book WHERE DeleteFlag = 0;";
 
             return SqliteHelper.ExecuteReader(sql);
         }
@@ -58,6 +58,18 @@ namespace BookStore.DAL
                 new SQLiteParameter("@Note", DbType.String){Value = book.Note},
                 new SQLiteParameter("@Rate", DbType.Int32){Value = book.Rate},
                 new SQLiteParameter("@ID", DbType.String){Value = book.ID},
+            };
+
+            return SqliteHelper.ExecuteNonQuery(sql, pms) != -1;
+        }
+
+        public static bool ModifyBookLength(string bookID, int length)
+        {
+            const string sql = "UPDATE Book SET Length = @Length WHERE ID = @ID;";
+            var pms = new[]
+            {
+                new SQLiteParameter("@Length", DbType.String){Value = length},
+                new SQLiteParameter("@ID", DbType.String){Value = bookID},
             };
 
             return SqliteHelper.ExecuteNonQuery(sql, pms) != -1;
