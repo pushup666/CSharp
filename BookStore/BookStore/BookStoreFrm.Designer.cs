@@ -67,7 +67,7 @@
             this.tabPageBook.Name = "tabPageBook";
             this.tabPageBook.Size = new System.Drawing.Size(933, 433);
             this.tabPageBook.TabIndex = 1;
-            this.tabPageBook.Text = "Book";
+            this.tabPageBook.Text = "书库";
             this.tabPageBook.UseVisualStyleBackColor = true;
             // 
             // ucBook
