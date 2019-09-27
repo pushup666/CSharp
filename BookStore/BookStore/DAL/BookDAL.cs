@@ -27,7 +27,7 @@ namespace BookStore.DAL
 
         public static DataTable GetBookList()
         {
-            const string sql = "SELECT ID, Title, Alias, Author, Note, Rate, Length FROM Book WHERE DeleteFlag = 0;";
+            const string sql = "SELECT ID, Title, Alias, Author, Note, Rate, Length FROM Book WHERE DeleteFlag = 0 ORDER BY ID;";
 
             return SqliteHelper.ExecuteReader(sql);
         }
