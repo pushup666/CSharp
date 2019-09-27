@@ -1,13 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics.Tracing;
-using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using BookStore.BLL;
 using BookStore.Model;
@@ -37,6 +31,7 @@ namespace BookStore
 
                     if (openFileDialog.ShowDialog() != DialogResult.OK) return;
 
+                    _fileList.Clear();
                     foreach (var fileName in openFileDialog.FileNames)
                     {
                         try
@@ -52,20 +47,19 @@ namespace BookStore
 
                 foreach (var fileName in _fileList)
                 {
-                    using (var sr = new StreamReader(fileName, Encoding.Default))
+                    using var sr = new StreamReader(fileName, Encoding.Default);
+
+                    var fileContent = sr.ReadToEnd();
+                    var contentHash = Utils.GetHash(fileContent);
+
+                    if (!BookStoreBLL.IsThisHashExist(contentHash))
                     {
-                        var fileContent = sr.ReadToEnd();
-                        var contentHash = Utils.GetHash(fileContent);
 
-                        if (!BookStoreBLL.IsThisHashExist(contentHash))
-                        {
+                        var book = new BookDO(Path.GetFileNameWithoutExtension(fileName), "", "", "");
+                        BookStoreBLL.AddBook(book);
 
-                            var book = new BookDO(Path.GetFileNameWithoutExtension(fileName), "", "", "");
-                            BookStoreBLL.AddBook(book);
-
-                            var version = new VersionDO(book.ID, fileContent, contentHash, fileContent.Length);
-                            BookStoreBLL.AddVersion(version);
-                        }
+                        var version = new VersionDO(book.ID, fileContent, contentHash, fileContent.Length);
+                        BookStoreBLL.AddVersion(version);
                     }
                 }
 

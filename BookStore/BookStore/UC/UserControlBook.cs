@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using BookStore.BLL;
 using BookStore.Model;
@@ -72,21 +65,23 @@ namespace BookStore.UC
             if (_currBook != null)
             {
                 var tabControlMain = ((TabControl) Parent.Parent);
+                var newTabName = "V" + _currBook.ID;
+                var newTabText = _currBook.Title;
 
-                if (tabControlMain.TabPages.ContainsKey(_currBook.Title))
+                if (tabControlMain.TabPages.ContainsKey(newTabName))
                 {
-                    tabControlMain.SelectTab(_currBook.Title);
+                    tabControlMain.SelectTab(newTabName);
                     return;
                 }
 
                 var ucVersion = new UserControlVersion(_currBook.ID);
-                var versionPage = new TabPage(_currBook.Title) {Name = _currBook.Title};
+                var versionPage = new TabPage(newTabText) {Name = newTabName};
 
                 versionPage.Controls.Add(ucVersion);
                 ucVersion.Dock = DockStyle.Fill;
 
                 tabControlMain.TabPages.Add(versionPage);
-                tabControlMain.SelectTab(_currBook.Title);
+                tabControlMain.SelectTab(newTabName);
             }
         }
     }

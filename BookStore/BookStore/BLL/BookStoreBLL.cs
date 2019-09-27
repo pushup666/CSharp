@@ -29,7 +29,7 @@ namespace BookStore.BLL
 
         public static bool RemoveBook(string bookID)
         {
-            return BookDAL.RemoveBook(bookID);
+            return VersionDAL.RemoveVersionByBookID(bookID) && BookDAL.RemoveBook(bookID);
         }
 
         public static bool ModifyBook(BookDO book)
@@ -69,6 +69,8 @@ namespace BookStore.BLL
         }
 
 
+
+
         public static DataTable GetLineList(string bookID)
         {
             return LineDAL.GetLineList(bookID);
@@ -77,6 +79,11 @@ namespace BookStore.BLL
         public static bool Version2Lines(string bookID, List<string> lines)
         {
             return LineDAL.ClearLines(bookID) && LineDAL.Version2Lines(bookID, lines);
+        }
+
+        public static string Lines2String(string bookID)
+        {
+            return LineDAL.Lines2String(bookID);
         }
 
         public static bool DeleteLines(List<string> lineIDList)

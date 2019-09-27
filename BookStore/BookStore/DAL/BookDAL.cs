@@ -9,20 +9,20 @@ namespace BookStore.DAL
         public static BookDO GetBook(string bookID)
         {
             const string sql = "SELECT * FROM Book WHERE ID = @ID AND DeleteFlag = 0;";
-            var pms = new SQLiteParameter[]
+            var pms = new[]
             {
                 new SQLiteParameter("@ID", DbType.String){Value = bookID},
             };
             var book = SqliteHelper.ExecuteReader(sql, pms);
 
-            var ID = book.Rows[0]["ID"].ToString();
+            var id = book.Rows[0]["ID"].ToString();
             var title = book.Rows[0]["Title"].ToString();
             var alias = book.Rows[0]["Alias"].ToString();
             var author = book.Rows[0]["Author"].ToString();
             var note = book.Rows[0]["Note"].ToString();
             var rate = int.Parse(book.Rows[0]["Rate"].ToString());
 
-            return book.Rows.Count == 1 ? new BookDO(ID,title,alias,author,note,rate) : null;
+            return book.Rows.Count == 1 ? new BookDO(id,title,alias,author,note,rate) : null;
         }
 
         public static DataTable GetBookList()

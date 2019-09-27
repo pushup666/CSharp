@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using BookStore.BLL;
-using BookStore.DAL;
+﻿using BookStore.BLL;
 using BookStore.Model;
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Windows.Forms;
 
 namespace BookStore.UC
 {
@@ -60,26 +54,45 @@ namespace BookStore.UC
                 var versionNo = dataGridViewVersionList.Rows[e.RowIndex].Cells["No"].Value.ToString();
                 _currVersion = BookStoreBLL.GetVersion(_bookID, int.Parse(versionNo));
 
-                //BookStoreBLL.IsVersionLineHashMatch(_currVersion.ID);
-
                 var tabControlMain = ((TabControl)Parent.Parent);
-                var tabName = $"{title} - {versionNo}";
+                var newTabName = "L" + _currVersion.BookID;
+                var newTabText = $"{title} - {versionNo}";
 
-                if (tabControlMain.TabPages.ContainsKey(tabName))
+                if (tabControlMain.TabPages.ContainsKey(newTabName))
                 {
-                    tabControlMain.SelectTab(tabName);
+                    tabControlMain.SelectTab(newTabName);
                     return;
                 }
 
-                var ucLine = new UserControlLine(_currVersion.BookID);
-                var linePage = new TabPage(tabName) {Name = tabName};
+                if (Version2Lines())
+                {
+                    var ucLine = new UserControlLine(_currVersion.BookID);
+                    var linePage = new TabPage(newTabText) { Name = newTabName };
 
-                linePage.Controls.Add(ucLine);
-                ucLine.Dock = DockStyle.Fill;
+                    linePage.Controls.Add(ucLine);
+                    ucLine.Dock = DockStyle.Fill;
 
-                tabControlMain.TabPages.Add(linePage);
-                tabControlMain.SelectTab(tabName);
+                    tabControlMain.TabPages.Add(linePage);
+                    tabControlMain.SelectTab(newTabName);
+                }
+                else
+                {
+                    MessageBox.Show("拆解失败！");
+                }
+
             }
+        }
+
+        private bool Version2Lines()
+        {
+            _lines.Clear();
+
+            foreach (var line in richTextBoxVersionContent.Lines)
+            {
+                _lines.Add(line);
+            }
+
+            return BookStoreBLL.Version2Lines(_currVersion.BookID, _lines);
         }
 
         private void RefreshTextBox()
@@ -231,25 +244,6 @@ namespace BookStore.UC
             return list;
         }
 
-        private void ToLinesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            _lines.Clear();
-
-            foreach (var line in richTextBoxVersionContent.Lines)
-            {
-                _lines.Add(line);
-            }
-
-            if (BookStoreBLL.Version2Lines(_currVersion.BookID, _lines))
-            {
-                MessageBox.Show($"拆解完成！");
-            }
-            else
-            {
-                MessageBox.Show($"拆解失败！");
-            }
-        }
-
         private void SaveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (_currVersion != null)
@@ -275,13 +269,18 @@ namespace BookStore.UC
         {
             if (_currVersion != null)
             {
+                if ( _currVersion.VersionNo == 0)
+                {
+                    MessageBox.Show($"不能删除 版本“{_currVersion.VersionNo}” 文件！");
+                    return;
+                }
+
                 if (MessageBox.Show($"确认删除 版本“{_currVersion.VersionNo}” 文件？", "警告⚠", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
                     BookStoreBLL.RemoveVersion(_currVersion.ID);
+                    RefreshVersionList();
                 }
             }
-
-            RefreshVersionList();
         }
     }
 }

@@ -110,7 +110,9 @@ namespace BookStore
                     cmd.Parameters.AddRange(pms);
                 }
                 conn.Open();
-                return cmd.ExecuteScalar().ToString();
+
+                return cmd.ExecuteScalar()?.ToString();
+
             }
             catch (Exception e)
             {

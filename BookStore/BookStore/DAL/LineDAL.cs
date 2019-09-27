@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
-using BookStore.Model;
+using System.Text;
 
 namespace BookStore.DAL
 {
@@ -17,6 +17,26 @@ namespace BookStore.DAL
             };
 
             return SqliteHelper.ExecuteReader(sql, pms);
+        }
+
+        public static string Lines2String(string bookID)
+        {
+            const string sql = "SELECT ID, LineNo, Content FROM Line WHERE BookID = @BookID ORDER BY LineNo;";
+
+            var pms = new[]
+            {
+                new SQLiteParameter("@BookID", DbType.String){Value = bookID},
+            };
+
+            var dt = SqliteHelper.ExecuteReader(sql, pms);
+            var sb = new StringBuilder();
+
+            for (var i = 0; i < dt.Rows.Count; i++)
+            {
+                sb.AppendLine(dt.Rows[i]["Content"].ToString());
+            }
+
+            return sb.ToString();
         }
 
 
@@ -60,7 +80,7 @@ namespace BookStore.DAL
             for (var i = 0; i < lineIDList.Count; i++)
             {
                 var pm = new SQLiteParameter[1];
-                pm[0] = new SQLiteParameter("@ID", DbType.String) { Value = lineIDList[i] }; ;
+                pm[0] = new SQLiteParameter("@ID", DbType.String) { Value = lineIDList[i] };
 
                 pms[i] = pm;
             }

@@ -44,7 +44,6 @@
             this.short2LongToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.long2ShortToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.EtcToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toLinesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewVersionList)).BeginInit();
@@ -202,19 +201,11 @@
             // EtcToolStripMenuItem
             // 
             this.EtcToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toLinesToolStripMenuItem,
             this.saveToolStripMenuItem,
             this.removeToolStripMenuItem});
             this.EtcToolStripMenuItem.Name = "EtcToolStripMenuItem";
             this.EtcToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
             this.EtcToolStripMenuItem.Text = "其他";
-            // 
-            // toLinesToolStripMenuItem
-            // 
-            this.toLinesToolStripMenuItem.Name = "toLinesToolStripMenuItem";
-            this.toLinesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.toLinesToolStripMenuItem.Text = "拆解";
-            this.toLinesToolStripMenuItem.Click += new System.EventHandler(this.ToLinesToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
@@ -268,7 +259,6 @@
         private System.Windows.Forms.ToolStripMenuItem short2LongToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem long2ShortToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem EtcToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem toLinesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem removeToolStripMenuItem;
     }
