@@ -43,12 +43,15 @@
             this.dataGridViewBookList = new System.Windows.Forms.DataGridView();
             this.buttonExport = new System.Windows.Forms.Button();
             this.buttonRefresh = new System.Windows.Forms.Button();
+            this.textBoxFilter = new System.Windows.Forms.TextBox();
+            this.checkBoxUseFilter = new System.Windows.Forms.CheckBox();
+            this.buttonTest = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBookList)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonRemove
             // 
-            this.buttonRemove.Location = new System.Drawing.Point(823, 12);
+            this.buttonRemove.Location = new System.Drawing.Point(578, 48);
             this.buttonRemove.Name = "buttonRemove";
             this.buttonRemove.Size = new System.Drawing.Size(75, 23);
             this.buttonRemove.TabIndex = 25;
@@ -58,7 +61,7 @@
             // 
             // buttonSave
             // 
-            this.buttonSave.Location = new System.Drawing.Point(742, 12);
+            this.buttonSave.Location = new System.Drawing.Point(497, 49);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(75, 23);
             this.buttonSave.TabIndex = 24;
@@ -77,7 +80,7 @@
             "3",
             "4",
             "5"});
-            this.comboBoxRate.Location = new System.Drawing.Point(542, 51);
+            this.comboBoxRate.Location = new System.Drawing.Point(288, 51);
             this.comboBoxRate.Name = "comboBoxRate";
             this.comboBoxRate.Size = new System.Drawing.Size(165, 20);
             this.comboBoxRate.TabIndex = 23;
@@ -85,7 +88,7 @@
             // labelRate
             // 
             this.labelRate.AutoSize = true;
-            this.labelRate.Location = new System.Drawing.Point(495, 54);
+            this.labelRate.Location = new System.Drawing.Point(253, 54);
             this.labelRate.Name = "labelRate";
             this.labelRate.Size = new System.Drawing.Size(29, 12);
             this.labelRate.TabIndex = 22;
@@ -93,9 +96,9 @@
             // 
             // textBoxNote
             // 
-            this.textBoxNote.Location = new System.Drawing.Point(67, 51);
+            this.textBoxNote.Location = new System.Drawing.Point(55, 51);
             this.textBoxNote.Name = "textBoxNote";
-            this.textBoxNote.Size = new System.Drawing.Size(398, 21);
+            this.textBoxNote.Size = new System.Drawing.Size(165, 21);
             this.textBoxNote.TabIndex = 21;
             // 
             // labelNote
@@ -109,7 +112,7 @@
             // 
             // textBoxAuthor
             // 
-            this.textBoxAuthor.Location = new System.Drawing.Point(542, 14);
+            this.textBoxAuthor.Location = new System.Drawing.Point(530, 14);
             this.textBoxAuthor.Name = "textBoxAuthor";
             this.textBoxAuthor.Size = new System.Drawing.Size(165, 21);
             this.textBoxAuthor.TabIndex = 19;
@@ -125,7 +128,7 @@
             // 
             // textBoxAlias
             // 
-            this.textBoxAlias.Location = new System.Drawing.Point(300, 14);
+            this.textBoxAlias.Location = new System.Drawing.Point(288, 14);
             this.textBoxAlias.Name = "textBoxAlias";
             this.textBoxAlias.Size = new System.Drawing.Size(165, 21);
             this.textBoxAlias.TabIndex = 17;
@@ -141,7 +144,7 @@
             // 
             // textBoxTitle
             // 
-            this.textBoxTitle.Location = new System.Drawing.Point(67, 14);
+            this.textBoxTitle.Location = new System.Drawing.Point(55, 14);
             this.textBoxTitle.Name = "textBoxTitle";
             this.textBoxTitle.Size = new System.Drawing.Size(165, 21);
             this.textBoxTitle.TabIndex = 15;
@@ -163,18 +166,18 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridViewBookList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewBookList.Location = new System.Drawing.Point(17, 93);
+            this.dataGridViewBookList.Location = new System.Drawing.Point(17, 88);
             this.dataGridViewBookList.Name = "dataGridViewBookList";
             this.dataGridViewBookList.ReadOnly = true;
             this.dataGridViewBookList.RowTemplate.Height = 23;
-            this.dataGridViewBookList.Size = new System.Drawing.Size(880, 376);
+            this.dataGridViewBookList.Size = new System.Drawing.Size(880, 381);
             this.dataGridViewBookList.TabIndex = 13;
             this.dataGridViewBookList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewBook_CellClick);
             this.dataGridViewBookList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewBook_CellDoubleClick);
             // 
             // buttonExport
             // 
-            this.buttonExport.Location = new System.Drawing.Point(742, 49);
+            this.buttonExport.Location = new System.Drawing.Point(740, 48);
             this.buttonExport.Name = "buttonExport";
             this.buttonExport.Size = new System.Drawing.Size(75, 23);
             this.buttonExport.TabIndex = 26;
@@ -184,7 +187,7 @@
             // 
             // buttonRefresh
             // 
-            this.buttonRefresh.Location = new System.Drawing.Point(822, 49);
+            this.buttonRefresh.Location = new System.Drawing.Point(659, 49);
             this.buttonRefresh.Name = "buttonRefresh";
             this.buttonRefresh.Size = new System.Drawing.Size(75, 23);
             this.buttonRefresh.TabIndex = 27;
@@ -192,10 +195,41 @@
             this.buttonRefresh.UseVisualStyleBackColor = true;
             this.buttonRefresh.Click += new System.EventHandler(this.ButtonRefresh_Click);
             // 
+            // textBoxFilter
+            // 
+            this.textBoxFilter.Location = new System.Drawing.Point(777, 14);
+            this.textBoxFilter.Name = "textBoxFilter";
+            this.textBoxFilter.Size = new System.Drawing.Size(120, 21);
+            this.textBoxFilter.TabIndex = 28;
+            // 
+            // checkBoxUseFilter
+            // 
+            this.checkBoxUseFilter.AutoSize = true;
+            this.checkBoxUseFilter.Location = new System.Drawing.Point(723, 16);
+            this.checkBoxUseFilter.Name = "checkBoxUseFilter";
+            this.checkBoxUseFilter.Size = new System.Drawing.Size(48, 16);
+            this.checkBoxUseFilter.TabIndex = 29;
+            this.checkBoxUseFilter.Text = "过滤";
+            this.checkBoxUseFilter.UseVisualStyleBackColor = true;
+            // 
+            // buttonTest
+            // 
+            this.buttonTest.Enabled = false;
+            this.buttonTest.Location = new System.Drawing.Point(821, 48);
+            this.buttonTest.Name = "buttonTest";
+            this.buttonTest.Size = new System.Drawing.Size(75, 23);
+            this.buttonTest.TabIndex = 30;
+            this.buttonTest.Text = "测试";
+            this.buttonTest.UseVisualStyleBackColor = true;
+            this.buttonTest.Click += new System.EventHandler(this.ButtonTest_Click);
+            // 
             // UserControlBook
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.buttonTest);
+            this.Controls.Add(this.checkBoxUseFilter);
+            this.Controls.Add(this.textBoxFilter);
             this.Controls.Add(this.buttonRefresh);
             this.Controls.Add(this.buttonExport);
             this.Controls.Add(this.buttonRemove);
@@ -236,5 +270,8 @@
         private System.Windows.Forms.DataGridView dataGridViewBookList;
         private System.Windows.Forms.Button buttonExport;
         private System.Windows.Forms.Button buttonRefresh;
+        private System.Windows.Forms.TextBox textBoxFilter;
+        private System.Windows.Forms.CheckBox checkBoxUseFilter;
+        private System.Windows.Forms.Button buttonTest;
     }
 }

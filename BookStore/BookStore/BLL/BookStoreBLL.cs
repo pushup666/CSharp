@@ -23,6 +23,11 @@ namespace BookStore.BLL
             return BookDAL.GetBookList();
         }
 
+        public static DataTable GetBookList(string filter)
+        {
+            return BookDAL.GetBookList(filter);
+        }
+
         public static BookDO GetBook(string bookID)
         {
             return BookDAL.GetBook(bookID);

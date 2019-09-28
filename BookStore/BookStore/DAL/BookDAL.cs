@@ -32,6 +32,13 @@ namespace BookStore.DAL
             return SqliteHelper.ExecuteReader(sql);
         }
 
+        public static DataTable GetBookList(string filter)
+        {
+            var sql = $"SELECT ID, Title, Alias, Author, Note, Rate, Length FROM Book WHERE DeleteFlag = 0 AND Title like '%{filter}%' ORDER BY Title;";
+
+            return SqliteHelper.ExecuteReader(sql);
+        }
+
         public static bool AddBook(BookDO book)
         {
             const string sql = "INSERT INTO Book(ID, Title, Alias, Author, Note) VALUES(@ID, @Title, @Alias, @Author, @Note);";

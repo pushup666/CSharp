@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using BookStore.BLL;
 using BookStore.Model;
@@ -19,14 +20,33 @@ namespace BookStore.UC
 
         internal void RefreshBookList()
         {
-            dataGridViewBookList.DataSource = BookStoreBLL.GetBookList();
+            dataGridViewBookList.DataSource = checkBoxUseFilter.Checked ? BookStoreBLL.GetBookList(textBoxFilter.Text) : BookStoreBLL.GetBookList();
             dataGridViewBookList.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+        }
+
+        private void Test()
+        {
+            var dt = BookStoreBLL.GetBookList();
+
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                BookDO book = BookStoreBLL.GetBook(dt.Rows[i]["ID"].ToString());
+                if (book.Title.Contains("（）"))
+                {
+                    BookDO newbook = new BookDO(book.ID, book.Title.Replace("（）", ""), book.Alias, book.Author, book.Note, book.Rate);
+                    BookStoreBLL.ModifyBook(newbook);
+                }
+                
+            }
+            MessageBox.Show("测试结束！");
         }
 
         private void DataGridViewBook_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             try
             {
+                Save();
+
                 if (e.RowIndex != -1)
                 {
                     var bookID = dataGridViewBookList.Rows[e.RowIndex].Cells["ID"].Value.ToString();
@@ -72,6 +92,11 @@ namespace BookStore.UC
         }
 
         private void ButtonSave_Click(object sender, EventArgs e)
+        {
+            Save();
+        }
+
+        private void Save()
         {
             if (_currBook != null)
             {
@@ -149,6 +174,11 @@ namespace BookStore.UC
         private void ButtonRefresh_Click(object sender, EventArgs e)
         {
             RefreshBookList();
+        }
+
+        private void ButtonTest_Click(object sender, EventArgs e)
+        {
+            Test();
         }
     }
 }
