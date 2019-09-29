@@ -59,6 +59,12 @@
     <Compile Include="DAL\BookStoreDAL.cs" />
     <Compile Include="DAL\LineDAL.cs" />
     <Compile Include="DAL\VersionDAL.cs" />
+    <Compile Include="InputFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InputFrm.Designer.cs">
+      <DependentUpon>InputFrm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Model\BookDO.cs" />
     <Compile Include="Model\VersionDO.cs" />
     <Compile Include="Program.cs" />
@@ -85,6 +91,9 @@
     <Compile Include="Utils.cs" />
     <EmbeddedResource Include="BookStoreFrm.resx">
       <DependentUpon>BookStoreFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InputFrm.resx">
+      <DependentUpon>InputFrm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

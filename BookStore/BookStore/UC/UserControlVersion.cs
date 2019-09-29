@@ -2,6 +2,7 @@
 using BookStore.Model;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
@@ -157,6 +158,23 @@ namespace BookStore.UC
             RefreshTextBox();
         }
 
+
+        private void removeAllBlankLineToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _lines.Clear();
+
+            foreach (var currLine in richTextBoxVersionContent.Lines)
+            {
+                if (currLine != "")
+                {
+                    _lines.Add(currLine);
+                }
+            }
+
+            RefreshTextBox();
+        }
+
+
         private void AddBlankLineToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _lines.Clear();
@@ -173,10 +191,36 @@ namespace BookStore.UC
         private void RestoreBlankLineToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _lines.Clear();
+            
+            Dictionary<int,int> dict =new Dictionary<int, int>();
+            foreach (var line in richTextBoxVersionContent.Lines)
+            {
+                if (dict.ContainsKey(line.Length))
+                {
+                    dict[line.Length]++;
+                }
+                else
+                {
+                    dict.Add(line.Length, 1);
+                }
+            }
+
+            
+
+            StringBuilder sb = new StringBuilder();
+            foreach (var item in dict.OrderBy(s => s.Key))
+            {
+                sb.AppendLine($"{item.Key}\t\t{item.Value}");
+            }
+
+            MessageBox.Show(sb.ToString());
+
+            using var inputFrm = new InputFrm();
+            var length = inputFrm.ShowDialog() == DialogResult.OK ? int.Parse(inputFrm.Value) : 33;
 
             foreach (var line in richTextBoxVersionContent.Lines)
             {
-                if (line.Length < 33)
+                if (line.Length < length)
                 {
                     _lines.Add(line);
                     _lines.Add("");
@@ -189,6 +233,7 @@ namespace BookStore.UC
 
             RefreshTextBox();
         }
+
 
         private void Short2LongToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -296,5 +341,7 @@ namespace BookStore.UC
                 }
             }
         }
+
+
     }
 }
