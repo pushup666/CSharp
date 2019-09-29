@@ -26,7 +26,7 @@ namespace BookStore.UC
 
         private void Test()
         {
-            var dt = BookStoreBLL.GetBookList();
+            using var dt = BookStoreBLL.GetBookList();
 
             for (int i = 0; i < dt.Rows.Count; i++)
             {
