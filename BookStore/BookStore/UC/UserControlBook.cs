@@ -28,15 +28,21 @@ namespace BookStore.UC
         {
             using var dt = BookStoreBLL.GetBookList();
 
-            for (int i = 0; i < dt.Rows.Count; i++)
+            //处理Title
+            for (var i = 0; i < dt.Rows.Count; i++)
             {
-                BookDO book = BookStoreBLL.GetBook(dt.Rows[i]["ID"].ToString());
-                if (book.Title.Contains("（）"))
+                var id = dt.Rows[i]["ID"].ToString();
+                var title = dt.Rows[i]["Title"].ToString();
+                var alias = dt.Rows[i]["Alias"].ToString();
+                var author = dt.Rows[i]["Author"].ToString();
+                var note = dt.Rows[i]["Note"].ToString();
+                var rate = int.Parse(dt.Rows[i]["Rate"].ToString());
+                
+                if (title.Contains("  "))
                 {
-                    BookDO newbook = new BookDO(book.ID, book.Title.Replace("（）", ""), book.Alias, book.Author, book.Note, book.Rate);
+                    BookDO newbook = new BookDO(id, title.Replace("  "," "), alias, author, note, rate);
                     BookStoreBLL.ModifyBook(newbook);
                 }
-                
             }
             MessageBox.Show("测试结束！");
         }
