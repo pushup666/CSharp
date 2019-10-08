@@ -162,7 +162,7 @@ namespace BookStore.UC
         }
 
 
-        private void removeAllBlankLineToolStripMenuItem_Click(object sender, EventArgs e)
+        private void RemoveAllBlankLineToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _lines.Clear();
 
@@ -331,7 +331,7 @@ namespace BookStore.UC
                     return;
                 }
 
-                if (MessageBox.Show($"确认删除 版本“{_currVersion.VersionNo}” 文件？", "警告⚠", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                if (MessageBox.Show($"确认删除 版本“{_currVersion.VersionNo}” 文件？", "警告", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
                     if (BookStoreBLL.RemoveVersion(_currVersion.ID))
                     {

@@ -185,7 +185,7 @@
             this.removeAllBlankLineToolStripMenuItem.Name = "removeAllBlankLineToolStripMenuItem";
             this.removeAllBlankLineToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.removeAllBlankLineToolStripMenuItem.Text = "去空白行（全部）";
-            this.removeAllBlankLineToolStripMenuItem.Click += new System.EventHandler(this.removeAllBlankLineToolStripMenuItem_Click);
+            this.removeAllBlankLineToolStripMenuItem.Click += new System.EventHandler(this.RemoveAllBlankLineToolStripMenuItem_Click);
             // 
             // shortLongToolStripMenuItem
             // 

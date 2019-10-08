@@ -128,7 +128,7 @@ namespace BookStore.UC
         {
             if (_currBook != null)
             {
-                if (MessageBox.Show($"确认删除 “{_currBook.Title}” 文件？", "警告⚠", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                if (MessageBox.Show($"确认删除 “{_currBook.Title}” 文件？", "警告", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
                     if (BookStoreBLL.RemoveBook(_currBook.ID))
                     {
