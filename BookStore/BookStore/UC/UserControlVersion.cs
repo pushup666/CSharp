@@ -1,11 +1,13 @@
 ﻿using BookStore.BLL;
+using BookStore.DLG;
 using BookStore.Model;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using BookStore.DLG;
 
 namespace BookStore.UC
 {
@@ -343,6 +345,63 @@ namespace BookStore.UC
             }
         }
 
+        private void ReplaceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using var replaceFrm = new FrmReplace();
+            if (replaceFrm.ShowDialog() == DialogResult.OK && replaceFrm.Input != string.Empty)
+            {
+                _lines.Clear();
 
+                foreach (var line in richTextBoxVersionContent.Lines)
+                {
+                    _lines.Add(line.Replace(replaceFrm.Input,replaceFrm.Replace));
+                }
+
+                RefreshTextBox();
+
+                MessageBox.Show("替换结束！");
+            }
+        }
+
+        private void CompareToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dataGridViewVersionList.SelectedRows.Count != 2)
+            {
+                MessageBox.Show("只能两版本进行比较！");
+                return;
+            }
+          
+            using var folderBrowserDialog = new FolderBrowserDialog();
+            if (folderBrowserDialog.ShowDialog() != DialogResult.OK) return;
+            var savePath = folderBrowserDialog.SelectedPath;
+
+            var book = BookStoreBLL.GetBook(_bookID);
+            var version0 = BookStoreBLL.GetVersion(_bookID, int.Parse(dataGridViewVersionList.SelectedRows[0].Cells["VersionNo"].Value.ToString()));
+            var version1 = BookStoreBLL.GetVersion(_bookID, int.Parse(dataGridViewVersionList.SelectedRows[1].Cells["VersionNo"].Value.ToString()));
+
+            if (version0 != null && version1 != null)
+            {
+                var title = book.Title;
+                var alias = book.Alias == "" ? "" : $"({book.Alias})";
+                var note = book.Note == "" ? "" : $"{book.Note}";
+
+                var author = book.Author == "" ? "" : $"[{book.Author}]";
+
+                var filename0 = $@"{savePath}\{title}{alias}{note}{author}_{version0.VersionNo}.txt";
+                using var sw0 = new StreamWriter(filename0, false);
+                sw0.Write(version0.Content);
+
+                var filename1 = $@"{savePath}\{title}{alias}{note}{author}_{version1.VersionNo}.txt";
+                using var sw1 = new StreamWriter(filename1, false);
+                sw1.Write(version1.Content);
+
+                var p = new Process();
+
+                p.StartInfo.WorkingDirectory = savePath;
+                p.StartInfo.FileName = @"D:\Softs\Beyond Compare 3\BCompare.exe";
+                p.StartInfo.Arguments = $"{filename0} {filename1}";
+                p.Start();
+            }
+        }
     }
 }

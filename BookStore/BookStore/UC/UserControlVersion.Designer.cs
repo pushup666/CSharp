@@ -47,6 +47,8 @@
             this.EtcToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.replaceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.compareToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewVersionList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -197,14 +199,14 @@
             // short2LongToolStripMenuItem
             // 
             this.short2LongToolStripMenuItem.Name = "short2LongToolStripMenuItem";
-            this.short2LongToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.short2LongToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.short2LongToolStripMenuItem.Text = "短行变长行";
             this.short2LongToolStripMenuItem.Click += new System.EventHandler(this.Short2LongToolStripMenuItem_Click);
             // 
             // long2ShortToolStripMenuItem
             // 
             this.long2ShortToolStripMenuItem.Name = "long2ShortToolStripMenuItem";
-            this.long2ShortToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.long2ShortToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.long2ShortToolStripMenuItem.Text = "长行变短行";
             this.long2ShortToolStripMenuItem.Click += new System.EventHandler(this.Long2ShortToolStripMenuItem_Click);
             // 
@@ -212,7 +214,9 @@
             // 
             this.EtcToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.saveToolStripMenuItem,
-            this.removeToolStripMenuItem});
+            this.removeToolStripMenuItem,
+            this.replaceToolStripMenuItem,
+            this.compareToolStripMenuItem});
             this.EtcToolStripMenuItem.Name = "EtcToolStripMenuItem";
             this.EtcToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
             this.EtcToolStripMenuItem.Text = "其他";
@@ -220,16 +224,30 @@
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveToolStripMenuItem.Text = "保存";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.SaveToolStripMenuItem_Click);
             // 
             // removeToolStripMenuItem
             // 
             this.removeToolStripMenuItem.Name = "removeToolStripMenuItem";
-            this.removeToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.removeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.removeToolStripMenuItem.Text = "删除";
             this.removeToolStripMenuItem.Click += new System.EventHandler(this.RemoveToolStripMenuItem_Click);
+            // 
+            // replaceToolStripMenuItem
+            // 
+            this.replaceToolStripMenuItem.Name = "replaceToolStripMenuItem";
+            this.replaceToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.replaceToolStripMenuItem.Text = "替换";
+            this.replaceToolStripMenuItem.Click += new System.EventHandler(this.ReplaceToolStripMenuItem_Click);
+            // 
+            // compareToolStripMenuItem
+            // 
+            this.compareToolStripMenuItem.Name = "compareToolStripMenuItem";
+            this.compareToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.compareToolStripMenuItem.Text = "对比";
+            this.compareToolStripMenuItem.Click += new System.EventHandler(this.CompareToolStripMenuItem_Click);
             // 
             // UserControlVersion
             // 
@@ -272,5 +290,7 @@
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem removeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem removeAllBlankLineToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem replaceToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem compareToolStripMenuItem;
     }
 }

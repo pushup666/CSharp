@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text.RegularExpressions;
-using System.Windows.Forms;
-using BookStore.BLL;
+﻿using BookStore.BLL;
 using BookStore.DLG;
 using BookStore.Model;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Windows.Forms;
 
 namespace BookStore.UC
 {
@@ -30,7 +29,7 @@ namespace BookStore.UC
             using var dt = BookStoreBLL.GetBookList();
 
             using var replaceFrm = new FrmReplace();
-            if (replaceFrm.ShowDialog() == DialogResult.OK)
+            if (replaceFrm.ShowDialog() == DialogResult.OK && replaceFrm.Input != string.Empty)
             {
                 //处理Title
                 for (var i = 0; i < dt.Rows.Count; i++)
