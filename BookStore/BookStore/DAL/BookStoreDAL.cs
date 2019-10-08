@@ -35,5 +35,11 @@ namespace BookStore.DAL
 
             SqliteHelper.ExecuteNonQueryBat(sqls);
         }
+
+        public static void VacuumDatabase()
+        {
+            var sql = "VACUUM;";
+            SqliteHelper.ExecuteNonQuery(sql);
+        }
     }
 }

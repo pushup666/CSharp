@@ -18,6 +18,17 @@ namespace BookStore
             InitializeComponent();
         }
 
+        private void TabControlMain_DoubleClick(object sender, EventArgs e)
+        {
+            var index = tabControlMain.SelectedIndex;
+
+            if (index > 0)
+            {
+                tabControlMain.TabPages.RemoveAt(index);
+                tabControlMain.SelectTab(index - 1);
+            }
+        }
+
         private void ButtonImportBooks_Click(object sender, EventArgs e)
         {
             try
@@ -127,18 +138,14 @@ namespace BookStore
                 MessageBox.Show(ex.Message + ex.StackTrace);
             }
         }
-
-        private void TabControlMain_DoubleClick(object sender, EventArgs e)
+        
+        private void ButtonVacuum_Click(object sender, EventArgs e)
         {
-            var index = tabControlMain.SelectedIndex;
-
-            if (index > 0)
+            if (MessageBox.Show($"确认将标记为“已删除”的数据从数据库里清空？同时这将收缩数据库未使用的空间。", "警告", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-                tabControlMain.TabPages.RemoveAt(index);
-                tabControlMain.SelectTab(index - 1);
-            }            
+                BookStoreBLL.VacuumDatabase();
+                MessageBox.Show("释放空间完成！");
+            }
         }
-
-
     }
 }

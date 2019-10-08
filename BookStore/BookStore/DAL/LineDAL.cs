@@ -52,6 +52,12 @@ namespace BookStore.DAL
             return SqliteHelper.ExecuteNonQuery(sql, pms) != -1;
         }
 
+        public static bool ClearLines()
+        {
+            const string sql = "DELETE FROM Line;";
+            return SqliteHelper.ExecuteNonQuery(sql) != -1;
+        }
+
         public static bool Version2Lines(string bookID, List<string> lines )
         {
             const string sql = "INSERT INTO Line (ID, BookID, LineNo, Content) VALUES (@ID, @BookID, @LineNo, @Content);";

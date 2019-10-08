@@ -92,5 +92,11 @@ namespace BookStore.DAL
 
             return versionID != null;
         }
+
+        public static bool ClearVersion()
+        {
+            const string sql = "DELETE FROM Version WHERE DeleteFlag = 1;";
+            return SqliteHelper.ExecuteNonQuery(sql) != -1;
+        }
     }
 }

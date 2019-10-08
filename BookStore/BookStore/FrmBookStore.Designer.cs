@@ -33,6 +33,7 @@
             this.tabPageBook = new System.Windows.Forms.TabPage();
             this.ucBook = new BookStore.UC.UserControlBook();
             this.buttonExport = new System.Windows.Forms.Button();
+            this.buttonVacuum = new System.Windows.Forms.Button();
             this.tabControlMain.SuspendLayout();
             this.tabPageBook.SuspendLayout();
             this.SuspendLayout();
@@ -88,11 +89,22 @@
             this.buttonExport.UseVisualStyleBackColor = true;
             this.buttonExport.Click += new System.EventHandler(this.ButtonExport_Click);
             // 
+            // buttonVacuum
+            // 
+            this.buttonVacuum.Location = new System.Drawing.Point(174, 12);
+            this.buttonVacuum.Name = "buttonVacuum";
+            this.buttonVacuum.Size = new System.Drawing.Size(75, 23);
+            this.buttonVacuum.TabIndex = 3;
+            this.buttonVacuum.Text = "释放空间";
+            this.buttonVacuum.UseVisualStyleBackColor = true;
+            this.buttonVacuum.Click += new System.EventHandler(this.ButtonVacuum_Click);
+            // 
             // FrmBookStore
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(965, 512);
+            this.Controls.Add(this.buttonVacuum);
             this.Controls.Add(this.buttonExport);
             this.Controls.Add(this.tabControlMain);
             this.Controls.Add(this.buttonImportBooks);
@@ -111,6 +123,7 @@
         private System.Windows.Forms.TabPage tabPageBook;
         private BookStore.UC.UserControlBook ucBook;
         private System.Windows.Forms.Button buttonExport;
+        private System.Windows.Forms.Button buttonVacuum;
     }
 }
 

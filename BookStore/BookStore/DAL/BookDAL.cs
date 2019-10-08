@@ -92,5 +92,11 @@ namespace BookStore.DAL
 
             return SqliteHelper.ExecuteNonQuery(sql, pms) != -1;
         }
+
+        public static bool ClearBook()
+        {
+            const string sql = "DELETE FROM Book WHERE DeleteFlag = 1;";
+            return SqliteHelper.ExecuteNonQuery(sql) != -1;
+        }
     }
 }
