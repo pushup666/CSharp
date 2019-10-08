@@ -399,7 +399,7 @@ namespace BookStore.UC
 
                 p.StartInfo.WorkingDirectory = savePath;
                 p.StartInfo.FileName = Utils.GetAppConfig("BCompare");
-                p.StartInfo.Arguments = $"{filename0} {filename1}";
+                p.StartInfo.Arguments = $"\"{filename0}\" \"{filename1}\"";
                 p.Start();
             }
         }
