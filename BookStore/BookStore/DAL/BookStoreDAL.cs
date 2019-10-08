@@ -30,7 +30,9 @@ namespace BookStore.DAL
                 "ID TEXT PRIMARY KEY NOT NULL, " +
                 "BookID TEXT REFERENCES Book(ID) NOT NULL, " +
                 "LineNo INTEGER NOT NULL, " +
-                "Content TEXT NOT NULL); "
+                "Content TEXT NOT NULL); ",
+
+                "CREATE INDEX IDX_ContentHash ON Version (ContentHash);"
             };
 
             SqliteHelper.ExecuteNonQueryBat(sqls);

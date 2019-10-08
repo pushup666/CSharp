@@ -18,7 +18,7 @@ namespace GenTxtFiles
         private const int FilesCount = 1000;
         private const int AvrgFileLines = 1000;
         private const int AvrgLineLength = 100;
-        private const string FilePath = @"C:\Users\ssf\Desktop\111\";
+        private const string FilePath = @"Z:\111\";
         private static readonly Random R = new Random();
 
         static void Main()

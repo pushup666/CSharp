@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
@@ -33,6 +34,9 @@ namespace BookStore
         {
             try
             {
+                using var sw = new StreamWriter($@"{Environment.CurrentDirectory}\{DateTime.Now:yyyy-MM-dd}.log", true);
+                var stopw = new Stopwatch();
+                
                 using (var openFileDialog = new OpenFileDialog())
                 {
                     openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
@@ -40,6 +44,8 @@ namespace BookStore
                     openFileDialog.Filter = "Text File|*.txt";
 
                     if (openFileDialog.ShowDialog() != DialogResult.OK) return;
+
+                    stopw.Restart();
 
                     _fileList.Clear();
                     foreach (var fileName in openFileDialog.FileNames)
@@ -53,16 +59,22 @@ namespace BookStore
                             MessageBox.Show(fileName + ex.Message);
                         }
                     }
+
+                    sw.WriteLine($"准备工作 {stopw.ElapsedMilliseconds} ms");
                 }
 
+
+                
                 foreach (var fileName in _fileList)
                 {
+                    stopw.Restart();
+
                     using var sr = new StreamReader(fileName, Encoding.Default);
 
                     var title = Path.GetFileNameWithoutExtension(fileName);
                     var fileContent = sr.ReadToEnd();
                     var contentHash = Utils.GetHash(fileContent);
-                    
+
                     if (BookStoreBLL.IsThisHashExist(contentHash))
                     {
                         MessageBox.Show($"{title} 重复！");                        
@@ -84,6 +96,8 @@ namespace BookStore
                             }
                         }
                     }
+
+                    sw.WriteLine($"导入{fileName} {stopw.ElapsedMilliseconds} ms");
                 }
 
                 MessageBox.Show("导入完成！");
