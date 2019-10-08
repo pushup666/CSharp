@@ -20,7 +20,7 @@
         }
         public BookDO(string title, string alias, string author, string note)
         {
-            ID = Utils.GetUID();
+            ID = Utils.GetID();
             Title = title;
             Alias = alias;
             Author = author;

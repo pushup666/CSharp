@@ -398,7 +398,7 @@ namespace BookStore.UC
                 var p = new Process();
 
                 p.StartInfo.WorkingDirectory = savePath;
-                p.StartInfo.FileName = @"D:\Softs\Beyond Compare 3\BCompare.exe";
+                p.StartInfo.FileName = Utils.GetAppConfig("BCompare");
                 p.StartInfo.Arguments = $"{filename0} {filename1}";
                 p.Start();
             }

@@ -67,7 +67,7 @@ namespace BookStore.DAL
             {
                 var pm = new SQLiteParameter[4];
 
-                pm[0] = new SQLiteParameter("@ID", DbType.String) {Value = Utils.GetUID()};
+                pm[0] = new SQLiteParameter("@ID", DbType.String) {Value = Utils.GetID()};
                 pm[1] = new SQLiteParameter("@BookID", DbType.String) {Value = bookID };
                 pm[2] = new SQLiteParameter("@LineNo", DbType.Int32) {Value = i};
                 pm[3] = new SQLiteParameter("@Content", DbType.String) {Value = lines[i]};

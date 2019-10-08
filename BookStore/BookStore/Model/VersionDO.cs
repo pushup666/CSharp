@@ -21,7 +21,7 @@
 
         public VersionDO(string bookID, string content, string contentHash, int contentLength)
         {
-            ID = Utils.GetUID();
+            ID = Utils.GetID();
             BookID = bookID;
             Content = content;
             ContentHash = contentHash;

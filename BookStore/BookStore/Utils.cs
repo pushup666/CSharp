@@ -6,7 +6,7 @@ namespace BookStore
 {
     static class Utils
     {
-        public static string GetUID()
+        public static string GetID()
         {
             return Guid.NewGuid().ToString("N").ToUpper();
         }
@@ -25,6 +25,11 @@ namespace BookStore
             }
 
             return sb.ToString();
+        }
+
+        public static string GetAppConfig(string key)
+        {
+            return System.Configuration.ConfigurationManager.AppSettings[key];
         }
     }
 }
