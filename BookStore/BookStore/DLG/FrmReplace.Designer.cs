@@ -1,4 +1,4 @@
-﻿namespace BookStore
+﻿namespace BookStore.DLG
 {
     partial class FrmReplace
     {
@@ -77,7 +77,7 @@
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.textBoxInput);
             this.Controls.Add(this.buttonConfirm);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "FrmReplace";
             this.Text = "Replace";
             this.ResumeLayout(false);

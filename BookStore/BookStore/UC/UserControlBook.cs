@@ -4,6 +4,7 @@ using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using BookStore.BLL;
+using BookStore.DLG;
 using BookStore.Model;
 
 namespace BookStore.UC

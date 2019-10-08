@@ -1,4 +1,4 @@
-﻿namespace BookStore
+﻿namespace BookStore.DLG
 {
     partial class FrmInput
     {
@@ -60,7 +60,7 @@
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
-            // InputFrm
+            // FrmInput
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -68,8 +68,8 @@
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.textBoxInput);
             this.Controls.Add(this.buttonConfirm);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "InputFrm";
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Name = "FrmInput";
             this.Text = "Input";
             this.ResumeLayout(false);
             this.PerformLayout();

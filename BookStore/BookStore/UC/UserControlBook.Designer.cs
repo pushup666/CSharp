@@ -223,7 +223,6 @@
             // 
             // buttonReplace
             // 
-            this.buttonReplace.Enabled = false;
             this.buttonReplace.Location = new System.Drawing.Point(821, 48);
             this.buttonReplace.Name = "buttonReplace";
             this.buttonReplace.Size = new System.Drawing.Size(75, 23);
