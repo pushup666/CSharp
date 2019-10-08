@@ -1,6 +1,6 @@
 ﻿namespace BookStore
 {
-    partial class BookStoreFrm
+    partial class FrmBookStore
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -88,7 +88,7 @@
             this.buttonExport.UseVisualStyleBackColor = true;
             this.buttonExport.Click += new System.EventHandler(this.ButtonExport_Click);
             // 
-            // BookStoreFrm
+            // FrmBookStore
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -96,8 +96,8 @@
             this.Controls.Add(this.buttonExport);
             this.Controls.Add(this.tabControlMain);
             this.Controls.Add(this.buttonImportBooks);
-            this.Name = "BookStoreFrm";
-            this.Text = "BookStoreFrm";
+            this.Name = "FrmBookStore";
+            this.Text = "BookStore";
             this.tabControlMain.ResumeLayout(false);
             this.tabPageBook.ResumeLayout(false);
             this.ResumeLayout(false);

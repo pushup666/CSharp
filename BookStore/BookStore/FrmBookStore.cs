@@ -8,11 +8,11 @@ using BookStore.Model;
 
 namespace BookStore
 {
-    public partial class BookStoreFrm : Form
+    public partial class FrmBookStore : Form
     {
         private readonly List<string> _fileList = new List<string>();
         
-        public BookStoreFrm()
+        public FrmBookStore()
         {
             BookStoreBLL.CreateTable();
             InitializeComponent();

@@ -24,26 +24,32 @@ namespace BookStore.UC
             dataGridViewBookList.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
         }
 
-        private void Test()
+        private void Replace()
         {
             using var dt = BookStoreBLL.GetBookList();
 
-            //处理Title
-            for (var i = 0; i < dt.Rows.Count; i++)
+            using var replaceFrm = new FrmReplace();
+            if (replaceFrm.ShowDialog() == DialogResult.OK)
             {
-                var id = dt.Rows[i]["ID"].ToString();
-                var title = dt.Rows[i]["Title"].ToString();
-                var alias = dt.Rows[i]["Alias"].ToString();
-                var author = dt.Rows[i]["Author"].ToString();
-                var note = dt.Rows[i]["Note"].ToString();
-                var rate = int.Parse(dt.Rows[i]["Rate"].ToString());
-                
-                if (title.Contains("  "))
+                //处理Title
+                for (var i = 0; i < dt.Rows.Count; i++)
                 {
-                    BookDO newbook = new BookDO(id, title.Replace("  "," "), alias, author, note, rate);
-                    BookStoreBLL.ModifyBook(newbook);
+                    var id = dt.Rows[i]["ID"].ToString();
+                    var title = dt.Rows[i]["Title"].ToString();
+                    var alias = dt.Rows[i]["Alias"].ToString();
+                    var author = dt.Rows[i]["Author"].ToString();
+                    var note = dt.Rows[i]["Note"].ToString();
+                    var rate = int.Parse(dt.Rows[i]["Rate"].ToString());
+
+                    if (title.Contains(replaceFrm.Input))
+                    {
+                        BookDO newbook = new BookDO(id, title.Replace(replaceFrm.Input, replaceFrm.Replace), alias, author, note, rate);
+                        BookStoreBLL.ModifyBook(newbook);
+                    }
                 }
+
             }
+            
             MessageBox.Show("测试结束！");
         }
 
@@ -182,9 +188,9 @@ namespace BookStore.UC
             RefreshBookList();
         }
 
-        private void ButtonTest_Click(object sender, EventArgs e)
+        private void ButtonReplace_Click(object sender, EventArgs e)
         {
-            Test();
+            Replace();
         }
     }
 }

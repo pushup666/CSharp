@@ -10,10 +10,10 @@ using System.Windows.Forms;
 
 namespace BookStore
 {
-    public partial class InputFrm : Form
+    public partial class FrmInput : Form
     {
-        public string Value;
-        public InputFrm()
+        public string Input;
+        public FrmInput()
         {
             InitializeComponent();
         }
@@ -21,7 +21,7 @@ namespace BookStore
         private void ButtonConfirm_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.OK;
-            Value = textBoxInput.Text;
+            Input = textBoxInput.Text;
             Close();
         }
 

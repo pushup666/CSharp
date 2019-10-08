@@ -46,7 +46,7 @@
             this.buttonRefresh = new System.Windows.Forms.Button();
             this.textBoxFilter = new System.Windows.Forms.TextBox();
             this.checkBoxUseFilter = new System.Windows.Forms.CheckBox();
-            this.buttonTest = new System.Windows.Forms.Button();
+            this.buttonReplace = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBookList)).BeginInit();
             this.SuspendLayout();
             // 
@@ -221,22 +221,22 @@
             this.checkBoxUseFilter.Text = "过滤";
             this.checkBoxUseFilter.UseVisualStyleBackColor = true;
             // 
-            // buttonTest
+            // buttonReplace
             // 
-            this.buttonTest.Enabled = false;
-            this.buttonTest.Location = new System.Drawing.Point(821, 48);
-            this.buttonTest.Name = "buttonTest";
-            this.buttonTest.Size = new System.Drawing.Size(75, 23);
-            this.buttonTest.TabIndex = 30;
-            this.buttonTest.Text = "测试";
-            this.buttonTest.UseVisualStyleBackColor = true;
-            this.buttonTest.Click += new System.EventHandler(this.ButtonTest_Click);
+            this.buttonReplace.Enabled = false;
+            this.buttonReplace.Location = new System.Drawing.Point(821, 48);
+            this.buttonReplace.Name = "buttonReplace";
+            this.buttonReplace.Size = new System.Drawing.Size(75, 23);
+            this.buttonReplace.TabIndex = 30;
+            this.buttonReplace.Text = "替换标题";
+            this.buttonReplace.UseVisualStyleBackColor = true;
+            this.buttonReplace.Click += new System.EventHandler(this.ButtonReplace_Click);
             // 
             // UserControlBook
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.buttonTest);
+            this.Controls.Add(this.buttonReplace);
             this.Controls.Add(this.checkBoxUseFilter);
             this.Controls.Add(this.textBoxFilter);
             this.Controls.Add(this.buttonRefresh);
@@ -281,6 +281,6 @@
         private System.Windows.Forms.Button buttonRefresh;
         private System.Windows.Forms.TextBox textBoxFilter;
         private System.Windows.Forms.CheckBox checkBoxUseFilter;
-        private System.Windows.Forms.Button buttonTest;
+        private System.Windows.Forms.Button buttonReplace;
     }
 }

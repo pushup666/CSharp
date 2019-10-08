@@ -215,8 +215,8 @@ namespace BookStore.UC
 
             MessageBox.Show(sb.ToString());
 
-            using var inputFrm = new InputFrm();
-            var length = inputFrm.ShowDialog() == DialogResult.OK ? int.Parse(inputFrm.Value) : 33;
+            using var inputFrm = new FrmInput();
+            var length = inputFrm.ShowDialog() == DialogResult.OK ? int.Parse(inputFrm.Input) : 33;
 
             foreach (var line in richTextBoxVersionContent.Lines)
             {

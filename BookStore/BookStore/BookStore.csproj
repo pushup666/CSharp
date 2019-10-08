@@ -49,21 +49,27 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLL\BookStoreBLL.cs" />
-    <Compile Include="BookStoreFrm.cs">
+    <Compile Include="FrmBookStore.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="BookStoreFrm.Designer.cs">
-      <DependentUpon>BookStoreFrm.cs</DependentUpon>
+    <Compile Include="FrmBookStore.Designer.cs">
+      <DependentUpon>FrmBookStore.cs</DependentUpon>
     </Compile>
     <Compile Include="DAL\BookDAL.cs" />
     <Compile Include="DAL\BookStoreDAL.cs" />
     <Compile Include="DAL\LineDAL.cs" />
     <Compile Include="DAL\VersionDAL.cs" />
-    <Compile Include="InputFrm.cs">
+    <Compile Include="DLG\FrmReplace.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="InputFrm.Designer.cs">
-      <DependentUpon>InputFrm.cs</DependentUpon>
+    <Compile Include="DLG\FrmReplace.Designer.cs">
+      <DependentUpon>FrmReplace.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DLG\FrmInput.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DLG\FrmInput.Designer.cs">
+      <DependentUpon>FrmInput.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\BookDO.cs" />
     <Compile Include="Model\VersionDO.cs" />
@@ -89,11 +95,14 @@
       <DependentUpon>UserControlVersion.cs</DependentUpon>
     </Compile>
     <Compile Include="Utils.cs" />
-    <EmbeddedResource Include="BookStoreFrm.resx">
-      <DependentUpon>BookStoreFrm.cs</DependentUpon>
+    <EmbeddedResource Include="FrmBookStore.resx">
+      <DependentUpon>FrmBookStore.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="InputFrm.resx">
-      <DependentUpon>InputFrm.cs</DependentUpon>
+    <EmbeddedResource Include="DLG\FrmReplace.resx">
+      <DependentUpon>FrmReplace.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DLG\FrmInput.resx">
+      <DependentUpon>FrmInput.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
