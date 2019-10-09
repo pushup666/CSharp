@@ -34,9 +34,11 @@ namespace BookStore
         {
             try
             {
+#if DEBUG
                 using var sw = new StreamWriter($@"{Environment.CurrentDirectory}\{DateTime.Now:yyyy-MM-dd}.log", true);
                 var stopw = new Stopwatch();
-                
+#endif
+
                 using (var openFileDialog = new OpenFileDialog())
                 {
                     openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
@@ -44,9 +46,9 @@ namespace BookStore
                     openFileDialog.Filter = "Text File|*.txt";
 
                     if (openFileDialog.ShowDialog() != DialogResult.OK) return;
-
+#if DEBUG
                     stopw.Restart();
-
+#endif
                     _fileList.Clear();
                     foreach (var fileName in openFileDialog.FileNames)
                     {
@@ -59,16 +61,18 @@ namespace BookStore
                             MessageBox.Show(fileName + ex.Message);
                         }
                     }
-
+#if DEBUG
                     sw.WriteLine($"准备工作 {stopw.ElapsedMilliseconds} ms");
+#endif
                 }
 
 
-                
+
                 foreach (var fileName in _fileList)
                 {
+#if DEBUG
                     stopw.Restart();
-
+#endif
                     using var sr = new StreamReader(fileName, Encoding.Default);
 
                     var title = Path.GetFileNameWithoutExtension(fileName);
@@ -96,8 +100,9 @@ namespace BookStore
                             }
                         }
                     }
-
+#if DEBUG
                     sw.WriteLine($"导入{fileName} {stopw.ElapsedMilliseconds} ms");
+#endif
                 }
 
                 MessageBox.Show("导入完成！");
