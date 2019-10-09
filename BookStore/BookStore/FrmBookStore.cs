@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using BookStore.BLL;
 using BookStore.Model;
+using BookStore.UC;
 
 
 namespace BookStore
@@ -16,11 +17,22 @@ namespace BookStore
     public partial class FrmBookStore : Form
     {
         private readonly List<string> _fileList = new List<string>();
-        
+        private readonly UserControlBook _ucBook = new UserControlBook();
+
         public FrmBookStore()
         {
             BookStoreBLL.CreateTable();
             InitializeComponent();
+        }
+
+        private void FrmBookStore_Load(object sender, EventArgs e)
+        {
+            var bookPage = new TabPage("书库") { Name = "Library" };
+
+            bookPage.Controls.Add(_ucBook);
+            _ucBook.Dock = DockStyle.Fill;
+
+            tabControlMain.TabPages.Add(bookPage);
         }
 
         private void TabControlMain_DoubleClick(object sender, EventArgs e)
@@ -113,7 +125,7 @@ namespace BookStore
 
                 MessageBox.Show($"{count.ToString()}项 导入完成！");
 
-                ucBook.RefreshBookList();
+                _ucBook.RefreshBookList();
             }
             catch (Exception ex)
             {

@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.buttonRemove = new System.Windows.Forms.Button();
             this.buttonSave = new System.Windows.Forms.Button();
             this.comboBoxRate = new System.Windows.Forms.ComboBox();
@@ -44,15 +44,31 @@
             this.dataGridViewBookList = new System.Windows.Forms.DataGridView();
             this.buttonExport = new System.Windows.Forms.Button();
             this.buttonRefresh = new System.Windows.Forms.Button();
-            this.textBoxFilter = new System.Windows.Forms.TextBox();
+            this.textBoxTitleFilter = new System.Windows.Forms.TextBox();
             this.checkBoxUseFilter = new System.Windows.Forms.CheckBox();
             this.buttonReplace = new System.Windows.Forms.Button();
+            this.labelRowCount = new System.Windows.Forms.Label();
+            this.labelPageSize = new System.Windows.Forms.Label();
+            this.labelCurrentPage = new System.Windows.Forms.Label();
+            this.buttonNextPage = new System.Windows.Forms.Button();
+            this.buttonLastPage = new System.Windows.Forms.Button();
+            this.buttonPrevPage = new System.Windows.Forms.Button();
+            this.buttonFirstPage = new System.Windows.Forms.Button();
+            this.panelPage = new System.Windows.Forms.Panel();
+            this.panelFilter = new System.Windows.Forms.Panel();
+            this.comboBoxRateFilter = new System.Windows.Forms.ComboBox();
+            this.textBoxLengthFilter = new System.Windows.Forms.TextBox();
+            this.labelTitleFilter = new System.Windows.Forms.Label();
+            this.labelLengthFilter = new System.Windows.Forms.Label();
+            this.labelRateFilter = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBookList)).BeginInit();
+            this.panelPage.SuspendLayout();
+            this.panelFilter.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonRemove
             // 
-            this.buttonRemove.Location = new System.Drawing.Point(578, 48);
+            this.buttonRemove.Location = new System.Drawing.Point(822, 11);
             this.buttonRemove.Name = "buttonRemove";
             this.buttonRemove.Size = new System.Drawing.Size(75, 23);
             this.buttonRemove.TabIndex = 25;
@@ -62,7 +78,7 @@
             // 
             // buttonSave
             // 
-            this.buttonSave.Location = new System.Drawing.Point(497, 49);
+            this.buttonSave.Location = new System.Drawing.Point(741, 12);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(75, 23);
             this.buttonSave.TabIndex = 24;
@@ -81,15 +97,15 @@
             "3",
             "4",
             "5"});
-            this.comboBoxRate.Location = new System.Drawing.Point(288, 51);
+            this.comboBoxRate.Location = new System.Drawing.Point(661, 13);
             this.comboBoxRate.Name = "comboBoxRate";
-            this.comboBoxRate.Size = new System.Drawing.Size(165, 20);
+            this.comboBoxRate.Size = new System.Drawing.Size(45, 20);
             this.comboBoxRate.TabIndex = 23;
             // 
             // labelRate
             // 
             this.labelRate.AutoSize = true;
-            this.labelRate.Location = new System.Drawing.Point(253, 54);
+            this.labelRate.Location = new System.Drawing.Point(623, 16);
             this.labelRate.Name = "labelRate";
             this.labelRate.Size = new System.Drawing.Size(29, 12);
             this.labelRate.TabIndex = 22;
@@ -97,15 +113,15 @@
             // 
             // textBoxNote
             // 
-            this.textBoxNote.Location = new System.Drawing.Point(55, 51);
+            this.textBoxNote.Location = new System.Drawing.Point(529, 14);
             this.textBoxNote.Name = "textBoxNote";
-            this.textBoxNote.Size = new System.Drawing.Size(165, 21);
+            this.textBoxNote.Size = new System.Drawing.Size(85, 21);
             this.textBoxNote.TabIndex = 21;
             // 
             // labelNote
             // 
             this.labelNote.AutoSize = true;
-            this.labelNote.Location = new System.Drawing.Point(20, 54);
+            this.labelNote.Location = new System.Drawing.Point(491, 17);
             this.labelNote.Name = "labelNote";
             this.labelNote.Size = new System.Drawing.Size(29, 12);
             this.labelNote.TabIndex = 20;
@@ -113,15 +129,15 @@
             // 
             // textBoxAuthor
             // 
-            this.textBoxAuthor.Location = new System.Drawing.Point(530, 14);
+            this.textBoxAuthor.Location = new System.Drawing.Point(397, 14);
             this.textBoxAuthor.Name = "textBoxAuthor";
-            this.textBoxAuthor.Size = new System.Drawing.Size(165, 21);
+            this.textBoxAuthor.Size = new System.Drawing.Size(85, 21);
             this.textBoxAuthor.TabIndex = 19;
             // 
             // labelAuthor
             // 
             this.labelAuthor.AutoSize = true;
-            this.labelAuthor.Location = new System.Drawing.Point(495, 17);
+            this.labelAuthor.Location = new System.Drawing.Point(359, 17);
             this.labelAuthor.Name = "labelAuthor";
             this.labelAuthor.Size = new System.Drawing.Size(29, 12);
             this.labelAuthor.TabIndex = 18;
@@ -129,15 +145,15 @@
             // 
             // textBoxAlias
             // 
-            this.textBoxAlias.Location = new System.Drawing.Point(288, 14);
+            this.textBoxAlias.Location = new System.Drawing.Point(265, 13);
             this.textBoxAlias.Name = "textBoxAlias";
-            this.textBoxAlias.Size = new System.Drawing.Size(165, 21);
+            this.textBoxAlias.Size = new System.Drawing.Size(85, 21);
             this.textBoxAlias.TabIndex = 17;
             // 
             // labelAlias
             // 
             this.labelAlias.AutoSize = true;
-            this.labelAlias.Location = new System.Drawing.Point(253, 17);
+            this.labelAlias.Location = new System.Drawing.Point(227, 16);
             this.labelAlias.Name = "labelAlias";
             this.labelAlias.Size = new System.Drawing.Size(29, 12);
             this.labelAlias.TabIndex = 16;
@@ -145,7 +161,7 @@
             // 
             // textBoxTitle
             // 
-            this.textBoxTitle.Location = new System.Drawing.Point(55, 14);
+            this.textBoxTitle.Location = new System.Drawing.Point(53, 14);
             this.textBoxTitle.Name = "textBoxTitle";
             this.textBoxTitle.Size = new System.Drawing.Size(165, 21);
             this.textBoxTitle.TabIndex = 15;
@@ -153,7 +169,7 @@
             // labelTitle
             // 
             this.labelTitle.AutoSize = true;
-            this.labelTitle.Location = new System.Drawing.Point(20, 17);
+            this.labelTitle.Location = new System.Drawing.Point(15, 17);
             this.labelTitle.Name = "labelTitle";
             this.labelTitle.Size = new System.Drawing.Size(29, 12);
             this.labelTitle.TabIndex = 14;
@@ -167,19 +183,20 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridViewBookList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewBookList.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewBookList.DefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridViewBookList.Location = new System.Drawing.Point(17, 88);
             this.dataGridViewBookList.Name = "dataGridViewBookList";
             this.dataGridViewBookList.ReadOnly = true;
             this.dataGridViewBookList.RowTemplate.Height = 23;
-            this.dataGridViewBookList.Size = new System.Drawing.Size(880, 381);
+            this.dataGridViewBookList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridViewBookList.Size = new System.Drawing.Size(880, 348);
             this.dataGridViewBookList.TabIndex = 13;
             this.dataGridViewBookList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewBook_CellClick);
             this.dataGridViewBookList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewBook_CellDoubleClick);
@@ -204,17 +221,17 @@
             this.buttonRefresh.UseVisualStyleBackColor = true;
             this.buttonRefresh.Click += new System.EventHandler(this.ButtonRefresh_Click);
             // 
-            // textBoxFilter
+            // textBoxTitleFilter
             // 
-            this.textBoxFilter.Location = new System.Drawing.Point(777, 14);
-            this.textBoxFilter.Name = "textBoxFilter";
-            this.textBoxFilter.Size = new System.Drawing.Size(120, 21);
-            this.textBoxFilter.TabIndex = 28;
+            this.textBoxTitleFilter.Location = new System.Drawing.Point(116, 10);
+            this.textBoxTitleFilter.Name = "textBoxTitleFilter";
+            this.textBoxTitleFilter.Size = new System.Drawing.Size(91, 21);
+            this.textBoxTitleFilter.TabIndex = 28;
             // 
             // checkBoxUseFilter
             // 
             this.checkBoxUseFilter.AutoSize = true;
-            this.checkBoxUseFilter.Location = new System.Drawing.Point(723, 16);
+            this.checkBoxUseFilter.Location = new System.Drawing.Point(3, 11);
             this.checkBoxUseFilter.Name = "checkBoxUseFilter";
             this.checkBoxUseFilter.Size = new System.Drawing.Size(48, 16);
             this.checkBoxUseFilter.TabIndex = 29;
@@ -223,7 +240,7 @@
             // 
             // buttonReplace
             // 
-            this.buttonReplace.Location = new System.Drawing.Point(821, 48);
+            this.buttonReplace.Location = new System.Drawing.Point(822, 49);
             this.buttonReplace.Name = "buttonReplace";
             this.buttonReplace.Size = new System.Drawing.Size(75, 23);
             this.buttonReplace.TabIndex = 30;
@@ -231,13 +248,160 @@
             this.buttonReplace.UseVisualStyleBackColor = true;
             this.buttonReplace.Click += new System.EventHandler(this.ButtonReplace_Click);
             // 
+            // labelRowCount
+            // 
+            this.labelRowCount.AutoSize = true;
+            this.labelRowCount.Location = new System.Drawing.Point(3, 13);
+            this.labelRowCount.Name = "labelRowCount";
+            this.labelRowCount.Size = new System.Drawing.Size(41, 12);
+            this.labelRowCount.TabIndex = 31;
+            this.labelRowCount.Text = "总行数";
+            // 
+            // labelPageSize
+            // 
+            this.labelPageSize.AutoSize = true;
+            this.labelPageSize.Location = new System.Drawing.Point(140, 13);
+            this.labelPageSize.Name = "labelPageSize";
+            this.labelPageSize.Size = new System.Drawing.Size(53, 12);
+            this.labelPageSize.TabIndex = 32;
+            this.labelPageSize.Text = "每页行数";
+            // 
+            // labelCurrentPage
+            // 
+            this.labelCurrentPage.AutoSize = true;
+            this.labelCurrentPage.Location = new System.Drawing.Point(289, 13);
+            this.labelCurrentPage.Name = "labelCurrentPage";
+            this.labelCurrentPage.Size = new System.Drawing.Size(53, 12);
+            this.labelCurrentPage.TabIndex = 33;
+            this.labelCurrentPage.Text = "当前页数";
+            // 
+            // buttonNextPage
+            // 
+            this.buttonNextPage.Location = new System.Drawing.Point(620, 8);
+            this.buttonNextPage.Name = "buttonNextPage";
+            this.buttonNextPage.Size = new System.Drawing.Size(75, 23);
+            this.buttonNextPage.TabIndex = 37;
+            this.buttonNextPage.Text = "下一页";
+            this.buttonNextPage.UseVisualStyleBackColor = true;
+            this.buttonNextPage.Click += new System.EventHandler(this.ButtonNextPage_Click);
+            // 
+            // buttonLastPage
+            // 
+            this.buttonLastPage.Location = new System.Drawing.Point(701, 8);
+            this.buttonLastPage.Name = "buttonLastPage";
+            this.buttonLastPage.Size = new System.Drawing.Size(75, 23);
+            this.buttonLastPage.TabIndex = 36;
+            this.buttonLastPage.Text = "末页";
+            this.buttonLastPage.UseVisualStyleBackColor = true;
+            this.buttonLastPage.Click += new System.EventHandler(this.ButtonLastPage_Click);
+            // 
+            // buttonPrevPage
+            // 
+            this.buttonPrevPage.Location = new System.Drawing.Point(539, 8);
+            this.buttonPrevPage.Name = "buttonPrevPage";
+            this.buttonPrevPage.Size = new System.Drawing.Size(75, 23);
+            this.buttonPrevPage.TabIndex = 35;
+            this.buttonPrevPage.Text = "上一页";
+            this.buttonPrevPage.UseVisualStyleBackColor = true;
+            this.buttonPrevPage.Click += new System.EventHandler(this.ButtonPrevPage_Click);
+            // 
+            // buttonFirstPage
+            // 
+            this.buttonFirstPage.Location = new System.Drawing.Point(458, 8);
+            this.buttonFirstPage.Name = "buttonFirstPage";
+            this.buttonFirstPage.Size = new System.Drawing.Size(75, 23);
+            this.buttonFirstPage.TabIndex = 34;
+            this.buttonFirstPage.Text = "首页";
+            this.buttonFirstPage.UseVisualStyleBackColor = true;
+            this.buttonFirstPage.Click += new System.EventHandler(this.ButtonFirstPage_Click);
+            // 
+            // panelPage
+            // 
+            this.panelPage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelPage.Controls.Add(this.labelRowCount);
+            this.panelPage.Controls.Add(this.buttonLastPage);
+            this.panelPage.Controls.Add(this.buttonNextPage);
+            this.panelPage.Controls.Add(this.labelPageSize);
+            this.panelPage.Controls.Add(this.labelCurrentPage);
+            this.panelPage.Controls.Add(this.buttonPrevPage);
+            this.panelPage.Controls.Add(this.buttonFirstPage);
+            this.panelPage.Location = new System.Drawing.Point(17, 442);
+            this.panelPage.Name = "panelPage";
+            this.panelPage.Size = new System.Drawing.Size(880, 37);
+            this.panelPage.TabIndex = 38;
+            // 
+            // panelFilter
+            // 
+            this.panelFilter.Controls.Add(this.labelRateFilter);
+            this.panelFilter.Controls.Add(this.labelLengthFilter);
+            this.panelFilter.Controls.Add(this.labelTitleFilter);
+            this.panelFilter.Controls.Add(this.textBoxLengthFilter);
+            this.panelFilter.Controls.Add(this.comboBoxRateFilter);
+            this.panelFilter.Controls.Add(this.textBoxTitleFilter);
+            this.panelFilter.Controls.Add(this.checkBoxUseFilter);
+            this.panelFilter.Location = new System.Drawing.Point(17, 41);
+            this.panelFilter.Name = "panelFilter";
+            this.panelFilter.Size = new System.Drawing.Size(597, 41);
+            this.panelFilter.TabIndex = 39;
+            // 
+            // comboBoxRateFilter
+            // 
+            this.comboBoxRateFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxRateFilter.FormattingEnabled = true;
+            this.comboBoxRateFilter.Items.AddRange(new object[] {
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"});
+            this.comboBoxRateFilter.Location = new System.Drawing.Point(286, 10);
+            this.comboBoxRateFilter.Name = "comboBoxRateFilter";
+            this.comboBoxRateFilter.Size = new System.Drawing.Size(45, 20);
+            this.comboBoxRateFilter.TabIndex = 30;
+            // 
+            // textBoxLengthFilter
+            // 
+            this.textBoxLengthFilter.Location = new System.Drawing.Point(410, 10);
+            this.textBoxLengthFilter.Name = "textBoxLengthFilter";
+            this.textBoxLengthFilter.Size = new System.Drawing.Size(85, 21);
+            this.textBoxLengthFilter.TabIndex = 31;
+            // 
+            // labelTitleFilter
+            // 
+            this.labelTitleFilter.AutoSize = true;
+            this.labelTitleFilter.Location = new System.Drawing.Point(57, 13);
+            this.labelTitleFilter.Name = "labelTitleFilter";
+            this.labelTitleFilter.Size = new System.Drawing.Size(53, 12);
+            this.labelTitleFilter.TabIndex = 32;
+            this.labelTitleFilter.Text = "标题过滤";
+            // 
+            // labelLengthFilter
+            // 
+            this.labelLengthFilter.AutoSize = true;
+            this.labelLengthFilter.Location = new System.Drawing.Point(351, 13);
+            this.labelLengthFilter.Name = "labelLengthFilter";
+            this.labelLengthFilter.Size = new System.Drawing.Size(53, 12);
+            this.labelLengthFilter.TabIndex = 33;
+            this.labelLengthFilter.Text = "长度过滤";
+            // 
+            // labelRateFilter
+            // 
+            this.labelRateFilter.AutoSize = true;
+            this.labelRateFilter.Location = new System.Drawing.Point(227, 13);
+            this.labelRateFilter.Name = "labelRateFilter";
+            this.labelRateFilter.Size = new System.Drawing.Size(53, 12);
+            this.labelRateFilter.TabIndex = 34;
+            this.labelRateFilter.Text = "评分过滤";
+            // 
             // UserControlBook
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.panelFilter);
+            this.Controls.Add(this.panelPage);
             this.Controls.Add(this.buttonReplace);
-            this.Controls.Add(this.checkBoxUseFilter);
-            this.Controls.Add(this.textBoxFilter);
             this.Controls.Add(this.buttonRefresh);
             this.Controls.Add(this.buttonExport);
             this.Controls.Add(this.buttonRemove);
@@ -256,6 +420,10 @@
             this.Name = "UserControlBook";
             this.Size = new System.Drawing.Size(913, 482);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBookList)).EndInit();
+            this.panelPage.ResumeLayout(false);
+            this.panelPage.PerformLayout();
+            this.panelFilter.ResumeLayout(false);
+            this.panelFilter.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -278,8 +446,22 @@
         private System.Windows.Forms.DataGridView dataGridViewBookList;
         private System.Windows.Forms.Button buttonExport;
         private System.Windows.Forms.Button buttonRefresh;
-        private System.Windows.Forms.TextBox textBoxFilter;
+        private System.Windows.Forms.TextBox textBoxTitleFilter;
         private System.Windows.Forms.CheckBox checkBoxUseFilter;
         private System.Windows.Forms.Button buttonReplace;
+        private System.Windows.Forms.Label labelRowCount;
+        private System.Windows.Forms.Label labelPageSize;
+        private System.Windows.Forms.Label labelCurrentPage;
+        private System.Windows.Forms.Button buttonNextPage;
+        private System.Windows.Forms.Button buttonLastPage;
+        private System.Windows.Forms.Button buttonPrevPage;
+        private System.Windows.Forms.Button buttonFirstPage;
+        private System.Windows.Forms.Panel panelPage;
+        private System.Windows.Forms.Panel panelFilter;
+        private System.Windows.Forms.TextBox textBoxLengthFilter;
+        private System.Windows.Forms.ComboBox comboBoxRateFilter;
+        private System.Windows.Forms.Label labelRateFilter;
+        private System.Windows.Forms.Label labelLengthFilter;
+        private System.Windows.Forms.Label labelTitleFilter;
     }
 }

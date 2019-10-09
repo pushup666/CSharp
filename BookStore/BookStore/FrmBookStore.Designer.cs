@@ -30,17 +30,14 @@
         {
             this.buttonImportBooks = new System.Windows.Forms.Button();
             this.tabControlMain = new System.Windows.Forms.TabControl();
-            this.tabPageBook = new System.Windows.Forms.TabPage();
-            this.ucBook = new BookStore.UC.UserControlBook();
             this.buttonExport = new System.Windows.Forms.Button();
             this.buttonVacuum = new System.Windows.Forms.Button();
-            this.tabControlMain.SuspendLayout();
-            this.tabPageBook.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonImportBooks
             // 
-            this.buttonImportBooks.Location = new System.Drawing.Point(12, 12);
+            this.buttonImportBooks.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonImportBooks.Location = new System.Drawing.Point(713, 12);
             this.buttonImportBooks.Name = "buttonImportBooks";
             this.buttonImportBooks.Size = new System.Drawing.Size(75, 23);
             this.buttonImportBooks.TabIndex = 0;
@@ -53,7 +50,6 @@
             this.tabControlMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControlMain.Controls.Add(this.tabPageBook);
             this.tabControlMain.Location = new System.Drawing.Point(12, 41);
             this.tabControlMain.Name = "tabControlMain";
             this.tabControlMain.SelectedIndex = 0;
@@ -61,27 +57,10 @@
             this.tabControlMain.TabIndex = 1;
             this.tabControlMain.DoubleClick += new System.EventHandler(this.TabControlMain_DoubleClick);
             // 
-            // tabPageBook
-            // 
-            this.tabPageBook.Controls.Add(this.ucBook);
-            this.tabPageBook.Location = new System.Drawing.Point(4, 22);
-            this.tabPageBook.Name = "tabPageBook";
-            this.tabPageBook.Size = new System.Drawing.Size(933, 433);
-            this.tabPageBook.TabIndex = 1;
-            this.tabPageBook.Text = "书库";
-            this.tabPageBook.UseVisualStyleBackColor = true;
-            // 
-            // ucBook
-            // 
-            this.ucBook.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucBook.Location = new System.Drawing.Point(0, 0);
-            this.ucBook.Name = "ucBook";
-            this.ucBook.Size = new System.Drawing.Size(933, 433);
-            this.ucBook.TabIndex = 0;
-            // 
             // buttonExport
             // 
-            this.buttonExport.Location = new System.Drawing.Point(93, 12);
+            this.buttonExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonExport.Location = new System.Drawing.Point(794, 12);
             this.buttonExport.Name = "buttonExport";
             this.buttonExport.Size = new System.Drawing.Size(75, 23);
             this.buttonExport.TabIndex = 2;
@@ -91,7 +70,8 @@
             // 
             // buttonVacuum
             // 
-            this.buttonVacuum.Location = new System.Drawing.Point(174, 12);
+            this.buttonVacuum.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonVacuum.Location = new System.Drawing.Point(875, 12);
             this.buttonVacuum.Name = "buttonVacuum";
             this.buttonVacuum.Size = new System.Drawing.Size(75, 23);
             this.buttonVacuum.TabIndex = 3;
@@ -110,8 +90,7 @@
             this.Controls.Add(this.buttonImportBooks);
             this.Name = "FrmBookStore";
             this.Text = "BookStore";
-            this.tabControlMain.ResumeLayout(false);
-            this.tabPageBook.ResumeLayout(false);
+            this.Load += new System.EventHandler(this.FrmBookStore_Load);
             this.ResumeLayout(false);
 
         }
@@ -120,8 +99,6 @@
 
         private System.Windows.Forms.Button buttonImportBooks;
         private System.Windows.Forms.TabControl tabControlMain;
-        private System.Windows.Forms.TabPage tabPageBook;
-        private BookStore.UC.UserControlBook ucBook;
         private System.Windows.Forms.Button buttonExport;
         private System.Windows.Forms.Button buttonVacuum;
     }

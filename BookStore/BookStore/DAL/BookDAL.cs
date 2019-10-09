@@ -1,5 +1,6 @@
 ﻿using System.Data;
 using System.Data.SQLite;
+using System.Text;
 using BookStore.Model;
 
 namespace BookStore.DAL
@@ -27,14 +28,19 @@ namespace BookStore.DAL
 
         public static DataTable GetBookList()
         {
-            const string sql = "SELECT ID, Title, Alias, Author, Note, Rate, Length FROM Book WHERE DeleteFlag = 0 ORDER BY Title;";
+            const string sql = "SELECT ID, Title, Length, Rate, Alias, Author, Note FROM Book WHERE DeleteFlag = 0 ORDER BY Title;";
 
             return SqliteHelper.ExecuteReader(sql);
         }
 
-        public static DataTable GetBookList(string filter)
+        public static DataTable GetBookList(string filterTitle, int filterRate, string filterLength)
         {
-            var sql = $"SELECT ID, Title, Alias, Author, Note, Rate, Length FROM Book WHERE DeleteFlag = 0 AND Title like '%{filter}%' ORDER BY Title;";
+            var filterSql = new StringBuilder();
+            if (filterTitle != "") filterSql.Append($"AND Title like '%{filterTitle}%' ");
+            if (filterRate != -1) filterSql.Append($"AND Rate = {filterRate} ");
+            if (filterLength != "") filterSql.Append($"AND Length {filterLength} ");
+
+            var sql = $"SELECT ID, Title, Length, Rate, Alias, Author, Note FROM Book WHERE DeleteFlag = 0 {filterSql}ORDER BY Title;";
 
             return SqliteHelper.ExecuteReader(sql);
         }

@@ -32,9 +32,9 @@ namespace BookStore.BLL
             return BookDAL.GetBookList();
         }
 
-        public static DataTable GetBookList(string filter)
+        public static DataTable GetBookList(string filterTitle, int filterRate, string filterLength)
         {
-            return BookDAL.GetBookList(filter);
+            return BookDAL.GetBookList(filterTitle, filterRate, filterLength);
         }
 
         public static BookDO GetBook(string bookID)

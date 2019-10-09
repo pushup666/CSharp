@@ -3,6 +3,7 @@ using BookStore.DLG;
 using BookStore.Model;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Windows.Forms;
 
@@ -12,16 +13,51 @@ namespace BookStore.UC
     {
         private BookDO _currBook;
 
+        private const int PageSize = 1000;
+
+        private int _rowCount, _pageCount;
+        private int _currentPage = 1;  
+
+
         public UserControlBook()
         {
             InitializeComponent();
             RefreshBookList();
         }
 
-        internal void RefreshBookList()
+        public void RefreshBookList()
         {
-            dataGridViewBookList.DataSource = checkBoxUseFilter.Checked ? BookStoreBLL.GetBookList(textBoxFilter.Text) : BookStoreBLL.GetBookList();
+            using var bookList = checkBoxUseFilter.Checked
+                ? BookStoreBLL.GetBookList(textBoxTitleFilter.Text, comboBoxRateFilter.SelectedIndex, textBoxLengthFilter.Text)
+                : BookStoreBLL.GetBookList();
+
+            if (bookList == null) return;
+
+            _rowCount = bookList.Rows.Count;
+            _pageCount = (int)Math.Ceiling((double)_rowCount / PageSize);
+
+            if (_currentPage > _pageCount)
+            {
+                _currentPage = _pageCount;
+            }
+
+            var currentPageBookList = bookList.Copy();
+            currentPageBookList.Clear();
+
+            var beginRow = (_currentPage - 1) * PageSize;
+            var endRow = Math.Min(_currentPage * PageSize, _rowCount);
+
+            for (var i = beginRow; i < endRow; i++)
+            {
+                currentPageBookList.ImportRow(bookList.Rows[i]);
+            }
+
+            dataGridViewBookList.DataSource = currentPageBookList;
             dataGridViewBookList.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+
+            labelRowCount.Text = $"总行数：{_rowCount}";
+            labelPageSize.Text = $"每页行数：{PageSize}";
+            labelCurrentPage.Text = $"当前页数：{_currentPage} / {_pageCount}";
         }
 
         private void Replace()
@@ -57,7 +93,7 @@ namespace BookStore.UC
         {
             try
             {
-                Save();
+                //Save();
 
                 if (e.RowIndex != -1)
                 {
@@ -115,7 +151,7 @@ namespace BookStore.UC
                 _currBook = new BookDO(_currBook.ID, textBoxTitle.Text, textBoxAlias.Text, textBoxAuthor.Text, textBoxNote.Text, comboBoxRate.SelectedIndex);
                 if (BookStoreBLL.ModifyBook(_currBook))
                 {
-                    //RefreshBookList();
+                    RefreshBookList();
                 }
                 else
                 {
@@ -132,7 +168,7 @@ namespace BookStore.UC
                 {
                     if (BookStoreBLL.RemoveBook(_currBook.ID))
                     {
-                        //RefreshBookList();
+                        RefreshBookList();
                     }
                     else
                     {
@@ -191,6 +227,31 @@ namespace BookStore.UC
         private void ButtonReplace_Click(object sender, EventArgs e)
         {
             Replace();
+        }
+
+        private void ButtonFirstPage_Click(object sender, EventArgs e)
+        {
+            _currentPage = 1;
+            RefreshBookList();
+        }
+
+        private void ButtonPrevPage_Click(object sender, EventArgs e)
+        {
+            if (_currentPage == 1) return;
+            _currentPage--;
+            RefreshBookList();
+        }
+        private void ButtonNextPage_Click(object sender, EventArgs e)
+        {
+            if (_currentPage == _pageCount) return;
+            _currentPage++;
+            RefreshBookList();
+        }
+
+        private void ButtonLastPage_Click(object sender, EventArgs e)
+        {
+            _currentPage = _pageCount;
+            RefreshBookList();
         }
     }
 }
