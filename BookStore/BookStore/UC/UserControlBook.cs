@@ -36,15 +36,15 @@ namespace BookStore.UC
             _rowCount = bookList.Rows.Count;
             _pageCount = (int)Math.Ceiling((double)_rowCount / PageSize);
 
-            if (_currentPage > _pageCount)
+            if (_pageCount == 0)
             {
-                _currentPage = _pageCount;
+                _pageCount = 1;
             }
 
             var currentPageBookList = bookList.Copy();
             currentPageBookList.Clear();
 
-            var beginRow = (_currentPage - 1) * PageSize;
+            var beginRow = Math.Max((_currentPage - 1) * PageSize, 0);
             var endRow = Math.Min(_currentPage * PageSize, _rowCount);
 
             for (var i = beginRow; i < endRow; i++)
@@ -237,13 +237,13 @@ namespace BookStore.UC
 
         private void ButtonPrevPage_Click(object sender, EventArgs e)
         {
-            if (_currentPage == 1) return;
+            if (_currentPage <= 1) return;
             _currentPage--;
             RefreshBookList();
         }
         private void ButtonNextPage_Click(object sender, EventArgs e)
         {
-            if (_currentPage == _pageCount) return;
+            if (_currentPage >= _pageCount) return;
             _currentPage++;
             RefreshBookList();
         }
