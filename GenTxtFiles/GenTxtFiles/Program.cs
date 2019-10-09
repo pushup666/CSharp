@@ -15,10 +15,10 @@ namespace GenTxtFiles
             " ", " ", " ", " "
         };
 
-        private const int FilesCount = 1000;
+        private const int FilesCount = 10000;
         private const int AvrgFileLines = 1000;
         private const int AvrgLineLength = 100;
-        private const string FilePath = @"Z:\111\";
+        private const string FilePath = @"C:\Users\ssf\Desktop\111\";
         private static readonly Random R = new Random();
 
         static void Main()
@@ -35,6 +35,11 @@ namespace GenTxtFiles
 
                 using var sw = new StreamWriter($"{FilePath}{i.ToString().PadLeft(10, '0')}.txt", false);
                 sw.Write(sb.ToString());
+
+                if (i % 100 == 0)
+                {
+                    Console.WriteLine(i);
+                }
             }
         }
 

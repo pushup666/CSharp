@@ -1,4 +1,6 @@
-﻿using System;
+﻿//#define LOG
+
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -7,8 +9,10 @@ using System.Windows.Forms;
 using BookStore.BLL;
 using BookStore.Model;
 
+
 namespace BookStore
 {
+
     public partial class FrmBookStore : Form
     {
         private readonly List<string> _fileList = new List<string>();
@@ -34,11 +38,10 @@ namespace BookStore
         {
             try
             {
-#if DEBUG
+#if LOG
                 using var sw = new StreamWriter($@"{Environment.CurrentDirectory}\{DateTime.Now:yyyy-MM-dd}.log", true);
                 var stopw = new Stopwatch();
 #endif
-
                 using (var openFileDialog = new OpenFileDialog())
                 {
                     openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
@@ -46,7 +49,7 @@ namespace BookStore
                     openFileDialog.Filter = "Text File|*.txt";
 
                     if (openFileDialog.ShowDialog() != DialogResult.OK) return;
-#if DEBUG
+#if LOG
                     stopw.Restart();
 #endif
                     _fileList.Clear();
@@ -61,16 +64,19 @@ namespace BookStore
                             MessageBox.Show(fileName + ex.Message);
                         }
                     }
-#if DEBUG
+#if LOG
                     sw.WriteLine($"准备工作 {stopw.ElapsedMilliseconds} ms");
 #endif
                 }
 
-
-
+                var count = 0;
                 foreach (var fileName in _fileList)
                 {
-#if DEBUG
+                    if (++count % 100 == 0)
+                    {
+                        Console.WriteLine($"已导入： {count.ToString()}项");
+                    }
+#if LOG
                     stopw.Restart();
 #endif
                     using var sr = new StreamReader(fileName, Encoding.Default);
@@ -100,12 +106,12 @@ namespace BookStore
                             }
                         }
                     }
-#if DEBUG
+#if LOG
                     sw.WriteLine($"导入{fileName} {stopw.ElapsedMilliseconds} ms");
 #endif
                 }
 
-                MessageBox.Show("导入完成！");
+                MessageBox.Show($"{count.ToString()}项 导入完成！");
 
                 ucBook.RefreshBookList();
             }
