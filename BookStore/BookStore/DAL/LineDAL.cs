@@ -16,7 +16,7 @@ namespace BookStore.DAL
                 new SQLiteParameter("@BookID", DbType.String){Value = bookID},
             };
 
-            return SqliteHelper.ExecuteReader(sql, pms);
+            return SQLiteHelper.ExecuteReader(sql, pms);
         }
 
         public static string Lines2String(string bookID)
@@ -28,7 +28,7 @@ namespace BookStore.DAL
                 new SQLiteParameter("@BookID", DbType.String){Value = bookID},
             };
 
-            using var dt = SqliteHelper.ExecuteReader(sql, pms);
+            using var dt = SQLiteHelper.ExecuteReader(sql, pms);
             var sb = new StringBuilder();
 
             for (var i = 0; i < dt.Rows.Count; i++)
@@ -49,13 +49,13 @@ namespace BookStore.DAL
                 new SQLiteParameter("@BookID", DbType.String){Value = bookID},
             };
 
-            return SqliteHelper.ExecuteNonQuery(sql, pms) != -1;
+            return SQLiteHelper.ExecuteNonQuery(sql, pms) != -1;
         }
 
         public static bool ClearLines()
         {
             const string sql = "DELETE FROM Line;";
-            return SqliteHelper.ExecuteNonQuery(sql) != -1;
+            return SQLiteHelper.ExecuteNonQuery(sql) != -1;
         }
 
         public static bool Version2Lines(string bookID, List<string> lines )
@@ -75,7 +75,7 @@ namespace BookStore.DAL
                 pms[i] = pm;
             }
 
-            return SqliteHelper.ExecuteNonQueryBat(sql, pms) != -1;
+            return SQLiteHelper.ExecuteNonQueryBat(sql, pms) != -1;
         }
 
         public static bool DeleteLines(List<string> lineIDList)
@@ -91,7 +91,7 @@ namespace BookStore.DAL
                 pms[i] = pm;
             }
 
-            return SqliteHelper.ExecuteNonQueryBat(sql, pms) != -1;
+            return SQLiteHelper.ExecuteNonQueryBat(sql, pms) != -1;
         }
     }
 }

@@ -79,7 +79,8 @@
     <Compile Include="Model\VersionDO.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SqliteHelper.cs" />
+    <Compile Include="SQLiteHelper.cs" />
+    <Compile Include="SQLitePinYingSort.cs" />
     <Compile Include="UC\UserControlBook.cs">
       <SubType>UserControl</SubType>
     </Compile>

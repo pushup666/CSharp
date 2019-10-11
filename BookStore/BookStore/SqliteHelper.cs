@@ -6,9 +6,9 @@ using System.Windows.Forms;
 
 namespace BookStore
 {
-    static class SqliteHelper
+    static class SQLiteHelper
     {
-        //private const string ConnStr = @"Data Source = C:\Users\ssf\Desktop\sqlite\BookStore.db3";
+        //private const string ConnStr = @"Data Source = C:\Users\ssf\Desktop\SQLite\BookStore.db3";
         private static readonly string ConnStr = $@"Data Source = {Environment.CurrentDirectory}\BookStore.db3";
 
 

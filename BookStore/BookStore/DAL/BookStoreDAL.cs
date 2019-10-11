@@ -35,13 +35,13 @@ namespace BookStore.DAL
                 "CREATE INDEX IDX_ContentHash ON Version (ContentHash);"
             };
 
-            SqliteHelper.ExecuteNonQueryBat(sqls);
+            SQLiteHelper.ExecuteNonQueryBat(sqls);
         }
 
         public static void VacuumDatabase()
         {
             var sql = "VACUUM;";
-            SqliteHelper.ExecuteNonQuery(sql);
+            SQLiteHelper.ExecuteNonQuery(sql);
         }
     }
 }

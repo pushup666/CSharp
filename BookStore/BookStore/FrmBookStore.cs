@@ -163,7 +163,7 @@ namespace BookStore
                         var filename = $@"{savePath}\{title}{alias}{note}{author}_{hash}.txt";
                         var content = latestVersion.Content;
 
-                        using var sw = new StreamWriter(filename, false);
+                        using var sw = new StreamWriter(filename, false, Encoding.Default);
                         sw.Write(content);
                     }
                 }

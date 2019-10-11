@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.SQLite;
 using System.Windows.Forms;
 
 namespace BookStore
@@ -11,6 +12,8 @@ namespace BookStore
         [STAThread]
         static void Main()
         {
+            SQLiteFunction.RegisterFunction(typeof(SQLitePinYingSort));
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new FrmBookStore());

@@ -388,11 +388,11 @@ namespace BookStore.UC
                 var author = book.Author == "" ? "" : $"[{book.Author}]";
 
                 var filename0 = $@"{savePath}\{title}{alias}{note}{author}_{version0.VersionNo}.txt";
-                using var sw0 = new StreamWriter(filename0, false);
+                using var sw0 = new StreamWriter(filename0, false, Encoding.Default);
                 sw0.Write(version0.Content);
 
                 var filename1 = $@"{savePath}\{title}{alias}{note}{author}_{version1.VersionNo}.txt";
-                using var sw1 = new StreamWriter(filename1, false);
+                using var sw1 = new StreamWriter(filename1, false, Encoding.Default);
                 sw1.Write(version1.Content);
 
                 var p = new Process();

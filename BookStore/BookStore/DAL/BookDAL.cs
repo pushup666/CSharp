@@ -14,7 +14,7 @@ namespace BookStore.DAL
             {
                 new SQLiteParameter("@ID", DbType.String){Value = bookID},
             };
-            using var book = SqliteHelper.ExecuteReader(sql, pms);
+            using var book = SQLiteHelper.ExecuteReader(sql, pms);
 
             var id = book.Rows[0]["ID"].ToString();
             var title = book.Rows[0]["Title"].ToString();
@@ -28,9 +28,9 @@ namespace BookStore.DAL
 
         public static DataTable GetBookList()
         {
-            const string sql = "SELECT ID, Title, Length, Rate, Alias, Author, Note FROM Book WHERE DeleteFlag = 0 ORDER BY Title;";
+            const string sql = "SELECT ID, Title, Length, Rate, Alias, Author, Note FROM Book WHERE DeleteFlag = 0 ORDER BY Title COLLATE PinYin;";
 
-            return SqliteHelper.ExecuteReader(sql);
+            return SQLiteHelper.ExecuteReader(sql);
         }
 
         public static DataTable GetBookList(string filterTitle, int filterRate, string filterLength)
@@ -40,9 +40,9 @@ namespace BookStore.DAL
             if (filterRate != -1) filterSql.Append($"AND Rate = {filterRate} ");
             if (filterLength != "") filterSql.Append($"AND Length {filterLength} ");
 
-            var sql = $"SELECT ID, Title, Length, Rate, Alias, Author, Note FROM Book WHERE DeleteFlag = 0 {filterSql}ORDER BY Title;";
+            var sql = $"SELECT ID, Title, Length, Rate, Alias, Author, Note FROM Book WHERE DeleteFlag = 0 {filterSql}ORDER BY Title COLLATE PinYin;";
 
-            return SqliteHelper.ExecuteReader(sql);
+            return SQLiteHelper.ExecuteReader(sql);
         }
 
         public static bool AddBook(BookDO book)
@@ -57,7 +57,7 @@ namespace BookStore.DAL
                 new SQLiteParameter("@Note", DbType.String){Value = book.Note},
             };
 
-            return SqliteHelper.ExecuteNonQuery(sql, pms) != -1;
+            return SQLiteHelper.ExecuteNonQuery(sql, pms) != -1;
         }
 
         public static bool ModifyBook(BookDO book)
@@ -73,7 +73,7 @@ namespace BookStore.DAL
                 new SQLiteParameter("@ID", DbType.String){Value = book.ID},
             };
 
-            return SqliteHelper.ExecuteNonQuery(sql, pms) != -1;
+            return SQLiteHelper.ExecuteNonQuery(sql, pms) != -1;
         }
 
         public static bool ModifyBookLength(string bookID, int length)
@@ -85,7 +85,7 @@ namespace BookStore.DAL
                 new SQLiteParameter("@ID", DbType.String){Value = bookID},
             };
 
-            return SqliteHelper.ExecuteNonQuery(sql, pms) != -1;
+            return SQLiteHelper.ExecuteNonQuery(sql, pms) != -1;
         }
 
         public static bool RemoveBook(string bookID)
@@ -96,13 +96,13 @@ namespace BookStore.DAL
                 new SQLiteParameter("@ID", DbType.String){Value = bookID},
             };
 
-            return SqliteHelper.ExecuteNonQuery(sql, pms) != -1;
+            return SQLiteHelper.ExecuteNonQuery(sql, pms) != -1;
         }
 
         public static bool ClearBook()
         {
             const string sql = "DELETE FROM Book WHERE DeleteFlag = 1;";
-            return SqliteHelper.ExecuteNonQuery(sql) != -1;
+            return SQLiteHelper.ExecuteNonQuery(sql) != -1;
         }
     }
 }

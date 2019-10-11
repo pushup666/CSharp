@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
@@ -23,9 +24,38 @@ namespace GenTxtFiles
 
         static void Main()
         {
+            GenSequeceNameFiles();
+            //GenNonSequeceNameFiles(Directory.GetFiles(@"C:\Users\ssf\Desktop\222"));
+
+        }
+
+        private static void GenNonSequeceNameFiles(string[] nameList)
+        {
+            for (var i = 0; i < nameList.Length; i++)
+            {
+                var fileLines = R.Next((int)(AvrgFileLines * 0.5), (int)(AvrgFileLines * 1.5));
+                var sb = new StringBuilder();
+
+                for (var j = 0; j < fileLines; j++)
+                {
+                    sb.AppendLine(GenRandomLine());
+                }
+
+                using var sw = new StreamWriter($"{FilePath}{Path.GetFileName(nameList[i])}", false);
+                sw.Write(sb.ToString());
+
+                if (i % 100 == 0)
+                {
+                    Console.WriteLine(i);
+                }
+            }
+        }
+
+        private static void GenSequeceNameFiles()
+        {
             for (var i = 0; i < FilesCount; i++)
             {
-                var fileLines = R.Next((int) (AvrgFileLines * 0.5), (int) (AvrgFileLines * 1.5));
+                var fileLines = R.Next((int)(AvrgFileLines * 0.5), (int)(AvrgFileLines * 1.5));
                 var sb = new StringBuilder();
 
                 for (var j = 0; j < fileLines; j++)
