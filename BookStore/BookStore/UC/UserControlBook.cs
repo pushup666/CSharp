@@ -18,6 +18,7 @@ namespace BookStore.UC
         private int _currentPage = 1;  
 
 
+
         public UserControlBook()
         {
             InitializeComponent();
@@ -59,44 +60,22 @@ namespace BookStore.UC
             labelCurrentPage.Text = $"当前页数：{_currentPage} / {_pageCount}";
         }
 
-        private void Replace()
-        {
-            using var dt = BookStoreBLL.GetBookList();
 
-            using var replaceFrm = new FrmReplace();
-            if (replaceFrm.ShowDialog() == DialogResult.OK && replaceFrm.Input != string.Empty)
-            {
-                //处理Title
-                for (var i = 0; i < dt.Rows.Count; i++)
-                {
-                    var id = dt.Rows[i]["ID"].ToString();
-                    var title = dt.Rows[i]["Title"].ToString();
-                    var alias = dt.Rows[i]["Alias"].ToString();
-                    var author = dt.Rows[i]["Author"].ToString();
-                    var note = dt.Rows[i]["Note"].ToString();
-                    var rate = int.Parse(dt.Rows[i]["Rate"].ToString());
-
-                    if (title.Contains(replaceFrm.Input))
-                    {
-                        BookDO newbook = new BookDO(id, title.Replace(replaceFrm.Input, replaceFrm.Replace), alias, author, note, rate);
-                        BookStoreBLL.ModifyBook(newbook);
-                    }
-                }
-
-            }
-            
-            MessageBox.Show("测试结束！");
-        }
 
         private void DataGridViewBook_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            GetSelectedBookInfo(e.RowIndex);
+        }
+
+        private void GetSelectedBookInfo(int rowIndex)
         {
             try
             {
                 //Save();
-
-                if (e.RowIndex != -1)
+                
+                if (rowIndex >= 0 && rowIndex < dataGridViewBookList.Rows.Count)
                 {
-                    var bookID = dataGridViewBookList.Rows[e.RowIndex].Cells["ID"].Value.ToString();
+                    var bookID = dataGridViewBookList.Rows[rowIndex].Cells["ID"].Value.ToString();
                     _currBook = BookStoreBLL.GetBook(bookID);
 
                     textBoxTitle.Text = _currBook.Title;
@@ -110,14 +89,18 @@ namespace BookStore.UC
             {
                 MessageBox.Show(ex.Message + ex.StackTrace);
             }
-            
         }
 
         private void DataGridViewBook_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            GetNewVersionTabOfCurrBook();
+        }
+
+        private void GetNewVersionTabOfCurrBook()
+        {
             if (_currBook != null)
             {
-                var tabControlMain = ((TabControl) Parent.Parent);
+                var tabControlMain = ((TabControl)Parent.Parent);
                 var newTabName = "V" + _currBook.ID;
                 var newTabText = _currBook.Title;
 
@@ -128,7 +111,7 @@ namespace BookStore.UC
                 }
 
                 var ucVersion = new UserControlVersion(_currBook.ID, _currBook.Title);
-                var versionPage = new TabPage(newTabText) {Name = newTabName};
+                var versionPage = new TabPage(newTabText) { Name = newTabName };
 
                 versionPage.Controls.Add(ucVersion);
                 ucVersion.Dock = DockStyle.Fill;
@@ -137,6 +120,24 @@ namespace BookStore.UC
                 tabControlMain.SelectTab(newTabName);
             }
         }
+
+        private void DataGridViewBookList_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Enter:
+                    GetNewVersionTabOfCurrBook();
+                    break;
+                case Keys.Up:
+                    GetSelectedBookInfo(dataGridViewBookList.CurrentCell.RowIndex - 1);
+                    break;
+                case Keys.Down:
+                    GetSelectedBookInfo(dataGridViewBookList.CurrentCell.RowIndex + 1);
+                    break;
+            }
+        }
+
+
 
         private void ButtonSave_Click(object sender, EventArgs e)
         {
@@ -228,6 +229,37 @@ namespace BookStore.UC
             Replace();
         }
 
+        private void Replace()
+        {
+            using var dt = BookStoreBLL.GetBookList();
+
+            using var replaceFrm = new FrmReplace();
+            if (replaceFrm.ShowDialog() == DialogResult.OK && replaceFrm.Input != string.Empty)
+            {
+                //处理Title
+                for (var i = 0; i < dt.Rows.Count; i++)
+                {
+                    var id = dt.Rows[i]["ID"].ToString();
+                    var title = dt.Rows[i]["Title"].ToString();
+                    var alias = dt.Rows[i]["Alias"].ToString();
+                    var author = dt.Rows[i]["Author"].ToString();
+                    var note = dt.Rows[i]["Note"].ToString();
+                    var rate = int.Parse(dt.Rows[i]["Rate"].ToString());
+
+                    if (title.Contains(replaceFrm.Input))
+                    {
+                        BookDO newbook = new BookDO(id, title.Replace(replaceFrm.Input, replaceFrm.Replace), alias, author, note, rate);
+                        BookStoreBLL.ModifyBook(newbook);
+                    }
+                }
+
+            }
+
+            MessageBox.Show("测试结束！");
+        }
+
+
+
         private void ButtonFirstPage_Click(object sender, EventArgs e)
         {
             _currentPage = 1;
@@ -240,6 +272,7 @@ namespace BookStore.UC
             _currentPage--;
             RefreshBookList();
         }
+
         private void ButtonNextPage_Click(object sender, EventArgs e)
         {
             if (_currentPage >= _pageCount) return;

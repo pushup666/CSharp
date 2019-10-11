@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.buttonRemove = new System.Windows.Forms.Button();
             this.buttonSave = new System.Windows.Forms.Button();
             this.comboBoxRate = new System.Windows.Forms.ComboBox();
@@ -56,11 +56,11 @@
             this.buttonFirstPage = new System.Windows.Forms.Button();
             this.panelPage = new System.Windows.Forms.Panel();
             this.panelFilter = new System.Windows.Forms.Panel();
-            this.comboBoxRateFilter = new System.Windows.Forms.ComboBox();
-            this.textBoxLengthFilter = new System.Windows.Forms.TextBox();
-            this.labelTitleFilter = new System.Windows.Forms.Label();
-            this.labelLengthFilter = new System.Windows.Forms.Label();
             this.labelRateFilter = new System.Windows.Forms.Label();
+            this.labelLengthFilter = new System.Windows.Forms.Label();
+            this.labelTitleFilter = new System.Windows.Forms.Label();
+            this.textBoxLengthFilter = new System.Windows.Forms.TextBox();
+            this.comboBoxRateFilter = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBookList)).BeginInit();
             this.panelPage.SuspendLayout();
             this.panelFilter.SuspendLayout();
@@ -183,14 +183,14 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridViewBookList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewBookList.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewBookList.DefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewBookList.Location = new System.Drawing.Point(17, 88);
             this.dataGridViewBookList.Name = "dataGridViewBookList";
             this.dataGridViewBookList.ReadOnly = true;
@@ -200,6 +200,7 @@
             this.dataGridViewBookList.TabIndex = 13;
             this.dataGridViewBookList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewBook_CellClick);
             this.dataGridViewBookList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewBook_CellDoubleClick);
+            this.dataGridViewBookList.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DataGridViewBookList_KeyDown);
             // 
             // buttonExport
             // 
@@ -345,6 +346,40 @@
             this.panelFilter.Size = new System.Drawing.Size(597, 41);
             this.panelFilter.TabIndex = 39;
             // 
+            // labelRateFilter
+            // 
+            this.labelRateFilter.AutoSize = true;
+            this.labelRateFilter.Location = new System.Drawing.Point(227, 13);
+            this.labelRateFilter.Name = "labelRateFilter";
+            this.labelRateFilter.Size = new System.Drawing.Size(53, 12);
+            this.labelRateFilter.TabIndex = 34;
+            this.labelRateFilter.Text = "评分过滤";
+            // 
+            // labelLengthFilter
+            // 
+            this.labelLengthFilter.AutoSize = true;
+            this.labelLengthFilter.Location = new System.Drawing.Point(351, 13);
+            this.labelLengthFilter.Name = "labelLengthFilter";
+            this.labelLengthFilter.Size = new System.Drawing.Size(53, 12);
+            this.labelLengthFilter.TabIndex = 33;
+            this.labelLengthFilter.Text = "长度过滤";
+            // 
+            // labelTitleFilter
+            // 
+            this.labelTitleFilter.AutoSize = true;
+            this.labelTitleFilter.Location = new System.Drawing.Point(57, 13);
+            this.labelTitleFilter.Name = "labelTitleFilter";
+            this.labelTitleFilter.Size = new System.Drawing.Size(53, 12);
+            this.labelTitleFilter.TabIndex = 32;
+            this.labelTitleFilter.Text = "标题过滤";
+            // 
+            // textBoxLengthFilter
+            // 
+            this.textBoxLengthFilter.Location = new System.Drawing.Point(410, 10);
+            this.textBoxLengthFilter.Name = "textBoxLengthFilter";
+            this.textBoxLengthFilter.Size = new System.Drawing.Size(85, 21);
+            this.textBoxLengthFilter.TabIndex = 31;
+            // 
             // comboBoxRateFilter
             // 
             this.comboBoxRateFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -360,40 +395,6 @@
             this.comboBoxRateFilter.Name = "comboBoxRateFilter";
             this.comboBoxRateFilter.Size = new System.Drawing.Size(45, 20);
             this.comboBoxRateFilter.TabIndex = 30;
-            // 
-            // textBoxLengthFilter
-            // 
-            this.textBoxLengthFilter.Location = new System.Drawing.Point(410, 10);
-            this.textBoxLengthFilter.Name = "textBoxLengthFilter";
-            this.textBoxLengthFilter.Size = new System.Drawing.Size(85, 21);
-            this.textBoxLengthFilter.TabIndex = 31;
-            // 
-            // labelTitleFilter
-            // 
-            this.labelTitleFilter.AutoSize = true;
-            this.labelTitleFilter.Location = new System.Drawing.Point(57, 13);
-            this.labelTitleFilter.Name = "labelTitleFilter";
-            this.labelTitleFilter.Size = new System.Drawing.Size(53, 12);
-            this.labelTitleFilter.TabIndex = 32;
-            this.labelTitleFilter.Text = "标题过滤";
-            // 
-            // labelLengthFilter
-            // 
-            this.labelLengthFilter.AutoSize = true;
-            this.labelLengthFilter.Location = new System.Drawing.Point(351, 13);
-            this.labelLengthFilter.Name = "labelLengthFilter";
-            this.labelLengthFilter.Size = new System.Drawing.Size(53, 12);
-            this.labelLengthFilter.TabIndex = 33;
-            this.labelLengthFilter.Text = "长度过滤";
-            // 
-            // labelRateFilter
-            // 
-            this.labelRateFilter.AutoSize = true;
-            this.labelRateFilter.Location = new System.Drawing.Point(227, 13);
-            this.labelRateFilter.Name = "labelRateFilter";
-            this.labelRateFilter.Size = new System.Drawing.Size(53, 12);
-            this.labelRateFilter.TabIndex = 34;
-            this.labelRateFilter.Text = "评分过滤";
             // 
             // UserControlBook
             // 
