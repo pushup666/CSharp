@@ -2,7 +2,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
@@ -10,6 +9,9 @@ using BookStore.BLL;
 using BookStore.Model;
 using BookStore.UC;
 
+#if LOG
+using System.Diagnostics;
+#endif
 
 namespace BookStore
 {
