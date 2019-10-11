@@ -4,6 +4,7 @@ using BookStore.Model;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using System.Windows.Forms;
 
 namespace BookStore.UC
@@ -76,7 +77,7 @@ namespace BookStore.UC
         {
             try
             {
-                //Save();
+                Save();
                 
                 if (rowIndex >= 0 && rowIndex < dataGridViewBookList.Rows.Count)
                 {
@@ -156,7 +157,7 @@ namespace BookStore.UC
                 _currBook = new BookDO(_currBook.ID, textBoxTitle.Text, textBoxAlias.Text, textBoxAuthor.Text, textBoxNote.Text, comboBoxRate.SelectedIndex);
                 if (BookStoreBLL.ModifyBook(_currBook))
                 {
-                    RefreshBookList();
+                    //RefreshBookList();
                 }
                 else
                 {
@@ -216,7 +217,7 @@ namespace BookStore.UC
                     var filename = $@"{savePath}\{title}{alias}{note}{author}_{hash}.txt";
                     var content = latestVersion.Content;
 
-                    using var sw = new StreamWriter(filename, false);
+                    using var sw = new StreamWriter(filename, false, Encoding.Default);
                     sw.Write(content);
                 }
             }
