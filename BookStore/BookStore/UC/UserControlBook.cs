@@ -12,8 +12,7 @@ namespace BookStore.UC
     {
         private BookDO _currBook;
 
-        private const int PageSize = 1000;
-
+        private readonly int _pageSize;
         private int _rowCount, _pageCount;
         private int _currentPage = 1;  
 
@@ -22,6 +21,12 @@ namespace BookStore.UC
         public UserControlBook()
         {
             InitializeComponent();
+
+            if (!int.TryParse(Utils.GetAppConfig("PageSize"), out _pageSize))
+            {
+                _pageSize = 100;
+            }
+
             RefreshBookList();
         }
 
@@ -34,7 +39,7 @@ namespace BookStore.UC
             if (bookList == null) return;
 
             _rowCount = bookList.Rows.Count;
-            _pageCount = (int)Math.Ceiling((double)_rowCount / PageSize);
+            _pageCount = (int)Math.Ceiling((double)_rowCount / _pageSize);
 
             if (_pageCount == 0)
             {
@@ -44,8 +49,8 @@ namespace BookStore.UC
             var currentPageBookList = bookList.Copy();
             currentPageBookList.Clear();
 
-            var beginRow = Math.Max((_currentPage - 1) * PageSize, 0);
-            var endRow = Math.Min(_currentPage * PageSize, _rowCount);
+            var beginRow = Math.Max((_currentPage - 1) * _pageSize, 0);
+            var endRow = Math.Min(_currentPage * _pageSize, _rowCount);
 
             for (var i = beginRow; i < endRow; i++)
             {
@@ -56,7 +61,7 @@ namespace BookStore.UC
             dataGridViewBookList.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
 
             labelRowCount.Text = $"总行数：{_rowCount}";
-            labelPageSize.Text = $"每页行数：{PageSize}";
+            labelPageSize.Text = $"每页行数：{_pageSize}";
             labelCurrentPage.Text = $"当前页数：{_currentPage} / {_pageCount}";
         }
 
