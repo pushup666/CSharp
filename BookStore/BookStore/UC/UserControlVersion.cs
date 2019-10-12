@@ -85,7 +85,6 @@ namespace BookStore.UC
                 {
                     MessageBox.Show("拆解失败！");
                 }
-
             }
         }
 
@@ -195,7 +194,7 @@ namespace BookStore.UC
         {
             _lines.Clear();
             
-            Dictionary<int,int> dict =new Dictionary<int, int>();
+            var dict =new Dictionary<int, int>();
             foreach (var line in richTextBoxVersionContent.Lines)
             {
                 if (dict.ContainsKey(line.Length))
@@ -208,9 +207,7 @@ namespace BookStore.UC
                 }
             }
 
-            
-
-            StringBuilder sb = new StringBuilder();
+            var sb = new StringBuilder();
             foreach (var item in dict.OrderBy(s => s.Key))
             {
                 sb.AppendLine($"{item.Key}\t\t{item.Value}");
