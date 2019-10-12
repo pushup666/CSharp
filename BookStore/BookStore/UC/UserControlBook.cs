@@ -174,7 +174,7 @@ namespace BookStore.UC
                 {
                     if (BookStoreBLL.RemoveBook(_currBook.ID))
                     {
-                        RefreshBookList();
+                        //RefreshBookList();
                     }
                     else
                     {

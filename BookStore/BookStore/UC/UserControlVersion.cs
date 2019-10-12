@@ -118,7 +118,9 @@ namespace BookStore.UC
 
             foreach (var line in richTextBoxVersionContent.Lines)
             {
-                _lines.Add(line.Trim());
+                var temp = line.Replace("", "");
+                _lines.Add(temp.Trim());
+
             }
 
             RefreshTextBox();
