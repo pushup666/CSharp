@@ -1,6 +1,4 @@
-﻿//#define LOG
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -9,9 +7,6 @@ using BookStore.BLL;
 using BookStore.Model;
 using BookStore.UC;
 
-#if LOG
-using System.Diagnostics;
-#endif
 
 namespace BookStore
 {
@@ -52,10 +47,6 @@ namespace BookStore
         {
             try
             {
-#if LOG
-                using var sw = new StreamWriter($@"{Environment.CurrentDirectory}\{DateTime.Now:yyyy-MM-dd}.log", true);
-                var stopw = new Stopwatch();
-#endif
                 using (var openFileDialog = new OpenFileDialog())
                 {
                     openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
@@ -63,9 +54,7 @@ namespace BookStore
                     openFileDialog.Filter = "Text File|*.txt";
 
                     if (openFileDialog.ShowDialog() != DialogResult.OK) return;
-#if LOG
-                    stopw.Restart();
-#endif
+
                     _fileList.Clear();
                     foreach (var fileName in openFileDialog.FileNames)
                     {
@@ -78,9 +67,6 @@ namespace BookStore
                             MessageBox.Show(fileName + ex.Message);
                         }
                     }
-#if LOG
-                    sw.WriteLine($"准备工作 {stopw.ElapsedMilliseconds} ms");
-#endif
                 }
 
                 var count = 0;
@@ -88,11 +74,9 @@ namespace BookStore
                 {
                     if (++count % 100 == 0)
                     {
-                        Console.WriteLine($"已导入： {count.ToString()}项");
+                        //Console.WriteLine($"已导入： {count.ToString()}项");
                     }
-#if LOG
-                    stopw.Restart();
-#endif
+
                     using var sr = new StreamReader(fileName, Encoding.Default);
 
                     var title = Path.GetFileNameWithoutExtension(fileName);
@@ -120,9 +104,6 @@ namespace BookStore
                             }
                         }
                     }
-#if LOG
-                    sw.WriteLine($"导入{fileName} {stopw.ElapsedMilliseconds} ms");
-#endif
                 }
 
                 MessageBox.Show($"{count.ToString()}项 导入完成！");
