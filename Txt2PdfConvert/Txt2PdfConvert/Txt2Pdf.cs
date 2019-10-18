@@ -1,11 +1,10 @@
-﻿using System;
+﻿using iTextSharp.text;
+using iTextSharp.text.pdf;
+using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
-using iTextSharp.text;
-using iTextSharp.text.pdf;
 
 namespace Txt2PdfConvert
 {
@@ -216,8 +215,7 @@ namespace Txt2PdfConvert
             }
             
         }
-
-
+        
         private void SplitPdf(string fileName)
         {
             try
