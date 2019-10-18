@@ -402,5 +402,13 @@ namespace BookStore.UC
                 p.Start();
             }
         }
+
+        public void JumpToLine(int lineNo)
+        {
+            richTextBoxVersionContent.SelectionStart = richTextBoxVersionContent.GetFirstCharIndexFromLine(lineNo);
+            richTextBoxVersionContent.SelectionLength = 0;
+            richTextBoxVersionContent.Focus();
+            richTextBoxVersionContent.ScrollToCaret();
+        }
     }
 }
