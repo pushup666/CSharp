@@ -201,7 +201,7 @@ namespace Txt2PdfConvert
         {
             using (var sw = new StreamWriter(@"D:\111.csv", false, Encoding.Default))
             {
-                StringBuilder sb = new StringBuilder();
+                var sb = new StringBuilder();
                 for (var i = 1; i < 30000; i++)
                 {
                     var pagesCount = i;
@@ -231,7 +231,7 @@ namespace Txt2PdfConvert
                     {
                         var document = new Document(reader.GetPageSizeWithRotation(1));
 
-                        string pdfSplitName = $@"{Path.GetDirectoryName(fileName)}\{Path.GetFileNameWithoutExtension(fileName)}-{(i + 1).ToString("D2")}.pdf";
+                        var pdfSplitName = $@"{Path.GetDirectoryName(fileName)}\{Path.GetFileNameWithoutExtension(fileName)}-{(i + 1).ToString("D2")}.pdf";
                         var pdfCopyProvider = new PdfCopy(document, new FileStream(pdfSplitName, FileMode.Create));
 
                         document.Open();
