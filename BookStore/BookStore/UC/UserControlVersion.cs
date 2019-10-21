@@ -405,8 +405,14 @@ namespace BookStore.UC
 
         public void JumpToLine(int lineNo)
         {
-            richTextBoxVersionContent.SelectionStart = richTextBoxVersionContent.GetFirstCharIndexFromLine(lineNo);
-            richTextBoxVersionContent.SelectionLength = 0;
+            var index = 0;
+            for (var i = 0; i < lineNo; i++)
+            {
+                index += (_lines[i].Length + 1);
+            }
+            
+            richTextBoxVersionContent.SelectionStart = index;
+            richTextBoxVersionContent.SelectionLength = _lines[lineNo].Length + 1;
             richTextBoxVersionContent.Focus();
             richTextBoxVersionContent.ScrollToCaret();
         }
