@@ -8,10 +8,8 @@ namespace BookStore
 {
     static class SQLiteHelper
     {
-        //private const string ConnStr = @"Data Source = C:\Users\ssf\Desktop\SQLite\BookStore.db3";
         private static readonly string ConnStr = $@"Data Source = {Environment.CurrentDirectory}\BookStore.db3";
-
-
+        
         public static int ExecuteNonQuery(string sql, params SQLiteParameter[] pms)
         {
             try
