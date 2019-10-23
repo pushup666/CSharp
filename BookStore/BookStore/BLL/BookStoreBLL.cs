@@ -57,6 +57,16 @@ namespace BookStore.BLL
             return BookDAL.ModifyBook(book);
         }
 
+        private static bool UpdateBookLength(string bookID)
+        {
+            var version = GetLatestVersion(bookID);
+            if (version == null)
+            {
+                return false;
+            }
+            return BookDAL.ModifyBookLength(version.BookID, version.ContentLength);
+        }
+
 
 
 
@@ -81,12 +91,12 @@ namespace BookStore.BLL
         public static bool AddVersion(VersionDO version)
         {
             version.VersionNo = VersionDAL.GetNextVersionNo(version.BookID);
-            return VersionDAL.AddVersion(version) && BookDAL.ModifyBookLength(version.BookID, version.ContentLength);
+            return VersionDAL.AddVersion(version) && UpdateBookLength(version.BookID);
         }
 
-        public static bool RemoveVersion(string versionID)
+        public static bool RemoveVersion(string bookID, string versionID)
         {
-            return VersionDAL.RemoveVersion(versionID);
+            return VersionDAL.RemoveVersion(versionID) && UpdateBookLength(bookID);
         }
 
         public static bool IsThisHashExist(string hash)

@@ -332,7 +332,7 @@ namespace BookStore.UC
 
                 if (MessageBox.Show($"确认删除 版本“{_currVersion.VersionNo}” 文件？", "警告", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-                    if (BookStoreBLL.RemoveVersion(_currVersion.ID))
+                    if (BookStoreBLL.RemoveVersion(_currVersion.BookID, _currVersion.ID))
                     {
                         RefreshVersionList();
                     }
