@@ -16,6 +16,9 @@ namespace BookStore.DAL
                 "Note TEXT, " +
                 "Rate INTEGER DEFAULT(0) NOT NULL, " +
                 "Length INTEGER DEFAULT(0) NOT NULL, " +
+                "ModifyDate DATETIME, " +
+                "LastReadDate DATETIME, " +
+                "LastReadPosition INTEGER DEFAULT (0) NOT NULL, " +
                 "DeleteFlag INTEGER DEFAULT(0) NOT NULL); ",
 
                 "CREATE TABLE Version (" +

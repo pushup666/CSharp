@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using System.Data.SQLite;
 using System.Text;
 using BookStore.Model;
@@ -28,7 +29,7 @@ namespace BookStore.DAL
 
         public static DataTable GetBookList()
         {
-            const string sql = "SELECT ID, Title, Length, Rate, Alias, Author, Note FROM Book WHERE DeleteFlag = 0 ORDER BY Title COLLATE PinYin;";
+            const string sql = "SELECT ID, Title, Length, Rate, Alias, Author, Note, ModifyDate, LastReadDate FROM Book WHERE DeleteFlag = 0 ORDER BY Title COLLATE PinYin;";
 
             return SQLiteHelper.ExecuteReader(sql);
         }
@@ -40,7 +41,7 @@ namespace BookStore.DAL
             if (filterRate != -1) filterSql.Append($"AND Rate = {filterRate} ");
             if (filterLength != "") filterSql.Append($"AND Length {filterLength} ");
 
-            var sql = $"SELECT ID, Title, Length, Rate, Alias, Author, Note FROM Book WHERE DeleteFlag = 0 {filterSql}ORDER BY Title COLLATE PinYin;";
+            var sql = $"SELECT ID, Title, Length, Rate, Alias, Author, Note, ModifyDate, LastReadDate FROM Book WHERE DeleteFlag = 0 {filterSql}ORDER BY Title COLLATE PinYin;";
 
             return SQLiteHelper.ExecuteReader(sql);
         }
@@ -76,16 +77,41 @@ namespace BookStore.DAL
             return SQLiteHelper.ExecuteNonQuery(sql, pms) != -1;
         }
 
-        public static bool ModifyBookLength(string bookID, int length)
+        public static bool UpdateBookLengthAndModifyDate(string bookID, int length)
         {
-            const string sql = "UPDATE Book SET Length = @Length WHERE ID = @ID;";
+            const string sql = "UPDATE Book SET Length = @Length, ModifyDate = @ModifyDate WHERE ID = @ID;";
             var pms = new[]
             {
-                new SQLiteParameter("@Length", DbType.String){Value = length},
+                new SQLiteParameter("@Length", DbType.Int32){Value = length},
+                new SQLiteParameter("@ModifyDate", DbType.DateTime){Value = DateTime.Now},
                 new SQLiteParameter("@ID", DbType.String){Value = bookID},
             };
 
             return SQLiteHelper.ExecuteNonQuery(sql, pms) != -1;
+        }
+
+        public static bool UpdateBookLastRead(string bookID, int lastReadPosition)
+        {
+            const string sql = "UPDATE Book SET LastReadDate = @LastReadDate, LastReadPosition = @LastReadPosition WHERE ID = @ID;";
+            var pms = new[]
+            {
+                new SQLiteParameter("@LastReadDate", DbType.DateTime){Value = DateTime.Now},
+                new SQLiteParameter("@LastReadPosition", DbType.Int32){Value = lastReadPosition},
+                new SQLiteParameter("@ID", DbType.String){Value = bookID},
+            };
+
+            return SQLiteHelper.ExecuteNonQuery(sql, pms) != -1;
+        }
+
+
+        public static int GetBookLastReadPosition(string bookID)
+        {
+            const string sql = "SELECT LastReadPosition FROM Book WHERE ID = @ID AND DeleteFlag = 0;";
+            var pms = new[]
+            {
+                new SQLiteParameter("@ID", DbType.String){Value = bookID},
+            };
+            return int.Parse(SQLiteHelper.ExecuteScalar(sql, pms));
         }
 
         public static bool RemoveBook(string bookID)
