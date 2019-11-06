@@ -15,9 +15,10 @@ namespace ReadVideoInfo
         public ReadVideoInfo()
         {
             InitializeComponent();
+            comboBoxVideoCodec.SelectedIndex = 0;
         }
 
-        private void buttonAddFile_Click(object sender, EventArgs e)
+        private void ButtonAddFile_Click(object sender, EventArgs e)
         {
             try
             {
@@ -48,7 +49,7 @@ namespace ReadVideoInfo
             }
         }
 
-        private void buttonAddFolder_Click(object sender, EventArgs e)
+        private void ButtonAddFolder_Click(object sender, EventArgs e)
         {
             try
             {
@@ -78,7 +79,7 @@ namespace ReadVideoInfo
             }
         }
 
-        private void buttonClearList_Click(object sender, EventArgs e)
+        private void ButtonClearList_Click(object sender, EventArgs e)
         {
             _files.Clear();
             RefreshFileList();
@@ -94,7 +95,7 @@ namespace ReadVideoInfo
             }
         }
 
-        private void buttonSave_Click(object sender, EventArgs e)
+        private void ButtonSave_Click(object sender, EventArgs e)
         {
             try
             {
@@ -107,7 +108,7 @@ namespace ReadVideoInfo
             }
         }
 
-        private void buttonReadVideoCreationTime_Click(object sender, EventArgs e)
+        private void ButtonReadVideoCreationTime_Click(object sender, EventArgs e)
         {
             try
             {
@@ -140,12 +141,8 @@ namespace ReadVideoInfo
         }
 
 
-        private void buttonAutoBitrate_Click(object sender, EventArgs e)
+        private void ButtonAutoBitrate_Click(object sender, EventArgs e)
         {
-            var IsSaveToRam = true;
-            const string format = @"{5}ffmpeg -i ""{0}\{1}"" -b:v {4}K -vcodec hevc_nvenc -acodec aac -ac 2 -q:a 0.7 ""{2}\{3}_hevc_nvenc.mp4""";
-            //const string format = @"{5}ffmpeg -i ""{0}\{1}"" -b:v {4}K -vcodec h264_qsv -acodec aac -ac 2 -q:a 0.7 ""{2}\{3}_h264_qsv.mp4""";
-
             try
             {
                 var sb = new StringBuilder();
@@ -153,7 +150,7 @@ namespace ReadVideoInfo
                 foreach (string item in checkedListBoxFileName.CheckedItems)
                 {
                     var srcDirectoryName = Path.GetDirectoryName(item);
-                    var dstDirectoryName = IsSaveToRam ? "Z:" : srcDirectoryName;
+                    var dstDirectoryName = checkBoxSaveToRam.Checked ? "Z:" : srcDirectoryName;
                     var srcFileName = Path.GetFileName(item);
                     var dstFileNameWithoutExtension = Path.GetFileNameWithoutExtension(item);
 
@@ -166,8 +163,11 @@ namespace ReadVideoInfo
                     var convertFlag = double.Parse(dstSize) > 0 && double.Parse(dstSize) < double.Parse(srcSize) / 1.5;
 
                     sb.AppendLine($"rem Src:{srcSize}M    Dst:{dstSize}M");
-                    //sb.Append($"{srcSize}\t{dstSize}\t\t");
-                    sb.AppendLine(string.Format(format, srcDirectoryName, srcFileName, dstDirectoryName, dstFileNameWithoutExtension, dstFileAutoBitrate, convertFlag ? "" : "rem "));
+                    sb.AppendLine(string.Format(
+                        @"{5}ffmpeg -i ""{0}\{1}"" -b:v {4}K -vcodec {6} -acodec aac -ac 2 -q:a 0.7   ""{2}\{3}_{6}.mp4""",
+                        srcDirectoryName, srcFileName, dstDirectoryName,
+                        dstFileNameWithoutExtension, dstFileAutoBitrate, convertFlag ? "" : "rem ",
+                        comboBoxVideoCodec.Text));
                 }
 
                 richTextBoxOutput.Text += sb.ToString();

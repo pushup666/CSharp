@@ -39,6 +39,7 @@
             this.richTextBoxOutput = new System.Windows.Forms.RichTextBox();
             this.buttonAll = new System.Windows.Forms.Button();
             this.buttonSave = new System.Windows.Forms.Button();
+            this.checkBoxSaveToRam = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // buttonClearList
@@ -149,7 +150,7 @@
             this.buttonAll.TabIndex = 19;
             this.buttonAll.Text = "一键转换";
             this.buttonAll.UseVisualStyleBackColor = true;
-            this.buttonAll.Click += new System.EventHandler(this.buttonAll_Click);
+            this.buttonAll.Click += new System.EventHandler(this.ButtonAll_Click);
             // 
             // buttonSave
             // 
@@ -160,13 +161,24 @@
             this.buttonSave.TabIndex = 20;
             this.buttonSave.Text = "保存";
             this.buttonSave.UseVisualStyleBackColor = true;
-            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
+            this.buttonSave.Click += new System.EventHandler(this.ButtonSave_Click);
+            // 
+            // checkBoxSaveToRam
+            // 
+            this.checkBoxSaveToRam.AutoSize = true;
+            this.checkBoxSaveToRam.Location = new System.Drawing.Point(285, 247);
+            this.checkBoxSaveToRam.Name = "checkBoxSaveToRam";
+            this.checkBoxSaveToRam.Size = new System.Drawing.Size(78, 16);
+            this.checkBoxSaveToRam.TabIndex = 21;
+            this.checkBoxSaveToRam.Text = "SaveToRam";
+            this.checkBoxSaveToRam.UseVisualStyleBackColor = true;
             // 
             // MainFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1010, 290);
+            this.Controls.Add(this.checkBoxSaveToRam);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.buttonAll);
             this.Controls.Add(this.richTextBoxOutput);
@@ -181,6 +193,7 @@
             this.Name = "MainFrm";
             this.Text = "MainFrm";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -197,5 +210,6 @@
         private System.Windows.Forms.RichTextBox richTextBoxOutput;
         private System.Windows.Forms.Button buttonAll;
         private System.Windows.Forms.Button buttonSave;
+        private System.Windows.Forms.CheckBox checkBoxSaveToRam;
     }
 }

@@ -36,18 +36,20 @@
             this.checkedListBoxFileName = new System.Windows.Forms.CheckedListBox();
             this.buttonReadVideoCreationTime = new System.Windows.Forms.Button();
             this.buttonAutoBitrate = new System.Windows.Forms.Button();
+            this.checkBoxSaveToRam = new System.Windows.Forms.CheckBox();
+            this.comboBoxVideoCodec = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // buttonSave
             // 
             this.buttonSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonSave.Location = new System.Drawing.Point(923, 352);
+            this.buttonSave.Location = new System.Drawing.Point(923, 353);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(75, 23);
             this.buttonSave.TabIndex = 31;
             this.buttonSave.Text = "保存";
             this.buttonSave.UseVisualStyleBackColor = true;
-            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
+            this.buttonSave.Click += new System.EventHandler(this.ButtonSave_Click);
             // 
             // richTextBoxOutput
             // 
@@ -64,35 +66,35 @@
             // buttonClearList
             // 
             this.buttonClearList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonClearList.Location = new System.Drawing.Point(174, 352);
+            this.buttonClearList.Location = new System.Drawing.Point(174, 353);
             this.buttonClearList.Name = "buttonClearList";
             this.buttonClearList.Size = new System.Drawing.Size(75, 23);
             this.buttonClearList.TabIndex = 24;
             this.buttonClearList.Text = "清空";
             this.buttonClearList.UseVisualStyleBackColor = true;
-            this.buttonClearList.Click += new System.EventHandler(this.buttonClearList_Click);
+            this.buttonClearList.Click += new System.EventHandler(this.ButtonClearList_Click);
             // 
             // buttonAddFolder
             // 
             this.buttonAddFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonAddFolder.Location = new System.Drawing.Point(93, 352);
+            this.buttonAddFolder.Location = new System.Drawing.Point(93, 353);
             this.buttonAddFolder.Name = "buttonAddFolder";
             this.buttonAddFolder.Size = new System.Drawing.Size(75, 23);
             this.buttonAddFolder.TabIndex = 23;
             this.buttonAddFolder.Text = "添加文件夹";
             this.buttonAddFolder.UseVisualStyleBackColor = true;
-            this.buttonAddFolder.Click += new System.EventHandler(this.buttonAddFolder_Click);
+            this.buttonAddFolder.Click += new System.EventHandler(this.ButtonAddFolder_Click);
             // 
             // buttonAddFile
             // 
             this.buttonAddFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonAddFile.Location = new System.Drawing.Point(12, 352);
+            this.buttonAddFile.Location = new System.Drawing.Point(12, 353);
             this.buttonAddFile.Name = "buttonAddFile";
             this.buttonAddFile.Size = new System.Drawing.Size(75, 23);
             this.buttonAddFile.TabIndex = 22;
             this.buttonAddFile.Text = "添加文件";
             this.buttonAddFile.UseVisualStyleBackColor = true;
-            this.buttonAddFile.Click += new System.EventHandler(this.buttonAddFile_Click);
+            this.buttonAddFile.Click += new System.EventHandler(this.ButtonAddFile_Click);
             // 
             // checkedListBoxFileName
             // 
@@ -108,31 +110,55 @@
             // 
             this.buttonReadVideoCreationTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonReadVideoCreationTime.AutoSize = true;
-            this.buttonReadVideoCreationTime.Location = new System.Drawing.Point(468, 352);
+            this.buttonReadVideoCreationTime.Location = new System.Drawing.Point(468, 353);
             this.buttonReadVideoCreationTime.Name = "buttonReadVideoCreationTime";
             this.buttonReadVideoCreationTime.Size = new System.Drawing.Size(87, 23);
             this.buttonReadVideoCreationTime.TabIndex = 32;
             this.buttonReadVideoCreationTime.Text = "读取创建时间";
             this.buttonReadVideoCreationTime.UseVisualStyleBackColor = true;
-            this.buttonReadVideoCreationTime.Click += new System.EventHandler(this.buttonReadVideoCreationTime_Click);
+            this.buttonReadVideoCreationTime.Click += new System.EventHandler(this.ButtonReadVideoCreationTime_Click);
             // 
             // buttonAutoBitrate
             // 
             this.buttonAutoBitrate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonAutoBitrate.AutoSize = true;
-            this.buttonAutoBitrate.Location = new System.Drawing.Point(561, 352);
+            this.buttonAutoBitrate.Location = new System.Drawing.Point(561, 353);
             this.buttonAutoBitrate.Name = "buttonAutoBitrate";
             this.buttonAutoBitrate.Size = new System.Drawing.Size(135, 23);
             this.buttonAutoBitrate.TabIndex = 33;
             this.buttonAutoBitrate.Text = "根据尺寸预估合理码率";
             this.buttonAutoBitrate.UseVisualStyleBackColor = true;
-            this.buttonAutoBitrate.Click += new System.EventHandler(this.buttonAutoBitrate_Click);
+            this.buttonAutoBitrate.Click += new System.EventHandler(this.ButtonAutoBitrate_Click);
+            // 
+            // checkBoxSaveToRam
+            // 
+            this.checkBoxSaveToRam.AutoSize = true;
+            this.checkBoxSaveToRam.Location = new System.Drawing.Point(278, 356);
+            this.checkBoxSaveToRam.Name = "checkBoxSaveToRam";
+            this.checkBoxSaveToRam.Size = new System.Drawing.Size(78, 16);
+            this.checkBoxSaveToRam.TabIndex = 34;
+            this.checkBoxSaveToRam.Text = "SaveToRam";
+            this.checkBoxSaveToRam.UseVisualStyleBackColor = true;
+            // 
+            // comboBoxVideoCodec
+            // 
+            this.comboBoxVideoCodec.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxVideoCodec.FormattingEnabled = true;
+            this.comboBoxVideoCodec.Items.AddRange(new object[] {
+            "h264_qsv",
+            "hevc_nvenc"});
+            this.comboBoxVideoCodec.Location = new System.Drawing.Point(702, 354);
+            this.comboBoxVideoCodec.Name = "comboBoxVideoCodec";
+            this.comboBoxVideoCodec.Size = new System.Drawing.Size(94, 20);
+            this.comboBoxVideoCodec.TabIndex = 35;
             // 
             // ReadVideoInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1021, 387);
+            this.Controls.Add(this.comboBoxVideoCodec);
+            this.Controls.Add(this.checkBoxSaveToRam);
             this.Controls.Add(this.buttonAutoBitrate);
             this.Controls.Add(this.buttonReadVideoCreationTime);
             this.Controls.Add(this.buttonSave);
@@ -158,6 +184,8 @@
         private System.Windows.Forms.CheckedListBox checkedListBoxFileName;
         private System.Windows.Forms.Button buttonReadVideoCreationTime;
         private System.Windows.Forms.Button buttonAutoBitrate;
+        private System.Windows.Forms.CheckBox checkBoxSaveToRam;
+        private System.Windows.Forms.ComboBox comboBoxVideoCodec;
     }
 }
 

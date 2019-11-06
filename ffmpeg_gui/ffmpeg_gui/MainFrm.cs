@@ -8,62 +8,61 @@ namespace ffmpeg_gui
 {
     public partial class MainFrm : Form
     {
-        private const bool IsSaveToRam = false;
         private readonly Dictionary<string, bool> _files = new Dictionary<string, bool>();
 
         //ffmpeg -ss 00:02:40 -i 111.mp4 -c copy -t 01:27:15 222.mp4 分割
 
 
 
+        //VideoFormat
+        private const string VideoFormat = @"ffmpeg -i ""{0}\{1}"" -vcodec copy -an ""{2}\Video_{3}.mp4""";             //copy
 
-        
-        //private const string VideoFormat = @"ffmpeg -i ""{0}\{1}"" -vcodec copy -an ""{2}\V_{3}.mp4""";
+        //private const string VideoFormat = @"ffmpeg -i ""{0}\{1}"" -vcodec hevc_nvenc -an ""{2}\Video_{3}.mp4""";     //2000 Kbps/s
+        //private const string VideoFormat = @"ffmpeg -i ""{0}\{1}"" -vcodec h264_qsv   -an ""{2}\Video_{3}.mp4""";     //1000 Kbps/s
 
-        private const string VideoFormat = @"ffmpeg -i ""{0}\{1}"" -b:v 2000K -vcodec hevc_nvenc -an ""{2}\V_{3}.mp4""";
-        //private const string VideoFormat = @"ffmpeg -i ""{0}\{1}"" -vcodec hevc_nvenc -rc vbr -cq 30 -an ""{2}\V_{3}.mp4""";
-        //private const string VideoFormat = @"ffmpeg -i ""{0}\{1}"" -vcodec hevc_nvenc -an ""{2}\V_{3}.mp4""";     //2000 Kbps/s
+        //private const string VideoFormat = @"ffmpeg -i ""{0}\{1}"" -vcodec hevc_nvenc -b:v 2000K     -an ""{2}\Video_{3}.mp4""";
+        //private const string VideoFormat = @"ffmpeg -i ""{0}\{1}"" -vcodec hevc_nvenc -rc vbr -cq 30 -an ""{2}\Video_{3}.mp4""";
 
-        //private const string VideoFormat = @"ffmpeg -i ""{0}\{1}"" -vcodec h264_qsv -an ""{2}\V_{3}.mp4""";     //1000 Kbps/s
-
-        //private const string VideoFormat = @"x264 -o ""{2}\V_{3}.mp4"" ""{0}\{1}"" --ssim --tune ssim";
-
+        //private const string VideoFormat = @"x264 -o ""{2}\Video_{3}.mp4"" ""{0}\{1}"" --ssim --tune ssim";
 
 
 
 
         //AudioFormat
-        //private const string AudioFormat = @"ffmpeg -i ""{0}\{1}"" -vn -acodec copy ""{2}\A_{3}.m4a""";
-        //private const string AudioFormat = @"ffmpeg -i ""{0}\{1}"" -ac 2 -f wav - | neroaacenc -q 0.3 -if - -ignorelength -of ""{2}\A_{3}.m4a""";           // 81 Kbps/s        59x
-        //private const string AudioFormat = @"ffmpeg -i ""{0}\{1}"" -ac 2 -f wav - | neroaacenc -q 0.4 -if - -ignorelength -of ""{2}\A_{3}.m4a""";         // 120 Kbps/s       55x
-        //private const string AudioFormat = @"ffmpeg -i ""{0}\{1}"" -ac 2 -f wav - | neroaacenc -q 0.5 -if - -ignorelength -of ""{2}\A_{3}.m4a""";         // 168 Kbps/s       52x
+        private const string AudioFormat = @"ffmpeg -i ""{0}\{1}"" -vn -acodec copy ""{2}\Audio_{3}.m4a""";             //copy
 
-        //private const string AudioFormat = @"ffmpeg -i ""{0}\{1}"" -vn -acodec aac -ac 2 ""{2}\A_{3}.m4a""";                                              // 130 Kbps/s       36x
-        private const string AudioFormat = @"ffmpeg -i ""{0}\{1}"" -vn -acodec aac -ac 2 -q:a 0.7 ""{2}\A_{3}.m4a""";                                       // 86 Kbps/s        44x
+        //private const string AudioFormat = @"ffmpeg -i ""{0}\{1}"" -ac 2 -f wav - | neroaacenc -q 0.3 -if - -ignorelength -of ""{2}\Audio_{3}.m4a""";         // 81  Kbps/s       59x
+        //private const string AudioFormat = @"ffmpeg -i ""{0}\{1}"" -ac 2 -f wav - | neroaacenc -q 0.4 -if - -ignorelength -of ""{2}\Audio_{3}.m4a""";         // 120 Kbps/s       55x
+        //private const string AudioFormat = @"ffmpeg -i ""{0}\{1}"" -ac 2 -f wav - | neroaacenc -q 0.5 -if - -ignorelength -of ""{2}\Audio_{3}.m4a""";         // 168 Kbps/s       52x
 
-
-
-
-
-
-        private const string PackageFormat = @"ffmpeg -i ""{2}\V_{3}.mp4"" -i ""{2}\A_{3}.m4a"" -vcodec copy -acodec copy ""{2}\{3}_ENC.mp4""";
+        //private const string AudioFormat = @"ffmpeg -i ""{0}\{1}"" -vn -acodec aac -ac 2          ""{2}\Audio_{3}.m4a""";                                     // 130 Kbps/s       36x
+        //private const string AudioFormat = @"ffmpeg -i ""{0}\{1}"" -vn -acodec aac -ac 2 -q:a 0.7 ""{2}\Audio_{3}.m4a""";                                     // 86  Kbps/s       44x
 
 
 
 
-        //private const string AllFormatLibx264 = @"ffmpeg -i ""{0}\{1}"" -vcodec libx264 -acodec aac -ac 2 ""{2}\{3}_libx264.mp4""";
-        //private const string AllFormatLibx265 = @"ffmpeg -i ""{0}\{1}"" -vcodec libx265 -acodec aac -ac 2 ""{2}\{3}_libx265.mp4""";
-        //private const string AllFormatH264NvEnc = @"ffmpeg -i ""{0}\{1}"" -vcodec h264_nvenc -acodec aac -ac 2 ""{2}\{3}_h264_nvenc.mp4""";
 
-        private const string AllFormatHevcNvEnc = @"ffmpeg -i ""{0}\{1}"" -b:v 2000K -vcodec hevc_nvenc -acodec aac -ac 2 -q:a 0.7 ""{2}\{3}_hevc_nvenc.mp4""";     //16:9 1080 2500、720 1500、480 
-
-        private const string AllFormatH264Qsv = @"ffmpeg -i ""{0}\{1}"" -vcodec h264_qsv -acodec aac -ac 2 ""{2}\{3}_h264_qsv.mp4""";
-
-        private const string AllFormatToMp4 = @"ffmpeg -i ""{0}\{1}"" -vcodec copy -acodec copy ""{2}\{3}.mp4""";
+        //PackageFormat
+        private const string PackageFormat = @"ffmpeg -i ""{2}\Video_{3}.mp4"" -i ""{2}\Audio_{3}.m4a"" -vcodec copy -acodec copy ""{2}\{3}_ENC.mp4""";
 
 
-        private const string SeparateAudioFormat = @"ffmpeg -i ""{0}\{1}"" -acodec copy -vn ""{2}\A_{3}.m4a""";
-        private const string SeparateVideoFormat = @"ffmpeg -i ""{0}\{1}"" -vcodec copy -an ""{2}\V_{3}.mp4""";
-        private const string SeparateSubtitleFormat = @"ffmpeg -i ""{0}\{1}"" -vn -an -scodec copy ""{2}\S_{3}.ass""";
+
+        //AllFormat
+        private const string AllFormat = @"ffmpeg -i ""{0}\{1}"" -vcodec copy -acodec copy ""{2}\{3}.mp4""";            //copy
+
+        //private const string AllFormat = @"ffmpeg -i ""{0}\{1}"" -vcodec libx264    -acodec aac -ac 2 ""{2}\{3}_libx264.mp4""";
+        //private const string AllFormat = @"ffmpeg -i ""{0}\{1}"" -vcodec libx265    -acodec aac -ac 2 ""{2}\{3}_libx265.mp4""";
+        //private const string AllFormat = @"ffmpeg -i ""{0}\{1}"" -vcodec h264_nvenc -acodec aac -ac 2 ""{2}\{3}_h264_nvenc.mp4""";
+
+        //private const string AllFormat = @"ffmpeg -i ""{0}\{1}"" -vcodec hevc_nvenc -b:v 2000K -acodec aac -ac 2 -q:a 0.7 ""{2}\{3}_hevc_nvenc.mp4""";     //16:9 1080 2500、720 1500、480 
+        //private const string AllFormat = @"ffmpeg -i ""{0}\{1}"" -vcodec h264_qsv              -acodec aac -ac 2          ""{2}\{3}_h264_qsv.mp4""";
+
+
+
+
+        private const string SeparateAudioFormat = @"ffmpeg -i ""{0}\{1}"" -acodec copy -vn ""{2}\Audio_{3}.m4a""";
+        private const string SeparateVideoFormat = @"ffmpeg -i ""{0}\{1}"" -vcodec copy -an ""{2}\Video_{3}.mp4""";
+        //private const string SeparateSubtitleFormat = @"ffmpeg -i ""{0}\{1}"" -vn -an -scodec copy ""{2}\Sub_{3}.ass""";
 
         public MainFrm()
         {
@@ -162,9 +161,9 @@ namespace ffmpeg_gui
             GenerateCmdLine(PackageFormat);
         }
 
-        private void buttonAll_Click(object sender, EventArgs e)
+        private void ButtonAll_Click(object sender, EventArgs e)
         {
-            GenerateCmdLine(AllFormatHevcNvEnc);
+            GenerateCmdLine(AllFormat);
         }
 
         private void ButtonSeparateClick(object sender, EventArgs e)
@@ -181,7 +180,7 @@ namespace ffmpeg_gui
                 foreach (string item in checkedListBoxFileName.CheckedItems)
                 {
                     var srcDirectoryName = Path.GetDirectoryName(item);
-                    var dstDirectoryName = IsSaveToRam ? "Z:" : srcDirectoryName;
+                    var dstDirectoryName = checkBoxSaveToRam.Checked ? "Z:" : srcDirectoryName;
                     var srcFileName = Path.GetFileName(item);
                     var dstFileNameWithoutExtension = Path.GetFileNameWithoutExtension(item);
 
@@ -196,7 +195,7 @@ namespace ffmpeg_gui
         }
 
 
-        private void buttonSave_Click(object sender, EventArgs e)
+        private void ButtonSave_Click(object sender, EventArgs e)
         {
             try
             {
