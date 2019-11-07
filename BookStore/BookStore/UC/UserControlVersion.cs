@@ -425,7 +425,7 @@ namespace BookStore.UC
 
         private void UserControlVersion_Load(object sender, EventArgs e)
         {
-            timerLastRead.Enabled = true;
+            timerLastRead.Enabled = false;
             timerLastRead.Interval = 10000;
 
             richTextBoxVersionContent.SelectionStart = BookStoreBLL.GetBookLastReadPosition(_bookID);
