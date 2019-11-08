@@ -120,15 +120,15 @@ namespace ReadVideoInfo
                     var directoryName = Path.GetDirectoryName(item);
                     var dstFileExtension = Path.GetExtension(item);
 
-                    var srcFileNameWithoutExtension = Path.GetFileNameWithoutExtension(item);
-                    var dstFileNameWithoutExtension = GetVideoCreationTime(item);
+                    var srcFileNameWithoutExt = Path.GetFileNameWithoutExtension(item);
+                    var dstFileNameWithoutExt = GetVideoCreationTime(item);
 
-                    if (srcFileNameWithoutExtension == dstFileNameWithoutExtension)
+                    if (srcFileNameWithoutExt == dstFileNameWithoutExt)
                     {
                         continue;
                     }
 
-                    sb.AppendLine(string.Format(format, directoryName, srcFileNameWithoutExtension, dstFileExtension, dstFileNameWithoutExtension));
+                    sb.AppendLine(string.Format(format, directoryName, srcFileNameWithoutExt, dstFileExtension, dstFileNameWithoutExt));
                 }
 
                 richTextBoxOutput.Text += sb.ToString();
@@ -152,7 +152,7 @@ namespace ReadVideoInfo
                     var srcDirectoryName = Path.GetDirectoryName(item);
                     var dstDirectoryName = checkBoxSaveToRam.Checked ? "Z:" : srcDirectoryName;
                     var srcFileName = Path.GetFileName(item);
-                    var dstFileNameWithoutExtension = Path.GetFileNameWithoutExtension(item);
+                    var dstFileNameWithoutExt = Path.GetFileNameWithoutExtension(item);
 
                     var dstFileAutoBitrate = GetVideoAutoBitrate(item);
                     var duration = GetVideoDuration(item);
@@ -166,7 +166,7 @@ namespace ReadVideoInfo
                     sb.AppendLine(string.Format(
                         @"{5}ffmpeg -i ""{0}\{1}"" -b:v {4}K -vcodec {6} -acodec aac -ac 2 -q:a 0.7   ""{2}\{3}_{6}.mp4""",
                         srcDirectoryName, srcFileName, dstDirectoryName,
-                        dstFileNameWithoutExtension, dstFileAutoBitrate, convertFlag ? "" : "rem ",
+                        dstFileNameWithoutExt, dstFileAutoBitrate, convertFlag ? "" : "rem ",
                         comboBoxVideoCodec.Text));
                 }
 
