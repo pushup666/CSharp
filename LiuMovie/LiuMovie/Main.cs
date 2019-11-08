@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Text;
 
 
@@ -72,14 +71,14 @@ namespace LiuMovie
         {
             if (WindowState == FormWindowState.Minimized)
             {
-                notifyIconNew.Visible = true;
+                notifyIcon.Visible = true;
                 Hide();
             }
         }
 
         private void NotifyIconNew_DoubleClick(object sender, EventArgs e)
         {
-            notifyIconNew.Visible = false;
+            notifyIcon.Visible = false;
             Show();
         }
 
@@ -94,7 +93,7 @@ namespace LiuMovie
                 _files.Remove(fileName);
                 RefreshTextBox();
 
-                notifyIconNew.Text = fileNameWithoutExt;
+                notifyIcon.Text = fileNameWithoutExt;
                 Record(fileNameWithoutExt);
                 Play(fileName);
             }

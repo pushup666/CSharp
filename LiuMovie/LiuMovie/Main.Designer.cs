@@ -30,28 +30,28 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
-            this.notifyIconNew = new System.Windows.Forms.NotifyIcon(this.components);
-            this.contextMenuStripnotify = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
+            this.contextMenuStripNotify = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.NextToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buttonClearList = new System.Windows.Forms.Button();
             this.buttonAddFile = new System.Windows.Forms.Button();
             this.richTextBoxFileList = new System.Windows.Forms.RichTextBox();
-            this.contextMenuStripnotify.SuspendLayout();
+            this.contextMenuStripNotify.SuspendLayout();
             this.SuspendLayout();
             // 
-            // notifyIconNew
+            // notifyIcon
             // 
-            this.notifyIconNew.ContextMenuStrip = this.contextMenuStripnotify;
-            this.notifyIconNew.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIconNew.Icon")));
-            this.notifyIconNew.Text = "ssf";
-            this.notifyIconNew.DoubleClick += new System.EventHandler(this.NotifyIconNew_DoubleClick);
+            this.notifyIcon.ContextMenuStrip = this.contextMenuStripNotify;
+            this.notifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon.Icon")));
+            this.notifyIcon.Text = "ssf";
+            this.notifyIcon.DoubleClick += new System.EventHandler(this.NotifyIconNew_DoubleClick);
             // 
-            // contextMenuStripnotify
+            // contextMenuStripNotify
             // 
-            this.contextMenuStripnotify.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.contextMenuStripNotify.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.NextToolStripMenuItem});
-            this.contextMenuStripnotify.Name = "contextMenuStripnotify";
-            this.contextMenuStripnotify.Size = new System.Drawing.Size(113, 26);
+            this.contextMenuStripNotify.Name = "contextMenuStripnotify";
+            this.contextMenuStripNotify.Size = new System.Drawing.Size(113, 26);
             // 
             // NextToolStripMenuItem
             // 
@@ -102,15 +102,15 @@
             this.Name = "Main";
             this.Text = "Main";
             this.SizeChanged += new System.EventHandler(this.Main_SizeChanged);
-            this.contextMenuStripnotify.ResumeLayout(false);
+            this.contextMenuStripNotify.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.NotifyIcon notifyIconNew;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStripnotify;
+        private System.Windows.Forms.NotifyIcon notifyIcon;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripNotify;
         private System.Windows.Forms.ToolStripMenuItem NextToolStripMenuItem;
         private System.Windows.Forms.Button buttonClearList;
         private System.Windows.Forms.Button buttonAddFile;
