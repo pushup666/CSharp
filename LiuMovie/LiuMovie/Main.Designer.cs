@@ -33,9 +33,9 @@
             this.notifyIconNew = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStripnotify = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.NextToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.checkedListBoxFileName = new System.Windows.Forms.CheckedListBox();
             this.buttonClearList = new System.Windows.Forms.Button();
             this.buttonAddFile = new System.Windows.Forms.Button();
+            this.richTextBoxFileList = new System.Windows.Forms.RichTextBox();
             this.contextMenuStripnotify.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -60,20 +60,10 @@
             this.NextToolStripMenuItem.Text = "下一个";
             this.NextToolStripMenuItem.Click += new System.EventHandler(this.NextToolStripMenuItem_Click);
             // 
-            // checkedListBoxFileName
-            // 
-            this.checkedListBoxFileName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.checkedListBoxFileName.FormattingEnabled = true;
-            this.checkedListBoxFileName.Location = new System.Drawing.Point(12, 12);
-            this.checkedListBoxFileName.Name = "checkedListBoxFileName";
-            this.checkedListBoxFileName.Size = new System.Drawing.Size(435, 324);
-            this.checkedListBoxFileName.TabIndex = 22;
-            // 
             // buttonClearList
             // 
             this.buttonClearList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonClearList.Location = new System.Drawing.Point(453, 54);
+            this.buttonClearList.Location = new System.Drawing.Point(453, 57);
             this.buttonClearList.Name = "buttonClearList";
             this.buttonClearList.Size = new System.Drawing.Size(77, 23);
             this.buttonClearList.TabIndex = 26;
@@ -84,7 +74,7 @@
             // buttonAddFile
             // 
             this.buttonAddFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonAddFile.Location = new System.Drawing.Point(453, 12);
+            this.buttonAddFile.Location = new System.Drawing.Point(453, 15);
             this.buttonAddFile.Name = "buttonAddFile";
             this.buttonAddFile.Size = new System.Drawing.Size(77, 23);
             this.buttonAddFile.TabIndex = 25;
@@ -92,14 +82,23 @@
             this.buttonAddFile.UseVisualStyleBackColor = true;
             this.buttonAddFile.Click += new System.EventHandler(this.ButtonAddFile_Click);
             // 
+            // richTextBoxFileList
+            // 
+            this.richTextBoxFileList.Location = new System.Drawing.Point(12, 12);
+            this.richTextBoxFileList.Name = "richTextBoxFileList";
+            this.richTextBoxFileList.ReadOnly = true;
+            this.richTextBoxFileList.Size = new System.Drawing.Size(435, 386);
+            this.richTextBoxFileList.TabIndex = 27;
+            this.richTextBoxFileList.Text = "";
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(542, 407);
+            this.ClientSize = new System.Drawing.Size(542, 410);
+            this.Controls.Add(this.richTextBoxFileList);
             this.Controls.Add(this.buttonClearList);
             this.Controls.Add(this.buttonAddFile);
-            this.Controls.Add(this.checkedListBoxFileName);
             this.Name = "Main";
             this.Text = "Main";
             this.SizeChanged += new System.EventHandler(this.Main_SizeChanged);
@@ -113,9 +112,9 @@
         private System.Windows.Forms.NotifyIcon notifyIconNew;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripnotify;
         private System.Windows.Forms.ToolStripMenuItem NextToolStripMenuItem;
-        private System.Windows.Forms.CheckedListBox checkedListBoxFileName;
         private System.Windows.Forms.Button buttonClearList;
         private System.Windows.Forms.Button buttonAddFile;
+        private System.Windows.Forms.RichTextBox richTextBoxFileList;
     }
 }
 

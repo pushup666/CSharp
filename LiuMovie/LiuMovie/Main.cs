@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
+using System.Text;
 
 
 namespace LiuMovie
@@ -29,7 +31,10 @@ namespace LiuMovie
                         {
                             foreach (var fileName in openFileDialog.FileNames)
                             {
-                                checkedListBoxFileName.Items.Add(fileName, true);
+                                if (!_files.Contains(fileName))
+                                {
+                                    _files.Add(fileName);
+                                }
                             }
                         }
                         catch (Exception ex)
@@ -39,7 +44,7 @@ namespace LiuMovie
                     }
                 }
 
-                RefreshFileList();
+                RefreshTextBox();
             }
             catch (Exception ex)
             {
@@ -49,17 +54,18 @@ namespace LiuMovie
 
         private void ButtonClearList_Click(object sender, EventArgs e)
         {
-            checkedListBoxFileName.Items.Clear();
-            RefreshFileList();
+            _files.Clear();
+            RefreshTextBox();
         }
 
-        private void RefreshFileList()
+        private void RefreshTextBox()
         {
-            _files.Clear();
-            foreach (string file in checkedListBoxFileName.CheckedItems)
+            var sb = new StringBuilder();
+            foreach (var file in _files)
             {
-                _files.Add(file);
+                sb.AppendLine(file);
             }
+            richTextBoxFileList.Text = sb.ToString().TrimEnd();
         }
 
         private void Main_SizeChanged(object sender, EventArgs e)
@@ -83,12 +89,18 @@ namespace LiuMovie
             if (_files.Count > 0)
             {
                 var fileName = _files[0];
-                _files.Remove(fileName);
                 var fileNameWithoutExt = Path.GetFileNameWithoutExtension(fileName);
+
+                _files.Remove(fileName);
+                RefreshTextBox();
 
                 notifyIconNew.Text = fileNameWithoutExt;
                 Record(fileNameWithoutExt);
                 Play(fileName);
+            }
+            else
+            {
+                MessageBox.Show("看完了！");
             }
         }
 
@@ -113,7 +125,7 @@ namespace LiuMovie
         }
 
 
-        private static void Record(string filename)
+        private static void Record(string fileNameWithoutExt)
         {
             try
             {
@@ -122,7 +134,7 @@ namespace LiuMovie
                 p.StartInfo.WorkingDirectory = @"C:\Users\ssf\Desktop";
                 p.StartInfo.FileName = "ffmpeg";
 
-                p.StartInfo.Arguments = $"-f dshow -i video=\"screen-capture-recorder\":audio=\"virtual-audio-capturer\" -vcodec h264_qsv -acodec aac -ac 2 \"{filename}.mkv\"";
+                p.StartInfo.Arguments = $"-f dshow -i video=\"screen-capture-recorder\":audio=\"virtual-audio-capturer\" -vcodec h264_qsv -acodec aac -ac 2 \"{fileNameWithoutExt}.mkv\"";
                 p.StartInfo.WindowStyle = ProcessWindowStyle.Minimized;
 
                 p.Start();
