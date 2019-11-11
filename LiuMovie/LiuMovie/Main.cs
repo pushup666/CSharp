@@ -130,7 +130,7 @@ namespace LiuMovie
             {
                 var p = new Process();
 
-                p.StartInfo.WorkingDirectory = @"C:\Users\ssf\Desktop";
+                p.StartInfo.WorkingDirectory = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
                 p.StartInfo.FileName = "ffmpeg";
 
                 p.StartInfo.Arguments = $"-f dshow -i video=\"screen-capture-recorder\":audio=\"virtual-audio-capturer\" -vcodec h264_qsv -acodec aac -ac 2 \"{fileNameWithoutExt}.mkv\"";
