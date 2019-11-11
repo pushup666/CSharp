@@ -11,11 +11,11 @@ namespace SyncFolder
         private static List<string> _srcFileList, _dstFileList, _srcCopyFileList, _dstDeleteFileList;
         private static string _srcFolder, _dstFolder;
 
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             try
             {
-                Console.WriteLine("{0}", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                Console.WriteLine("{0:yyyy-MM-dd HH:mm:ss}", DateTime.Now);
 
                 _srcFolder = args[0];
                 _dstFolder = args[1];
