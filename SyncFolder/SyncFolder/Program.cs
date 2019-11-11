@@ -31,14 +31,29 @@ namespace SyncFolder
 
                 foreach (var file in _srcCopyFileList)
                 {
-                    File.Copy(_srcFolder + file, _dstFolder + file);
-                    Console.WriteLine("Copy {0} {1}", _srcFolder + file, _dstFolder + file);
+                    try
+                    {
+                        File.Copy(_srcFolder + file, _dstFolder + file);
+                        Console.WriteLine("Copy {0} {1}", _srcFolder + file, _dstFolder + file);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
+                    
                 }
 
                 foreach (var file in _dstDeleteFileList)
                 {
-                    File.Delete(_dstFolder + file);
-                    Console.WriteLine("Delete {0}", _dstFolder + file);
+                    try
+                    {
+                        File.Delete(_dstFolder + file);
+                        Console.WriteLine("Delete {0}", _dstFolder + file);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
                 }
             }
             catch (Exception ex)
