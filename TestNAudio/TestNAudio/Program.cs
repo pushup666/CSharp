@@ -14,7 +14,7 @@ namespace TestNAudio
 {
     static class Program
     {
-        static Dictionary<double, string> _lrcDict = new Dictionary<double, string>();
+        static Dictionary<int, string> _lrcDict = new Dictionary<int, string>();
 
         private static void Main(string[] args)
         {
@@ -48,6 +48,8 @@ namespace TestNAudio
                         Console.SetCursorPosition(0, 0);
                         Console.WriteLine($"{Path.GetFileName(fileFullName)?.PadRight(30, ' ')}{st.Elapsed:hh\\:mm\\:ss}");
 
+                        Console.WriteLine();
+                        Console.WriteLine(GetLyric((int)st.ElapsedMilliseconds));
 
                         Thread.Sleep(100);
                     }
@@ -84,7 +86,7 @@ namespace TestNAudio
                     for (var i = 0; i < temp.Length - 1; i++)
                     {
                         var tsTemp = "00:" + temp[i].Replace("[", "");
-                        var ts = TimeSpan.Parse(tsTemp).TotalMilliseconds;
+                        var ts = (int)TimeSpan.Parse(tsTemp).TotalMilliseconds;
 
                         _lrcDict.Add(ts, seq);
                     }
@@ -94,17 +96,32 @@ namespace TestNAudio
 
         private static string GetLyric(int elapsedMilliseconds)
         {
-            var sb = new StringBuilder();
+            var currLine = "";
+            var nextLine = "";
 
-            for (int i = 0; i < _lrcDict.Count; i++)
+
+            foreach (var item in _lrcDict)
             {
-                
+                if (item.Key < elapsedMilliseconds)
+                {
+                    currLine = item.Value;
+                }
+                else
+                {
+                    break;
+                }
             }
 
+            foreach (var item in _lrcDict)
+            {
+                if (item.Key > elapsedMilliseconds)
+                {
+                    nextLine = item.Value;
+                    break;
+                }
+            }
 
-
-
-            return sb.ToString();
+            return currLine + "\n" + nextLine;
         }
     }
 }
