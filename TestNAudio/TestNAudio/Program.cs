@@ -18,8 +18,8 @@ namespace TestNAudio
 
         private static void Main(string[] args)
         {
-            ReadLyricFile(@"D:\Music\叶倩文 - 秋去秋来.lrc");
-            PlayAudioFile(@"D:\Music\叶倩文 - 秋去秋来.mp3");
+            //ReadLyricFile(@"D:\Music\叶倩文 - 秋去秋来.lrc");
+            PlayAudioFile(@"D:\Music\Lossless\ED2「世界が終わるまでは」WANDS(FLAC)\01.世界が終るまでは….flac");
 
 
 
@@ -46,10 +46,10 @@ namespace TestNAudio
                     while (outputDevice.PlaybackState == PlaybackState.Playing)
                     {
                         Console.SetCursorPosition(0, 0);
-                        Console.WriteLine($"{Path.GetFileName(fileFullName)?.PadRight(30, ' ')}{st.Elapsed:hh\\:mm\\:ss}");
+                        Console.WriteLine($"{Path.GetFileName(fileFullName)}\t\t{st.Elapsed:hh\\:mm\\:ss}");
 
-                        Console.WriteLine();
-                        Console.WriteLine(GetLyric((int)st.ElapsedMilliseconds));
+                        //Console.WriteLine();
+                        //Console.WriteLine(GetLyric((int)st.ElapsedMilliseconds));
 
                         Thread.Sleep(100);
                     }
