@@ -109,8 +109,8 @@ namespace LiuMovie
             {
                 var p = new Process();
 
-                p.StartInfo.WorkingDirectory = @"C:\Program Files\DAUM\PotPlayer";
-                p.StartInfo.FileName = "PotPlayerMini64";
+                p.StartInfo.WorkingDirectory = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + @"\111\";
+                p.StartInfo.FileName = "2021";
 
                 p.StartInfo.Arguments = $"\"{filename}\"";
                 p.StartInfo.WindowStyle = ProcessWindowStyle.Normal;
