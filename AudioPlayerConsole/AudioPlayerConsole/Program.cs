@@ -28,6 +28,11 @@ namespace AudioPlayerConsole
 
         private static void PlayAudioFile(string fileFullName)
         {
+            if (!File.Exists(fileFullName))
+            {
+                return;
+            }
+
             try
             {
                 var st = new Stopwatch();
@@ -60,6 +65,11 @@ namespace AudioPlayerConsole
 
         private static void ReadLyricFile(string fileFullName)
         {
+            if (!File.Exists(fileFullName))
+            {
+                return;
+            }
+
             using (var sr = new StreamReader(fileFullName, Encoding.Default))
             {
                 string line;
@@ -96,7 +106,6 @@ namespace AudioPlayerConsole
             if (LrcList.Count == 0)
             {
                 return;
-
             }
 
             var currLineNo = 0;
