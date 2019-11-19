@@ -1,127 +1,23 @@
-﻿using System;
+﻿using NAudio.Wave;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading;
-using System.Threading.Tasks;
-using NAudio.Wave;
-using NAudio.Wave.Compression;
 
 namespace TestNAudio
 {
     static class Program
     {
-        static Dictionary<int, string> _lrcDict = new Dictionary<int, string>();
-
         private static void Main(string[] args)
         {
-            //ReadLyricFile(@"D:\Music\叶倩文 - 秋去秋来.lrc");
-            PlayAudioFile(@"D:\Music\Lossless\ED2「世界が終わるまでは」WANDS(FLAC)\01.世界が終るまでは….flac");
-
-
-
-
-            //var outputFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "NAudio");
-            //Directory.CreateDirectory(outputFolder);
-            //var outputFilePath = Path.Combine(outputFolder, "recorded.wav");
-            //var capture = new WasapiLoopbackCapture();
-            //var writer = new WaveFileWriter(outputFilePath, capture.WaveFormat);
-        }
-
-        private static void PlayAudioFile(string fileFullName)
-        {
-            try
-            {
-                var st = new Stopwatch();
-
-                using (var audioFile = new AudioFileReader(fileFullName))
-                using (var outputDevice = new WaveOutEvent())
-                {
-                    outputDevice.Init(audioFile);
-                    st.Restart();
-                    outputDevice.Play();
-                    while (outputDevice.PlaybackState == PlaybackState.Playing)
-                    {
-                        Console.SetCursorPosition(0, 0);
-                        Console.WriteLine($"{Path.GetFileName(fileFullName)}\t\t{st.Elapsed:hh\\:mm\\:ss}");
-
-                        //Console.WriteLine();
-                        //Console.WriteLine(GetLyric((int)st.ElapsedMilliseconds));
-
-                        Thread.Sleep(100);
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                Console.WriteLine("Press any key to continue...");
-                Console.ReadKey();
-            }
-        }
-
-        private static void ReadLyricFile(string fileFullName)
-        {
-            using (var sr = new StreamReader(fileFullName, Encoding.Default))
-            {
-                string line;
-                while ((line = sr.ReadLine()) != null)
-                {
-                    if (!line.Contains("]"))
-                    {
-                        continue;
-                    }
-
-                    var temp = line.Split(']');
-
-                    var seq = temp.Last().Trim();
-                    if (seq == "")
-                    {
-                        continue;
-                    }
-
-                    for (var i = 0; i < temp.Length - 1; i++)
-                    {
-                        var tsTemp = "00:" + temp[i].Replace("[", "");
-                        var ts = (int)TimeSpan.Parse(tsTemp).TotalMilliseconds;
-
-                        _lrcDict.Add(ts, seq);
-                    }
-                }
-            }
-        }
-
-        private static string GetLyric(int elapsedMilliseconds)
-        {
-            var currLine = "";
-            var nextLine = "";
-
-
-            foreach (var item in _lrcDict)
-            {
-                if (item.Key < elapsedMilliseconds)
-                {
-                    currLine = item.Value;
-                }
-                else
-                {
-                    break;
-                }
-            }
-
-            foreach (var item in _lrcDict)
-            {
-                if (item.Key > elapsedMilliseconds)
-                {
-                    nextLine = item.Value;
-                    break;
-                }
-            }
-
-            return currLine + "\n" + nextLine;
+            var outputFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "NAudio");
+            Directory.CreateDirectory(outputFolder);
+            var outputFilePath = Path.Combine(outputFolder, "recorded.wav");
+            var capture = new WasapiLoopbackCapture();
+            var writer = new WaveFileWriter(outputFilePath, capture.WaveFormat);
         }
     }
 }
