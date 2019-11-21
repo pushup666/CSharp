@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using NAudio.Utils;
 
 namespace AudioPlayerConsole
 {
@@ -20,10 +21,24 @@ namespace AudioPlayerConsole
     {
         private static readonly List<LrcLine> LrcList = new List<LrcLine>();
 
+        //AudioPlayerConsole "D:\Music\叶倩文 - 秋去秋来.mp3"
         private static void Main(string[] args)
+
         {
-            ReadLyricFile(@"D:\Music\叶倩文 - 秋去秋来.lrc");
-            PlayAudioFile(@"D:\Music\叶倩文 - 秋去秋来.mp3");
+            if (args.Length == 1)
+            {
+                var fileNameAudio = args[0];
+                var fileNameLyric = Path.GetDirectoryName(fileNameAudio) + "\\" +
+                                    Path.GetFileNameWithoutExtension(fileNameAudio) + ".lrc";
+                ReadLyricFile(fileNameLyric);
+                PlayAudioFile(fileNameAudio);
+            }
+            else
+            {
+                //Console.WriteLine("Usage:\nAudioPlayerConsole AudioFileFullName");
+                ReadLyricFile(@"D:\Music\叶倩文 - 秋去秋来.lrc");
+                PlayAudioFile(@"D:\Music\叶倩文 - 秋去秋来.mp3");
+            }
         }
 
         private static void PlayAudioFile(string fileFullName)
@@ -46,12 +61,10 @@ namespace AudioPlayerConsole
                     while (outputDevice.PlaybackState == PlaybackState.Playing)
                     {
                         Console.SetCursorPosition(0, 0);
-                        Console.WriteLine($"{Path.GetFileName(fileFullName)}\t\t{st.Elapsed:hh\\:mm\\:ss}");
-
+                        Console.WriteLine($"{Path.GetFileName(fileFullName)}\t\t{outputDevice.GetPositionTimeSpan():hh\\:mm\\:ss}/{audioFile.TotalTime:hh\\:mm\\:ss}");
                         Console.WriteLine();
                         PrintLyric((int)st.ElapsedMilliseconds);
-
-                        Thread.Sleep(100);
+                        Thread.Sleep(200);
                     }
                 }
             }
