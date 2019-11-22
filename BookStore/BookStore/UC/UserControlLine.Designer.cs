@@ -88,7 +88,7 @@
             this.textBoxFilter.Name = "textBoxFilter";
             this.textBoxFilter.Size = new System.Drawing.Size(163, 21);
             this.textBoxFilter.TabIndex = 4;
-            this.textBoxFilter.Text = "^第.+章.+$";
+            this.textBoxFilter.Text = "^第.+章.*$";
             // 
             // UserControlLine
             // 
