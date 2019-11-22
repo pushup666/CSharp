@@ -28,16 +28,14 @@ namespace AudioPlayerConsole
             if (args.Length == 1)
             {
                 var fileNameAudio = args[0];
-                var fileNameLyric = Path.GetDirectoryName(fileNameAudio) + "\\" +
-                                    Path.GetFileNameWithoutExtension(fileNameAudio) + ".lrc";
+                var fileNameLyric = Path.ChangeExtension(fileNameAudio, "lrc");
+
                 ReadLyricFile(fileNameLyric);
                 PlayAudioFile(fileNameAudio);
             }
             else
             {
-                //Console.WriteLine("Usage:\nAudioPlayerConsole AudioFileFullName");
-                ReadLyricFile(@"D:\Music\叶倩文 - 秋去秋来.lrc");
-                PlayAudioFile(@"D:\Music\叶倩文 - 秋去秋来.mp3");
+                Console.WriteLine("Usage:\nAudioPlayerConsole AudioFileFullName");
             }
         }
 
@@ -112,6 +110,15 @@ namespace AudioPlayerConsole
                     }
                 }
             }
+
+            LrcList.Sort((left, right) =>
+            {
+                if (left.Position > right.Position)
+                    return 1;
+                if (left.Position == right.Position)
+                    return 0;
+                return -1;
+            });
         }
 
         private static void PrintLyric(int elapsedMilliseconds)

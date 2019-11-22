@@ -89,6 +89,15 @@ namespace Txt2PdfConvert
             ShowFileList();
         }
 
+        private void ShowFileList()
+        {
+            checkedListBoxFileName.Items.Clear();
+            foreach (var file in _files)
+            {
+                checkedListBoxFileName.Items.Add(file.Key, file.Value);
+            }
+        }
+
         private void ButtonConvertClick(object sender, EventArgs e)
         {
             try
@@ -106,15 +115,6 @@ namespace Txt2PdfConvert
                 MessageBox.Show(ex.Message);
             }
         }
-
-        private void ShowFileList()
-        {
-            checkedListBoxFileName.Items.Clear();
-            foreach(var file in _files)
-            {
-                checkedListBoxFileName.Items.Add(file.Key, file.Value);
-            }
-        }
         
         private void GeneratePdf(string fileName)
         {
@@ -122,8 +122,6 @@ namespace Txt2PdfConvert
             {
                 if (fileName != null)
                 {
-                    var baseFont = BaseFont.CreateFont(@"C:\Windows\Fonts\msyhbd.ttc,0", BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
-                    Font font, titleFont, chapterFont, textFont;
                     Document document;
                     float textFontSize;
 
@@ -151,9 +149,11 @@ namespace Txt2PdfConvert
                             break;
                     }
 
-                    textFont = new Font(baseFont, (float)(textFontSize * 1.0));
-                    chapterFont = new Font(baseFont, (float)(textFontSize * 1.5));
-                    titleFont = new Font(baseFont, (float)(textFontSize * 2.0));
+                    var baseFont = BaseFont.CreateFont(@"C:\Windows\Fonts\msyhbd.ttc,0", BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
+
+                    var textFont = new Font(baseFont, (float)(textFontSize * 1.0));
+                    var chapterFont = new Font(baseFont, (float)(textFontSize * 1.5));
+                    var titleFont = new Font(baseFont, (float)(textFontSize * 2.0));
 
                     //反色
                     //font.Color = BaseColor.WHITE;
@@ -169,6 +169,7 @@ namespace Txt2PdfConvert
                         string line;
                         while ((line = sr.ReadLine()) != null)
                         {
+                            Font font;
                             if (line.StartsWith("<TITLE>"))
                             {
                                 font = titleFont;
