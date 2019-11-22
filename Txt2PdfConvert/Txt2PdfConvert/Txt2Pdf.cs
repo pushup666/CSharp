@@ -216,7 +216,7 @@ namespace Txt2PdfConvert
             
         }
         
-        private void SplitPdf(string fileName)
+        private static void SplitPdf(string fileName)
         {
             try
             {
