@@ -167,5 +167,10 @@ namespace BookStore
                 MessageBox.Show("释放空间完成！");
             }
         }
+
+        private void TabControlMain_ControlRemoved(object sender, ControlEventArgs e)
+        {
+            ((UserControlVersion)e.Control.Controls[0]).UpdateBookLastRead();
+        }
     }
 }

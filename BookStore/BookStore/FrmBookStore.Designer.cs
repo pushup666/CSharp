@@ -55,6 +55,7 @@
             this.tabControlMain.SelectedIndex = 0;
             this.tabControlMain.Size = new System.Drawing.Size(941, 459);
             this.tabControlMain.TabIndex = 1;
+            this.tabControlMain.ControlRemoved += new System.Windows.Forms.ControlEventHandler(this.TabControlMain_ControlRemoved);
             this.tabControlMain.DoubleClick += new System.EventHandler(this.TabControlMain_DoubleClick);
             // 
             // buttonExport

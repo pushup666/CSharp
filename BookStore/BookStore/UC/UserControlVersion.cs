@@ -417,21 +417,18 @@ namespace BookStore.UC
             richTextBoxVersionContent.ScrollToCaret();
         }
 
-        private void TimerLastRead_Tick(object sender, EventArgs e)
-        {
-            var readPosition = richTextBoxVersionContent.GetFirstCharIndexOfCurrentLine();
-            BookStoreBLL.UpdateBookLastRead(_bookID, readPosition);
-        }
-
         private void UserControlVersion_Load(object sender, EventArgs e)
         {
-            timerLastRead.Enabled = false;
-            timerLastRead.Interval = 10000;
-
             richTextBoxVersionContent.SelectionStart = BookStoreBLL.GetBookLastReadPosition(_bookID);
             richTextBoxVersionContent.SelectionLength = 0;
             richTextBoxVersionContent.Focus();
             richTextBoxVersionContent.ScrollToCaret();
+        }
+
+        internal void UpdateBookLastRead()
+        {
+            var readPosition = richTextBoxVersionContent.GetFirstCharIndexOfCurrentLine();
+            BookStoreBLL.UpdateBookLastRead(_bookID, readPosition);
         }
     }
 }
