@@ -214,7 +214,7 @@ namespace Txt2PdfConvert
                     {
                         var document = new Document(reader.GetPageSizeWithRotation(1));
 
-                        var pdfSplitName = $@"{Path.GetDirectoryName(fileName)}\{Path.GetFileNameWithoutExtension(fileName)}-{(i + 1).ToString("D2")}.pdf";
+                        var pdfSplitName = $@"{Path.GetDirectoryName(fileName)}\{Path.GetFileNameWithoutExtension(fileName)}-{i + 1:D2}.pdf";
                         var pdfCopyProvider = new PdfCopy(document, new FileStream(pdfSplitName, FileMode.Create));
 
                         document.Open();
@@ -229,6 +229,7 @@ namespace Txt2PdfConvert
                             }
                         }
 
+                        pdfCopyProvider.Close();
                         document.Close();
                     }
 
