@@ -7,20 +7,23 @@ namespace SpectrumPicAnalysis
 {
     static class Program
     {
+        //SpectrumPicAnalysis -l picFileNameList.txt
+        //SpectrumPicAnalysis picFileName.png
         private static void Main(string[] args)
         {
+            //CMD To Generate Spectrum PNG
             //for %%a in ("*.mp3") do ffmpeg -i "%%a" -lavfi showspectrumpic=legend=false "%%~na.png"
 
+            string picFileName;
             if (args[0] == "-l")
             {
-                string result = "";
+                var result = "";
                 using (var sr = new StreamReader(args[1], Encoding.Default))
                 {
-                    string fileName;
-                    while ((fileName = sr.ReadLine()) !=null)
+                    while ((picFileName = sr.ReadLine()) !=null)
                     {
-                        result += $"{CalcAvgFreq(fileName)}\t{fileName}\r\n";
-                        Console.WriteLine(fileName);
+                        result += $"{CalcAvgFreq(picFileName)}\t{picFileName}\r\n";
+                        Console.WriteLine(picFileName);
                     }
                 }
                 using (var sw = new StreamWriter("ListResult.txt", false, Encoding.Default))
@@ -30,38 +33,39 @@ namespace SpectrumPicAnalysis
             }
             else
             {
-                string fileName = args[0];
-                using (var sw = new StreamWriter($"{fileName}.txt", false, Encoding.Default))
+                picFileName = args[0];
+                using (var sw = new StreamWriter($"{picFileName}.txt", false, Encoding.Default))
                 {
-                    sw.Write($"{CalcAvgFreq(fileName)}\t{fileName}\r\n");
+                    sw.Write($"{CalcAvgFreq(picFileName)}\t{picFileName}\r\n");
                 }
             }
         }
 
         private static string CalcAvgFreq(string picName)
         {
-            var img = new Bitmap(picName);
-
-            double allSum = 0;
-            for (var i = 0; i < img.Width; ++i)
+            using (var img = new Bitmap(picName))
             {
-                var colSum = 0;
-                for (var j = 0; j < img.Height; ++j)
+                double allSum = 0;
+                for (var i = 0; i < img.Width; ++i)
                 {
-                    if (img.GetPixel(i, j).R + img.GetPixel(i, j).G + img.GetPixel(i, j).B == 0)
+                    var colSum = 0;
+                    for (var j = 0; j < img.Height; ++j)
                     {
-                        colSum++;
+                        if (img.GetPixel(i, j).R + img.GetPixel(i, j).G + img.GetPixel(i, j).B == 0)
+                        {
+                            colSum++;
+                        }
+                        else
+                        {
+                            break;
+                        }
                     }
-                    else
-                    {
-                        break;
-                    }
+                    allSum += colSum;
                 }
-                allSum += colSum;
-            }
 
-            var result = (img.Height - allSum / img.Width) * 21963.87 / img.Height / 1000;
-            return result.ToString("F");
+                var result = (img.Height - allSum / img.Width) * 21963.87 / img.Height / 1000;
+                return $"{result:F} khz";
+            }
         }
     }
 }
