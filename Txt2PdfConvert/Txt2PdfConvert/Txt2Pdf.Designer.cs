@@ -35,6 +35,7 @@
             this.buttonClearList = new System.Windows.Forms.Button();
             this.comboBoxDevice = new System.Windows.Forms.ComboBox();
             this.checkBoxUTF8 = new System.Windows.Forms.CheckBox();
+            this.checkBoxReverse = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // buttonAddFile
@@ -59,7 +60,8 @@
             // 
             // buttonConvert
             // 
-            this.buttonConvert.Location = new System.Drawing.Point(528, 12);
+            this.buttonConvert.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonConvert.Location = new System.Drawing.Point(650, 12);
             this.buttonConvert.Name = "buttonConvert";
             this.buttonConvert.Size = new System.Drawing.Size(75, 23);
             this.buttonConvert.TabIndex = 2;
@@ -69,10 +71,13 @@
             // 
             // checkedListBoxFileName
             // 
+            this.checkedListBoxFileName.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.checkedListBoxFileName.FormattingEnabled = true;
             this.checkedListBoxFileName.Location = new System.Drawing.Point(12, 44);
             this.checkedListBoxFileName.Name = "checkedListBoxFileName";
-            this.checkedListBoxFileName.Size = new System.Drawing.Size(590, 212);
+            this.checkedListBoxFileName.Size = new System.Drawing.Size(712, 212);
             this.checkedListBoxFileName.TabIndex = 4;
             // 
             // buttonClearList
@@ -109,11 +114,22 @@
             this.checkBoxUTF8.Text = "UTF-8";
             this.checkBoxUTF8.UseVisualStyleBackColor = true;
             // 
+            // checkBoxReverse
+            // 
+            this.checkBoxReverse.AutoSize = true;
+            this.checkBoxReverse.Location = new System.Drawing.Point(489, 16);
+            this.checkBoxReverse.Name = "checkBoxReverse";
+            this.checkBoxReverse.Size = new System.Drawing.Size(48, 16);
+            this.checkBoxReverse.TabIndex = 8;
+            this.checkBoxReverse.Text = "反色";
+            this.checkBoxReverse.UseVisualStyleBackColor = true;
+            // 
             // Txt2Pdf
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(615, 268);
+            this.ClientSize = new System.Drawing.Size(737, 268);
+            this.Controls.Add(this.checkBoxReverse);
             this.Controls.Add(this.checkBoxUTF8);
             this.Controls.Add(this.comboBoxDevice);
             this.Controls.Add(this.buttonClearList);
@@ -137,5 +153,6 @@
         private System.Windows.Forms.Button buttonClearList;
         private System.Windows.Forms.ComboBox comboBoxDevice;
         private System.Windows.Forms.CheckBox checkBoxUTF8;
+        private System.Windows.Forms.CheckBox checkBoxReverse;
     }
 }

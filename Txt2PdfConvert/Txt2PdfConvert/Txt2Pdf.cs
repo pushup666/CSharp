@@ -17,7 +17,6 @@ namespace Txt2PdfConvert
         {
             InitializeComponent();
             comboBoxDevice.SelectedIndex = 0;
-            //TestSplit();
         }
 
         private void ButtonAddFileClick(object sender, EventArgs e)
@@ -44,7 +43,6 @@ namespace Txt2PdfConvert
                         }  
                     }
                 }
-
                 ShowFileList();
             }
             catch (Exception ex)
@@ -74,7 +72,6 @@ namespace Txt2PdfConvert
                         }
                     }
                 }
-
                 ShowFileList();
             }
             catch (Exception ex)
@@ -155,9 +152,13 @@ namespace Txt2PdfConvert
                     var chapterFont = new Font(baseFont, (float)(textFontSize * 1.5));
                     var titleFont = new Font(baseFont, (float)(textFontSize * 2.0));
 
-                    //反色
-                    //font.Color = BaseColor.WHITE;
-                    //document.PageSize.BackgroundColor = BaseColor.BLACK;
+                    if (checkBoxReverse.Checked)
+                    {
+                        textFont.Color = BaseColor.WHITE;
+                        chapterFont.Color = BaseColor.WHITE;
+                        titleFont.Color = BaseColor.WHITE;
+                        document.PageSize.BackgroundColor = BaseColor.BLACK;
+                    }
 
                     var pdfName = Path.ChangeExtension(fileName, "pdf");
                     PdfWriter.GetInstance(document, new FileStream(pdfName, FileMode.Create));
@@ -198,25 +199,6 @@ namespace Txt2PdfConvert
             }
         }
 
-        private void TestSplit()
-        {
-            using (var sw = new StreamWriter(@"D:\111.csv", false, Encoding.Default))
-            {
-                var sb = new StringBuilder();
-                for (var i = 1; i < 30000; i++)
-                {
-                    var pagesCount = i;
-                    var filesCount = (int)Math.Ceiling((double)pagesCount / MaxPagesPerPdf);
-                    var pagesPerPdf = (int)Math.Ceiling((double)pagesCount / filesCount);
-
-                    sb.AppendLine($"{pagesCount},{filesCount},{pagesPerPdf}");
-                }
-
-                sw.Write(sb.ToString());
-            }
-            
-        }
-        
         private static void SplitPdf(string fileName)
         {
             try
