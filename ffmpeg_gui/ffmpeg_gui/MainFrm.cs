@@ -10,8 +10,8 @@ namespace ffmpeg_gui
     {
         private readonly Dictionary<string, bool> _files = new Dictionary<string, bool>();
 
-        //ffmpeg -ss 00:02:40 -i 111.mp4 -c copy -t 01:27:15 222.mp4 分割
-
+        //ffmpeg -ss 00:02:40 -i 111.mp4 -c copy -t 01:27:15 222.mp4        分割
+        //ffmpeg -f gdigrab -i desktop -vcodec h264_qsv output.mp4          录屏
 
 
         //VideoFormat
