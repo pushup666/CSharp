@@ -8,12 +8,12 @@ namespace ffmpeg_gui
 {
     public partial class MainFrm : Form
     {
-        //码率预估：width * height * fps / 20 / 1024;
-        //1280 * 720 = 1350K;    1366 * 768 = 1536K;   1920 * 1080 = 3037K;   2560 * 1440 = 5400K;   3840 * 2160 = 12150K
+        //码率预估      width * height * fps / 20 / 1024;
+        //1280 * 720 = 1350K;   1366 * 768 = 1536K;     1920 * 1080 = 3037K;    2560 * 1440 = 5400K;    3840 * 2160 = 12150K
 
 
-        //ffmpeg -ss 00:02:40 -i 111.mp4 -c copy -t 01:27:15 222.mp4                    分割
-        //ffmpeg -f gdigrab -probesize 100M -i desktop -b:v 1536K -vcodec h264_qsv output.mp4           录屏
+        //分割        ffmpeg -ss 00:02:40 -i 111.mp4 -c copy -t 01:27:15 222.mp4
+        //录屏        ffmpeg -f gdigrab -probesize 100M -i desktop -b:v 1536K -vcodec h264_qsv output.mp4
 
         private readonly Dictionary<string, bool> _files = new Dictionary<string, bool>();
 
