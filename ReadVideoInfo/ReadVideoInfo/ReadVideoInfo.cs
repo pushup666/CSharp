@@ -158,13 +158,13 @@ namespace ReadVideoInfo
                     var duration = GetVideoDuration(item);
 
                     var srcSize = ((double)GetVideoSize(item) / 1024 / 1024).ToString("F2");
-                    var dstSize = ((double)(dstFileAutoBitrate + 70) / 8 * duration / 1024).ToString("F2");
+                    var dstSize = ((double)(dstFileAutoBitrate + 70) / 8 * duration / 1024).ToString("F2");     //70  音频码率预估
 
                     var convertFlag = double.Parse(dstSize) > 0 && double.Parse(dstSize) < double.Parse(srcSize) / 1.5;
 
                     sb.AppendLine($"rem Src:{srcSize}M    Dst:{dstSize}M");
                     sb.AppendLine(string.Format(
-                        @"{5}ffmpeg -i ""{0}\{1}"" -b:v {4}K -vcodec {6} -acodec aac -ac 2 -q:a 0.7   ""{2}\{3}_{6}.mp4""",
+                        @"{5}ffmpeg -i ""{0}\{1}"" -b:v {4}K -vcodec {6} -acodec aac -ac 2 -q:a 0.7 ""{2}\{3}_{6}.mp4""",
                         srcDirectoryName, srcFileName, dstDirectoryName,
                         dstFileNameWithoutExt, dstFileAutoBitrate, convertFlag ? "" : "rem ",
                         comboBoxVideoCodec.Text));
