@@ -29,6 +29,7 @@ namespace BookStore
 
         public static string GetAppConfig(string key)
         {
+            System.Configuration.ConfigurationManager.RefreshSection("appSettings");
             return System.Configuration.ConfigurationManager.AppSettings[key];
         }
     }

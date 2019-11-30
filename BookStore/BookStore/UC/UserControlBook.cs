@@ -107,7 +107,7 @@ namespace BookStore.UC
             if (_currBook != null)
             {
                 var tabControlMain = ((TabControl)Parent.Parent);
-                var newTabName = "V" + _currBook.ID;
+                var newTabName = "V_" + _currBook.ID;
                 var newTabText = _currBook.Title;
 
                 if (tabControlMain.TabPages.ContainsKey(newTabName))

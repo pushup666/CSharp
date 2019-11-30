@@ -170,7 +170,11 @@ namespace BookStore
 
         private void TabControlMain_ControlRemoved(object sender, ControlEventArgs e)
         {
-            ((UserControlVersion)e.Control.Controls[0]).UpdateBookLastRead();
+            if (e.Control.Name.StartsWith("V_"))
+            {
+                ((UserControlVersion)e.Control.Controls[0]).UpdateBookLastRead();
+
+            }
         }
     }
 }

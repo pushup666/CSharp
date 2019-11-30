@@ -25,6 +25,12 @@ namespace BookStore.UC
 
             InitializeComponent();
             RefreshVersionList();
+
+            if (!float.TryParse(Utils.GetAppConfig("VersionFontSize"), out var versionFontSize))
+            {
+                versionFontSize = 15.75F;
+            }
+            richTextBoxVersionContent.Font = new System.Drawing.Font("微软雅黑 Light", versionFontSize, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134))); ;
         }
 
         private void RefreshVersionList()
@@ -61,7 +67,7 @@ namespace BookStore.UC
                 _currVersion = BookStoreBLL.GetVersion(_bookID, int.Parse(versionNo));
 
                 var tabControlMain = ((TabControl)Parent.Parent);
-                var newTabName = "L" + _currVersion.BookID;
+                var newTabName = "L_" + _currVersion.BookID;
                 var newTabText = $"{title} - {versionNo}";
 
                 if (tabControlMain.TabPages.ContainsKey(newTabName))
