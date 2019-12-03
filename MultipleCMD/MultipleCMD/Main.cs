@@ -21,7 +21,7 @@ namespace MultipleCMD
         private void buttonStart_Click(object sender, EventArgs e)
         {
             ThreadPool.SetMinThreads(1, 1);
-            ThreadPool.SetMaxThreads(6, 6);
+            ThreadPool.SetMaxThreads(4, 4);
 
             _finishLines = 0;
             _allLines = richTextBoxCmdInput.Lines.Length;
@@ -42,11 +42,11 @@ namespace MultipleCMD
             {
                 var p = new Process();
 
-                //p.StartInfo.WorkingDirectory = @"Z:\you-get-develop";
-                //p.StartInfo.FileName = "python";
+                p.StartInfo.WorkingDirectory = @"Z:\you-get-develop";
+                p.StartInfo.FileName = "python";
 
-                p.StartInfo.WorkingDirectory = @"D:\Music";
-                p.StartInfo.FileName = "SpectrumPicAnalysis";
+                //p.StartInfo.WorkingDirectory = @"D:\Music";
+                //p.StartInfo.FileName = "SpectrumPicAnalysis";
 
                 p.StartInfo.Arguments = cmdArguments.ToString();
                 p.StartInfo.WindowStyle = ProcessWindowStyle.Minimized;
@@ -82,13 +82,13 @@ namespace MultipleCMD
             }
         }
 
-        private void buttonGenCMD_Click(object sender, EventArgs e)
+        private void ButtonGenCMD_Click(object sender, EventArgs e)
         {
             var sb = new StringBuilder();
             foreach (var line in richTextBoxCmdInput.Lines)
             {
                 //sb.AppendLine($"-i \"{line}\" -lavfi showspectrumpic=legend=false \"{line}.png\"");
-                sb.AppendLine($"\"{line}\"");
+                sb.AppendLine($"you-get \"{line}\"");
             }
             richTextBoxCmdOutput.Text = sb.ToString().TrimEnd();
         }

@@ -76,7 +76,7 @@
             this.buttonGenCMD.TabIndex = 3;
             this.buttonGenCMD.Text = "GenCMD";
             this.buttonGenCMD.UseVisualStyleBackColor = true;
-            this.buttonGenCMD.Click += new System.EventHandler(this.buttonGenCMD_Click);
+            this.buttonGenCMD.Click += new System.EventHandler(this.ButtonGenCMD_Click);
             // 
             // richTextBoxCmdOutput
             // 
