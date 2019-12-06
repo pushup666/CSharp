@@ -77,10 +77,23 @@ namespace BookStore
                         //Console.WriteLine($"已导入： {count.ToString()}项");
                     }
 
-                    using var sr = new StreamReader(fileName, Encoding.Default);
-
                     var title = Path.GetFileNameWithoutExtension(fileName);
-                    var fileContent = sr.ReadToEnd();
+
+                    var ansiContent = File.ReadAllText(fileName, Encoding.Default);
+                    var utf8Content = File.ReadAllText(fileName, Encoding.UTF8);
+
+                    string fileContent;
+                    if (ansiContent.Length > utf8Content.Length)
+                    {
+                        //判断是否是UTF-8的简单方法，可能不准确
+                        MessageBox.Show($"{title} 疑似UTF-8格式，已转码保存，请核实是否正确。");
+                        fileContent = utf8Content;
+                    }
+                    else
+                    {
+                        fileContent = ansiContent;
+                    }
+                    
                     var contentHash = Utils.GetHash(fileContent);
 
                     if (BookStoreBLL.IsThisHashExist(contentHash))

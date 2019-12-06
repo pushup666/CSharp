@@ -48,7 +48,7 @@ namespace SmartHDD
                 //    iDriveIndex++;
                 //}
 
-                // retrive attribute flags, value worste and vendor data information
+
                 searcher.Query = new ObjectQuery("Select * from MSStorageDriver_FailurePredictData");
                 var failurePredictData = searcher.Get();
 
@@ -94,9 +94,6 @@ namespace SmartHDD
                 }
 
 
-
-
-                // retreive threshold values foreach attribute
                 searcher.Query = new ObjectQuery("Select * from MSStorageDriver_FailurePredictThresholds");
                 var failurePredictThresholds = searcher.Get();
 
