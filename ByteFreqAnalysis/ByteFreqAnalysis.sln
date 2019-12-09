@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29519.87
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ByteFreqAnalysis", "ByteFreqAnalysis\ByteFreqAnalysis.csproj", "{29F288F8-61D1-4B76-B9A2-55B849A92E42}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{29F288F8-61D1-4B76-B9A2-55B849A92E42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29F288F8-61D1-4B76-B9A2-55B849A92E42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29F288F8-61D1-4B76-B9A2-55B849A92E42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29F288F8-61D1-4B76-B9A2-55B849A92E42}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {15895AC0-B480-43B2-BE12-1B13FC5E1C01}
+	EndGlobalSection
+EndGlobal
