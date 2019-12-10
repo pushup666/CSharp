@@ -10,11 +10,9 @@ using BookStore.UC;
 
 namespace BookStore
 {
-
     public partial class FrmBookStore : Form
     {
         private readonly List<string> _fileList = new List<string>();
-        private readonly UserControlBook _ucBook = new UserControlBook();
 
         public FrmBookStore()
         {
@@ -25,9 +23,10 @@ namespace BookStore
         private void FrmBookStore_Load(object sender, EventArgs e)
         {
             var bookPage = new TabPage("书库") { Name = "Library" };
+            var ucBook = new UserControlBook();
 
-            bookPage.Controls.Add(_ucBook);
-            _ucBook.Dock = DockStyle.Fill;
+            bookPage.Controls.Add(ucBook);
+            ucBook.Dock = DockStyle.Fill;
 
             tabControlMain.TabPages.Add(bookPage);
         }
@@ -121,7 +120,7 @@ namespace BookStore
 
                 MessageBox.Show($"{count.ToString()}项 导入完成！");
 
-                _ucBook.RefreshBookList();
+                ((UserControlBook)tabControlMain.TabPages[0].Controls[0]).RefreshBookList();
             }
             catch (Exception ex)
             {

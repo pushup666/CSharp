@@ -30,7 +30,7 @@ namespace BookStore.UC
             {
                 versionFontSize = 15.75F;
             }
-            richTextBoxVersionContent.Font = new System.Drawing.Font("微软雅黑 Light", versionFontSize, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134))); ;
+            richTextBoxVersionContent.Font = new System.Drawing.Font("微软雅黑 Light", versionFontSize, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 134);
         }
 
         private void RefreshVersionList()

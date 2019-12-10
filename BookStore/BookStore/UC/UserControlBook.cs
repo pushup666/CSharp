@@ -16,8 +16,7 @@ namespace BookStore.UC
         private readonly int _pageSize;
         private int _rowCount, _pageCount;
         private int _currentPage = 1;  
-
-
+        
 
         public UserControlBook()
         {
