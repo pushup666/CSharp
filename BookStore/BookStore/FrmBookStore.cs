@@ -173,10 +173,9 @@ namespace BookStore
         
         private void ButtonVacuum_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show($"确认将标记为“已删除”的数据从数据库里清空？同时这将收缩数据库未使用的空间，建议在Ramdisk上操作。", "警告", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            if (MessageBox.Show("确认将标记为“已删除”的数据从数据库里清空？同时这将收缩数据库未使用的空间，建议在RamDisk上操作。", "警告", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-                BookStoreBLL.VacuumDatabase();
-                MessageBox.Show("释放空间完成！");
+                MessageBox.Show(BookStoreBLL.VacuumDatabase() ? "释放空间完成！" : "释放空间失败！");
             }
         }
 

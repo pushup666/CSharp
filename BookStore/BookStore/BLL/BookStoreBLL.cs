@@ -18,13 +18,15 @@ namespace BookStore.BLL
             }
         }
 
-        public static void VacuumDatabase()
+        public static bool VacuumDatabase()
         {
-            LineDAL.ClearLines();
-            VersionDAL.ClearVersion();
-            BookDAL.ClearBook();
+            if (LineDAL.ClearLines() && VersionDAL.ClearVersion() && BookDAL.ClearBook())
+            {
+                BookStoreDAL.VacuumDatabase();
+                return true;
+            }
 
-            BookStoreDAL.VacuumDatabase();
+            return false;
         }
 
         public static DataTable GetBookList()

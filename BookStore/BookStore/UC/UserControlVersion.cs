@@ -434,7 +434,10 @@ namespace BookStore.UC
         internal void UpdateBookLastRead()
         {
             var readPosition = richTextBoxVersionContent.GetFirstCharIndexOfCurrentLine();
-            BookStoreBLL.UpdateBookLastRead(_bookID, readPosition);
+            if (!BookStoreBLL.UpdateBookLastRead(_bookID, readPosition))
+            {
+                MessageBox.Show("保存阅读进度失败！");
+            }
         }
     }
 }

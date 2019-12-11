@@ -198,9 +198,8 @@ namespace BookStore.UC
                 bookIDList.Add(row.Cells["ID"].Value.ToString());
             }
 
-            for (var i = 0; i < bookIDList.Count; i++)
+            foreach (var id in bookIDList)
             {
-                var id = bookIDList[i];
                 var book = BookStoreBLL.GetBook(id);
                 var latestVersion = BookStoreBLL.GetLatestVersion(id);
 
