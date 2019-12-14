@@ -115,14 +115,13 @@ namespace BookStore.UC
                     return;
                 }
 
-                var ucVersion = new UserControlVersion(_currBook.ID, _currBook.Title);
                 var versionPage = new TabPage(newTabText) { Name = newTabName };
-
-                versionPage.Controls.Add(ucVersion);
-                ucVersion.Dock = DockStyle.Fill;
-
                 tabControlMain.TabPages.Add(versionPage);
                 tabControlMain.SelectTab(newTabName);
+
+                var ucVersion = new UserControlVersion(_currBook.ID, _currBook.Title);
+                versionPage.Controls.Add(ucVersion);
+                ucVersion.Dock = DockStyle.Fill;
             }
         }
 
