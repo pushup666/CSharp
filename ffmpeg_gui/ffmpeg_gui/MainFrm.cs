@@ -13,7 +13,7 @@ namespace ffmpeg_gui
 
 
         //分割        ffmpeg -ss 00:02:40 -i 111.mp4 -c copy -t 01:27:15 222.mp4
-        //录屏        ffmpeg -f gdigrab -probesize 100M -i desktop -b:v 1536k -vcodec h264_qsv desktop.mp4
+        //录屏        ffmpeg -f gdigrab -probesize 100M -framerate 30 -i desktop -b:v 1536k -vcodec h264_qsv desktop.mp4
         //录屏录音    ffmpeg -f dshow   -rtbufsize 100M -i video="screen-capture-recorder":audio="virtual-audio-capturer" -b:v 1536k -vcodec h264_qsv -acodec aac -ac 2 desktop.mp4
 
         private readonly Dictionary<string, bool> _files = new Dictionary<string, bool>();
