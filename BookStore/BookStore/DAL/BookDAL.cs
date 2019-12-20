@@ -34,12 +34,24 @@ namespace BookStore.DAL
             return SQLiteHelper.ExecuteReader(sql);
         }
 
-        public static DataTable GetBookList(string filterTitle, int filterRate, string filterLength)
+        public static DataTable GetBookList(string filterTitle, string filterRate, string filterLength)
         {
             var filterSql = new StringBuilder();
-            if (filterTitle != "") filterSql.Append($"AND Title like '%{filterTitle}%' ");
-            if (filterRate != -1) filterSql.Append($"AND Rate = {filterRate} ");
-            if (filterLength != "") filterSql.Append($"AND Length {filterLength} ");
+
+            if (filterTitle != "")
+            {
+                filterSql.Append($"AND Title like '%{filterTitle}%' ");
+            }
+
+            if (int.TryParse(filterRate, out var filterRateInt))
+            {
+                filterSql.Append($"AND Rate = {filterRateInt} ");
+            }
+
+            if (filterLength != "")
+            {
+                filterSql.Append($"AND Length {filterLength} ");
+            }
 
             var sql = $"SELECT ID, Title, Length, Rate, Alias, Author, Note, ModifyDate, LastReadDate FROM Book WHERE DeleteFlag = 0 {filterSql}ORDER BY Title COLLATE PinYin;";
 
