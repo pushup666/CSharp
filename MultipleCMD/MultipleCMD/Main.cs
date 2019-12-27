@@ -90,7 +90,7 @@ namespace MultipleCMD
                 //sb.AppendLine($"-i \"{line}\" -lavfi showspectrumpic=legend=false \"{line}.png\"");
                 sb.AppendLine($"you-get \"{line}\"");
             }
-            richTextBoxCmdOutput.Text = sb.ToString().TrimEnd();
+            richTextBoxCmdInput.Text = sb.ToString().TrimEnd();
         }
     }
 }

@@ -32,7 +32,6 @@
             this.buttonStart = new System.Windows.Forms.Button();
             this.labelCount = new System.Windows.Forms.Label();
             this.buttonGenCMD = new System.Windows.Forms.Button();
-            this.richTextBoxCmdOutput = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // richTextBoxCmdInput
@@ -40,16 +39,17 @@
             this.richTextBoxCmdInput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.richTextBoxCmdInput.DetectUrls = false;
             this.richTextBoxCmdInput.Location = new System.Drawing.Point(12, 12);
             this.richTextBoxCmdInput.Name = "richTextBoxCmdInput";
-            this.richTextBoxCmdInput.Size = new System.Drawing.Size(662, 367);
+            this.richTextBoxCmdInput.Size = new System.Drawing.Size(662, 549);
             this.richTextBoxCmdInput.TabIndex = 0;
             this.richTextBoxCmdInput.Text = "";
             // 
             // buttonStart
             // 
             this.buttonStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonStart.Location = new System.Drawing.Point(680, 12);
+            this.buttonStart.Location = new System.Drawing.Point(680, 62);
             this.buttonStart.Name = "buttonStart";
             this.buttonStart.Size = new System.Drawing.Size(75, 23);
             this.buttonStart.TabIndex = 1;
@@ -61,7 +61,7 @@
             // 
             this.labelCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelCount.AutoSize = true;
-            this.labelCount.Location = new System.Drawing.Point(680, 60);
+            this.labelCount.Location = new System.Drawing.Point(680, 110);
             this.labelCount.Name = "labelCount";
             this.labelCount.Size = new System.Drawing.Size(35, 12);
             this.labelCount.TabIndex = 2;
@@ -70,7 +70,7 @@
             // buttonGenCMD
             // 
             this.buttonGenCMD.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonGenCMD.Location = new System.Drawing.Point(680, 532);
+            this.buttonGenCMD.Location = new System.Drawing.Point(680, 12);
             this.buttonGenCMD.Name = "buttonGenCMD";
             this.buttonGenCMD.Size = new System.Drawing.Size(75, 23);
             this.buttonGenCMD.TabIndex = 3;
@@ -78,22 +78,11 @@
             this.buttonGenCMD.UseVisualStyleBackColor = true;
             this.buttonGenCMD.Click += new System.EventHandler(this.ButtonGenCMD_Click);
             // 
-            // richTextBoxCmdOutput
-            // 
-            this.richTextBoxCmdOutput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.richTextBoxCmdOutput.Location = new System.Drawing.Point(12, 395);
-            this.richTextBoxCmdOutput.Name = "richTextBoxCmdOutput";
-            this.richTextBoxCmdOutput.Size = new System.Drawing.Size(662, 160);
-            this.richTextBoxCmdOutput.TabIndex = 4;
-            this.richTextBoxCmdOutput.Text = "";
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(767, 567);
-            this.Controls.Add(this.richTextBoxCmdOutput);
+            this.ClientSize = new System.Drawing.Size(767, 573);
             this.Controls.Add(this.buttonGenCMD);
             this.Controls.Add(this.labelCount);
             this.Controls.Add(this.buttonStart);
@@ -111,6 +100,5 @@
         private System.Windows.Forms.Button buttonStart;
         private System.Windows.Forms.Label labelCount;
         private System.Windows.Forms.Button buttonGenCMD;
-        private System.Windows.Forms.RichTextBox richTextBoxCmdOutput;
     }
 }
