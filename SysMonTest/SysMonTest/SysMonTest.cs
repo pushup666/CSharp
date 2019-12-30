@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 
@@ -8,6 +9,64 @@ namespace SysMonTest
 {
     public partial class SysMonTest : Form
     {
+        [StructLayout(LayoutKind.Sequential)]
+        struct CURSORINFO
+        {
+            public Int32 cbSize;
+            public Int32 flags;
+            public IntPtr hCursor;
+            public POINTAPI ptScreenPos;
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        struct POINTAPI
+        {
+            public int x;
+            public int y;
+        }
+
+        [DllImport("user32.dll")]
+        static extern bool GetCursorInfo(out CURSORINFO pci);
+
+        [DllImport("user32.dll")]
+        static extern bool DrawIcon(IntPtr hDC, int X, int Y, IntPtr hIcon);
+
+        const Int32 CURSOR_SHOWING = 0x00000001;
+
+        private static Bitmap CaptureScreen(bool CaptureMouse)
+        {
+            var result = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height, PixelFormat.Format24bppRgb);
+
+            try
+            {
+                using (var g = Graphics.FromImage(result))
+                {
+                    g.CopyFromScreen(0, 0, 0, 0, Screen.PrimaryScreen.Bounds.Size, CopyPixelOperation.SourceCopy);
+
+                    if (CaptureMouse)
+                    {
+                        CURSORINFO pci;
+                        pci.cbSize = Marshal.SizeOf(typeof(CURSORINFO));
+
+                        if (GetCursorInfo(out pci))
+                        {
+                            if (pci.flags == CURSOR_SHOWING)
+                            {
+                                DrawIcon(g.GetHdc(), pci.ptScreenPos.x, pci.ptScreenPos.y, pci.hCursor);
+                                g.ReleaseHdc();
+                            }
+                        }
+                    }
+                }
+            }
+            catch
+            {
+                result = null;
+            }
+
+            return result;
+        }
+
         public SysMonTest()
         {
             InitializeComponent();
@@ -15,19 +74,15 @@ namespace SysMonTest
 
         private void SysMonTest_Load(object sender, EventArgs e)
         {
-            timerMain.Interval = 1000;
+            timerMain.Interval = 100;
             timerMain.Enabled = true;
         }
 
         private void TimerMain_Tick(object sender, EventArgs e)
         {
-            using (var bmp = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height))
+            using (var bmp = CaptureScreen(true))
             {
-                using (var g = Graphics.FromImage(bmp))
-                {
-                    g.CopyFromScreen(new Point(0, 0), new Point(0, 0), bmp.Size);
-                    bmp.Save($@"C:\Codec\{DateTime.Now:yyyyMMddHHmmssffff}.jpg",ImageFormat.Jpeg);
-                }
+                bmp.Save($@"C:\Codec\{DateTime.Now:yyyyMMddHHmmssffff}.jpg", ImageFormat.Jpeg);
             }
         }
     }
