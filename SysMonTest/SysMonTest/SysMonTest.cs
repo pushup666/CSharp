@@ -42,29 +42,22 @@ namespace SysMonTest
 
             try
             {
-                using (var g = Graphics.FromImage(result))
+                using var g = Graphics.FromImage(result);
+
+                g.CopyFromScreen(0, 0, 0, 0, Screen.PrimaryScreen.Bounds.Size, CopyPixelOperation.SourceCopy);
+                if (captureMouse && GetCursorInfo(out var pci) && pci.flags == 1)
                 {
-                    g.CopyFromScreen(0, 0, 0, 0, Screen.PrimaryScreen.Bounds.Size, CopyPixelOperation.SourceCopy);
-
-                    if (captureMouse)
-                    {
-                        if (GetCursorInfo(out var pci))
-                        {
-                            if (pci.flags == 1)
-                            {
-                                DrawIcon(g.GetHdc(), pci.ptScreenPos.x, pci.ptScreenPos.y, pci.hCursor);
-                                g.ReleaseHdc();
-                            }
-                        }
-                    }
+                    DrawIcon(g.GetHdc(), pci.ptScreenPos.x, pci.ptScreenPos.y, pci.hCursor);
+                    g.ReleaseHdc();
                 }
-            }
-            catch
-            {
-                result = null;
+                return result;
             }
 
-            return result;
+            catch (Exception)
+            {
+                result.Dispose();
+                return null;
+            }
         }
 
         public SysMonTest()
@@ -85,10 +78,9 @@ namespace SysMonTest
 
         private void TimerMain_Tick(object sender, EventArgs e)
         {
-            using (var bmp = CaptureScreen(true))
-            {
-                bmp.Save($@"{_folderName}\Sample{_fileNameNo++.ToString().PadLeft(5, '0')}.dat", ImageFormat.Jpeg);
-            }
+            using var bmp = CaptureScreen(true);
+
+            bmp?.Save($@"{_folderName}\Sample{_fileNameNo++.ToString().PadLeft(5, '0')}.dat", ImageFormat.Jpeg);
         }
     }
 }
