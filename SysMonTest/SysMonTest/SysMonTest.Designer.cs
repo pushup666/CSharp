@@ -42,7 +42,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Name = "SysMonTest";
+            this.ShowInTaskbar = false;
             this.Text = "SysMonTest";
+            this.WindowState = System.Windows.Forms.FormWindowState.Minimized;
             this.Load += new System.EventHandler(this.SysMonTest_Load);
             this.ResumeLayout(false);
 
