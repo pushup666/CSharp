@@ -18,7 +18,7 @@ namespace ffmpeg_gui
         //录屏        ffmpeg -f gdigrab -probesize 100M -framerate 30 -i desktop -b:v 1536k -vcodec libx264  desktop.mp4
         //录屏录音    ffmpeg -f dshow   -rtbufsize 100M -i video="screen-capture-recorder":audio="virtual-audio-capturer" -b:v 1536k -vcodec h264_qsv -acodec aac -ac 2 desktop.mp4
 
-        //图片转视频  ffmpeg -i C:\Pic2Mov\Pic%10d.jpg -vcodec libx264 -r 10 Pic2Mov.mp4
+        //图片转视频  ffmpeg -f image2 -i Sample%5d.dat -vcodec libx264 -r 10 Pic2Mov.mp4    用命令行cmd，不能用批处理bat
 
         private readonly Dictionary<string, bool> _files = new Dictionary<string, bool>();
 
