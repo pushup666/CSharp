@@ -42,8 +42,8 @@ namespace MultipleCMD
             {
                 var p = new Process();
 
-                p.StartInfo.WorkingDirectory = @"Z:\you-get-develop";
-                p.StartInfo.FileName = "python";
+                p.StartInfo.WorkingDirectory = textBoxWorkingDirectory.Text;
+                p.StartInfo.FileName = textBoxFileName.Text;
 
                 //p.StartInfo.WorkingDirectory = @"D:\Music";
                 //p.StartInfo.FileName = "SpectrumPicAnalysis";
