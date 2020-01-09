@@ -36,6 +36,9 @@
             this.textBoxWorkingDirectory = new System.Windows.Forms.TextBox();
             this.textBoxFileName = new System.Windows.Forms.TextBox();
             this.labelFileName = new System.Windows.Forms.Label();
+            this.numericUpDownMaxThread = new System.Windows.Forms.NumericUpDown();
+            this.labelMaxThread = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMaxThread)).BeginInit();
             this.SuspendLayout();
             // 
             // richTextBoxCmdInput
@@ -46,16 +49,16 @@
             this.richTextBoxCmdInput.DetectUrls = false;
             this.richTextBoxCmdInput.Location = new System.Drawing.Point(12, 12);
             this.richTextBoxCmdInput.Name = "richTextBoxCmdInput";
-            this.richTextBoxCmdInput.Size = new System.Drawing.Size(662, 317);
+            this.richTextBoxCmdInput.Size = new System.Drawing.Size(695, 317);
             this.richTextBoxCmdInput.TabIndex = 0;
             this.richTextBoxCmdInput.Text = "";
             // 
             // buttonStart
             // 
             this.buttonStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonStart.Location = new System.Drawing.Point(680, 62);
+            this.buttonStart.Location = new System.Drawing.Point(713, 62);
             this.buttonStart.Name = "buttonStart";
-            this.buttonStart.Size = new System.Drawing.Size(75, 23);
+            this.buttonStart.Size = new System.Drawing.Size(103, 23);
             this.buttonStart.TabIndex = 1;
             this.buttonStart.Text = "Start";
             this.buttonStart.UseVisualStyleBackColor = true;
@@ -65,7 +68,7 @@
             // 
             this.labelCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelCount.AutoSize = true;
-            this.labelCount.Location = new System.Drawing.Point(680, 110);
+            this.labelCount.Location = new System.Drawing.Point(713, 110);
             this.labelCount.Name = "labelCount";
             this.labelCount.Size = new System.Drawing.Size(35, 12);
             this.labelCount.TabIndex = 2;
@@ -74,9 +77,9 @@
             // buttonGenCMD
             // 
             this.buttonGenCMD.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonGenCMD.Location = new System.Drawing.Point(680, 12);
+            this.buttonGenCMD.Location = new System.Drawing.Point(713, 12);
             this.buttonGenCMD.Name = "buttonGenCMD";
-            this.buttonGenCMD.Size = new System.Drawing.Size(75, 23);
+            this.buttonGenCMD.Size = new System.Drawing.Size(103, 23);
             this.buttonGenCMD.TabIndex = 3;
             this.buttonGenCMD.Text = "GenCMD";
             this.buttonGenCMD.UseVisualStyleBackColor = true;
@@ -120,11 +123,41 @@
             this.labelFileName.TabIndex = 6;
             this.labelFileName.Text = "FileName";
             // 
+            // numericUpDownMaxThread
+            // 
+            this.numericUpDownMaxThread.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.numericUpDownMaxThread.Location = new System.Drawing.Point(778, 145);
+            this.numericUpDownMaxThread.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDownMaxThread.Name = "numericUpDownMaxThread";
+            this.numericUpDownMaxThread.Size = new System.Drawing.Size(38, 21);
+            this.numericUpDownMaxThread.TabIndex = 8;
+            this.numericUpDownMaxThread.Value = new decimal(new int[] {
+            4,
+            0,
+            0,
+            0});
+            // 
+            // labelMaxThread
+            // 
+            this.labelMaxThread.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelMaxThread.AutoSize = true;
+            this.labelMaxThread.Location = new System.Drawing.Point(713, 149);
+            this.labelMaxThread.Name = "labelMaxThread";
+            this.labelMaxThread.Size = new System.Drawing.Size(59, 12);
+            this.labelMaxThread.TabIndex = 9;
+            this.labelMaxThread.Text = "MaxThread";
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(767, 411);
+            this.ClientSize = new System.Drawing.Size(828, 411);
+            this.Controls.Add(this.labelMaxThread);
+            this.Controls.Add(this.numericUpDownMaxThread);
             this.Controls.Add(this.textBoxFileName);
             this.Controls.Add(this.labelFileName);
             this.Controls.Add(this.textBoxWorkingDirectory);
@@ -135,6 +168,7 @@
             this.Controls.Add(this.richTextBoxCmdInput);
             this.Name = "Main";
             this.Text = "MultipleCMD";
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMaxThread)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -150,5 +184,7 @@
         private System.Windows.Forms.TextBox textBoxWorkingDirectory;
         private System.Windows.Forms.TextBox textBoxFileName;
         private System.Windows.Forms.Label labelFileName;
+        private System.Windows.Forms.NumericUpDown numericUpDownMaxThread;
+        private System.Windows.Forms.Label labelMaxThread;
     }
 }

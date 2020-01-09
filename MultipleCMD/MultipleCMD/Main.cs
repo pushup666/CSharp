@@ -20,8 +20,11 @@ namespace MultipleCMD
 
         private void buttonStart_Click(object sender, EventArgs e)
         {
-            ThreadPool.SetMinThreads(1, 1);
-            ThreadPool.SetMaxThreads(4, 4);
+            const int minThreads = 1;
+            var maxThreads = (int) numericUpDownMaxThread.Value;
+
+            ThreadPool.SetMinThreads(minThreads, minThreads);
+            ThreadPool.SetMaxThreads(maxThreads, maxThreads);
 
             _finishLines = 0;
             _allLines = richTextBoxCmdInput.Lines.Length;
