@@ -90,8 +90,8 @@ namespace MultipleCMD
             var sb = new StringBuilder();
             foreach (var line in richTextBoxCmdInput.Lines)
             {
-                //sb.AppendLine($"-i \"{line}\" -lavfi showspectrumpic=legend=false \"{line}.png\"");
                 sb.AppendLine($"you-get \"{line}\"");
+                //sb.AppendLine($"-i \"{line}\" -lavfi showspectrumpic=legend=false \"{line}.png\"");
             }
             richTextBoxCmdInput.Text = sb.ToString().TrimEnd();
         }
