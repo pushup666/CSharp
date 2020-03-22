@@ -32,9 +32,7 @@ namespace BookStore.UC
 
         public void RefreshBookList()
         {
-            using var bookList = checkBoxUseFilter.Checked
-                ? BookStoreBLL.GetBookList(textBoxTitleFilter.Text, comboBoxRateFilter.Text, textBoxLengthFilter.Text)
-                : BookStoreBLL.GetBookList();
+            using var bookList = checkBoxUseFilter.Checked ? BookStoreBLL.GetBookList(textBoxTitleFilter.Text, comboBoxRateFilter.Text, textBoxLengthFilter.Text, comboBoxOrderBy.Text) : BookStoreBLL.GetBookList();
 
             if (bookList == null) return;
 
@@ -76,7 +74,7 @@ namespace BookStore.UC
         {
             try
             {
-                Save();
+                //Save();
                 
                 if (rowIndex >= 0 && rowIndex < dataGridViewBookList.Rows.Count)
                 {
@@ -138,6 +136,22 @@ namespace BookStore.UC
                 case Keys.Down:
                     GetSelectedBookInfo(dataGridViewBookList.CurrentCell.RowIndex + 1);
                     break;
+                case Keys.Left:
+                    JumpToPrevPage();
+                    GetSelectedBookInfo(dataGridViewBookList.CurrentCell.RowIndex);
+                    break;
+                case Keys.Right:
+                    JumpToNextPage();
+                    GetSelectedBookInfo(dataGridViewBookList.CurrentCell.RowIndex);
+                    break;
+                case Keys.PageUp:
+                    JumpToFirstPage();
+                    GetSelectedBookInfo(dataGridViewBookList.CurrentCell.RowIndex);
+                    break;
+                case Keys.PageDown:
+                    JumpToLastPage();
+                    GetSelectedBookInfo(dataGridViewBookList.CurrentCell.RowIndex);
+                    break;
             }
         }
 
@@ -155,7 +169,7 @@ namespace BookStore.UC
                 _currBook = new BookDO(_currBook.ID, textBoxTitle.Text, textBoxAlias.Text, textBoxAuthor.Text, textBoxNote.Text, comboBoxRate.SelectedIndex);
                 if (BookStoreBLL.ModifyBook(_currBook))
                 {
-                    //RefreshBookList();
+                    RefreshBookList();
                 }
                 else
                 {
@@ -172,7 +186,7 @@ namespace BookStore.UC
                 {
                     if (BookStoreBLL.RemoveBook(_currBook.ID))
                     {
-                        //RefreshBookList();
+                        RefreshBookList();
                     }
                     else
                     {
@@ -265,25 +279,47 @@ namespace BookStore.UC
 
         private void ButtonFirstPage_Click(object sender, EventArgs e)
         {
+            JumpToFirstPage();
+        }
+        
+        private void ButtonPrevPage_Click(object sender, EventArgs e)
+        {
+            JumpToPrevPage();
+        }
+
+        private void ButtonNextPage_Click(object sender, EventArgs e)
+        {
+            JumpToNextPage();
+        }
+
+        private void ButtonLastPage_Click(object sender, EventArgs e)
+        {
+            JumpToLastPage();
+        }
+
+
+        private void JumpToFirstPage()
+        {
             _currentPage = 1;
             RefreshBookList();
         }
 
-        private void ButtonPrevPage_Click(object sender, EventArgs e)
+        private void JumpToPrevPage()
         {
             if (_currentPage <= 1) return;
             _currentPage--;
             RefreshBookList();
         }
 
-        private void ButtonNextPage_Click(object sender, EventArgs e)
+        private void JumpToNextPage()
         {
             if (_currentPage >= _pageCount) return;
             _currentPage++;
             RefreshBookList();
         }
 
-        private void ButtonLastPage_Click(object sender, EventArgs e)
+
+        private void JumpToLastPage()
         {
             _currentPage = _pageCount;
             RefreshBookList();

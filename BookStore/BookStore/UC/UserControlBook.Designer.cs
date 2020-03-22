@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.buttonRemove = new System.Windows.Forms.Button();
             this.buttonSave = new System.Windows.Forms.Button();
             this.comboBoxRate = new System.Windows.Forms.ComboBox();
@@ -61,6 +61,7 @@
             this.labelTitleFilter = new System.Windows.Forms.Label();
             this.textBoxLengthFilter = new System.Windows.Forms.TextBox();
             this.comboBoxRateFilter = new System.Windows.Forms.ComboBox();
+            this.comboBoxOrderBy = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBookList)).BeginInit();
             this.panelPage.SuspendLayout();
             this.panelFilter.SuspendLayout();
@@ -183,14 +184,14 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridViewBookList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewBookList.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewBookList.DefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewBookList.Location = new System.Drawing.Point(17, 88);
             this.dataGridViewBookList.Name = "dataGridViewBookList";
             this.dataGridViewBookList.ReadOnly = true;
@@ -334,6 +335,7 @@
             // 
             // panelFilter
             // 
+            this.panelFilter.Controls.Add(this.comboBoxOrderBy);
             this.panelFilter.Controls.Add(this.labelRateFilter);
             this.panelFilter.Controls.Add(this.labelLengthFilter);
             this.panelFilter.Controls.Add(this.labelTitleFilter);
@@ -396,6 +398,20 @@
             this.comboBoxRateFilter.Name = "comboBoxRateFilter";
             this.comboBoxRateFilter.Size = new System.Drawing.Size(45, 20);
             this.comboBoxRateFilter.TabIndex = 30;
+            // 
+            // comboBoxOrderBy
+            // 
+            this.comboBoxOrderBy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxOrderBy.FormattingEnabled = true;
+            this.comboBoxOrderBy.Items.AddRange(new object[] {
+            "Title",
+            "Rate",
+            "Length",
+            "ModifyDate"});
+            this.comboBoxOrderBy.Location = new System.Drawing.Point(512, 10);
+            this.comboBoxOrderBy.Name = "comboBoxOrderBy";
+            this.comboBoxOrderBy.Size = new System.Drawing.Size(72, 20);
+            this.comboBoxOrderBy.TabIndex = 35;
             // 
             // UserControlBook
             // 
@@ -465,5 +481,6 @@
         private System.Windows.Forms.Label labelRateFilter;
         private System.Windows.Forms.Label labelLengthFilter;
         private System.Windows.Forms.Label labelTitleFilter;
+        private System.Windows.Forms.ComboBox comboBoxOrderBy;
     }
 }

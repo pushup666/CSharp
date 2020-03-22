@@ -33,27 +33,50 @@ namespace BookStore.DAL
 
             return SQLiteHelper.ExecuteReader(sql);
         }
-
-        public static DataTable GetBookList(string filterTitle, string filterRate, string filterLength)
+        
+        public static DataTable GetBookList(string filterTitle, string filterRate, string filterLength, string orderBy)
         {
             var filterSql = new StringBuilder();
 
             if (filterTitle != "")
             {
-                filterSql.Append($"AND Title like '%{filterTitle}%' ");
+                filterSql.Append($" AND Title like '%{filterTitle}%'");
             }
 
             if (int.TryParse(filterRate, out var filterRateInt))
             {
-                filterSql.Append($"AND Rate = {filterRateInt} ");
+                filterSql.Append($" AND Rate = {filterRateInt}");
             }
 
             if (filterLength != "")
             {
-                filterSql.Append($"AND Length {filterLength} ");
+                filterSql.Append($" AND Length {filterLength}");
             }
 
-            var sql = $"SELECT ID, Title, Length, Rate, Alias, Author, Note, ModifyDate, LastReadDate FROM Book WHERE DeleteFlag = 0 {filterSql}ORDER BY Title COLLATE PinYin;";
+
+            string orderBySql;
+
+            switch (orderBy)
+            {
+                case "Title":
+                    orderBySql = " ORDER BY Title COLLATE PinYin";
+                    break;
+                case "Length":
+                    orderBySql = " ORDER BY Length DESC";
+                    break;
+                case "Rate":
+                    orderBySql = " ORDER BY Rate DESC";
+                    break;
+                case "ModifyDate":
+                    orderBySql = " ORDER BY ModifyDate DESC";
+                    break;
+                default:
+                    orderBySql = "";
+                    break;
+            }
+
+
+            var sql = $"SELECT ID, Title, Length, Rate, Alias, Author, Note, ModifyDate, LastReadDate FROM Book WHERE DeleteFlag = 0{filterSql}{orderBySql};";
 
             return SQLiteHelper.ExecuteReader(sql);
         }
