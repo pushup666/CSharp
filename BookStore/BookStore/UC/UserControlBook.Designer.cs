@@ -56,22 +56,23 @@
             this.buttonFirstPage = new System.Windows.Forms.Button();
             this.panelPage = new System.Windows.Forms.Panel();
             this.panelFilter = new System.Windows.Forms.Panel();
-            this.labelRateFilter = new System.Windows.Forms.Label();
-            this.labelLengthFilter = new System.Windows.Forms.Label();
-            this.labelTitleFilter = new System.Windows.Forms.Label();
-            this.textBoxLengthFilter = new System.Windows.Forms.TextBox();
-            this.comboBoxRateFilter = new System.Windows.Forms.ComboBox();
             this.comboBoxOrderBy = new System.Windows.Forms.ComboBox();
+            this.labelRateFilter = new System.Windows.Forms.Label();
+            this.labelOrderBy = new System.Windows.Forms.Label();
+            this.labelTitleFilter = new System.Windows.Forms.Label();
+            this.comboBoxRateFilter = new System.Windows.Forms.ComboBox();
+            this.panelBookInfo = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBookList)).BeginInit();
             this.panelPage.SuspendLayout();
             this.panelFilter.SuspendLayout();
+            this.panelBookInfo.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonRemove
             // 
-            this.buttonRemove.Location = new System.Drawing.Point(822, 11);
+            this.buttonRemove.Location = new System.Drawing.Point(865, 22);
             this.buttonRemove.Name = "buttonRemove";
-            this.buttonRemove.Size = new System.Drawing.Size(75, 23);
+            this.buttonRemove.Size = new System.Drawing.Size(86, 23);
             this.buttonRemove.TabIndex = 25;
             this.buttonRemove.Text = "删除";
             this.buttonRemove.UseVisualStyleBackColor = true;
@@ -79,7 +80,7 @@
             // 
             // buttonSave
             // 
-            this.buttonSave.Location = new System.Drawing.Point(741, 12);
+            this.buttonSave.Location = new System.Drawing.Point(784, 22);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(75, 23);
             this.buttonSave.TabIndex = 24;
@@ -98,7 +99,7 @@
             "3",
             "4",
             "5"});
-            this.comboBoxRate.Location = new System.Drawing.Point(661, 13);
+            this.comboBoxRate.Location = new System.Drawing.Point(643, 13);
             this.comboBoxRate.Name = "comboBoxRate";
             this.comboBoxRate.Size = new System.Drawing.Size(45, 20);
             this.comboBoxRate.TabIndex = 23;
@@ -106,7 +107,7 @@
             // labelRate
             // 
             this.labelRate.AutoSize = true;
-            this.labelRate.Location = new System.Drawing.Point(623, 16);
+            this.labelRate.Location = new System.Drawing.Point(608, 17);
             this.labelRate.Name = "labelRate";
             this.labelRate.Size = new System.Drawing.Size(29, 12);
             this.labelRate.TabIndex = 22;
@@ -114,15 +115,15 @@
             // 
             // textBoxNote
             // 
-            this.textBoxNote.Location = new System.Drawing.Point(529, 14);
+            this.textBoxNote.Location = new System.Drawing.Point(522, 13);
             this.textBoxNote.Name = "textBoxNote";
-            this.textBoxNote.Size = new System.Drawing.Size(85, 21);
+            this.textBoxNote.Size = new System.Drawing.Size(62, 21);
             this.textBoxNote.TabIndex = 21;
             // 
             // labelNote
             // 
             this.labelNote.AutoSize = true;
-            this.labelNote.Location = new System.Drawing.Point(491, 17);
+            this.labelNote.Location = new System.Drawing.Point(487, 17);
             this.labelNote.Name = "labelNote";
             this.labelNote.Size = new System.Drawing.Size(29, 12);
             this.labelNote.TabIndex = 20;
@@ -130,15 +131,15 @@
             // 
             // textBoxAuthor
             // 
-            this.textBoxAuthor.Location = new System.Drawing.Point(397, 14);
+            this.textBoxAuthor.Location = new System.Drawing.Point(397, 12);
             this.textBoxAuthor.Name = "textBoxAuthor";
-            this.textBoxAuthor.Size = new System.Drawing.Size(85, 21);
+            this.textBoxAuthor.Size = new System.Drawing.Size(66, 21);
             this.textBoxAuthor.TabIndex = 19;
             // 
             // labelAuthor
             // 
             this.labelAuthor.AutoSize = true;
-            this.labelAuthor.Location = new System.Drawing.Point(359, 17);
+            this.labelAuthor.Location = new System.Drawing.Point(362, 17);
             this.labelAuthor.Name = "labelAuthor";
             this.labelAuthor.Size = new System.Drawing.Size(29, 12);
             this.labelAuthor.TabIndex = 18;
@@ -146,15 +147,15 @@
             // 
             // textBoxAlias
             // 
-            this.textBoxAlias.Location = new System.Drawing.Point(265, 13);
+            this.textBoxAlias.Location = new System.Drawing.Point(268, 14);
             this.textBoxAlias.Name = "textBoxAlias";
-            this.textBoxAlias.Size = new System.Drawing.Size(85, 21);
+            this.textBoxAlias.Size = new System.Drawing.Size(70, 21);
             this.textBoxAlias.TabIndex = 17;
             // 
             // labelAlias
             // 
             this.labelAlias.AutoSize = true;
-            this.labelAlias.Location = new System.Drawing.Point(227, 16);
+            this.labelAlias.Location = new System.Drawing.Point(233, 17);
             this.labelAlias.Name = "labelAlias";
             this.labelAlias.Size = new System.Drawing.Size(29, 12);
             this.labelAlias.TabIndex = 16;
@@ -162,7 +163,7 @@
             // 
             // textBoxTitle
             // 
-            this.textBoxTitle.Location = new System.Drawing.Point(53, 14);
+            this.textBoxTitle.Location = new System.Drawing.Point(44, 12);
             this.textBoxTitle.Name = "textBoxTitle";
             this.textBoxTitle.Size = new System.Drawing.Size(165, 21);
             this.textBoxTitle.TabIndex = 15;
@@ -170,7 +171,7 @@
             // labelTitle
             // 
             this.labelTitle.AutoSize = true;
-            this.labelTitle.Location = new System.Drawing.Point(15, 17);
+            this.labelTitle.Location = new System.Drawing.Point(9, 17);
             this.labelTitle.Name = "labelTitle";
             this.labelTitle.Size = new System.Drawing.Size(29, 12);
             this.labelTitle.TabIndex = 14;
@@ -192,12 +193,12 @@
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridViewBookList.DefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridViewBookList.Location = new System.Drawing.Point(17, 88);
+            this.dataGridViewBookList.Location = new System.Drawing.Point(17, 110);
             this.dataGridViewBookList.Name = "dataGridViewBookList";
             this.dataGridViewBookList.ReadOnly = true;
             this.dataGridViewBookList.RowTemplate.Height = 23;
             this.dataGridViewBookList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewBookList.Size = new System.Drawing.Size(880, 348);
+            this.dataGridViewBookList.Size = new System.Drawing.Size(934, 325);
             this.dataGridViewBookList.TabIndex = 13;
             this.dataGridViewBookList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewBook_CellClick);
             this.dataGridViewBookList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewBook_CellDoubleClick);
@@ -205,7 +206,7 @@
             // 
             // buttonExport
             // 
-            this.buttonExport.Location = new System.Drawing.Point(740, 48);
+            this.buttonExport.Location = new System.Drawing.Point(784, 71);
             this.buttonExport.Name = "buttonExport";
             this.buttonExport.Size = new System.Drawing.Size(75, 23);
             this.buttonExport.TabIndex = 26;
@@ -215,7 +216,7 @@
             // 
             // buttonRefresh
             // 
-            this.buttonRefresh.Location = new System.Drawing.Point(659, 49);
+            this.buttonRefresh.Location = new System.Drawing.Point(703, 71);
             this.buttonRefresh.Name = "buttonRefresh";
             this.buttonRefresh.Size = new System.Drawing.Size(75, 23);
             this.buttonRefresh.TabIndex = 27;
@@ -225,15 +226,15 @@
             // 
             // textBoxTitleFilter
             // 
-            this.textBoxTitleFilter.Location = new System.Drawing.Point(116, 10);
+            this.textBoxTitleFilter.Location = new System.Drawing.Point(132, 10);
             this.textBoxTitleFilter.Name = "textBoxTitleFilter";
-            this.textBoxTitleFilter.Size = new System.Drawing.Size(91, 21);
+            this.textBoxTitleFilter.Size = new System.Drawing.Size(100, 21);
             this.textBoxTitleFilter.TabIndex = 28;
             // 
             // checkBoxUseFilter
             // 
             this.checkBoxUseFilter.AutoSize = true;
-            this.checkBoxUseFilter.Location = new System.Drawing.Point(3, 11);
+            this.checkBoxUseFilter.Location = new System.Drawing.Point(10, 12);
             this.checkBoxUseFilter.Name = "checkBoxUseFilter";
             this.checkBoxUseFilter.Size = new System.Drawing.Size(48, 16);
             this.checkBoxUseFilter.TabIndex = 29;
@@ -242,11 +243,11 @@
             // 
             // buttonReplace
             // 
-            this.buttonReplace.Location = new System.Drawing.Point(822, 49);
+            this.buttonReplace.Location = new System.Drawing.Point(865, 71);
             this.buttonReplace.Name = "buttonReplace";
-            this.buttonReplace.Size = new System.Drawing.Size(75, 23);
+            this.buttonReplace.Size = new System.Drawing.Size(86, 23);
             this.buttonReplace.TabIndex = 30;
-            this.buttonReplace.Text = "替换标题";
+            this.buttonReplace.Text = "批量替换标题";
             this.buttonReplace.UseVisualStyleBackColor = true;
             this.buttonReplace.Click += new System.EventHandler(this.ButtonReplace_Click);
             // 
@@ -330,57 +331,63 @@
             this.panelPage.Controls.Add(this.buttonFirstPage);
             this.panelPage.Location = new System.Drawing.Point(17, 442);
             this.panelPage.Name = "panelPage";
-            this.panelPage.Size = new System.Drawing.Size(880, 37);
+            this.panelPage.Size = new System.Drawing.Size(934, 37);
             this.panelPage.TabIndex = 38;
             // 
             // panelFilter
             // 
             this.panelFilter.Controls.Add(this.comboBoxOrderBy);
             this.panelFilter.Controls.Add(this.labelRateFilter);
-            this.panelFilter.Controls.Add(this.labelLengthFilter);
+            this.panelFilter.Controls.Add(this.labelOrderBy);
             this.panelFilter.Controls.Add(this.labelTitleFilter);
-            this.panelFilter.Controls.Add(this.textBoxLengthFilter);
             this.panelFilter.Controls.Add(this.comboBoxRateFilter);
             this.panelFilter.Controls.Add(this.textBoxTitleFilter);
             this.panelFilter.Controls.Add(this.checkBoxUseFilter);
-            this.panelFilter.Location = new System.Drawing.Point(17, 41);
+            this.panelFilter.Location = new System.Drawing.Point(17, 63);
             this.panelFilter.Name = "panelFilter";
             this.panelFilter.Size = new System.Drawing.Size(597, 41);
             this.panelFilter.TabIndex = 39;
             // 
+            // comboBoxOrderBy
+            // 
+            this.comboBoxOrderBy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxOrderBy.FormattingEnabled = true;
+            this.comboBoxOrderBy.Items.AddRange(new object[] {
+            "Title",
+            "Rate",
+            "Length",
+            "ModifyDate"});
+            this.comboBoxOrderBy.Location = new System.Drawing.Point(410, 10);
+            this.comboBoxOrderBy.Name = "comboBoxOrderBy";
+            this.comboBoxOrderBy.Size = new System.Drawing.Size(81, 20);
+            this.comboBoxOrderBy.TabIndex = 35;
+            // 
             // labelRateFilter
             // 
             this.labelRateFilter.AutoSize = true;
-            this.labelRateFilter.Location = new System.Drawing.Point(227, 13);
+            this.labelRateFilter.Location = new System.Drawing.Point(247, 14);
             this.labelRateFilter.Name = "labelRateFilter";
             this.labelRateFilter.Size = new System.Drawing.Size(53, 12);
             this.labelRateFilter.TabIndex = 34;
             this.labelRateFilter.Text = "评分过滤";
             // 
-            // labelLengthFilter
+            // labelOrderBy
             // 
-            this.labelLengthFilter.AutoSize = true;
-            this.labelLengthFilter.Location = new System.Drawing.Point(351, 13);
-            this.labelLengthFilter.Name = "labelLengthFilter";
-            this.labelLengthFilter.Size = new System.Drawing.Size(53, 12);
-            this.labelLengthFilter.TabIndex = 33;
-            this.labelLengthFilter.Text = "长度过滤";
+            this.labelOrderBy.AutoSize = true;
+            this.labelOrderBy.Location = new System.Drawing.Point(375, 14);
+            this.labelOrderBy.Name = "labelOrderBy";
+            this.labelOrderBy.Size = new System.Drawing.Size(29, 12);
+            this.labelOrderBy.TabIndex = 33;
+            this.labelOrderBy.Text = "排序";
             // 
             // labelTitleFilter
             // 
             this.labelTitleFilter.AutoSize = true;
-            this.labelTitleFilter.Location = new System.Drawing.Point(57, 13);
+            this.labelTitleFilter.Location = new System.Drawing.Point(73, 14);
             this.labelTitleFilter.Name = "labelTitleFilter";
             this.labelTitleFilter.Size = new System.Drawing.Size(53, 12);
             this.labelTitleFilter.TabIndex = 32;
             this.labelTitleFilter.Text = "标题过滤";
-            // 
-            // textBoxLengthFilter
-            // 
-            this.textBoxLengthFilter.Location = new System.Drawing.Point(410, 10);
-            this.textBoxLengthFilter.Name = "textBoxLengthFilter";
-            this.textBoxLengthFilter.Size = new System.Drawing.Size(85, 21);
-            this.textBoxLengthFilter.TabIndex = 31;
             // 
             // comboBoxRateFilter
             // 
@@ -394,29 +401,33 @@
             "3",
             "4",
             "5"});
-            this.comboBoxRateFilter.Location = new System.Drawing.Point(286, 10);
+            this.comboBoxRateFilter.Location = new System.Drawing.Point(306, 10);
             this.comboBoxRateFilter.Name = "comboBoxRateFilter";
-            this.comboBoxRateFilter.Size = new System.Drawing.Size(45, 20);
+            this.comboBoxRateFilter.Size = new System.Drawing.Size(54, 20);
             this.comboBoxRateFilter.TabIndex = 30;
             // 
-            // comboBoxOrderBy
+            // panelBookInfo
             // 
-            this.comboBoxOrderBy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxOrderBy.FormattingEnabled = true;
-            this.comboBoxOrderBy.Items.AddRange(new object[] {
-            "Title",
-            "Rate",
-            "Length",
-            "ModifyDate"});
-            this.comboBoxOrderBy.Location = new System.Drawing.Point(512, 10);
-            this.comboBoxOrderBy.Name = "comboBoxOrderBy";
-            this.comboBoxOrderBy.Size = new System.Drawing.Size(72, 20);
-            this.comboBoxOrderBy.TabIndex = 35;
+            this.panelBookInfo.Controls.Add(this.textBoxTitle);
+            this.panelBookInfo.Controls.Add(this.labelTitle);
+            this.panelBookInfo.Controls.Add(this.labelAlias);
+            this.panelBookInfo.Controls.Add(this.textBoxAlias);
+            this.panelBookInfo.Controls.Add(this.labelAuthor);
+            this.panelBookInfo.Controls.Add(this.textBoxAuthor);
+            this.panelBookInfo.Controls.Add(this.labelNote);
+            this.panelBookInfo.Controls.Add(this.textBoxNote);
+            this.panelBookInfo.Controls.Add(this.comboBoxRate);
+            this.panelBookInfo.Controls.Add(this.labelRate);
+            this.panelBookInfo.Location = new System.Drawing.Point(17, 12);
+            this.panelBookInfo.Name = "panelBookInfo";
+            this.panelBookInfo.Size = new System.Drawing.Size(706, 45);
+            this.panelBookInfo.TabIndex = 41;
             // 
             // UserControlBook
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.panelBookInfo);
             this.Controls.Add(this.panelFilter);
             this.Controls.Add(this.panelPage);
             this.Controls.Add(this.buttonReplace);
@@ -424,26 +435,17 @@
             this.Controls.Add(this.buttonExport);
             this.Controls.Add(this.buttonRemove);
             this.Controls.Add(this.buttonSave);
-            this.Controls.Add(this.comboBoxRate);
-            this.Controls.Add(this.labelRate);
-            this.Controls.Add(this.textBoxNote);
-            this.Controls.Add(this.labelNote);
-            this.Controls.Add(this.textBoxAuthor);
-            this.Controls.Add(this.labelAuthor);
-            this.Controls.Add(this.textBoxAlias);
-            this.Controls.Add(this.labelAlias);
-            this.Controls.Add(this.textBoxTitle);
-            this.Controls.Add(this.labelTitle);
             this.Controls.Add(this.dataGridViewBookList);
             this.Name = "UserControlBook";
-            this.Size = new System.Drawing.Size(913, 482);
+            this.Size = new System.Drawing.Size(967, 482);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBookList)).EndInit();
             this.panelPage.ResumeLayout(false);
             this.panelPage.PerformLayout();
             this.panelFilter.ResumeLayout(false);
             this.panelFilter.PerformLayout();
+            this.panelBookInfo.ResumeLayout(false);
+            this.panelBookInfo.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -476,11 +478,11 @@
         private System.Windows.Forms.Button buttonFirstPage;
         private System.Windows.Forms.Panel panelPage;
         private System.Windows.Forms.Panel panelFilter;
-        private System.Windows.Forms.TextBox textBoxLengthFilter;
         private System.Windows.Forms.ComboBox comboBoxRateFilter;
         private System.Windows.Forms.Label labelRateFilter;
-        private System.Windows.Forms.Label labelLengthFilter;
+        private System.Windows.Forms.Label labelOrderBy;
         private System.Windows.Forms.Label labelTitleFilter;
         private System.Windows.Forms.ComboBox comboBoxOrderBy;
+        private System.Windows.Forms.Panel panelBookInfo;
     }
 }

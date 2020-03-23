@@ -34,7 +34,7 @@ namespace BookStore.DAL
             return SQLiteHelper.ExecuteReader(sql);
         }
         
-        public static DataTable GetBookList(string filterTitle, string filterRate, string filterLength, string orderBy)
+        public static DataTable GetBookList(string filterTitle, string filterRate, string orderBy)
         {
             var filterSql = new StringBuilder();
 
@@ -46,11 +46,6 @@ namespace BookStore.DAL
             if (int.TryParse(filterRate, out var filterRateInt))
             {
                 filterSql.Append($" AND Rate = {filterRateInt}");
-            }
-
-            if (filterLength != "")
-            {
-                filterSql.Append($" AND Length {filterLength}");
             }
 
 

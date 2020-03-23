@@ -32,7 +32,7 @@ namespace BookStore.UC
 
         public void RefreshBookList()
         {
-            using var bookList = checkBoxUseFilter.Checked ? BookStoreBLL.GetBookList(textBoxTitleFilter.Text, comboBoxRateFilter.Text, textBoxLengthFilter.Text, comboBoxOrderBy.Text) : BookStoreBLL.GetBookList();
+            using var bookList = checkBoxUseFilter.Checked ? BookStoreBLL.GetBookList(textBoxTitleFilter.Text, comboBoxRateFilter.Text, comboBoxOrderBy.Text) : BookStoreBLL.GetBookList();
 
             if (bookList == null) return;
 
