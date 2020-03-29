@@ -65,6 +65,9 @@ namespace BookStore.DAL
                 case "ModifyDate":
                     orderBySql = " ORDER BY ModifyDate DESC";
                     break;
+                case "LastReadDate":
+                    orderBySql = " ORDER BY LastReadDate DESC";
+                    break;
                 default:
                     orderBySql = "";
                     break;

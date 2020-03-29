@@ -356,7 +356,8 @@
             "Title",
             "Rate",
             "Length",
-            "ModifyDate"});
+            "ModifyDate",
+            "LastReadDate"});
             this.comboBoxOrderBy.Location = new System.Drawing.Point(410, 10);
             this.comboBoxOrderBy.Name = "comboBoxOrderBy";
             this.comboBoxOrderBy.Size = new System.Drawing.Size(81, 20);

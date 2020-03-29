@@ -91,6 +91,7 @@
             this.Controls.Add(this.buttonImportBooks);
             this.Name = "FrmBookStore";
             this.Text = "BookStore";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmBookStore_FormClosing);
             this.Load += new System.EventHandler(this.FrmBookStore_Load);
             this.ResumeLayout(false);
 

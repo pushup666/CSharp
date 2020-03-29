@@ -187,5 +187,16 @@ namespace BookStore
 
             }
         }
+
+        private void FrmBookStore_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            foreach (TabPage page in tabControlMain.TabPages)
+            {
+                if (page.Name.StartsWith("V_"))
+                {
+                    tabControlMain.TabPages.Remove(page);
+                }
+            }
+        }
     }
 }
