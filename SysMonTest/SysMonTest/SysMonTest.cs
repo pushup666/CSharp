@@ -72,7 +72,7 @@ namespace SysMonTest
                 Directory.CreateDirectory(_folderName);
             }
 
-            timerMain.Interval = 5000;
+            timerMain.Interval = 60000;
             timerMain.Enabled = true;
         }
 
