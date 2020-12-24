@@ -118,7 +118,7 @@ namespace BookStore
                     }
                 }
 
-                MessageBox.Show($"{count.ToString()}项 导入完成！");
+                MessageBox.Show($"{count}项 导入完成！");
 
                 ((UserControlBook)tabControlMain.TabPages[0].Controls[0]).RefreshBookList();
             }
