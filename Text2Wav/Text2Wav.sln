@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Text2Wav", "Text2Wav\Text2Wav.csproj", "{8260A7BD-EE6F-4104-A129-5491E652E7CF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8260A7BD-EE6F-4104-A129-5491E652E7CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8260A7BD-EE6F-4104-A129-5491E652E7CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8260A7BD-EE6F-4104-A129-5491E652E7CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8260A7BD-EE6F-4104-A129-5491E652E7CF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D0F404E5-F494-43E2-842A-D381948BF73A}
+	EndGlobalSection
+EndGlobal
