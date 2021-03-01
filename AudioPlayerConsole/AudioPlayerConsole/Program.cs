@@ -21,7 +21,6 @@ namespace AudioPlayerConsole
     {
         private static readonly List<LrcLine> LrcList = new List<LrcLine>();
 
-        //AudioPlayerConsole "D:\Music\叶倩文 - 秋去秋来.mp3"
         private static void Main(string[] args)
 
         {
@@ -43,6 +42,7 @@ namespace AudioPlayerConsole
         {
             if (!File.Exists(fileFullName))
             {
+                Console.WriteLine($"{fileFullName} Not Exists");
                 return;
             }
 
@@ -78,6 +78,7 @@ namespace AudioPlayerConsole
         {
             if (!File.Exists(fileFullName))
             {
+                Console.WriteLine($"{fileFullName} Not Exists");
                 return;
             }
 
