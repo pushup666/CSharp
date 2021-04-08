@@ -36,6 +36,7 @@
             this.buttonDelFolder = new System.Windows.Forms.Button();
             this.buttonDelMarkFiles = new System.Windows.Forms.Button();
             this.listBoxLog = new System.Windows.Forms.ListBox();
+            this.buttonImportMods = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFiles)).BeginInit();
             this.SuspendLayout();
             // 
@@ -131,11 +132,23 @@
             this.listBoxLog.Size = new System.Drawing.Size(776, 76);
             this.listBoxLog.TabIndex = 10;
             // 
+            // buttonImportMods
+            // 
+            this.buttonImportMods.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonImportMods.Location = new System.Drawing.Point(794, 181);
+            this.buttonImportMods.Name = "buttonImportMods";
+            this.buttonImportMods.Size = new System.Drawing.Size(103, 23);
+            this.buttonImportMods.TabIndex = 11;
+            this.buttonImportMods.Text = "Import Mods";
+            this.buttonImportMods.UseVisualStyleBackColor = true;
+            this.buttonImportMods.Click += new System.EventHandler(this.buttonImportMods_Click);
+            // 
             // DuplicateFinder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(909, 624);
+            this.Controls.Add(this.buttonImportMods);
             this.Controls.Add(this.listBoxLog);
             this.Controls.Add(this.buttonDelMarkFiles);
             this.Controls.Add(this.buttonDelFolder);
@@ -162,5 +175,6 @@
         private System.Windows.Forms.Button buttonDelFolder;
         private System.Windows.Forms.Button buttonDelMarkFiles;
         private System.Windows.Forms.ListBox listBoxLog;
+        private System.Windows.Forms.Button buttonImportMods;
     }
 }

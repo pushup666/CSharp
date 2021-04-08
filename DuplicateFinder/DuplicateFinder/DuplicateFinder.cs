@@ -44,7 +44,7 @@ namespace DuplicateFinder
         
         private void dataGridViewFiles_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-            ChangeRowForeColor();
+            //ChangeRowForeColor();
         }
 
         
@@ -189,8 +189,6 @@ namespace DuplicateFinder
             }
 
             MessageBox.Show("删除完成！");
-
-            ImportFiles();
         }
 
         
@@ -199,7 +197,7 @@ namespace DuplicateFinder
         {
             foreach (DataGridViewRow row in dataGridViewFiles.Rows)
             {
-                var foreColor = int.Parse(((string)row.Cells["MD5"].Value).Substring(0, 6), NumberStyles.HexNumber);
+                var foreColor = int.Parse(GetHashFromString((string)row.Cells["MD5"].Value).Substring(0, 6), NumberStyles.HexNumber);
                 row.DefaultCellStyle.ForeColor = Color.FromArgb(foreColor);
             }
         }
@@ -208,8 +206,9 @@ namespace DuplicateFinder
         {
             try
             {
-                var file = new FileStream(fileName, FileMode.Open);
                 System.Security.Cryptography.MD5 md5 = new System.Security.Cryptography.MD5CryptoServiceProvider();
+
+                var file = new FileStream(fileName, FileMode.Open);
                 var retVal = md5.ComputeHash(file);
                 file.Close();
 
@@ -226,6 +225,84 @@ namespace DuplicateFinder
                 listBoxLog.Items.Add(msg);
                 return msg;
             }
+        }
+
+        private string GetHashFromString(string input)
+        {
+            try
+            {
+                System.Security.Cryptography.MD5 md5 = new System.Security.Cryptography.MD5CryptoServiceProvider();
+
+                var retVal = md5.ComputeHash(Encoding.UTF8.GetBytes(input));
+
+                var sb = new StringBuilder();
+                foreach (var t in retVal)
+                {
+                    sb.Append(t.ToString("X2"));
+                }
+                return sb.ToString();
+            }
+            catch (Exception ex)
+            {
+                var msg = "Error:\r\n" + ex.Message;
+                listBoxLog.Items.Add(msg);
+                return msg;
+            }
+        }
+
+        private void buttonImportMods_Click(object sender, EventArgs e)
+        {
+            ImportMods();
+        }
+
+        private void ImportMods()
+        {
+            _fileDict.Clear();
+            _uniqueFileDict.Clear();
+            listBoxLog.Items.Clear();
+
+            foreach (var file in Directory.GetFiles(@"C:\Users\ssf\AppData\Roaming\Factorio\mods"))
+            {
+                if (!_fileDict.ContainsKey(file))
+                {
+                    var prefix = file.Split('_')[0];
+                    _fileDict.Add(file, prefix);
+                }
+            }
+
+            foreach (var file in _fileDict)
+            {
+                if (_uniqueFileDict.ContainsKey(file.Value))
+                {
+                    if (string.CompareOrdinal(file.Key,_uniqueFileDict[file.Value]) > 0)
+                    {
+                        _uniqueFileDict[file.Value] = file.Key;
+                    }
+                }
+                else
+                {
+                    _uniqueFileDict.Add(file.Value, file.Key);
+                }
+            }
+
+            var dt = new DataTable();
+            dt.Columns.Add("Mark", typeof(bool));
+            dt.Columns.Add("MD5", typeof(string));
+            dt.Columns.Add("Name", typeof(string));
+
+            foreach (var file in _fileDict)
+            {
+                var dr = dt.NewRow();
+                dr["Mark"] = !_uniqueFileDict.ContainsValue(file.Key);
+                dr["MD5"] = file.Value;
+                dr["Name"] = file.Key;
+                dt.Rows.Add(dr);
+            }
+
+            dataGridViewFiles.DataSource = dt;
+            dataGridViewFiles.Columns[1].ReadOnly = true;
+            dataGridViewFiles.Columns[2].ReadOnly = true;
+            dataGridViewFiles.AutoResizeColumns();
         }
     }
 }
