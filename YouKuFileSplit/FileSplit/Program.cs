@@ -13,11 +13,14 @@ namespace FileSplit
             //var splitPattern = new byte[] { 70, 76, 86, 1, 5 };     //flv
             //const string ext = "flv";
 
-            var splitPattern = new byte[] {0, 0, 0, 32, 102, 116, 121, 112, 105, 115, 111, 109};     //mp4
-            const string ext = "mp4";
+            //var splitPattern = new byte[] {0, 0, 0, 32, 102, 116, 121, 112, 105, 115, 111, 109};     //mp4
+            //const string ext = "mp4";
+
+            var splitPattern = new byte[] {107, 101, 0, 60, 7, 120, 0};     //flv
+            const string ext = "flv";
 
             var count = 0;
-            const string path = @"Z:\kux\";
+            const string path = @"D:\Temp\";
 
             foreach (var fullname in Directory.GetFiles(path, "*.kux"))
             {
