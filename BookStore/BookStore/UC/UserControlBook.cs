@@ -272,7 +272,7 @@ namespace BookStore.UC
 
             }
 
-            MessageBox.Show("测试结束！");
+            MessageBox.Show("替换结束！");
         }
 
 
