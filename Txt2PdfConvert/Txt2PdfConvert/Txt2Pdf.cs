@@ -6,6 +6,7 @@ using System.IO;
 using System.Text;
 using System.Windows.Forms;
 
+
 namespace Txt2PdfConvert
 {
     public partial class Txt2Pdf : Form
@@ -242,6 +243,47 @@ namespace Txt2PdfConvert
             {
                 MessageBox.Show(ex.Message);
             }
-        }        
+        }
+
+        private void buttonConvertAg_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var beginTime = DateTime.Now;
+                foreach (string fileName in checkedListBoxFileName.CheckedItems)
+                {
+                    GenerateTxt(fileName);
+                }
+                MessageBox.Show($@"耗时：{DateTime.Now.Subtract(beginTime).TotalSeconds} 秒");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private static void GenerateTxt(string fileName)
+        {
+            try
+            {
+                if (fileName != null)
+                {
+                    var pdfReader = new PdfReader(fileName);
+                    var txtWriter = new StreamWriter(Path.ChangeExtension(fileName, "txt"), true, Encoding.Default);
+
+                    for (var i = 0; i < pdfReader.NumberOfPages; i++)
+                    {
+                        txtWriter.WriteLine(iTextSharp.text.pdf.parser.PdfTextExtractor.GetTextFromPage(pdfReader, i + 1));
+                    }
+                    
+                    txtWriter.Close();
+                    pdfReader.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }
