@@ -132,7 +132,7 @@
             this.buttonConvertAg.TabIndex = 9;
             this.buttonConvertAg.Text = "Pdf2Txt";
             this.buttonConvertAg.UseVisualStyleBackColor = true;
-            this.buttonConvertAg.Click += new System.EventHandler(this.buttonConvertAg_Click);
+            this.buttonConvertAg.Click += new System.EventHandler(this.ButtonConvertAg_Click);
             // 
             // Txt2Pdf
             // 

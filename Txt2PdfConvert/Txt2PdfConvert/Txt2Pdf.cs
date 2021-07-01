@@ -6,7 +6,6 @@ using System.IO;
 using System.Text;
 using System.Windows.Forms;
 
-
 namespace Txt2PdfConvert
 {
     public partial class Txt2Pdf : Form
@@ -245,7 +244,7 @@ namespace Txt2PdfConvert
             }
         }
 
-        private void buttonConvertAg_Click(object sender, EventArgs e)
+        private void ButtonConvertAg_Click(object sender, EventArgs e)
         {
             try
             {
