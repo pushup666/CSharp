@@ -206,36 +206,43 @@ namespace Txt2PdfConvert
                 if (fileName != null)
                 {
                     var reader = new PdfReader(Path.ChangeExtension(fileName, "pdf"));
+
                     var pagesCount = reader.NumberOfPages;
                     var filesCount = (int)Math.Ceiling((double)pagesCount / MaxPagesPerPdf);
                     var pagesPerPdf = (int)Math.Ceiling((double)pagesCount / filesCount);
 
-                    for (var i = 0; i < filesCount; i++)
+                    if (filesCount == 1)
                     {
-                        var document = new Document(reader.GetPageSizeWithRotation(1));
-
-                        var pdfSplitName = $@"{Path.GetDirectoryName(fileName)}\{Path.GetFileNameWithoutExtension(fileName)}-{i + 1:D2}.pdf";
-                        var pdfCopyProvider = new PdfCopy(document, new FileStream(pdfSplitName, FileMode.Create));
-
-                        document.Open();
-
-                        for (var j = 0; j < pagesPerPdf; j++)
+                        reader.Close();
+                    }
+                    else
+                    {
+                        for (var i = 0; i < filesCount; i++)
                         {
-                            var index = i * pagesPerPdf + j + 1;
+                            var document = new Document(reader.GetPageSizeWithRotation(1));
 
-                            if (index <= pagesCount)
+                            var pdfSplitName = $@"{Path.GetDirectoryName(fileName)}\{Path.GetFileNameWithoutExtension(fileName)}-{i + 1:D2}.pdf";
+                            var pdfCopyProvider = new PdfCopy(document, new FileStream(pdfSplitName, FileMode.Create));
+
+                            document.Open();
+
+                            for (var j = 0; j < pagesPerPdf; j++)
                             {
-                                pdfCopyProvider.AddPage(pdfCopyProvider.GetImportedPage(reader, index));
+                                var index = i * pagesPerPdf + j + 1;
+
+                                if (index <= pagesCount)
+                                {
+                                    pdfCopyProvider.AddPage(pdfCopyProvider.GetImportedPage(reader, index));
+                                }
                             }
+
+                            pdfCopyProvider.Close();
+                            document.Close();
                         }
 
-                        pdfCopyProvider.Close();
-                        document.Close();
+                        reader.Close();
+                        File.Delete(Path.ChangeExtension(fileName, "pdf"));
                     }
-
-                    reader.Close();
-
-                    File.Delete(Path.ChangeExtension(fileName, "pdf"));
                 }
             }
             catch (Exception ex)
