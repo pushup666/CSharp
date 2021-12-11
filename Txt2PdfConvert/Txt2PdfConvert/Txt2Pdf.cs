@@ -206,42 +206,90 @@ namespace Txt2PdfConvert
                 if (fileName != null)
                 {
                     var reader = new PdfReader(Path.ChangeExtension(fileName, "pdf"));
+
                     var pagesCount = reader.NumberOfPages;
                     var filesCount = (int)Math.Ceiling((double)pagesCount / MaxPagesPerPdf);
                     var pagesPerPdf = (int)Math.Ceiling((double)pagesCount / filesCount);
 
-                    for (var i = 0; i < filesCount; i++)
+                    if (filesCount == 1)
                     {
-                        var document = new Document(reader.GetPageSizeWithRotation(1));
-
-                        var pdfSplitName = $@"{Path.GetDirectoryName(fileName)}\{Path.GetFileNameWithoutExtension(fileName)}-{i + 1:D2}.pdf";
-                        var pdfCopyProvider = new PdfCopy(document, new FileStream(pdfSplitName, FileMode.Create));
-
-                        document.Open();
-
-                        for (var j = 0; j < pagesPerPdf; j++)
+                        reader.Close();
+                    }
+                    else
+                    {
+                        for (var i = 0; i < filesCount; i++)
                         {
-                            var index = i * pagesPerPdf + j + 1;
+                            var document = new Document(reader.GetPageSizeWithRotation(1));
 
-                            if (index <= pagesCount)
+                            var pdfSplitName = $@"{Path.GetDirectoryName(fileName)}\{Path.GetFileNameWithoutExtension(fileName)}-{i + 1:D2}.pdf";
+                            var pdfCopyProvider = new PdfCopy(document, new FileStream(pdfSplitName, FileMode.Create));
+
+                            document.Open();
+
+                            for (var j = 0; j < pagesPerPdf; j++)
                             {
-                                pdfCopyProvider.AddPage(pdfCopyProvider.GetImportedPage(reader, index));
+                                var index = i * pagesPerPdf + j + 1;
+
+                                if (index <= pagesCount)
+                                {
+                                    pdfCopyProvider.AddPage(pdfCopyProvider.GetImportedPage(reader, index));
+                                }
                             }
+
+                            pdfCopyProvider.Close();
+                            document.Close();
                         }
 
-                        pdfCopyProvider.Close();
-                        document.Close();
+                        reader.Close();
+                        File.Delete(Path.ChangeExtension(fileName, "pdf"));
                     }
-
-                    reader.Close();
-
-                    File.Delete(Path.ChangeExtension(fileName, "pdf"));
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-        }        
+        }
+
+        private void ButtonConvertAg_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var beginTime = DateTime.Now;
+                foreach (string fileName in checkedListBoxFileName.CheckedItems)
+                {
+                    GenerateTxt(fileName);
+                }
+                MessageBox.Show($@"耗时：{DateTime.Now.Subtract(beginTime).TotalSeconds} 秒");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private static void GenerateTxt(string fileName)
+        {
+            try
+            {
+                if (fileName != null)
+                {
+                    var pdfReader = new PdfReader(fileName);
+                    var txtWriter = new StreamWriter(Path.ChangeExtension(fileName, "txt"), true, Encoding.Default);
+
+                    for (var i = 0; i < pdfReader.NumberOfPages; i++)
+                    {
+                        txtWriter.WriteLine(iTextSharp.text.pdf.parser.PdfTextExtractor.GetTextFromPage(pdfReader, i + 1));
+                    }
+                    
+                    txtWriter.Close();
+                    pdfReader.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }

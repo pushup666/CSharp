@@ -36,6 +36,7 @@
             this.comboBoxDevice = new System.Windows.Forms.ComboBox();
             this.checkBoxUTF8 = new System.Windows.Forms.CheckBox();
             this.checkBoxReverse = new System.Windows.Forms.CheckBox();
+            this.buttonConvertAg = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // buttonAddFile
@@ -61,11 +62,11 @@
             // buttonConvert
             // 
             this.buttonConvert.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonConvert.Location = new System.Drawing.Point(650, 12);
+            this.buttonConvert.Location = new System.Drawing.Point(561, 12);
             this.buttonConvert.Name = "buttonConvert";
             this.buttonConvert.Size = new System.Drawing.Size(75, 23);
             this.buttonConvert.TabIndex = 2;
-            this.buttonConvert.Text = "转换";
+            this.buttonConvert.Text = "Txt2Pdf";
             this.buttonConvert.UseVisualStyleBackColor = true;
             this.buttonConvert.Click += new System.EventHandler(this.ButtonConvertClick);
             // 
@@ -95,10 +96,8 @@
             this.comboBoxDevice.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxDevice.FormattingEnabled = true;
             this.comboBoxDevice.Items.AddRange(new object[] {
-            "iPad Pro 11",
             "iPhone 8",
-            "iPhone 5s",
-            "iPad Mini2"});
+            "iPad Pro 11"});
             this.comboBoxDevice.Location = new System.Drawing.Point(277, 14);
             this.comboBoxDevice.Name = "comboBoxDevice";
             this.comboBoxDevice.Size = new System.Drawing.Size(121, 20);
@@ -124,11 +123,23 @@
             this.checkBoxReverse.Text = "反色";
             this.checkBoxReverse.UseVisualStyleBackColor = true;
             // 
+            // buttonConvertAg
+            // 
+            this.buttonConvertAg.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonConvertAg.Location = new System.Drawing.Point(649, 12);
+            this.buttonConvertAg.Name = "buttonConvertAg";
+            this.buttonConvertAg.Size = new System.Drawing.Size(75, 23);
+            this.buttonConvertAg.TabIndex = 9;
+            this.buttonConvertAg.Text = "Pdf2Txt";
+            this.buttonConvertAg.UseVisualStyleBackColor = true;
+            this.buttonConvertAg.Click += new System.EventHandler(this.ButtonConvertAg_Click);
+            // 
             // Txt2Pdf
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(737, 268);
+            this.Controls.Add(this.buttonConvertAg);
             this.Controls.Add(this.checkBoxReverse);
             this.Controls.Add(this.checkBoxUTF8);
             this.Controls.Add(this.comboBoxDevice);
@@ -154,5 +165,6 @@
         private System.Windows.Forms.ComboBox comboBoxDevice;
         private System.Windows.Forms.CheckBox checkBoxUTF8;
         private System.Windows.Forms.CheckBox checkBoxReverse;
+        private System.Windows.Forms.Button buttonConvertAg;
     }
 }
