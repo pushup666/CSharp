@@ -16,6 +16,7 @@ namespace MultipleCMD
         public Main()
         {
             InitializeComponent();
+            textBoxWorkingDirectory.Text = Application.StartupPath;
         }
 
         private void buttonStart_Click(object sender, EventArgs e)
