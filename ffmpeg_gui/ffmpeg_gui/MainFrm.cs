@@ -67,10 +67,12 @@ namespace ffmpeg_gui
 
 
 
-
-        private const string SeparateAudioFormat = @"ffmpeg -i ""{0}\{1}"" -acodec copy -vn ""{2}\Audio_{3}.m4a""";
-        private const string SeparateVideoFormat = @"ffmpeg -i ""{0}\{1}"" -vcodec copy -an ""{2}\Video_{3}.mp4""";
+        //private const string SeparateVideoFormat = @"ffmpeg -i ""{0}\{1}"" -vcodec copy -an ""{2}\Video_{3}.mp4""";
+        //private const string SeparateAudioFormat = @"ffmpeg -i ""{0}\{1}"" -acodec copy -vn ""{2}\Audio_{3}.m4a""";
         //private const string SeparateSubtitleFormat = @"ffmpeg -i ""{0}\{1}"" -vn -an -scodec copy ""{2}\Sub_{3}.ass""";
+        private const string SeparateVideoFormat = @"ffmpeg -i ""{0}\{1}"" -map 0:0 -c copy ""{2}\{3}_v.mp4""";
+        private const string SeparateAudioFormat = @"ffmpeg -i ""{0}\{1}"" -map 0:1 -c copy ""{2}\{3}_a.m4a""";
+        private const string SeparateSubtitleFormat = @"ffmpeg -i ""{0}\{1}"" -map 0:5 -c copy ""{2}\{3}.srt""";
 
         public MainFrm()
         {
@@ -176,8 +178,9 @@ namespace ffmpeg_gui
 
         private void ButtonSeparateClick(object sender, EventArgs e)
         {
-            GenerateCmdLine(SeparateAudioFormat);
-            GenerateCmdLine(SeparateVideoFormat);
+            //GenerateCmdLine(SeparateVideoFormat);
+            //GenerateCmdLine(SeparateAudioFormat);
+            GenerateCmdLine(SeparateSubtitleFormat);
         }
 
         private void GenerateCmdLine(string format)
