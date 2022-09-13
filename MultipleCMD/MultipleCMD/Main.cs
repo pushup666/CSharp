@@ -29,7 +29,7 @@ namespace MultipleCMD
 
             _finishLines = 0;
             _allLines = richTextBoxCmdInput.Lines.Length;
-            richTextBoxCmdInput.Enabled = false;
+            //richTextBoxCmdInput.Enabled = false;
 
             SetLabelCountText($@"{_finishLines} / {_allLines}");
 
