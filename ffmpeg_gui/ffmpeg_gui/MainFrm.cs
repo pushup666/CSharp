@@ -11,14 +11,19 @@ namespace ffmpeg_gui
         //码率预估      width * height * fps / 20 / 1024;
         //1280 * 720 = 1350K;   1366 * 768 = 1536K;     1440 * 900 = 1898K;     1920 * 1080 = 3037K;    2560 * 1440 = 5400K;    3840 * 2160 = 12150K
 
-        //视频灰屏    加参数-pix_fmt yuv420p
+        //视频灰屏        加参数-pix_fmt yuv420p
 
-        //分割        ffmpeg -ss 00:02:40 -i 111.mp4 -c copy -t 01:27:15 222.mp4
-        //录屏        ffmpeg -f gdigrab -probesize 100M -framerate 30 -i desktop -b:v 1536k -vcodec h264_qsv desktop.mp4
-        //录屏        ffmpeg -f gdigrab -probesize 100M -framerate 30 -i desktop -b:v 1536k -vcodec libx264  desktop.mp4
-        //录屏录音    ffmpeg -f dshow   -rtbufsize 100M -i video="screen-capture-recorder":audio="virtual-audio-capturer" -b:v 1536k -vcodec h264_qsv -acodec aac -ac 2 desktop.mp4
+        //分割            ffmpeg -ss 00:02:40 -i 111.mp4 -c copy -t 01:27:15 222.mp4
+        //录屏            ffmpeg -f gdigrab -probesize 100M -framerate 30 -i desktop -b:v 1536k -vcodec h264_qsv desktop.mp4
+        //录屏            ffmpeg -f gdigrab -probesize 100M -framerate 30 -i desktop -b:v 1536k -vcodec libx264  desktop.mp4
+        //录屏录音        ffmpeg -f dshow   -rtbufsize 100M -i video="screen-capture-recorder":audio="virtual-audio-capturer" -b:v 1536k -vcodec h264_qsv -acodec aac -ac 2 desktop.mp4
 
-        //图片转视频  ffmpeg -f image2 -i Sample%5d.dat -vcodec libx264 -r 10 Pic2Mov.mp4    用命令行cmd，不能用批处理bat
+        //图片转视频      ffmpeg -f image2 -i Sample%5d.dat -vcodec libx264 -r 10 Pic2Mov.mp4    用命令行cmd，不能用批处理bat
+
+        //改变尺寸        ffmpeg -i Test.mp4" -vf scale = 1920:-1 ...
+
+        //限制CPU的使用率 ffmpeg -threads 3 ...
+
 
         private readonly Dictionary<string, bool> _files = new Dictionary<string, bool>();
 
