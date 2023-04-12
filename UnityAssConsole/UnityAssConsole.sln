@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.33423.256
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityAssConsole", "UnityAssConsole\UnityAssConsole.csproj", "{01D4C0DB-AC2E-48C9-8BC5-581DF0A69B42}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{01D4C0DB-AC2E-48C9-8BC5-581DF0A69B42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01D4C0DB-AC2E-48C9-8BC5-581DF0A69B42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01D4C0DB-AC2E-48C9-8BC5-581DF0A69B42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01D4C0DB-AC2E-48C9-8BC5-581DF0A69B42}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {84F4FC3A-C02C-44F1-9A9B-F013C9693C1D}
+	EndGlobalSection
+EndGlobal
