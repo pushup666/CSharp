@@ -103,7 +103,7 @@ namespace UnityAss
                 try
                 {
                     evt.Style = "Default";
-                    evt.Text = Regex.Replace(evt.Text, "{.*}", "");
+                    evt.Text = Regex.Replace(evt.Text, "{.+?}", "");
 
                     var texts = evt.Text.Split(new[] { "\\N" }, StringSplitOptions.RemoveEmptyEntries);
 
@@ -114,6 +114,9 @@ namespace UnityAss
                             continue;
                         case 2:
                             evt.Text = texts[0].Trim() + "\\N{\\fs10}" + texts[1].Trim();
+                            continue;
+                        case 3:
+                            evt.Text = texts[0].Trim() + "\\N{\\fs10}" + texts[1].Trim() + "\\N{\\fs10}" + texts[2].Trim();
                             continue;
                         default:
                             MessageBox.Show("Error: " + evt.Text);
