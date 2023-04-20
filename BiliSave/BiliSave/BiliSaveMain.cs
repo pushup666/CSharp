@@ -16,8 +16,8 @@ namespace BiliSave
 
         private void BiliSaveMain_Load(object sender, EventArgs e)
         {
-            textBoxPathLoad.Text = @"C:\Users\ssf\Desktop\Videos\bilibili";
-            textBoxPathSave.Text = @"C:\Users\ssf\Desktop\Video";
+            textBoxPathLoad.Text = @"Z:\Temp\bilibili";
+            textBoxPathSave.Text = @"Z:\Temp";
         }
 
         private void ButtonLoad_Click(object sender, EventArgs e)
@@ -31,27 +31,33 @@ namespace BiliSave
 
                 if (!File.Exists(filePlayUrl)) continue;
 
+                var listM4s = Directory.GetFiles(itemPath, "*.m4s");
+
+                if (listM4s.Length != 2)
+                {
+                    MessageBox.Show($@"{itemPath}中m4s文件数为不等于2");
+                    continue;
+                }
+
+                for (var i = 0; i < listM4s.Length; i++)
+                {
+                    CrackMp4File(listM4s[i], $"{textBoxPathSave.Text}\\{i}.m4s");
+                }
+
                 using (var file = File.OpenText(fileVideoInfo))
                 {
                     using (var reader = new JsonTextReader(file))
                     {
                         var o = (JObject)JToken.ReadFrom(reader);
 
-                        var fileSrcVideo = $"{itemPath}\\{o["itemId"]}-1-30080.m4s";
-                        var fileDstVideo = $"{textBoxPathSave.Text}\\Video.m4v";
-                        CrackMp4File(fileSrcVideo, fileDstVideo);
+                        var fileDstMp4 = $"{textBoxPathSave.Text}\\P{o["p"]}.{o["title"]}.mp4";
 
-                        var fileSrcAudio = $"{itemPath}\\{o["itemId"]}-1-30280.m4s";
-                        var fileDstAudio = $"{textBoxPathSave.Text}\\Audio.m4a";
-                        CrackMp4File(fileSrcAudio, fileDstAudio);
-
-                        var fileDstMp4 = $"{textBoxPathSave.Text}\\P{o["p"]} {o["title"]}.mp4";
-
-                        var cmdArguments = $"-i \"{fileDstVideo}\" -i \"{fileDstAudio}\" -vcodec copy -acodec copy \"{fileDstMp4}\"";
+                        var cmdArguments = $"-i \"{textBoxPathSave.Text}\\0.m4s\" -i \"{textBoxPathSave.Text}\\1.m4s\" -vcodec copy -acodec copy \"{fileDstMp4}\"";
                         ExecCmd(cmdArguments);
                     }
                 }
             }
+            MessageBox.Show(@"Finish!");
         }
 
         private static void CrackMp4File(string srcFile, string dstFile)
