@@ -164,7 +164,7 @@ namespace ReadVideoInfo
 
                     sb.AppendLine($"rem Src:{srcSize}M    Dst:{dstSize}M");
                     sb.AppendLine(string.Format(
-                        @"{5}ffmpeg -i ""{0}\{1}"" -b:v {4}K -vcodec {6} -acodec aac -ac 2 -q:a 0.7 ""{2}\{3}_{6}.mp4""",
+                        @"{5}ffmpeg -threads 3 -i ""{0}\{1}"" -b:v {4}K -vcodec {6} -acodec aac -ac 2 -q:a 0.7 ""{2}\{3}_{6}.mp4""",
                         srcDirectoryName, srcFileName, dstDirectoryName,
                         dstFileNameWithoutExt, dstFileAutoBitrate, convertFlag ? "" : "rem ",
                         comboBoxVideoCodec.Text));
