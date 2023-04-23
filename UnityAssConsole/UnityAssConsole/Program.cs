@@ -53,7 +53,7 @@ namespace UnityAssConsole
                         Outline = Convert.ToInt32("2"),
                         Shadow = Convert.ToInt32("0"),
 
-                        Alignment = (V4pStyleAlignment)Convert.ToInt16("2"),       //小键盘布局
+                        Alignment = (V4pStyleAlignment)Convert.ToInt16("2"),       //1: Bottom left 2: Bottom center 3: Bottom right    5: Top left 6: Top center 7: Top right    9: Middle left 10: Middle center 11: Middle right
                         MarginL = Convert.ToInt32("5"),
                         MarginR = Convert.ToInt32("5"),
                         MarginV = Convert.ToInt32("5"),

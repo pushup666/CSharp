@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Text;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -50,9 +51,16 @@ namespace BiliSave
                     {
                         var o = (JObject)JToken.ReadFrom(reader);
 
-                        var fileDstMp4 = $"{textBoxPathSave.Text}\\P{o["p"]}.{o["title"]}.mp4";
+                        var fileDstMp4 = $"P{o["p"]}.{o["title"]}.mp4";
 
-                        var cmdArguments = $"-i \"{textBoxPathSave.Text}\\0.m4s\" -i \"{textBoxPathSave.Text}\\1.m4s\" -vcodec copy -acodec copy \"{fileDstMp4}\"";
+                        var sb = new StringBuilder(fileDstMp4);
+                        foreach (var rInvalidChar in Path.GetInvalidFileNameChars())
+                        {
+                            sb.Replace(rInvalidChar.ToString(), string.Empty);
+                        }
+                        fileDstMp4 = sb.ToString();
+
+                        var cmdArguments = $"-i \"{textBoxPathSave.Text}\\0.m4s\" -i \"{textBoxPathSave.Text}\\1.m4s\" -vcodec copy -acodec copy \"{textBoxPathSave.Text}\\{fileDstMp4}\"";
                         ExecCmd(cmdArguments);
                     }
                 }
