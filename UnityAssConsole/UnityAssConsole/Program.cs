@@ -17,7 +17,7 @@ namespace UnityAssConsole
                     var ass = new AssSubtitle();
 
                     //Console.WriteLine($"openFileName: {openFileName}", openFileName);
-                    ass.Load(openFileName);
+                    ass.Load(openFileName, Encoding.Default);
 
                     ass.ScriptInfo.Clear();
                     ass.ScriptInfo.Add("ScriptType", new Tuple<string, string>("key-value", "v4.00+"));
