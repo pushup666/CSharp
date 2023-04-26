@@ -92,7 +92,6 @@ namespace BookStore.UC
 
         private void ButtonFilter_Click(object sender, EventArgs e)
         {
-            
             var pattern = textBoxFilter.Text;
             using var dt = BookStoreBLL.GetLineList(_bookID);
 
