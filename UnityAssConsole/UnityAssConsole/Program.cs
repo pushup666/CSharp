@@ -62,29 +62,37 @@ namespace UnityAssConsole
                     };
                     ass.V4pStyles[style.Name] = style;
 
+                    ass.UnknownSections.Clear();
 
                     foreach (var evt in ass.Events)
                     {
                         try
                         {
                             evt.Style = "Default";
+                            evt.Name = "SSF";
+                            evt.MarginL = 0;
+                            evt.MarginR = 0;
+                            evt.MarginV = 0;
+                            evt.Effect = "";
+
                             evt.Text = Regex.Replace(evt.Text, "{.+?}", "");
 
                             var texts = evt.Text.Split(new[] { "\\N" }, StringSplitOptions.RemoveEmptyEntries);
 
                             switch (texts.Length)
                             {
+                                case 0:
+                                    Console.WriteLine("Error: " + evt.Text);
+                                    break;
                                 case 1:
                                     evt.Text = texts[0].Trim();
-                                    continue;
+                                    break;
                                 case 2:
                                     evt.Text = texts[0].Trim() + "\\N{\\fs10}" + texts[1].Trim();
-                                    continue;
-                                case 3:
-                                    evt.Text = texts[0].Trim() + "\\N{\\fs10}" + texts[1].Trim() + "\\N{\\fs10}" + texts[2].Trim();
-                                    continue;
+                                    break;
                                 default:
                                     Console.WriteLine("Error: " + evt.Text);
+                                    evt.Text = evt.Text.Replace("\\N"," ");
                                     break;
                             }
                         }
@@ -95,7 +103,15 @@ namespace UnityAssConsole
                     }
 
                     var path = Path.GetDirectoryName(openFileName);
-                    var saveFileName = string.Format(path == "" ? $"{Path.GetFileNameWithoutExtension(openFileName)}.Unity{Path.GetExtension(openFileName)}" : $"{path}\\{Path.GetFileNameWithoutExtension(openFileName)}.Unity{Path.GetExtension(openFileName)}");
+                    if (path == string.Empty)
+                    {
+                        path = Environment.CurrentDirectory;
+                    }
+                    path += "\\Unity";
+
+                    Directory.CreateDirectory(path);
+
+                    var saveFileName = string.Format($"{path}\\{Path.GetFileName(openFileName)}");
 
                     //Console.WriteLine($"saveFileName: {saveFileName}", saveFileName);
                     File.WriteAllText(saveFileName, ass.Stringify(), Encoding.UTF8);
