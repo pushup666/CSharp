@@ -17,8 +17,8 @@ namespace BiliSave
 
         private void BiliSaveMain_Load(object sender, EventArgs e)
         {
-            textBoxPathLoad.Text = @"Z:\Temp\bilibili";
-            textBoxPathSave.Text = @"Z:\Temp";
+            textBoxPathLoad.Text = @"C:\Users\ssf\Desktop\Videos\bilibili";
+            textBoxPathSave.Text = @"C:\Users\ssf\Desktop\Videos";
         }
 
         private void ButtonLoad_Click(object sender, EventArgs e)
@@ -32,17 +32,17 @@ namespace BiliSave
 
                 if (!File.Exists(filePlayUrl)) continue;
 
-                var listM4s = Directory.GetFiles(itemPath, "*.m4s");
+                var listM4S = Directory.GetFiles(itemPath, "*.m4s");
 
-                if (listM4s.Length != 2)
+                if (listM4S.Length != 2)
                 {
                     MessageBox.Show($@"{itemPath}中m4s文件数为不等于2");
                     continue;
                 }
 
-                for (var i = 0; i < listM4s.Length; i++)
+                for (var i = 0; i < listM4S.Length; i++)
                 {
-                    CrackMp4File(listM4s[i], $"{textBoxPathSave.Text}\\{i}.m4s");
+                    CrackMp4FileNew(listM4S[i], $"{textBoxPathSave.Text}\\{i}.m4s");
                 }
 
                 using (var file = File.OpenText(fileVideoInfo))
@@ -79,6 +79,17 @@ namespace BiliSave
             }
 
             File.WriteAllBytes(dstFile, dstBytes);
+        }
+
+        private static void CrackMp4FileNew(string srcFile, string dstFile)
+        {
+            var srcBytes = File.ReadAllBytes(srcFile);
+            const int offset = 9;
+
+            using (var writer = new BinaryWriter(new FileStream(dstFile, FileMode.Create)))
+            {
+                writer.Write(srcBytes, offset, srcBytes.Length - offset);
+            }
         }
 
         private void ExecCmd(string cmdArguments)
