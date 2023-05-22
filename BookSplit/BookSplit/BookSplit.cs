@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace BookSplit
@@ -34,7 +30,7 @@ namespace BookSplit
 
                 _fileName = openFileDialog.FileName;
                 this.Text = $"BookSplit - {_fileName}";
-                _lineList = File.ReadAllLines(openFileDialog.FileName, Encoding.Default);
+                _lineList = File.ReadAllLines(openFileDialog.FileName, Encoding.UTF8);
             }
 
             LoadListToDict();
@@ -151,7 +147,7 @@ namespace BookSplit
                     sb.AppendLine(_lineList[j]);
                 }
 
-                File.WriteAllText($"{savePath}\\{lineNoBegin}_{chapterTitle}.txt", sb.ToString(), Encoding.Default);
+                File.WriteAllText($"{savePath}\\{lineNoBegin}_{chapterTitle}.txt", sb.ToString(), Encoding.UTF8);
             }
 
             MessageBox.Show("Finish!");
@@ -184,19 +180,19 @@ namespace BookSplit
 
         private void ButtonDeleteRow_Click(object sender, EventArgs e)
         {
-            var listDelete = new List<int>();
+            //var listDelete = new List<int>();
 
-            foreach (DataGridViewRow row in dataGridViewLineList.SelectedRows)
-            {
-                listDelete.Add((int)row.Cells["Key"].Value);
-            }
+            //foreach (DataGridViewRow row in dataGridViewLineList.SelectedRows)
+            //{
+            //    listDelete.Add((int)row.Cells["Key"].Value);
+            //}
 
-            foreach (var key in listDelete)
-            {
-                _lineDict.Remove(key);
-            }
+            //foreach (var key in listDelete)
+            //{
+            //    _lineDict.Remove(key);
+            //}
 
-            RefreshView();
+            //RefreshView();
         }
     }
 }
