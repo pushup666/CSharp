@@ -103,7 +103,10 @@ namespace Txt2PdfConvert
                 foreach (string fileName in checkedListBoxFileName.CheckedItems)
                 {
                     GeneratePdf(fileName);
-                    SplitPdf(fileName);
+                    if (checkBoxSplit.Checked)
+                    {
+                        SplitPdf(fileName);
+                    }
                 }
                 MessageBox.Show($@"耗时：{DateTime.Now.Subtract(beginTime).TotalSeconds} 秒");
             }

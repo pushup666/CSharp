@@ -37,6 +37,7 @@
             this.checkBoxUTF8 = new System.Windows.Forms.CheckBox();
             this.checkBoxReverse = new System.Windows.Forms.CheckBox();
             this.buttonConvertAg = new System.Windows.Forms.Button();
+            this.checkBoxSplit = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // buttonAddFile
@@ -62,7 +63,7 @@
             // buttonConvert
             // 
             this.buttonConvert.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonConvert.Location = new System.Drawing.Point(561, 12);
+            this.buttonConvert.Location = new System.Drawing.Point(601, 12);
             this.buttonConvert.Name = "buttonConvert";
             this.buttonConvert.Size = new System.Drawing.Size(75, 23);
             this.buttonConvert.TabIndex = 2;
@@ -78,7 +79,7 @@
             this.checkedListBoxFileName.FormattingEnabled = true;
             this.checkedListBoxFileName.Location = new System.Drawing.Point(12, 44);
             this.checkedListBoxFileName.Name = "checkedListBoxFileName";
-            this.checkedListBoxFileName.Size = new System.Drawing.Size(712, 212);
+            this.checkedListBoxFileName.Size = new System.Drawing.Size(752, 212);
             this.checkedListBoxFileName.TabIndex = 4;
             // 
             // buttonClearList
@@ -109,15 +110,15 @@
             this.checkBoxUTF8.AutoSize = true;
             this.checkBoxUTF8.Location = new System.Drawing.Point(429, 16);
             this.checkBoxUTF8.Name = "checkBoxUTF8";
-            this.checkBoxUTF8.Size = new System.Drawing.Size(54, 16);
+            this.checkBoxUTF8.Size = new System.Drawing.Size(48, 16);
             this.checkBoxUTF8.TabIndex = 7;
-            this.checkBoxUTF8.Text = "UTF-8";
+            this.checkBoxUTF8.Text = "UTF8";
             this.checkBoxUTF8.UseVisualStyleBackColor = true;
             // 
             // checkBoxReverse
             // 
             this.checkBoxReverse.AutoSize = true;
-            this.checkBoxReverse.Location = new System.Drawing.Point(489, 16);
+            this.checkBoxReverse.Location = new System.Drawing.Point(483, 16);
             this.checkBoxReverse.Name = "checkBoxReverse";
             this.checkBoxReverse.Size = new System.Drawing.Size(48, 16);
             this.checkBoxReverse.TabIndex = 8;
@@ -127,7 +128,7 @@
             // buttonConvertAg
             // 
             this.buttonConvertAg.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonConvertAg.Location = new System.Drawing.Point(649, 12);
+            this.buttonConvertAg.Location = new System.Drawing.Point(689, 12);
             this.buttonConvertAg.Name = "buttonConvertAg";
             this.buttonConvertAg.Size = new System.Drawing.Size(75, 23);
             this.buttonConvertAg.TabIndex = 9;
@@ -135,11 +136,24 @@
             this.buttonConvertAg.UseVisualStyleBackColor = true;
             this.buttonConvertAg.Click += new System.EventHandler(this.ButtonConvertAg_Click);
             // 
+            // checkBoxSplit
+            // 
+            this.checkBoxSplit.AutoSize = true;
+            this.checkBoxSplit.Checked = true;
+            this.checkBoxSplit.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxSplit.Location = new System.Drawing.Point(537, 16);
+            this.checkBoxSplit.Name = "checkBoxSplit";
+            this.checkBoxSplit.Size = new System.Drawing.Size(48, 16);
+            this.checkBoxSplit.TabIndex = 10;
+            this.checkBoxSplit.Text = "分割";
+            this.checkBoxSplit.UseVisualStyleBackColor = true;
+            // 
             // Txt2Pdf
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(737, 268);
+            this.ClientSize = new System.Drawing.Size(777, 268);
+            this.Controls.Add(this.checkBoxSplit);
             this.Controls.Add(this.buttonConvertAg);
             this.Controls.Add(this.checkBoxReverse);
             this.Controls.Add(this.checkBoxUTF8);
@@ -167,5 +181,6 @@
         private System.Windows.Forms.CheckBox checkBoxUTF8;
         private System.Windows.Forms.CheckBox checkBoxReverse;
         private System.Windows.Forms.Button buttonConvertAg;
+        private System.Windows.Forms.CheckBox checkBoxSplit;
     }
 }

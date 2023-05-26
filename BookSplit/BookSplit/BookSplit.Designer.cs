@@ -38,6 +38,7 @@ namespace BookSplit
             this.buttonFolder = new System.Windows.Forms.Button();
             this.comboBoxFilter = new System.Windows.Forms.ComboBox();
             this.buttonDeleteRow = new System.Windows.Forms.Button();
+            this.buttonCombine = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLineList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMaxLength)).BeginInit();
             this.SuspendLayout();
@@ -74,11 +75,6 @@ namespace BookSplit
             this.numericUpDownMaxLength.Name = "numericUpDownMaxLength";
             this.numericUpDownMaxLength.Size = new System.Drawing.Size(37, 21);
             this.numericUpDownMaxLength.TabIndex = 9;
-            this.numericUpDownMaxLength.Value = new decimal(new int[] {
-            20,
-            0,
-            0,
-            0});
             // 
             // buttonFilter
             // 
@@ -124,14 +120,14 @@ namespace BookSplit
             // 
             this.comboBoxFilter.FormattingEnabled = true;
             this.comboBoxFilter.Items.AddRange(new object[] {
-            "^第.+章.*$",
-            "^第.+卷.*$",
-            "^第.+部.*$"});
+            "^第.+章 .*$",
+            "^第.+卷 .*$",
+            "^第.+部 .*$"});
             this.comboBoxFilter.Location = new System.Drawing.Point(401, 12);
             this.comboBoxFilter.Name = "comboBoxFilter";
             this.comboBoxFilter.Size = new System.Drawing.Size(101, 20);
             this.comboBoxFilter.TabIndex = 14;
-            this.comboBoxFilter.Text = "^第.+章.*$";
+            this.comboBoxFilter.Text = "^第.+章 .*$";
             // 
             // buttonDeleteRow
             // 
@@ -143,11 +139,22 @@ namespace BookSplit
             this.buttonDeleteRow.UseVisualStyleBackColor = true;
             this.buttonDeleteRow.Click += new System.EventHandler(this.ButtonDeleteRow_Click);
             // 
+            // buttonCombine
+            // 
+            this.buttonCombine.Location = new System.Drawing.Point(255, 12);
+            this.buttonCombine.Name = "buttonCombine";
+            this.buttonCombine.Size = new System.Drawing.Size(75, 23);
+            this.buttonCombine.TabIndex = 16;
+            this.buttonCombine.Text = "合并";
+            this.buttonCombine.UseVisualStyleBackColor = true;
+            this.buttonCombine.Click += new System.EventHandler(this.ButtonCombine_Click);
+            // 
             // BookSplit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.buttonCombine);
             this.Controls.Add(this.buttonDeleteRow);
             this.Controls.Add(this.comboBoxFilter);
             this.Controls.Add(this.buttonFolder);
@@ -176,5 +183,6 @@ namespace BookSplit
         private System.Windows.Forms.Button buttonFolder;
         private System.Windows.Forms.ComboBox comboBoxFilter;
         private System.Windows.Forms.Button buttonDeleteRow;
+        private System.Windows.Forms.Button buttonCombine;
     }
 }

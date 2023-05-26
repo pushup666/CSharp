@@ -29,8 +29,9 @@ namespace BookSplit
                 if (openFileDialog.ShowDialog() != DialogResult.OK) return;
 
                 _fileName = openFileDialog.FileName;
-                this.Text = $"BookSplit - {_fileName}";
-                _lineList = File.ReadAllLines(openFileDialog.FileName, Encoding.UTF8);
+
+                _lineList = File.ReadAllLines(_fileName, Encoding.Default);
+                Text = $"BookSplit - {_fileName}";
             }
 
             LoadListToDict();
@@ -147,7 +148,7 @@ namespace BookSplit
                     sb.AppendLine(_lineList[j]);
                 }
 
-                File.WriteAllText($"{savePath}\\{lineNoBegin}_{chapterTitle}.txt", sb.ToString(), Encoding.UTF8);
+                File.WriteAllText($"{savePath}\\{lineNoBegin}_{chapterTitle}.txt", sb.ToString(), Encoding.Default);
             }
 
             MessageBox.Show("Finish!");
@@ -193,6 +194,34 @@ namespace BookSplit
             //}
 
             //RefreshView();
+        }
+
+        private void ButtonCombine_Click(object sender, EventArgs e)
+        {
+            var sb = new StringBuilder();
+
+            using (var openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                openFileDialog.Filter = "Text File|*.txt";
+                openFileDialog.Multiselect = true;
+
+                if (openFileDialog.ShowDialog() != DialogResult.OK) return;
+
+                
+                foreach (var fileName in openFileDialog.FileNames)
+                {
+                    MessageBox.Show(fileName);
+                    sb.AppendLine(File.ReadAllText(fileName, Encoding.Default));
+                }
+            }
+
+            using (var saveFileDialog = new SaveFileDialog())
+            {
+                if (saveFileDialog.ShowDialog() != DialogResult.OK) return;
+
+                File.WriteAllText(saveFileDialog.FileName, sb.ToString(), Encoding.Default);
+            }
         }
     }
 }
