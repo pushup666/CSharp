@@ -208,7 +208,7 @@ namespace DuplicateFinder
             {
                 System.Security.Cryptography.MD5 md5 = new System.Security.Cryptography.MD5CryptoServiceProvider();
 
-                var file = new FileStream(fileName, FileMode.Open);
+                var file = new FileStream(fileName, FileMode.Open, FileAccess.Read);
                 var retVal = md5.ComputeHash(file);
                 file.Close();
 
@@ -261,27 +261,30 @@ namespace DuplicateFinder
             _uniqueFileDict.Clear();
             listBoxLog.Items.Clear();
 
-            foreach (var file in Directory.GetFiles(@"C:\Users\ssf\AppData\Roaming\Factorio\mods"))
+            foreach (var fileName in Directory.GetFiles(@"C:\Users\ssf\AppData\Roaming\Factorio\mods"))
             {
-                if (!_fileDict.ContainsKey(file))
+                if (!_fileDict.ContainsKey(fileName))
                 {
-                    var prefix = file.Split('_')[0];
-                    _fileDict.Add(file, prefix);
+                    var modName = fileName.Split('_')[0];
+                    _fileDict.Add(fileName, modName);
                 }
             }
 
             foreach (var file in _fileDict)
             {
-                if (_uniqueFileDict.ContainsKey(file.Value))
+                var fileName = file.Key;
+                var modName = file.Value;
+
+                if (_uniqueFileDict.ContainsKey(modName))
                 {
-                    if (string.CompareOrdinal(file.Key,_uniqueFileDict[file.Value]) > 0)
+                    if (CompareModVersion(fileName,_uniqueFileDict[modName]) > 0)
                     {
-                        _uniqueFileDict[file.Value] = file.Key;
+                        _uniqueFileDict[modName] = fileName;
                     }
                 }
                 else
                 {
-                    _uniqueFileDict.Add(file.Value, file.Key);
+                    _uniqueFileDict.Add(modName, fileName);
                 }
             }
 
@@ -292,10 +295,13 @@ namespace DuplicateFinder
 
             foreach (var file in _fileDict)
             {
+                var fileName = file.Key;
+                var modName = file.Value;
+
                 var dr = dt.NewRow();
-                dr["Mark"] = !_uniqueFileDict.ContainsValue(file.Key);
-                dr["MD5"] = file.Value;
-                dr["Name"] = file.Key;
+                dr["Mark"] = !_uniqueFileDict.ContainsValue(fileName);
+                dr["MD5"] = modName;
+                dr["Name"] = fileName;
                 dt.Rows.Add(dr);
             }
 
@@ -303,6 +309,38 @@ namespace DuplicateFinder
             dataGridViewFiles.Columns[1].ReadOnly = true;
             dataGridViewFiles.Columns[2].ReadOnly = true;
             dataGridViewFiles.AutoResizeColumns();
+        }
+
+        private int CompareModVersion(string fileName1, string fileName2)
+        {
+            try
+            {
+                var version1 = fileName1.Split('_')[1].Split('.');
+                var version2 = fileName2.Split('_')[1].Split('.');
+
+                for (int i = 0; i < version1.Length; i++)
+                {
+                    if (version1[i] == version2[i])
+                    {
+                        continue;
+                    }
+
+                    if (int.Parse(version1[i]) > int.Parse(version2[i]))
+                    {
+                        return 1;
+                    }
+
+                    return -1;
+                }
+
+                return 0;
+            }
+            catch (Exception ex)
+            {
+                var msg = "Error:\r\n" + ex.Message;
+                listBoxLog.Items.Add(msg);
+                return 0;
+            }
         }
     }
 }
