@@ -17,8 +17,8 @@ namespace BiliSave
 
         private void BiliSaveMain_Load(object sender, EventArgs e)
         {
-            textBoxPathLoad.Text = @"C:\Users\ssf\Desktop\Video\bilibili";
-            textBoxPathSave.Text = @"C:\Users\ssf\Desktop\Video";
+            textBoxPathLoad.Text = @"Z:\Temp";
+            textBoxPathSave.Text = @"Z:\";
         }
 
         private void ButtonLoad_Click(object sender, EventArgs e)
