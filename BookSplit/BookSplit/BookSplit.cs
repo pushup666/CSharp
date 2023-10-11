@@ -223,6 +223,8 @@ namespace BookSplit
 
                 File.WriteAllText(saveFileDialog.FileName, sb.ToString(), Encoding.Default);
             }
+
+            MessageBox.Show("Finish!");
         }
     }
 }
