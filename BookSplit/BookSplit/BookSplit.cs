@@ -218,6 +218,7 @@ namespace BookSplit
 
             using (var saveFileDialog = new SaveFileDialog())
             {
+                saveFileDialog.Filter = "Text File|*.txt";
                 if (saveFileDialog.ShowDialog() != DialogResult.OK) return;
 
                 File.WriteAllText(saveFileDialog.FileName, sb.ToString(), Encoding.Default);
