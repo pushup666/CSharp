@@ -145,7 +145,7 @@ namespace Txt2PdfConvert
                             break;
                         case "iPhone 14 +":
                             textFontSize = 54f;                                                 //iPhone 14 + 458 ppi
-                            document = new Document(new Rectangle(1284, 2568));          //iPhone 8 2788x1284       -220 Safe Area
+                            document = new Document(new Rectangle(1284, 2568));          //iPhone 14 + 2788x1284       -220 Safe Area
                             break;
                         default:
                             textFontSize = 36f;                                                 //iPad Pro 11 264 ppi
