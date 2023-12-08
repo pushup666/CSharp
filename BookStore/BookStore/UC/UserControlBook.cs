@@ -228,12 +228,12 @@ namespace BookStore.UC
                     var filename = $@"{savePath}\{author}{title}{alias}{note}_{hash}.txt";
                     var content = latestVersion.Content;
 
-                    using var sw = new StreamWriter(filename, false, Encoding.Default);
+                    using var sw = new StreamWriter(filename, false, Encoding.UTF8);
                     sw.Write(content);
                 }
             }
 
-            MessageBox.Show("导出完成！");
+            MessageBox.Show("导出UTF-8完成！");
         }
 
         private void ButtonRefresh_Click(object sender, EventArgs e)
