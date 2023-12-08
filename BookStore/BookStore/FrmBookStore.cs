@@ -155,7 +155,7 @@ namespace BookStore
                         var author = book.Author == "" ? "" : $"[{book.Author}]";
                         var hash = latestVersion.ContentHash.Substring(0, 4);
 
-                        var filename = $@"{savePath}\{title}{alias}{note}{author}_{hash}.txt";
+                        var filename = $@"{savePath}\{author}{title}{alias}{note}_{hash}.txt";
                         var content = latestVersion.Content;
 
                         using var sw = new StreamWriter(filename, false, Encoding.Default);
