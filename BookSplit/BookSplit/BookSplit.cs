@@ -30,7 +30,7 @@ namespace BookSplit
 
                 _fileName = openFileDialog.FileName;
 
-                _lineList = File.ReadAllLines(_fileName, Encoding.Default);
+                _lineList = File.ReadAllLines(_fileName, Encoding.UTF8);
                 Text = $"BookSplit - {_fileName}";
             }
 
@@ -148,7 +148,7 @@ namespace BookSplit
                     sb.AppendLine(_lineList[j]);
                 }
 
-                File.WriteAllText($"{savePath}\\{lineNoBegin}_{chapterTitle}.txt", sb.ToString(), Encoding.Default);
+                File.WriteAllText($"{savePath}\\{lineNoBegin}_{chapterTitle}.txt", sb.ToString(), Encoding.UTF8);
             }
 
             MessageBox.Show("Finish!");
@@ -211,8 +211,8 @@ namespace BookSplit
                 
                 foreach (var fileName in openFileDialog.FileNames)
                 {
-                    MessageBox.Show(fileName);
-                    sb.AppendLine(File.ReadAllText(fileName, Encoding.Default));
+                    //MessageBox.Show(fileName);
+                    sb.AppendLine(File.ReadAllText(fileName, Encoding.UTF8));
                 }
             }
 
@@ -221,7 +221,7 @@ namespace BookSplit
                 saveFileDialog.Filter = "Text File|*.txt";
                 if (saveFileDialog.ShowDialog() != DialogResult.OK) return;
 
-                File.WriteAllText(saveFileDialog.FileName, sb.ToString(), Encoding.Default);
+                File.WriteAllText(saveFileDialog.FileName, sb.ToString(), Encoding.UTF8);
             }
 
             MessageBox.Show("Finish!");

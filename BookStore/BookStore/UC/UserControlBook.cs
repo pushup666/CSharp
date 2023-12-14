@@ -233,7 +233,7 @@ namespace BookStore.UC
                 }
             }
 
-            MessageBox.Show("导出UTF-8完成！");
+            MessageBox.Show("导出完成！");
         }
 
         private void ButtonRefresh_Click(object sender, EventArgs e)

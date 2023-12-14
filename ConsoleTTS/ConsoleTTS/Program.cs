@@ -1,42 +1,47 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Speech.AudioFormat;
 using System.Speech.Synthesis;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace ConsoleTTS
 {
-    class Program
+    static class Program
     {
-        static void Main(string[] args)
+        private static void Main()
         {
-            // Initialize a new instance of the SpeechSynthesizer.
-            using (SpeechSynthesizer synth = new SpeechSynthesizer())
+            var files = Directory.GetFiles(@"Z:\Temp", "*.txt", SearchOption.TopDirectoryOnly);
+            foreach (var file in files)
             {
-                synth.Rate = 5;
-
-                // Configure the audio output.
-                synth.SetOutputToWaveFile(@"C:\Users\ssf\Desktop\tts\test.wav", new SpeechAudioFormatInfo(32000, AudioBitsPerSample.Sixteen, AudioChannel.Mono));
-
-                // Create a SoundPlayer instance to play output audio file.
-                System.Media.SoundPlayer m_SoundPlayer = new System.Media.SoundPlayer(@"C:\Users\ssf\Desktop\tts\test.wav");
-
-                // Build a prompt.
-                var text = File.ReadAllText(@"C:\Users\ssf\Desktop\tts\test.txt");
-                PromptBuilder builder = new PromptBuilder();
-                builder.AppendText(text);
-
-                // Speak the prompt.
-                synth.Speak(builder);
-                m_SoundPlayer.Play();
+                Text2Wav(file);
             }
-
+            
             Console.WriteLine();
             Console.WriteLine("Press any key to exit...");
             Console.ReadKey();
+        }
+
+        private static void Text2Wav(string textFileName)
+        {
+            if (textFileName == null) return;
+
+            Console.WriteLine(textFileName);
+
+            using (var synth = new SpeechSynthesizer())
+            {
+                 var text = File.ReadAllText(textFileName, Encoding.Default);
+                var builder = new PromptBuilder();
+                builder.AppendText(text);
+
+                var wavFileName = Path.ChangeExtension(textFileName, "wav");
+
+                synth.Rate = 5;
+                synth.SetOutputToWaveFile(wavFileName, new SpeechAudioFormatInfo(44100, AudioBitsPerSample.Sixteen, AudioChannel.Mono));
+                synth.Speak(builder);
+
+                //var mSoundPlayer = new System.Media.SoundPlayer(wavFileName);
+                //mSoundPlayer.Play();
+            }
         }
     }
 }

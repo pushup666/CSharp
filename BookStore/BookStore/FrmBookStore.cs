@@ -163,7 +163,7 @@ namespace BookStore
                     }
                 }
 
-                MessageBox.Show("导出UTF-8完成！");
+                MessageBox.Show("导出完成！");
             }
             catch (Exception ex)
             {
