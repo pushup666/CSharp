@@ -51,7 +51,7 @@ namespace ConsoleTTS
 
                 var wavFileName = Path.ChangeExtension(textFileName, "wav");
 
-                synth.Rate = 5;
+                synth.Rate = 6;
                 synth.SetOutputToWaveFile(wavFileName, new SpeechAudioFormatInfo(44100, AudioBitsPerSample.Sixteen, AudioChannel.Stereo));
                 synth.Speak(builder);
             }
@@ -68,7 +68,7 @@ namespace ConsoleTTS
 
                 sb.AppendFormat(@"ConsoleTTS -file ""{0}""", file);
                 sb.AppendLine();
-                sb.AppendFormat(@"ffmpeg -channel_layout stereo -i ""{0}"" -codec:a libmp3lame -q:a 9 ""{1}""", wavFileName, mp3FileName);
+                sb.AppendFormat(@"ffmpeg -guess_layout_max 0 -i ""{0}"" -codec:a libmp3lame -q:a 9 ""{1}""", wavFileName, mp3FileName);
                 sb.AppendLine();
                 sb.AppendFormat(@"del ""{0}""", wavFileName);
                 sb.AppendLine();
