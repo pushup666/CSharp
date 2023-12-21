@@ -51,7 +51,7 @@ namespace ConsoleTTS
 
                 var wavFileName = Path.ChangeExtension(textFileName, "wav");
 
-                synth.Rate = 6;
+                synth.Rate = 7;
                 synth.SetOutputToWaveFile(wavFileName, new SpeechAudioFormatInfo(44100, AudioBitsPerSample.Sixteen, AudioChannel.Stereo));
                 synth.Speak(builder);
             }
