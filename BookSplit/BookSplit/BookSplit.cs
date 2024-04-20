@@ -149,6 +149,7 @@ namespace BookSplit
                 }
 
                 File.WriteAllText($"{savePath}\\{lineNoBegin}_{chapterTitle}.txt", sb.ToString(), Encoding.UTF8);
+                //File.WriteAllText($"{savePath}\\{chapterTitle}.txt", sb.ToString(), Encoding.UTF8);
             }
 
             MessageBox.Show("Finish!");
