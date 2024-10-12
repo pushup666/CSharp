@@ -91,7 +91,7 @@ namespace UnityAssConsole
                                     evt.Text = texts[0].Trim() + "\\N{\\fs10}" + texts[1].Trim();
                                     break;
                                 default:
-                                    Console.WriteLine("Error: " + evt.Text);
+                                    Console.WriteLine("Error: " + evt.Start + " " + evt.Text);
                                     evt.Text = evt.Text.Replace("\\N"," ");
                                     break;
                             }
