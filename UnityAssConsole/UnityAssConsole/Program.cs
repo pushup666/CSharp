@@ -102,16 +102,17 @@ namespace UnityAssConsole
                         }
                     }
 
-                    var path = Path.GetDirectoryName(openFileName);
-                    if (path == string.Empty)
-                    {
-                        path = Environment.CurrentDirectory;
-                    }
-                    path += "\\Unity";
 
-                    Directory.CreateDirectory(path);
+                    //var path = Path.GetDirectoryName(openFileName);
+                    //if (path == string.Empty)
+                    //{
+                    //    path = Environment.CurrentDirectory;
+                    //}
+                    //path += "\\Unity";
+                    //Directory.CreateDirectory(path);
+                    //var saveFileName = string.Format($"{path}\\{Path.GetFileName(openFileName)}");
 
-                    var saveFileName = string.Format($"{path}\\{Path.GetFileName(openFileName)}");
+                    var saveFileName = string.Format($"{Path.GetDirectoryName(openFileName)}\\{Path.GetFileNameWithoutExtension(openFileName)}.Unity{Path.GetExtension(openFileName)}");
 
                     //Console.WriteLine($"saveFileName: {saveFileName}", saveFileName);
                     File.WriteAllText(saveFileName, ass.Stringify(), Encoding.UTF8);
