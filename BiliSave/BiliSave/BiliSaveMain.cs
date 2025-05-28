@@ -18,6 +18,7 @@ namespace BiliSave
         private void BiliSaveMain_Load(object sender, EventArgs e)
         {
             textBoxPathLoad.Text = @"Z:\Temp";
+            textBoxPathTemp.Text = @"Z:\";
             textBoxPathSave.Text = @"Z:\";
         }
 
@@ -42,7 +43,7 @@ namespace BiliSave
 
                 for (var i = 0; i < listM4S.Length; i++)
                 {
-                    CrackMp4FileNew(listM4S[i], $"{textBoxPathSave.Text}\\{i}.m4s");
+                    CrackMp4FileNew(listM4S[i], $"{textBoxPathTemp.Text}\\{i}.m4s");
                 }
 
                 using (var file = File.OpenText(fileVideoInfo))
@@ -60,7 +61,7 @@ namespace BiliSave
                         }
                         fileDstMp4 = sb.ToString();
 
-                        var cmdArguments = $"-i \"{textBoxPathSave.Text}\\0.m4s\" -i \"{textBoxPathSave.Text}\\1.m4s\" -vcodec copy -acodec copy \"{textBoxPathSave.Text}\\{fileDstMp4}\"";
+                        var cmdArguments = $"-i \"{textBoxPathTemp.Text}\\0.m4s\" -i \"{textBoxPathTemp.Text}\\1.m4s\" -vcodec copy -acodec copy \"{textBoxPathSave.Text}\\{fileDstMp4}\"";
                         ExecCmd(cmdArguments);
                     }
                 }
@@ -68,20 +69,38 @@ namespace BiliSave
             MessageBox.Show(@"Finish!");
         }
 
-        private static void CrackMp4File(string srcFile, string dstFile)
+        private static void CrackMp4FileNew(string srcFile, string dstFile)
         {
-            var srcBytes = File.ReadAllBytes(srcFile);
-            var dstBytes = new byte[srcBytes.Length - 9];
-
-            for (var i = 0; i < dstBytes.Length; i++)
+            using (FileStream fsRead = new FileStream(srcFile, FileMode.Open))
             {
-                dstBytes[i] = srcBytes[i + 9];
-            }
+                using (FileStream fsWrite = new FileStream(dstFile, FileMode.Create))
+                {
+                    byte[] arr = new byte[10*1024*1024];
 
-            File.WriteAllBytes(dstFile, dstBytes);
+                    int count = 0;
+                    bool isFirst = true;
+                    const int offset = 9;
+
+                    while (fsRead.Position < fsRead.Length)
+                    {
+                        count = fsRead.Read(arr, 0, arr.Length);
+
+                        if (isFirst)
+                        {
+                            fsWrite.Write(arr, offset, count - offset);
+                            isFirst = false;
+                        }
+                        else
+                        {
+                            fsWrite.Write(arr, 0, count);
+                        }
+                       
+                    }
+                }
+            }
         }
 
-        private static void CrackMp4FileNew(string srcFile, string dstFile)
+        private static void CrackMp4File(string srcFile, string dstFile)
         {
             var srcBytes = File.ReadAllBytes(srcFile);
             const int offset = 9;
